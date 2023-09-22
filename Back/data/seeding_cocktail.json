@@ -1,0 +1,33 @@
+[{
+    "id":1,
+    "name": "mojito",
+    "instruction": "Réaliser la recette 'Mojito' directement dans le verre. \\n Placer les feuilles de menthe dans le verre, ajouter le sucre et le jus de citron vert. Piler consciencieusement afin d'exprimer l'essence de la menthe, mais sans la broyer. Ajouter le rhum blanc, remplir le verre à moitié de glaçons et compléter avec de l'eau gazeuse. Mélanger doucement et servir avec une paille.\\n Servir dans un verre de type 'tumbler'.\\n Décorer avec des feuilles de menthe fraîches et une tranche de citron",
+    "picture": "mojito.png",
+    "validation": true,
+    "user_id": 1
+},
+{
+    "id":2,
+    "name": "pina colada",
+    "instruction": "",
+    "picture": "pinacolada.png",
+    "validation": true,
+    "user_id": 1
+},
+{
+    "id":3,
+    "name": "moscow mule",
+    "instruction": "",
+    "picture": "moscowmule.png",
+    "validation": true,
+    "user_id": 1
+},
+{
+    "id":4,
+    "name": "gin tonic",
+    "instruction": "",
+    "picture": "gintonic.png",
+    "validation": true,
+    "user_id": 1
+}
+]
