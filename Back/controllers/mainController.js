@@ -1,7 +1,7 @@
 const mainController = {
   getHomePage: (req,res) => {
-    res.render('homepage')
+    res.render("homePage");
   }
-} 
+};
 
 module.exports = mainController;

@@ -1,3 +1,4 @@
+-- SQLBook: Code
 DROP DATABASE IF EXISTS drink_genius;
 DROP USER IF EXISTS drink_genius;
 

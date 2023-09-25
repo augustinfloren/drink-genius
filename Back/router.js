@@ -1,14 +1,14 @@
-const { router } = require("express");
-const { mainController, randomController, cocktailsController, userController, adminController } = require("../controllers");
+const router = require("express").Router();
+const mainController  = require("./controllers/mainController");
 const cw = require("./controllerWrapper");
 
 
 // VISITEUR
 
 // Accueil
-router.get("/", mainController.getHomePage);
+router.get("/", cw(mainController.getHomePage));
 
-// Connexion
+/*// Connexion
 router.post("/signup", cw(userController.signup));
 router.post("/login", cw(userController.login));
 
@@ -20,4 +20,6 @@ router.get("/cocktail", cw(cocktailsController.getCocktail));
 
 // MEMBRE
 
-router.get("/profile/:id", cw())
+router.get("/profile/:id", cw())*/
+
+module.exports = router;
