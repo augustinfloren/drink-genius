@@ -1,0 +1,29 @@
+[{
+    "name": "mojito",
+    "instruction": "Réaliser la recette 'Mojito' directement dans le verre. \\n Placer les feuilles de menthe dans le verre, ajouter le sucre et le jus de citron vert. Piler consciencieusement afin d'exprimer l'essence de la menthe, mais sans la broyer. Ajouter le rhum blanc, remplir le verre à moitié de glaçons et compléter avec de l'eau gazeuse. Mélanger doucement et servir avec une paille.\\n Servir dans un verre de type 'tumbler'.\\n Décorer avec des feuilles de menthe fraîches et une tranche de citron",
+    "picture": "mojito.png",
+    "validation": true,
+    "user_id": 1
+},
+{
+    "name": "pina colada",
+    "instruction": "Réalisez la recette 'Piña Colada' au mixer.\\n Dans un blender (mixer), versez les ingrédients avec 5 ou 6 glaçons et mixez le tout. C'est prêt ! Versez dans le verre et dégustez. Peut aussi se réaliser au shaker si c'est juste pour une personne.\\n Servir dans un verre de type 'verre à vin'.\\n Décorer avec un morceau d'ananas et une cerise confite",
+    "picture": "pinacolada.png",
+    "validation": true,
+    "user_id": 1
+},
+{
+    "name": "moscow mule",
+    "instruction": "Réalisez la recette 'Moscow mule' dans un verre à mélange.\\n Mettre la Glace dans un grand verre. Verser les ingrédients et remuer délicatement avec la cuillère à cocktail.\\n Servir dans un verre de type 'tumbler'. Une tranche de citron et une feuille de menthe.",
+    "picture": "moscowmule.png",
+    "validation": true,
+    "user_id": 1
+},
+{
+    "name": "gin tonic",
+    "instruction": "Réalisez la recette 'Gin Tonic' directement dans le verre.\\n Servir dans un tumbler, sur des glaçons. Verser le gin, remplir de tonic frais et remuer doucement une seule fois.\\n Servir dans un verre de type 'tumbler'.\\n Garnissez selon les propriétés du gin, sinon une tranche ou un zeste de citron vert fera généralement l'affaire.",
+    "picture": "gintonic.png",
+    "validation": true,
+    "user_id": 1
+}
+]

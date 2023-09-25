@@ -1,4 +1,6 @@
-sudo -u postgres psql -f ./init_db.sql
+export PGUSER=postgres
+
+psql -f init_db.sql
 
 export PGUSER=drink_genius
 export PGPASSWORD=drink_genius

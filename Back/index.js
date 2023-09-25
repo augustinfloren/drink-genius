@@ -4,6 +4,8 @@ const session = require('express-session');
 const pg = require('pg');
 const router = require('./router');
 
+const PORT = process.env.PORT || 3000;
+
 // Configuration de l'app
 const app = express();
 app.set("view engine", "ejs");
@@ -19,6 +21,6 @@ app.use(session({
 }));
 
 //Lancement du serveur
-app.listen(process.env.PORT, () => {
-    console.log(`Listening on port ${process.env.PORT}`)
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`)
 });
