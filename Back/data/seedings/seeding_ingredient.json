@@ -1,0 +1,86 @@
+[
+    {
+        "name": "rhum blanc",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 5
+    },
+    {
+        "name": "sirop de sucre de canne",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 4
+    },
+    {
+        "name": "de menthe",
+        "unit": "feuille",
+        "min_quantity": 1,
+        "max_quantity": 10
+    },
+    {
+        "name": "jus de citron vert",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 12
+    },
+    {
+        "name": "eau gazeuse",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 12
+    },
+    {
+        "name": "glaçons",
+        "unit": "",
+        "min_quantity": 1,
+        "max_quantity": 6
+    },
+    {
+        "name": "vodka",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 5
+    },
+    {
+        "name": "rhum ambré",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 5
+    },
+    {
+        "name": "jus d'ananas",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 12
+    },
+    {
+        "name": "lait de coco",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 4
+    },
+    {
+        "name": "ginger beer",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 12
+    },
+    {
+        "name": "jus de citron",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 12
+    },
+    {
+        "name": "tonic",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 12
+    },
+    {
+        "name": "gin",
+        "unit": "cl",
+        "min_quantity": 1,
+        "max_quantity": 5
+    }
+]

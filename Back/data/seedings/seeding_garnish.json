@@ -1,0 +1,26 @@
+[
+    {
+        "name": "d'ananas",
+        "unit": "morceau",
+        "min_quantity": 1,
+        "max_quantity": 4
+    },
+    {
+        "name": "cerise confite",
+        "unit": "",
+        "min_quantity": 1,
+        "max_quantity": 4
+    },
+    {
+        "name": "de citron",
+        "unit": "tranche",
+        "min_quantity": 1,
+        "max_quantity": 4
+    },
+    {
+        "name": "de menthe",
+        "unit": "feuille",
+        "min_quantity": 1,
+        "max_quantity": 4
+    }
+]
