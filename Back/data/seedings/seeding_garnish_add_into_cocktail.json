@@ -1,0 +1,22 @@
+[
+    {
+        "cocktail_id":2,
+        "garnish":1,
+        "quantity": 2
+    },
+    {
+        "cocktail_id":2,
+        "garnish":2,
+        "quantity": 1
+    },
+    {
+        "cocktail_id":3,
+        "garnish":3,
+        "quantity": 1
+    },
+    {
+        "cocktail_id":3,
+        "garnish":4,
+        "quantity": 1
+    }
+]
