@@ -1,13 +1,13 @@
 BEGIN;
-DROP TABLE IF EXISTS public.ingredient_has_label;
-DROP TABLE IF EXISTS public.label;
-DROP TABLE IF EXISTS public.garnish_add_into_cocktail;
-DROP TABLE IF EXISTS public.cocktail_contain_ingredient;
-DROP TABLE IF EXISTS public.garnish;
-DROP TABLE IF EXISTS public.ingredient;
-DROP TABLE IF EXISTS public.user;
-DROP TABLE IF EXISTS public.cocktail;
-DROP TABLE IF EXISTS public.role;
+DROP TABLE IF EXISTS public.ingredient_has_label CASCADE;
+DROP TABLE IF EXISTS public.label CASCADE;
+DROP TABLE IF EXISTS public.garnish_add_into_cocktail CASCADE;
+DROP TABLE IF EXISTS public.cocktail_contain_ingredient CASCADE;
+DROP TABLE IF EXISTS public.garnish CASCADE;
+DROP TABLE IF EXISTS public.ingredient CASCADE;
+DROP TABLE IF EXISTS public.user CASCADE;
+DROP TABLE IF EXISTS public.cocktail CASCADE;
+DROP TABLE IF EXISTS public.role CASCADE;
 
 
 /* CREATION TABLE ROLE */
