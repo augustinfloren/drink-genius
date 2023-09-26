@@ -1,9 +1,9 @@
 // Modules
-require('dotenv').config();
+require("dotenv").config();
 
-const express = require('express');
-const session = require('express-session');
-const router = require('./router');
+const express = require("express");
+// const session = require("express-session");
+const router = require("./router");
 
 const PORT = process.env.PORT || 3000;
 
@@ -15,15 +15,15 @@ app.set("views", "./views");
 app.use(express.static("./public"));
 
 //Configuration des sessions
-app.use(session({
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.SECRET_SESSION
-}));
+/*app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.SECRET_SESSION
+}));*/
 
 app.use(router);
 
 //Lancement du serveur
 app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`)
+  console.log(`Listening on port ${PORT}`);
 });
