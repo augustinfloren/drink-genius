@@ -26,7 +26,9 @@ async function importRoles(){
     `;
 
     const response = await client.query(sqlQuery, sqlValues);
-    console.log(response.rows);
+    if(response.rowCount>0){
+        console.log("Les données ont bien été ajoutées !")
+    }
 };
 
 async function importUsers(){
@@ -52,8 +54,9 @@ async function importUsers(){
     `;    
 
     const response = await client.query(sqlQuery, sqlValues);
-    console.log(response.rows);
-
+    if(response.rowCount>0){
+        console.log("Les données ont bien été ajoutées !")
+    };
 };
 
 async function importCocktails(){
@@ -78,7 +81,9 @@ async function importCocktails(){
     `;    
 
     const response = await client.query(sqlQuery, sqlValues);
-    console.log(response.rows);
+    if(response.rowCount>0){
+        console.log("Les données ont bien été ajoutées !")
+    };
 };
 
 async function importLabels(){
@@ -99,7 +104,9 @@ async function importLabels(){
     `;    
     
     const response = await client.query(sqlQuery, sqlValues);
-    console.log(response.rows);
+    if(response.rowCount>0){
+        console.log("Les données ont bien été ajoutées !")
+    };
 };
 
 async function importIngredients(){
@@ -123,7 +130,9 @@ async function importIngredients(){
     `;    
     
     const response = await client.query(sqlQuery, sqlValues);
-    console.log(response.rows);
+    if(response.rowCount>0){
+        console.log("Les données ont bien été ajoutées !")
+    };
 };
 
 async function importCocktailContainIngredient(){
@@ -146,7 +155,9 @@ async function importCocktailContainIngredient(){
 `;    
 
     const response = await client.query(sqlQuery, sqlValues);
-    console.log(response.rows);
+    if(response.rowCount>0){
+        console.log("Les données ont bien été ajoutées !")
+    };
 };
 
 async function importGarnish(){
@@ -170,7 +181,9 @@ async function importGarnish(){
     `;    
     
     const response = await client.query(sqlQuery, sqlValues);
-    console.log(response.rows);
+    if(response.rowCount>0){
+        console.log("Les données ont bien été ajoutées !")
+    };
 };
 
 async function importGarnishAddIntoCocktail(){
@@ -193,7 +206,9 @@ async function importGarnishAddIntoCocktail(){
 `;    
 
     const response = await client.query(sqlQuery, sqlValues);
-    console.log(response.rows);
+    if(response.rowCount>0){
+        console.log("Les données ont bien été ajoutées !")
+    };
 };
 
 async function importIngredientHasLabel(){
@@ -215,7 +230,9 @@ async function importIngredientHasLabel(){
 `;    
 
     const response = await client.query(sqlQuery, sqlValues);
-    console.log(response.rows);
+    if(response.rowCount>0){
+        console.log("Les données ont bien été ajoutées !")
+    };
 };
 
 
