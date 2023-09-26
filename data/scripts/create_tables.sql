@@ -87,6 +87,11 @@ CREATE TABLE IF NOT EXISTS public.cocktail_contain_ingredient
     cocktail_id integer NOT NULL,
     ingredient_id integer NOT NULL,
     quantity integer NOT NULL,
+    CONSTRAINT cocktail_id FOREIGN KEY (cocktail_id)
+        REFERENCES public.cocktail (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
     CONSTRAINT ingredient_id FOREIGN KEY (ingredient_id)
         REFERENCES public.ingredient (id) MATCH SIMPLE
         ON UPDATE NO ACTION
