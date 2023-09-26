@@ -27,7 +27,7 @@ async function importRoles(){
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
-        console.log("Les données ont bien été ajoutées !")
+        console.log("Les données ont bien été ajoutées dans la table 'role' !")
     }
 };
 
@@ -55,7 +55,7 @@ async function importUsers(){
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
-        console.log("Les données ont bien été ajoutées !")
+        console.log("Les données ont bien été ajoutées dans la table 'user' !")
     };
 };
 
@@ -82,7 +82,7 @@ async function importCocktails(){
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
-        console.log("Les données ont bien été ajoutées !")
+        console.log("Les données ont bien été ajoutées dans la table 'cocktail' !")
     };
 };
 
@@ -105,7 +105,7 @@ async function importLabels(){
     
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
-        console.log("Les données ont bien été ajoutées !")
+        console.log("Les données ont bien été ajoutées dans la table 'label' !")
     };
 };
 
@@ -131,7 +131,7 @@ async function importIngredients(){
     
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
-        console.log("Les données ont bien été ajoutées !")
+        console.log("Les données ont bien été ajoutées dans la table 'ingredient' !")
     };
 };
 
@@ -156,7 +156,7 @@ async function importCocktailContainIngredient(){
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
-        console.log("Les données ont bien été ajoutées !")
+        console.log("Les données ont bien été ajoutées dans la table 'cocktail_contain_ingredient' !")
     };
 };
 
@@ -182,7 +182,7 @@ async function importGarnish(){
     
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
-        console.log("Les données ont bien été ajoutées !")
+        console.log("Les données ont bien été ajoutées dans la table 'garnish' !")
     };
 };
 
@@ -207,7 +207,7 @@ async function importGarnishAddIntoCocktail(){
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
-        console.log("Les données ont bien été ajoutées !")
+        console.log("Les données ont bien été ajoutées dans la table 'garnish_add_into_cocktail' !")
     };
 };
 
@@ -231,7 +231,7 @@ async function importIngredientHasLabel(){
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
-        console.log("Les données ont bien été ajoutées !")
+        console.log("Les données ont bien été ajoutées dans la table 'ingredient_has_label' !")
     };
 };
 
