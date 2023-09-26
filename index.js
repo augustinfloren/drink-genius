@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.set("view engine", "ejs");
 app.set("views", "./views");
-app.use(router);
+
 app.use(express.static("./public"));
 
 //Configuration des sessions
@@ -20,6 +20,8 @@ app.use(session({
     saveUninitialized: false,
     secret: process.env.SECRET_SESSION
 }));
+
+app.use(router);
 
 //Lancement du serveur
 app.listen(PORT, () => {

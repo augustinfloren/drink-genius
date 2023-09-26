@@ -1,13 +1,13 @@
 BEGIN;
-DROP TABLE IF EXISTS public.ingredient_has_label;
-DROP TABLE IF EXISTS public.label;
-DROP TABLE IF EXISTS public.garnish_add_into_cocktail;
-DROP TABLE IF EXISTS public.cocktail_contain_ingredient;
-DROP TABLE IF EXISTS public.garnish;
-DROP TABLE IF EXISTS public.ingredient;
-DROP TABLE IF EXISTS public.user;
-DROP TABLE IF EXISTS public.cocktail;
-DROP TABLE IF EXISTS public.role;
+DROP TABLE IF EXISTS public.ingredient_has_label CASCADE;
+DROP TABLE IF EXISTS public.label CASCADE;
+DROP TABLE IF EXISTS public.garnish_add_into_cocktail CASCADE;
+DROP TABLE IF EXISTS public.cocktail_contain_ingredient CASCADE;
+DROP TABLE IF EXISTS public.garnish CASCADE;
+DROP TABLE IF EXISTS public.ingredient CASCADE;
+DROP TABLE IF EXISTS public.user CASCADE;
+DROP TABLE IF EXISTS public.cocktail CASCADE;
+DROP TABLE IF EXISTS public.role CASCADE;
 
 
 /* CREATION TABLE ROLE */
@@ -87,6 +87,11 @@ CREATE TABLE IF NOT EXISTS public.cocktail_contain_ingredient
     cocktail_id integer NOT NULL,
     ingredient_id integer NOT NULL,
     quantity integer NOT NULL,
+    CONSTRAINT cocktail_id FOREIGN KEY (cocktail_id)
+        REFERENCES public.cocktail (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
     CONSTRAINT ingredient_id FOREIGN KEY (ingredient_id)
         REFERENCES public.ingredient (id) MATCH SIMPLE
         ON UPDATE NO ACTION
