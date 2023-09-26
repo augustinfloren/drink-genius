@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const mainController  = require("./controllers/mainController");
+const mainController = require("./controllers/mainController");
 const cw = require("./controllerWrapper");
 
 
@@ -7,6 +7,7 @@ const cw = require("./controllerWrapper");
 
 // Accueil
 router.get("/", cw(mainController.getHomePage));
+
 
 /*// Connexion
 router.post("/signup", cw(userController.signup));
@@ -22,4 +23,7 @@ router.get("/cocktail", cw(cocktailsController.getCocktail));
 
 router.get("/profile/:id", cw())*/
 
+
+
 module.exports = router;
+
