@@ -12,10 +12,9 @@ body {
     height: 100vh;
     font-family: 'Mooli', sans-serif;
     color: var(--theme-purple);
-    background: linear-gradient(90deg, rgba(123, 255, 251, 0.247) 0%, rgba(123,255,251,0.46549957873774506) 100%);
+    background: linear-gradient(90deg, #7afffb3f 0%, #7bfffb77 100%);
     display: flex;
     flex-direction: column;
-    /* align-content: space-between; */
 }
 
 #container {
@@ -25,18 +24,15 @@ body {
   flex-grow: 1;
 }
 
+
 /*#### HEADER ####*/
 
-
 #header {
-    height: 100px;
     display:flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    /* background-color: var(--theme-yellow); */
     padding: 20px 20px;
-    /* flex-grow: 1; */
 }
 
 #header-logo {
@@ -50,6 +46,7 @@ body {
 }
 
 #header-title {
+    min-width: 220px;
     display: inline;
     font-size: 2.2em;
     font-weight: bold;
@@ -66,20 +63,19 @@ body {
 
 .nav-item-link:hover {
     font-weight: bold;
+    cursor: pointer;
 }
 
-/*#### MAIN ####*/
 
+/*#### MAIN ####*/
 
 #main {
     flex: auto;
     width: 100%;
-    /* height: 80vh; */
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    /* flex-grow: 1; */
 }
 
 #generator {
@@ -92,7 +88,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 80px;
+    box-shadow: 10px 10px 40px #081a1971;
 }
 
 h2 {
@@ -114,6 +112,9 @@ h2 {
 #generator-preferences-btn {
     font-size: 1em;
     margin-top: -20px;
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+    width: 70px;
 }
 
 #generator-preferences-btn:hover {
@@ -134,30 +135,24 @@ h2 {
     cursor: pointer;
 }
 
-/*#### FOOTER ####*/
 
+/*#### FOOTER ####*/
 
 #footer {
     padding: 20px 20px;
-    height: 170px;
-    /* padding: 5px 20px; */
-    /* width: 100vw; */
-    /* background: var(--theme-yellow); */
+    height: 140px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    /* justify-content: space-between; */
     background-color: var(--theme-purple);
     color: white;
-    flex-wrap: wrap;
     justify-content: center;
-    /* flex-grow: 1; */
+    gap: 20px;
 }
 
 #copyright {
     font-size: 0.7em;
     color: rgba(255, 255, 255, 0.596);
-    order: 3;
 }
 
 #footer-nav-ul {
@@ -166,23 +161,106 @@ h2 {
     align-items: center;
     gap: 25px;
     font-size: 1em;
-    order: 1;
     padding-top: 10px;
 }
 
 #legal-notices {
     text-align: center;
-    width: 90vw;
     padding: 0.5em;
     background: #ddd;
     border-radius: 5px;
-    margin: 2em;
     color: var(--theme-purple);
-    /* width: 270px; */
-    /* align-self: flex-end; */
+    padding-top: 10px;
+    width: 700px;
 }
 
-#header-burger {
+#hamburger-menu {
+    display: none;
+    height: 30px;
+}
+
+.hamburger-menu-line{
+    display: none;
+    width: 35px;
+    height: 5px;
+    background-color: var(--theme-purple);
+    border-radius: 30px;
+
+}
+
+@media screen and (max-width: 790px) {
+
+#header {
+    /* flex-flow: column wrap; */
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#header-logo-container {
+}
+
+#header-nav-ul {
+    display: none;
+    flex-direction: column;
+    width: 90vw;
+}
+
+.nav-item-link {
+}
+
+#hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburger-menu-line {
+    display: block;
+}
+
+h2 {
+    margin: 0rem 1rem 0rem 1rem;
+}
+
+#generator {
+    height: 350px;
+    width: 350px;
+    gap: 50px;
+}
+
+#legal-notices {
+    width: 300px;
+}
+
+#footer {
+    height: 170px;
+}
+
+}
+
+@media screen and (max-width: 375px) {
+
+#generator {
+    height: 300px;
+    width: 330px;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+#generator-virgin-option-label {
+    font-size: 1em;
+}
+
+#generator-preferences-btn {
+    font-size: 0.8em;
+}
+
+}
+
+
+/* #header-burger {
     display: none;
 }
 
@@ -194,12 +272,12 @@ h2 {
 
 #header-nav-close {
     display: none;
-}
+} */
 
 /*#### RESPONSIVE ####*/
 
-@media screen and (max-width: 500px) {
-    #header-nav {
+
+    /* #header-nav {
         display: none;
     }
 
@@ -247,6 +325,4 @@ h2 {
         height: 100vh;
         background-color: rgba(0,0,0,0,6);
 
-    }
-}
-
+    } */
