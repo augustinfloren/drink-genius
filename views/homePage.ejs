@@ -1,75 +1,18 @@
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Drink Genius</title>
-    
-    <!--Bulma CSS-->
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  </head>
-  <body>
-    
-    <header>
-      <section class="hero is-primary">
-        <div class="navbar mt-2 mb-2 mr-2 ml-2">
-          <figure class="image is-24x24">
-            <img src="/images/icone.png">
-          </figure>
-          <p class="title navbar-left">
-            Drink Genius
-          </p>
-          <div class="buttons navbar-end">
-            <button class="button">Accueil</button>
-            <button class="button">Les cocktails</button>
-            <input class="button" type="submit" value="Connexion">
-            <input class="button" type="submit" value="Inscription">
-          </div>
-        </div>
-      </section>  
-    </header> 
-    
-    <main class="containers box content has-text-centered mt-6 mb-6 mr-6 ml-6">
-      
-      <div class ="container mt-4 mb-4">
-          <p><strong>Générer un cocktail aléatoire !</strong></p>
-        </div>
-        <div class ="container mt-4 mb-4">
-          <label class="checkbox">
-            <input type="checkbox">
-            Sans alcool
-          </label>
-        </div>
-        <div class ="container mt-4 mb-4">
-          
-          <button class="button">Préférences</button>
-          
-            <button class="modal-close is-large" aria-label="close"></button>
-          </div>
-        </div>
-        <div class ="container mt-4 mb-4">
-          <button class="button is-primary is-rounded"><strong>Générer</strong></button>
-        </div>
-        
-        </div>
-      </div>
-    </main>
+<%- include("partials/header") %>
 
-    <footer class="footer is-fixed-bottom">
-      <section class="hero is-primary">
-        <div class="hero-foot">
-          
-            <p>Copyright</p>
-            <div class="content has-text-centered">
-            <input class="button" type="submit" value="Contact">
-            <p>Site internet réservé à des personnes majeures</p>
-            <p>L'ABUS D'ALCOOL EST DANGEREUX POUR LA SANTÉ. À CONSOMMER AVEC MODÉRATION.</p>
+        <!-- MAIN -->
+        <main id="main">
+          <div id="generator">
+            <h2>Générer un cocktail aléatoire !</h2>
+            <div id="generator-virgin-option">
+              <input id="generator-virgin-option-checkbox" type="checkbox" name="Sans-Alcool" checked> 
+              <label id="generator-virgin-option-label" for="virgin">Sans-Alcool</label>
             </div>
-          </section>
-    </footer>
-    
-    <!--Bulma JS-->
-  
-  </body>
-</html>
+              <a id="generator-preferences-btn">Préférences</a>
+            <div>
+              <a id="generator-generate-btn">Générer</a>
+            </div>
+          </div>
+        </main>
+
+<%- include("partials/footer") %>

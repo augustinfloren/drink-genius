@@ -1,0 +1,142 @@
+html {
+    --theme-blue: rgb(255, 251, 202);
+    --theme-light-blue: rgb(219, 242, 255);
+    --theme-grey: rgb(214, 142, 142);
+    --theme-yellow: yellow ;
+    --theme-purple: #2d213f;
+}
+
+body {
+    font-family: 'Mooli', sans-serif;
+    background: linear-gradient(90deg, rgba(123, 255, 251, 0.247) 0%, rgba(123,255,251,0.46549957873774506) 100%);
+
+POWERED BY DESIGNSTRIPE
+
+}
+
+#container {
+    /* display: flex;
+    flex-direction: column; */
+}
+
+/*#### HEADER ####*/
+
+
+#header {
+    width: 100vw;
+    height: 10vh;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    /* background-color: var(--theme-yellow); */
+    padding: 20px 20px;
+}
+
+#header-logo {
+    width: 60px;
+    padding-bottom: 10px;
+}
+
+#header-logo-container {
+    display: flex;
+    align-items: center;
+}
+
+#header-title {
+    display: inline;
+    font-size: 2.2em;
+    font-weight: bold;    
+    color: var(--theme-purple);
+}
+
+#header-nav-ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+    font-size: 1em;
+}
+
+/*#### MAIN ####*/
+
+
+#main {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+#generator {
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+    width: 500px;
+    height: 50vh;
+    border-radius: 15%;
+    background-color: var(--theme-purple);
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    margin: 3rem;
+    font-size: 2em;
+}
+
+#generator-virgin-option {
+    margin: 10px;
+    font-size: 1.5em;
+  
+}
+
+#generator-virgin-option-checkbox {
+
+}
+
+#generator-virgin-option-label {
+
+}
+
+/*#### FOOTER ####*/
+
+
+#footer {
+    width: 100vw;
+    height: 10vh;
+    /* background: var(--theme-yellow); */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;  
+}
+
+#copyright {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem; 
+    letter-spacing: .04em;
+    font-size: 1.3em;
+    text-align: center;
+    justify-content: flex-start;
+    
+}
+
+#legal-notices {
+    padding:1rem;
+    background: #ddd;
+    border-radius:5px;
+    margin: 2em;
+    letter-spacing: .04em;
+    font-size: .85em;
+}
+
+/*#### RESPONSIVE ####*/
+
+@media screen and (max-width: 500px) {
+    #header-nav {
+        display: none;
+    }
+}
