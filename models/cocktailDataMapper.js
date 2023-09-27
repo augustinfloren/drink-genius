@@ -14,6 +14,14 @@ const cocktailDataMapper = {
     },
 
     // FONCTION POUR CHANGER LE STATUT PAR L'ADMIN
+    async updateCocktailStatus(validation, cocktail_id){
+        const sqlQuery = {
+            text:'UPDATE cocktail SET validation=$1 WHERE id=$2',
+            values: [validation, cocktail_id]
+        };
+        const result = await client.query(sqlQuery);
+        return result.rowCount;
+        },
 
     // OBTENIR UN COCKTAIL
     async getOneCocktail(id) {
@@ -64,7 +72,7 @@ const cocktailDataMapper = {
     },
 
     // AJOUT D'UN COCKTAIL PAR ADMIN
-    async addOneCocktailByUser(cocktail) {
+    async addOneCocktailByAdmin(cocktail) {
         const { name, instruction, user_id } = cocktail;
         const validation = true;
         const sqlQuery = {

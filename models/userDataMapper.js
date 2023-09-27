@@ -9,7 +9,17 @@ const dataMapper = {
         return result.rows;
     },
 
-    // CONNECTION USER
+    // CONNECTION
+    async getUserByEmail(email){
+        const sqlQuery = {
+            text: `SELECT * FROM "user" WHERE email=$1`,
+            values: [email]
+        };
+        const result = await client.query(sqlQuery);
+        return result.rows[0];
+    },
+
+    // AFFICHER LE PROFIL USER
     async getOneUser(id){
         const sqlQuery = {
             text: `SELECT * FROM user WHERE id=$1`,
