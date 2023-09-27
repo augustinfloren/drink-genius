@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Drink Genius</title> 
-    
+    <title>Drink Genius</title>
+
     <link rel="stylesheet" href="../css/reset.css">
 	  <link rel="stylesheet" href="../css/style.css">
 
@@ -13,8 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Mooli&display=swap" rel="stylesheet">
   </head>
   <body>
+    <div id="overlay-menu-mobile"></div>
     <div id="container">
-        
+
         <header id="header">
           <div id="header-logo-container">
             <img id="header-logo" src="/images/cocktail.png" alt="logo">
@@ -22,6 +23,11 @@
           </div>
 
           <nav id="header-nav">
+            <div id="header-nav-close">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
             <ul id="header-nav-ul">
                 <li class="nav-item">
                     <a class="nav-item-link" href="homePage">Accueil</a>
@@ -38,6 +44,8 @@
             </ul>
           </nav>
           <div id="header-burger">
-            
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
           </div>
         </header>
