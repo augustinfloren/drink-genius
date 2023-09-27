@@ -1,6 +1,7 @@
 const mainController = {
   getHomePage: (req,res) => {
-    res.render("homePage");
+    const message = req.session.errorMessage
+    res.render('homePage', {message});
   }
 };
 
