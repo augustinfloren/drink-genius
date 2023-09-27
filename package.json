@@ -13,6 +13,7 @@
   "author": "Stephane Andre, Mathilde Calon, Maxime Gaure, Augustin Floren",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",

@@ -7,7 +7,7 @@ const cocktailContainIngredient = require('./seedings/seeding_cocktail_contain_i
 const garnishes = require('./seedings/seeding_garnish.json');
 const garnishAddIntoCocktail = require('./seedings/seeding_garnish_add_into_cocktail.json');
 const ingredientHasLabel = require('./seedings/seeding_ingredient_has_label.json');
-const client = require('../dataMapper/dbClient');
+const client = require('../models/dbClient');
 
 async function importRoles(){
     let counter = 1;

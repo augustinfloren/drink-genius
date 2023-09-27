@@ -1,4 +1,5 @@
 BEGIN;
+DROP TABLE IF EXISTS public.user_like_cocktail CASCADE;
 DROP TABLE IF EXISTS public.ingredient_has_label CASCADE;
 DROP TABLE IF EXISTS public.label CASCADE;
 DROP TABLE IF EXISTS public.garnish_add_into_cocktail CASCADE;
@@ -135,6 +136,22 @@ CREATE TABLE IF NOT EXISTS public.ingredient_has_label
         NOT VALID,
     CONSTRAINT label_id FOREIGN KEY (label_id)
         REFERENCES public.label (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);
+
+/*CREATION TABLE USER_LIKE_INGREDIENT */
+CREATE TABLE IF NOT EXISTS public.user_like_cocktail
+(
+    user_id integer NOT NULL,
+    cocktail_id integer NOT NULL,
+    CONSTRAINT user_id FOREIGN KEY (user_id)
+        REFERENCES public.user (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT cocktail_id FOREIGN KEY (cocktail_id)
+        REFERENCES public.cocktail (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );
