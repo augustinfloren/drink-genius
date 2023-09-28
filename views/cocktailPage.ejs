@@ -1,26 +1,31 @@
 <%- include("partials/header") %>
 
         <!-- MAIN -->
+
         <main id="main">
-            <div id="cocktail-info">
+            <div id="cocktail-main-container">
 
-                <h2><%= cocktail.name %></h2>
+                <nav>
+                    <ul id="cocktail-nav">
+                        <li><a href="/cocktails">Liste des cocktails</a></li>
+                        <p>></p>
+                        <li id="cocktail-nav-current"><%=cocktail.name%></li>
+                    </ul>
+                </nav>
 
-                <div class="cocktail-picture"><img src="/images/<%= cocktail.picture %>" alt="Image de <%= cocktail.name %>"></div>
-
-                <div id="ingredients">Ingredients : <ul>
-                    <% cocktailIngredients.forEach(ingredient => { %>
-                 <li><%= ingredient.name %> : <%= ingredient.quantity %> <%= ingredient.unit %></li>
-                <% }) %>
-                </ul></div>
-
-                <% if (cocktailGarnishes.length > 0) { %>
-                <div id="garnishes">Garniture : <% cocktailGarnishes.forEach(garnish => { %>
-                <li><%= garnish.name %> : <%= garnish.quantity %> <%= garnish.unit %></li>
-                <% }) %></div>
-                <% } %>
-                
-                <div id="recipe"><p>Recette : <%= cocktail.instruction %></p></div>
+                <h2><%=cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)%></h2>
+                <div id="cocktail-container">
+                    <div id="cocktail-img-big" style="background-image: url('/images/<%= cocktail.picture %> ');" alt="Image de <%= cocktail.name %>"></div>
+                    <div id="recipe-container">
+                        <h3>Recette :</h3>
+                        <ul id="recipe-list">
+                            <% cocktailIngredients.forEach(ingredient => { %>
+                                <li>- <%= ingredient.name %> : <%= ingredient.quantity %> <%= ingredient.unit %></li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </main>
+
 <%- include("partials/footer") %>
