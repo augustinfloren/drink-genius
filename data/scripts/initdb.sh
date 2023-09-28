@@ -6,4 +6,4 @@ export PGDATABASE=drink_genius
 
 psql -f ./data/scripts/create_tables.sql
 
-node '/var/www/html/APO/DrinkGenius/data/import_data.js'
+node '/home/student/Bureau/html/SPE_DATA/APO/DrinkGenius/projet-10-bar-to-glass/data/import_data.js'
