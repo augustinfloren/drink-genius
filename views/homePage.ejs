@@ -1,48 +1,26 @@
 <%- include("partials/header") %>
-
-        <!-- MAIN -->
-        <main id="main">
-          <div id="generator">
-            <h2>Générer un cocktail aléatoire !</h2>
-            <label id="generator-virgin-option-label">
-              <input id="generator-virgin-option-checkbox" type="checkbox" name="Sans-Alcool">
-              Sans-Alcool
-            </label>
-              <a id="generator-preferences-btn">+ Filtres</a>
-            <div id="generator-generate-btn">
-              <a id="generator-generate-btn-link">Générer</a>
-            </div>
-          </div>
-
-
+        <main>
           <div class="modal-container">
-
             <div class="overlay modal-trigger"></div>
-           
-            <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="dialogDesc">
-              <button aria-label="close modal" class="close-modal modal-trigger">X</button>
-              <h3 id="modalTitle">Veuillez vous inscrire</h3>
-              <form action="/signIn" method="post">
-                <label class="label">Nom</label>
-                <input class="input" type="text" name="nom" id="card-nom-input" placeholder="Votre nom">
-                <label class="label">Prénom</label>
-                <input class="input" type="text" name="prenom" id="card-prenom-input" placeholder="Votre prénom">
-                <label class="label">Date de naissance</label>
-                <input class="input" type="date" name="date_naissance" id="card-date-input" placeholder="Votre date de naissance">
-                <label class="label">Email</label>
-                <input class="input" type="email" name="email" id="card-email-input" placeholder="Votre email">
-                <label class="label">Mot de passe</label>
-                <input class="input" type="password" name="mot_de_passe" id="card-password-input" placeholder="Votre mot de passe">
-              </form>
-              <p id="dialogDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut nam exercitationem nihil veritatis sapiente quia.</p>
-            </div>
-      
-          </div>
-      
-          <button class="modal-btn modal-trigger">Inscription</button>
-        
+                <div class="modal" >
+                  <button class="close-modal modal-trigger">X</button>
+                  <h1>Inscris-toi ti coq et profite pleinement de l'appli</h1>
+                  <form action="/signIn" method="post"></form>
+                  <label class="label">Nom</label>
+                  <input class="input" type="text" name="nom" id="card-nom-input" placeholder="Votre nom">
+                  <label class="label">Prénom</label>
+                  <input class="input" type="text" name="prenom" id="card-prenom-input" placeholder="Votre prénom">
+                  <label class="label">Date de naissance</label>
+                  <input class="input" type="date" name="date_naissance" id="card-date-input" placeholder="Votre date de naissance">
+                  <label class="label">Email</label>
+                  <input class="input" type="email" name="email" id="card-email-input" placeholder="Votre email">
+                  <label class="label">Mot de passe</label>
+                  <input class="input" type="password" name="mot_de_passe" id="card-password-input" placeholder="Votre mot de passe">
+                </form>
+              </div>
+            </div> 
 
         </main>
 
-<%- include("partials/footer") %>
+        <%- include("partials/footer") %>      
 
