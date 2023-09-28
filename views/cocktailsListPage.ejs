@@ -1,0 +1,15 @@
+<%- include("partials/header") %>
+
+        <!-- MAIN -->
+        <main id="main">
+            <div id="cocktails-list">
+                <h2>Cocktails :</h2>
+                <% cocktails.forEach(cocktail => { %>
+                 <a href="/cocktail/<%= cocktail.id %>"><div class="cocktail-list">
+                    <h3><%= cocktail.name.toUpperCase() %></h3>
+                <div class="cocktail-picture"><img src="/images/<%= cocktail.picture %>" alt="Image de <%= cocktail.name %>"></div>
+                 </div></a>
+                <% }) %>
+            </div>
+        </main>
+<%- include("partials/footer") %>

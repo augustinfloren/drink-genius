@@ -1,0 +1,21 @@
+.cocktails-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cocktail-list{
+    border: solid black;
+    padding: 1rem;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.cocktail-list img{
+    width: 60px;
+}
+
+#cocktail-info img{
+    width: 150px;
+}
