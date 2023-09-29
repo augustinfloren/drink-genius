@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS public.cocktail_contain_ingredient
     cocktail_id integer NOT NULL,
     ingredient_id integer NOT NULL,
     quantity integer NOT NULL,
+    UNIQUE (cocktail_id, ingredient_id),
     CONSTRAINT cocktail_id FOREIGN KEY (cocktail_id)
         REFERENCES public.cocktail (id) MATCH SIMPLE
         ON UPDATE NO ACTION
@@ -106,6 +107,7 @@ CREATE TABLE IF NOT EXISTS public.garnish_add_into_cocktail
     cocktail_id integer NOT NULL,
     garnish_id integer NOT NULL,
     quantity integer NOT NULL,
+    UNIQUE (cocktail_id, garnish_id),
     CONSTRAINT cocktail_id FOREIGN KEY (cocktail_id)
         REFERENCES public.cocktail (id) MATCH SIMPLE
         ON UPDATE NO ACTION
@@ -129,6 +131,7 @@ CREATE TABLE IF NOT EXISTS public.ingredient_has_label
 (
     ingredient_id integer NOT NULL,
     label_id integer NOT NULL,
+    UNIQUE (label_id, ingredient_id),
     CONSTRAINT ingredient_id FOREIGN KEY (ingredient_id)
         REFERENCES public.ingredient (id) MATCH SIMPLE
         ON UPDATE NO ACTION
@@ -145,6 +148,7 @@ CREATE TABLE IF NOT EXISTS public.user_like_cocktail
 (
     user_id integer NOT NULL,
     cocktail_id integer NOT NULL,
+    UNIQUE (cocktail_id, user_id),
     CONSTRAINT user_id FOREIGN KEY (user_id)
         REFERENCES public.user (id) MATCH SIMPLE
         ON UPDATE NO ACTION

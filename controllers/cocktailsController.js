@@ -9,7 +9,7 @@ const cocktailsController = {
   async getCocktailInfoPage(req, res){
     const cocktailId = parseInt(req.params.id, 10);
     const cocktail = await cocktailDataMapper.getOneCocktail(cocktailId);
-    const cocktailIngredients = await cocktailDataMapper.getIngredientByCocktail(cocktailId)
+    const cocktailIngredients = await cocktailDataMapper.getIngredientByCocktail(cocktailId);
     if(cocktail){
         res.render('cocktailPage', {cocktail, cocktailIngredients});
     } else {
