@@ -33,6 +33,20 @@ const cocktailDataMapper = {
         return result.rows[0];
     },
  
+    // OBTENIR TOUTES LES INFORMATIONS D'UN COCKTAIL
+    async getCocktailInformation(cocktail_id){
+        const sqlQuery = {
+            text: `SELECT ARRAY_AGG(DISTINCT gaic.quantity ||' '|| garnish.unit || ' '  || garnish.name) AS garnitures,
+            ARRAY_AGG(DISTINCT cci.quantity ||' '|| ingredient.unit ||' '|| ingredient.name) AS ingredients
+            FROM cocktail
+            JOIN cocktail_contain_ingredient AS cci ON cocktail.id = cci.cocktail_id
+            JOIN ingredient ON ingredient.id = cci.ingredient_id
+            JOIN garnish_add_into_cocktail AS gaic ON cocktail.id = gaic.cocktail_id
+            JOIN garnish ON garnish.id = gaic.garnish_id
+            WHERE cocktail.id=$1`,
+            values: [id]
+        } 
+    },
 
     // OBTENIR LES INGREDIENTS PAR COCKTAIL
     async getIngredientByCocktail(cocktail_id) {
