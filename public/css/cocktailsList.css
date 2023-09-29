@@ -47,11 +47,3 @@
    cursor: pointer;
    opacity: 0.7;
 }
-
-@media screen and (max-width: 790px) {
-
-#cocktails-main-container {
-}
-
-
-}
