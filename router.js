@@ -21,4 +21,3 @@ router.get("/profile", cw(userController.getProfilePage));
 router.get("/logout", cw(userController.logOutPage));
 
 module.exports = router;
-

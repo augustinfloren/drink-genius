@@ -1,5 +1,4 @@
 const cocktailDataMapper = require("../models/cocktailDataMapper");
-const ingredientDataMapper = require("../models/ingredientDataMapper");
 
 const cocktailsController = {
   async getAllCocktailsPage(req, res){
@@ -10,24 +9,9 @@ const cocktailsController = {
   async getCocktailInfoPage(req, res){
     const cocktailId = parseInt(req.params.id, 10);
     const cocktail = await cocktailDataMapper.getOneCocktail(cocktailId);
-    const cocktailIngredients = await cocktailDataMapper.getIngredientByCocktail(cocktailId)
-    const cocktailGarnishes = await cocktailDataMapper.getGarnishByCocktail(cocktailId);
-    
-/*     let ingredient_id = []
-    cocktailIngredients.forEach(ingredient => {
-      ingredient_id.push(ingredient.id);
-    });
-
-    console.log(ingredient_id);
-
-    for(const id of ingredient_id){
-    const ingredientsLabels = await ingredientDataMapper.getLabelByIngredient(id);
-    console.log(ingredientsLabels)
-    return ingredientsLabels;
-    }; */
-
+    const cocktailIngredients = await cocktailDataMapper.getIngredientByCocktail(cocktailId);
     if(cocktail){
-        res.render('cocktailPage', {cocktail, cocktailIngredients, cocktailGarnishes});
+        res.render('cocktailPage', {cocktail, cocktailIngredients});
     } else {
         next();
     };

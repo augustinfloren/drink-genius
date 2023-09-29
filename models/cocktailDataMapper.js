@@ -32,6 +32,7 @@ const cocktailDataMapper = {
         const result = await client.query(sqlQuery);
         return result.rows[0];
     },
+ 
 
     // OBTENIR LES INGREDIENTS PAR COCKTAIL
     async getIngredientByCocktail(cocktail_id) {

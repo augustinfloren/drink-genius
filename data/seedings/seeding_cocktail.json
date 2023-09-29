@@ -1,6 +1,6 @@
 [{
     "name": "mojito",
-    "instruction": "Réaliser la recette 'Mojito' directement dans le verre. Placer les feuilles de menthe dans le verre, ajouter le sucre et le jus de citron vert. Piler consciencieusement afin d'exprimer l'essence de la menthe, mais sans la broyer. Ajouter le rhum blanc, remplir le verre à moitié de glaçons et compléter avec de l'eau gazeuse. Mélanger doucement et servir avec une paille.  Servir dans un verre de type 'tumbler'.  Décorer avec des feuilles de menthe fraîches et une tranche de citron",
+    "instruction": "Réaliser la recette 'Mojito' directement dans le verre.  Placer les feuilles de menthe dans le verre, ajouter le sucre et le jus de citron vert. Piler consciencieusement afin d'exprimer l'essence de la menthe, mais sans la broyer. Ajouter le rhum blanc, remplir le verre à moitié de glaçons et compléter avec de l'eau gazeuse. Mélanger doucement et servir avec une paille.  Servir dans un verre de type 'tumbler'.  Décorer avec des feuilles de menthe fraîches et une tranche de citron",
     "picture": "mojito.png",
     "validation": true,
     "user_id": 1
