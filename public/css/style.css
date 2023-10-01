@@ -137,14 +137,14 @@ h2 {
 
 /*#### modal ####*/
 
-#modal-container {
+.modal-container {
     display: none;
     position: fixed;
     top:0;
     width: 100vw;
     height: 100vh;
 }
-#modal-container.active{
+.modal-container.active{
     display: block;
 }
 .overlay{
@@ -155,7 +155,7 @@ h2 {
     background-color: black;
     transition: all 0.4s;
 }
-#modal-container.active .overlay{
+.modal-container.active .overlay{
     opacity: 0.6;
     background-color: black;
     transition: all 0.4s;
@@ -175,7 +175,7 @@ h2 {
     transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
-#modal-container.active .modal{
+.modal-container.active .modal{
     transform: translate(-50%,-50%);
     transition: opacity 0.4s 0.2s ease-out, transform 0.4s 0.2s ease-out;
 }
