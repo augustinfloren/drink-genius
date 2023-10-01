@@ -1,9 +1,7 @@
 const client = require('./dbClient');
 
-// POST, GET, DELETE, PATCH
-
 const dataMapper = {
-    // GET ALL USER
+    // AFFICHER TOUS LES UTILISATEURS
     async getAllUsers(){
         const result = await client.query(`SELECT * FROM user`);
         return result.rows;

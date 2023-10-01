@@ -1,7 +1,7 @@
 [
     {
-        "name": "d'ananas",
-        "unit": "morceau",
+        "name": "ananas",
+        "unit": "morceaux",
         "min_quantity": 1,
         "max_quantity": 4
     },
@@ -12,14 +12,14 @@
         "max_quantity": 4
     },
     {
-        "name": "de citron",
-        "unit": "tranche",
+        "name": "citron",
+        "unit": "tranches",
         "min_quantity": 1,
         "max_quantity": 4
     },
     {
-        "name": "de menthe",
-        "unit": "feuille",
+        "name": "menthe",
+        "unit": "feuilles",
         "min_quantity": 1,
         "max_quantity": 4
     }

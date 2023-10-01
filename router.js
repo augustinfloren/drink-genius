@@ -18,6 +18,6 @@ router.post("/admin/newcocktail", cw(cocktailsController.addCocktailByAdminPage)
 router.post("/signin", cw(userController.signInPage))
 router.get("/login", cw(userController.logInPage))
 router.get("/profile", cw(userController.getProfilePage));
+router.get("/logout", cw(userController.logOutPage));
 
 module.exports = router;
-
