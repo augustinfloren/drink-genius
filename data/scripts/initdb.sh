@@ -9,3 +9,4 @@ export PGDATABASE=drink_genius
 psql -f ./data/scripts/create_tables.sql
 
 node './data/import_data.js'
+
