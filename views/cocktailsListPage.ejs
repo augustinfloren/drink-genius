@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+
+        <!-- MAIN -->
+        <main id="main">
+            <div id="cocktails-main-container">
+                <h2>Liste des cocktails</h2>
+                <div id="cocktails-container">
+                    <% cocktails.forEach(cocktail => { %>
+                        <a id="cocktails-container-item" href="/cocktail/<%=cocktail.id%>">
+                            <h3 id="cocktail-title"><%=cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)%></h3>
+                            <div id="cocktail-img" style="background-image: url('/images/<%= cocktail.picture %> ');" alt="Image de <%= cocktail.name %>"></div>
+                        </a>
+                    <% }) %>
+
+                </div>
+            </div>
+        </main>
+
+<%- include("partials/footer") %>

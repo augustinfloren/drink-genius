@@ -1,0 +1,39 @@
+<%- include("partials/header") %>
+
+        <!-- MAIN -->
+
+        <main id="main">
+            <div id="cocktail-main-container">
+
+                <nav>
+                    <ul id="cocktail-nav">
+                        <li><a href="/cocktails">Liste des cocktails</a></li>
+                        <p>></p>
+                        <li id="cocktail-nav-current"><%=cocktail.name%></li>
+                    </ul>
+                </nav>
+
+                <div id="cocktail-container">
+                    <h2><%=cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)%></h2>
+                    <div id="cocktail-img-big" style="background-image: url('/images/<%= cocktail.picture %> ');" alt="Image de <%= cocktail.name %>"></div>
+                    <div id="recipe-container">
+                        <div id="ingredients-container">
+                            <h3>Ingrédients :</h3>
+                            <ul id="ingredients-list">
+                                <% cocktailIngredients.forEach(ingredient => { %>
+                                    <li>- <%= ingredient.name %> : <%= ingredient.quantity %> <%= ingredient.unit %></li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                        <div id="instruction-container">
+                            <h3>Recette :</h3>
+                            <p id="instruction">
+                                <%= cocktail.instruction %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+<%- include("partials/footer") %>

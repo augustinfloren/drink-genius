@@ -3,14 +3,15 @@ const cocktailDataMapper = require("../models/cocktailDataMapper");
 const cocktailsController = {
   async getAllCocktailsPage(req, res){
     const cocktails = await cocktailDataMapper.getValidatedCocktails();
-    res.render('cocktailsPage', {cocktails});
+    res.render('cocktailsListPage', {cocktails});
   },
 
   async getCocktailInfoPage(req, res){
     const cocktailId = parseInt(req.params.id, 10);
     const cocktail = await cocktailDataMapper.getOneCocktail(cocktailId);
+    const cocktailIngredients = await cocktailDataMapper.getIngredientByCocktail(cocktailId);
     if(cocktail){
-        res.render('cocktailInfoPage', {cocktail});
+        res.render('cocktailPage', {cocktail, cocktailIngredients});
     } else {
         next();
     };
