@@ -12,7 +12,7 @@
         "max_quantity": 4
     },
     {
-        "name": "de citron",
+        "name": "citron",
         "unit": "rondelle",
         "min_quantity": 1,
         "max_quantity": 4
@@ -24,37 +24,37 @@
         "max_quantity": 4
     },
     {
-        "name": "de celeri",
+        "name": "celeri",
         "unit": "branche",
         "min_quantity": 1,
         "max_quantity": 2 
     },
     {
-        "name": "de citron vert",
+        "name": "citron vert",
         "unit": "rondelle",
         "min_quantity": 1,
         "max_quantity": 4 
     },
     {
-        "name": "de citron",
+        "name": "citron",
         "unit": "zeste",
         "min_quantity": 1,
         "max_quantity": 3 
     },
     {
-        "name": "de citron vert",
+        "name": "citron vert",
         "unit": "zeste",
         "min_quantity": 1,
         "max_quantity": 3 
     },
     {
-        "name": "d'orange",
+        "name": "orange",
         "unit": "rondelle",
         "min_quantity": 1,
         "max_quantity": 2 
     },
     {
-        "name": "d'orange",
+        "name": "orange",
         "unit": "zeste",
         "min_quantity": 1,
         "max_quantity": 3 
@@ -66,13 +66,13 @@
         "max_quantity": 3 
     },
     {
-        "name": "de pamplemousse",
+        "name": "pamplemousse",
         "unit": "rondelle",
         "min_quantity": 1,
         "max_quantity": 2 
     },
     {
-        "name": "de pêche",
+        "name": "pêche",
         "unit": "tranche",
         "min_quantity": 1,
         "max_quantity": 2 
@@ -84,7 +84,7 @@
         "max_quantity": 2 
     },
     {
-        "name": "de mangue",
+        "name": "mangue",
         "unit": "morceau",
         "min_quantity": 1,
         "max_quantity": 2 
@@ -95,5 +95,4 @@
         "min_quantity": 1,
         "max_quantity": 4 
     }
-
 ]
