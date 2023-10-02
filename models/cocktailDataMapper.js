@@ -36,14 +36,30 @@ const cocktailDataMapper = {
     // OBTENIR TOUTES LES INFORMATIONS D'UN COCKTAIL
     async getCocktailInformation(cocktail_id){
         const sqlQuery = {
-            text: `SELECT ARRAY_AGG(DISTINCT gaic.quantity ||' '|| garnish.unit || ' '  || garnish.name) AS garnitures,
-            ARRAY_AGG(DISTINCT cci.quantity ||' '|| ingredient.unit ||' '|| ingredient.name) AS ingredients
-            FROM cocktail
-            JOIN cocktail_contain_ingredient AS cci ON cocktail.id = cci.cocktail_id
-            JOIN ingredient ON ingredient.id = cci.ingredient_id
-            JOIN garnish_add_into_cocktail AS gaic ON cocktail.id = gaic.cocktail_id
-            JOIN garnish ON garnish.id = gaic.garnish_id
-            WHERE cocktail.id=$1`,
+            text: `SELECT cocktail.name, cocktail.instruction,
+            CASE 
+                WHEN COUNT(DISTINCT gaic.quantity) = 0 THEN NULL
+                ELSE ARRAY_AGG(DISTINCT 
+                    jsonb_build_object(
+                        'quantity', gaic.quantity,
+                        'unit', garnish.unit,
+                        'name', garnish.name))
+            END AS garnitures,
+            ARRAY_AGG(DISTINCT 
+                jsonb_build_object(
+                    'quantity', cci.quantity,
+                    'unit', ingredient.unit,
+                    'name', ingredient.name)) AS ingredients,
+        ARRAY_REMOVE(ARRAY_AGG(DISTINCT label.name), NULL) AS labels
+        FROM cocktail
+        LEFT JOIN cocktail_contain_ingredient AS cci ON cocktail.id = cci.cocktail_id
+        LEFT JOIN ingredient ON ingredient.id = cci.ingredient_id
+        LEFT JOIN garnish_add_into_cocktail AS gaic ON cocktail.id = gaic.cocktail_id
+        LEFT JOIN garnish ON garnish.id = gaic.garnish_id
+        LEFT JOIN ingredient_has_label AS labeling ON ingredient.id = labeling.ingredient_id
+        LEFT JOIN label ON label.id = labeling.label_id
+        WHERE cocktail.id = $1
+        GROUP BY cocktail.name, cocktail.instruction`,
             values: [id]
         } 
     },
