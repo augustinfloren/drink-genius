@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const userController = {
   async signInPage (req, res){
     const newUser = req.body;
+    console.log(newUser)
     if(newUser.password === newUser.confirmation){
       newUser.password = await bcrypt.hash(newUser.password, parseInt(process.env.SALT));
       const signedUser = await userDataMapper.addOneUser(newUser);
@@ -36,7 +37,7 @@ const userController = {
       res.status(500).redirect('/')
     }
   },
-  
+
   async getProfilePage (req, res) {
     const userId = req.session.user.id;
     res.render('profilePage', {userId});

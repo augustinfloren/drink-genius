@@ -36,7 +36,7 @@
                 <li class="nav-item"> <a class="nav-item-link"  href="/cocktails">Liste des cocktails</a></li>
                 <li class="nav-item modal-trigger-connexion"><div class="nav-item-link">Connexion</div></li>
                 <li class="nav-item modal-trigger-inscription"><div class="nav-item-link">Inscription</div></li>
-              </ul> 
+              </ul>
           </nav>
         </header>
 
@@ -48,16 +48,19 @@
 	      <button aria-label="close modal" class="close-modal modal-trigger">X</button>
 	      <h1 id="modalTitle">Remplis ce formulaire et après remplis ton verre</h1>
 	      <form action="/signIn" method="post">
-	      	<label class=" label firstName">Nom</label>
-	      	<input class=" input " type="text" name="nom" id="nom-input" placeholder="Votre nom">
-	      	<label class=" label lastName">Prénom</label>
-	      	<input class=" input " type="text" name="prenom" id="prenom-input" placeholder="Votre prénom">
-	      	<label class=" label date">Date de naissance</label>
-	      	<input class=" input " type="date" name="date_naissance" id="date-input" placeholder="Votre date de naissance">
-	      	<label class=" label">Email</label>
-	      	<input class=" input" type="email" name="email" id="email-input" placeholder="Votre email">
-	      	<label class=" label">Mot de passe</label>
-	      	<input class=" input" type="password" name="mot_de_passe" id="password-input" placeholder="Votre mot de passe">
+	      	<label for="firstname" class="label firstName">Nom</label>
+	      	<input class="input" type="text" name="firstname" id="nom-input" placeholder="Votre nom" pattern="^[a-zA-Z][a-zA-Z0-9_-]{2,14}$">
+	      	<label for="lastname" class="label lastName">Prénom</label>
+	      	<input class="input" type="text" name="lastname" id="prenom-input" placeholder="Votre prénom" pattern="^[a-zA-Z][a-zA-Z0-9_-]{2,14}$">
+	      	<label for="birthdate" class="label date">Date de naissance</label>
+	      	<input class="input" type="date" name="birthdate" id="date-input" placeholder="Votre date de naissance">
+	      	<label for="email" class="label">Email</label>
+	      	<input class="input" type="email" name="email" id="email-input" placeholder="Votre email">
+	      	<label for="password" class="label">Mot de passe</label>
+	      	<input class="input" type="password" name="password" id="password-input" placeholder="Votre mot de passe" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$">
+          <label for="confirmation" class="label">Confirmation</label>
+	      	<input class="input" type="confirmation" name="confirmation" id="confirmation-input" placeholder="Confirmation" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$">
+          <button type="submit" class="">S'enregistrer</button>
 	      </form>
 	  </div>
 	</div>
