@@ -1,6 +1,17 @@
 const client = require('./dbClient');
 
 const ingredientDataMapper = {
+    async getRandomIngredients(){
+        const result = await client.query(`FROM ingredient
+        ORDER BY random()SELECT
+        name, unit,
+        floor(random() * (max_quantity - min_quantity) + min_quantity) AS quantity
+        FROM ingredient
+        ORDER BY random()
+        LIMIT (3 + random() * (6 - 3))`)
+        return result.rows
+    },
+
     async getAllIngredients(){
         const result = await client.query(`SELECT name FROM ingredient`);
         return result.rows;
