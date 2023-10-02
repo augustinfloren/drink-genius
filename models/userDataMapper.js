@@ -1,4 +1,5 @@
 const client = require('./dbClient');
+const debug = require('debug')
 
 const dataMapper = {
     // AFFICHER TOUS LES UTILISATEURS
@@ -29,16 +30,28 @@ const dataMapper = {
 
     // INSCRIPTION USER
     async addOneUser(user){
-        const { lastname, firstname, birthdate, email, password } = user;
-        const roleId = 2;
+        const { lastname, firstname, birthdate, email, password, roleId } = user;
+        const sqlQuery = `INSERT INTO "user"(lastname, firstname, birthdate, email, password, role_id) VALUES ($1, $2, $3, $4, $5, $6)`;
+        const values = [lastname, firstname, birthdate, email, password, roleId];
 
-        const sqlQuery = {
-            text: `INSERT INTO "user"(lastname, firstname, birthdate, email, password, role_id) VALUES ($1, $2, $3, $4, $5, $6)`,
-            values: [lastname, firstname, birthdate, email, password, roleId]
-        };
+        let result;
+        let error;
 
-        const result = await client.query(sqlQuery);
-        return result.rowCount;
+        try{
+            const response = await client.query(sqlQuery, values);
+
+            result = response.rows;
+
+            console.log(result);
+
+            if(!result) {
+                throw new Error("Informations erronnées");
+            }
+        } catch(error){
+            return { error: error.message || "Une erreur inattendue s'est produite." };
+        }
+
+        return {error, result};
     },
 
     // MODIFICATION PROFIL
@@ -52,7 +65,7 @@ const dataMapper = {
         return result.rowCount;
     },
 
-    // DESINSCRIPTION 
+    // DESINSCRIPTION
     async deleteUser(userId){
         const sqlQuery= {
             text:`DELETE FROM "user" WHERE id=$1`,

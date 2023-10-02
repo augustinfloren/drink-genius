@@ -2,21 +2,22 @@ const userDataMapper = require('../models/userDataMapper');
 const bcrypt = require('bcrypt');
 
 const userController = {
-  async signInPage (req, res){
+  async signInPage (req, res, next){
     const newUser = req.body;
+    newUser.roleId = 2;
     console.log(newUser)
     if(newUser.password === newUser.confirmation){
       newUser.password = await bcrypt.hash(newUser.password, parseInt(process.env.SALT));
-      const signedUser = await userDataMapper.addOneUser(newUser);
-      if(signedUser === 1){
-        delete newUser.password;
-        delete newUser.confirmation;
-        req.session.user = newUser;
-        res.render('homePage', {success:"Votre compte a bien été créé !"});
+      const {error,result} = await userDataMapper.addOneUser(newUser);
+
+      if (error) {
+        next(error);
       } else {
-        req.session.errorMessage = 'Error'
-        res.status(500).redirect('/');
+        req.session.user = result;
+        res.render('homePage', {success:"Votre compte a bien été créé !"});
       }
+    } else {
+
     }
   },
 
