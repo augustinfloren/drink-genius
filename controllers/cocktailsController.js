@@ -9,12 +9,11 @@ const cocktailsController = {
   async getCocktailInfoPage(req, res){
     const cocktailId = parseInt(req.params.id, 10);
     const cocktailInfo = await cocktailDataMapper.getCocktailInformation(cocktailId);
-    console.log(cocktailInfo)
-/*     if(cocktailInfo){ */
+    if(cocktailInfo){
         res.render('cocktailPage', {cocktailInfo});
-/*     } else {
-      res.json("cocktail introuvable"); */
-/*     }; */
+    } else {
+      res.status(500).json("cocktail introuvable");
+    };
   },
 
   async addCocktailByUserPage(req, res){
