@@ -12,8 +12,8 @@
         "max_quantity": 4
     },
     {
-        "name": "citron",
-        "unit": "tranches",
+        "name": "de citron",
+        "unit": "rondelle",
         "min_quantity": 1,
         "max_quantity": 4
     },
@@ -22,5 +22,78 @@
         "unit": "feuilles",
         "min_quantity": 1,
         "max_quantity": 4
+    },
+    {
+        "name": "de celeri",
+        "unit": "branche",
+        "min_quantity": 1,
+        "max_quantity": 2 
+    },
+    {
+        "name": "de citron vert",
+        "unit": "rondelle",
+        "min_quantity": 1,
+        "max_quantity": 4 
+    },
+    {
+        "name": "de citron",
+        "unit": "zeste",
+        "min_quantity": 1,
+        "max_quantity": 3 
+    },
+    {
+        "name": "de citron vert",
+        "unit": "zeste",
+        "min_quantity": 1,
+        "max_quantity": 3 
+    },
+    {
+        "name": "d'orange",
+        "unit": "rondelle",
+        "min_quantity": 1,
+        "max_quantity": 2 
+    },
+    {
+        "name": "d'orange",
+        "unit": "zeste",
+        "min_quantity": 1,
+        "max_quantity": 3 
+    },
+    {
+        "name": "olive verte",
+        "unit": "",
+        "min_quantity": 1,
+        "max_quantity": 3 
+    },
+    {
+        "name": "de pamplemousse",
+        "unit": "rondelle",
+        "min_quantity": 1,
+        "max_quantity": 2 
+    },
+    {
+        "name": "de pêche",
+        "unit": "tranche",
+        "min_quantity": 1,
+        "max_quantity": 2 
+    },
+    {
+        "name": "fraise",
+        "unit": "",
+        "min_quantity": 1,
+        "max_quantity": 2 
+    },
+    {
+        "name": "de mangue",
+        "unit": "morceau",
+        "min_quantity": 1,
+        "max_quantity": 2 
+    },
+    {
+        "name": "framboise",
+        "unit": "",
+        "min_quantity": 1,
+        "max_quantity": 4 
     }
+
 ]
