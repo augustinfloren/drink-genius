@@ -41,6 +41,12 @@ const userController = {
     const userId = req.session.user.id;
     res.render('profilePage', {userId});
   },
+
+  async logOutPage(req, res){
+    req.session.user = [];
+    console.log(req.session.user)
+    res.redirect('/')
+  }
 }
 
 module.exports = userController;

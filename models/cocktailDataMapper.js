@@ -13,7 +13,7 @@ const cocktailDataMapper = {
         return result.rows;
     },
 
-    // FONCTION POUR CHANGER LE STATUT PAR L'ADMIN
+    // CHANGER LE STATUT D'UN COCKTAIL PAR L'ADMIN
     async updateCocktailStatus(validation, cocktail_id){
         const sqlQuery = {
             text:'UPDATE cocktail SET validation=$1 WHERE id=$2',
@@ -32,12 +32,13 @@ const cocktailDataMapper = {
         const result = await client.query(sqlQuery);
         return result.rows[0];
     },
+ 
 
     // OBTENIR LES INGREDIENTS PAR COCKTAIL
     async getIngredientByCocktail(cocktail_id) {
         const sqlQuery = {
             // cci = cocktail_contain_ingredient
-            text: `SELECT ingredient.name, ingredient.unit, cci.quantity FROM ingredient
+            text: `SELECT ingredient.name, ingredient.unit, ingredient.id, cci.quantity FROM ingredient
             JOIN cocktail_contain_ingredient AS cci ON ingredient.id = cci.ingredient_id
             WHERE cci.cocktail_id=$1`,
             values: [cocktail_id]
@@ -46,7 +47,7 @@ const cocktailDataMapper = {
         return result.rows;
     },
 
-    //OBTENIR LES GARNITURES PAR COCKTAIL
+    // OBTENIR LES GARNITURES PAR COCKTAIL
     async getGarnishByCocktail(cocktail_id) {
         const sqlQuery = {
             // gaic = garnish_add_into_cocktail

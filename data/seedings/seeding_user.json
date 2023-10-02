@@ -2,7 +2,7 @@
     {
     "lastname": "admin",
     "firstname": "admin",
-    "birthdate": "31/03/1992",
+    "birthdate": "1992-03-31",
     "location": "",
     "email": "admin@admin.fr",
     "password": "admin",
@@ -10,13 +10,13 @@
     "role_id": 1
     },
     {
-        "lastname": "user",
-        "firstname": "user",
-        "birthdate": "31/03/1992",
-        "location": "",
-        "email": "user@user.fr",
-        "password": "user",
-        "hobbies": "",
-        "role_id": 2
-        }
+    "lastname": "user",
+    "firstname": "user",
+    "birthdate": "1992-03-31",
+    "location": "",
+    "email": "user@user.fr",
+    "password": "user",
+    "hobbies": "",
+    "role_id": 2
+    }
 ]
