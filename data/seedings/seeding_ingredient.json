@@ -195,7 +195,7 @@
         "name": "cola",
         "unit": "cl",
         "min_quantity": 1,
-        "max_quantity": 15
+        "max_quantity": 12
     },
     {
         "name": "vin blanc pétillant",
@@ -258,7 +258,7 @@
         "max_quantity": 12
     },
     {
-        "name": "sirop d'érable'",
+        "name": "sirop d'érable",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 3
