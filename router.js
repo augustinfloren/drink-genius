@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { mainController, cocktailsController, userController } = require('./controllers')
+const { mainController, cocktailsController, userController, searchCocktailController } = require('./controllers')
 const cw = require("./controllerWrapper");
 const validationService = require("./services/validationService");
 
@@ -20,5 +20,8 @@ router.post("/signin", validationService.checkSignUpData, userController.signInP
 router.get("/login", cw(userController.logInPage))
 router.get("/profile", cw(userController.getProfilePage));
 router.get("/logout", cw(userController.logOutPage));
+
+
+
 
 module.exports = router;
