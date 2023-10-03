@@ -7,9 +7,9 @@ const ingredientDataMapper = {
         CEIL(random()*( (max_quantity - min_quantity) + min_quantity)) AS quantity
         FROM ingredient 
         ORDER BY name(random())
-        LIMIT (3 + random() * (6 - 3))`)
+        LIMIT (3 + random() * (6 - 3))`);
         return result.rows
-    },
+        },
 
     async getAllIngredients(){
         const result = await client.query(`SELECT name FROM ingredient`);
@@ -45,16 +45,11 @@ const ingredientDataMapper = {
         return result.rowCount;
     },
 
-    async getIngredientByLabel(label_id){
-        const sqlQuery = {
-            text: `SELECT ingredient.name AS ingredient, label.name AS category FROM ingredient
-            JOIN ingredient_has_label AS labeling ON labeling.ingredient_id = id
-            JOIN label ON labeling.label_id = label.id
-            WHERE labeling.label_id=$1`,
-            values: [label_id]
-        };
-
-        const result = await client.query(sqlQuery)
+    async getIngredientByLabel(){
+        const result = await client.query(`SELECT ingredient.name AS ingredient, label.name AS label FROM ingredient
+        JOIN ingredient_has_label AS labeling ON labeling.ingredient_id = id
+        JOIN label ON labeling.label_id = label.id
+        WHERE labeling.label_id=1`)
         return result.rows;
     },
     
