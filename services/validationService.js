@@ -19,6 +19,7 @@ module.exports = {
     else{
         // let error = new APIError();
         // next(error);
+        console.log(error)
         res.send(error)
     }
 },

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "init:db": "bash ./data/scripts/initdb.sh",
     "dev": "nodemon index.js"
   },
   "repository": {

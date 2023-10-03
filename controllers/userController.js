@@ -5,7 +5,6 @@ const userController = {
   async signInPage (req, res, next){
     const newUser = req.body;
     newUser.roleId = 2;
-    console.log(newUser)
     if(newUser.password === newUser.confirmation){
       newUser.password = await bcrypt.hash(newUser.password, parseInt(process.env.SALT));
       const {error,result} = await userDataMapper.addOneUser(newUser);
@@ -13,11 +12,12 @@ const userController = {
       if (error) {
         next(error);
       } else {
-        req.session.user = result;
+        const userData = result[0];
+        delete userData.password;
+        req.session.user = userData;
+        console.log(req.session.user)
         res.render('homePage', {success:"Votre compte a bien été créé !"});
       }
-    } else {
-
     }
   },
 

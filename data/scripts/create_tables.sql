@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS public."user"
     firstname text COLLATE pg_catalog."default" NOT NULL,
     birthdate date NOT NULL,
     location text COLLATE pg_catalog."default",
-    email text COLLATE pg_catalog."default" NOT NULL,
+    email text COLLATE pg_catalog."default" NOT NULL UNIQUE,
     password text COLLATE pg_catalog."default" NOT NULL,
     hobbies text COLLATE pg_catalog."default",
     role_id integer NOT NULL,
