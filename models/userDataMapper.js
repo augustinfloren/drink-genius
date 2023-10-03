@@ -7,7 +7,7 @@ const dataMapper = {
         return result.rows;
     },
 
-    // CONNECTION
+    // CONNEXION
     async getUserByEmail(email){
         const sqlQuery = {
             text: `SELECT * FROM "user" WHERE email=$1`,
@@ -29,16 +29,43 @@ const dataMapper = {
 
     // INSCRIPTION USER
     async addOneUser(user){
-        const { lastname, firstname, birthdate, email, password } = user;
-        const roleId = 2;
-
+        // Récupère données du formulaire
+        const { lastname, firstname, birthdate, email, password, roleId } = user;
         const sqlQuery = {
-            text: `INSERT INTO "user"(lastname, firstname, birthdate, email, password, role_id) VALUES ($1, $2, $3, $4, $5, $6)`,
+            text: `INSERT INTO "user"(lastname, firstname, birthdate, email, password, role_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
             values: [lastname, firstname, birthdate, email, password, roleId]
-        };
+        }
 
-        const result = await client.query(sqlQuery);
-        return result.rowCount;
+        let result;
+        let error;
+
+        try{
+            const checkEmailQuery = {
+                text: 'SELECT * FROM "user" WHERE email = $1',
+                values: [email],
+            };
+
+            // Cherche si l'email existe déjà
+            const emailCheckResult = await client.query(checkEmailQuery);
+            const emailExists = emailCheckResult.rows[0];
+
+            if (emailExists) {
+                return { error: "Cet e-mail est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
+            } else {
+                const response = await client.query(sqlQuery);
+                result = response.rows;
+            }
+
+            } catch(err){
+                if (err.code === '23505') { // Violation de contrainte unique (e-mail déjà utilisé)
+                    return { error: "Cet e-mail est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
+                } else {
+                    return { error: "Une erreur s'est produite lors de l'ajout de l'utilisateur.", code: "DATABASE_ERROR", result: null };
+                }
+
+            }
+
+            return {error, result};
     },
 
     // MODIFICATION PROFIL
@@ -52,7 +79,7 @@ const dataMapper = {
         return result.rowCount;
     },
 
-    // DESINSCRIPTION 
+    // DESINSCRIPTION
     async deleteUser(userId){
         const sqlQuery= {
             text:`DELETE FROM "user" WHERE id=$1`,

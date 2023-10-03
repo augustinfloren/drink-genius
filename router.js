@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { mainController, cocktailsController, userController } = require('./controllers')
 const cw = require("./controllerWrapper");
+const validationService = require("./services/validationService");
 
 
 // VISITEUR
@@ -15,7 +16,7 @@ router.post("/profile/newcocktail", cw(cocktailsController.addCocktailByUserPage
 router.post("/admin/newcocktail", cw(cocktailsController.addCocktailByAdminPage));
 
 // User
-router.post("/signin", cw(userController.signInPage))
+router.post("/signin", validationService.checkSignUpData, userController.signInPage)
 router.get("/login", cw(userController.logInPage))
 router.get("/profile", cw(userController.getProfilePage));
 router.get("/logout", cw(userController.logOutPage));
