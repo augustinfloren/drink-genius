@@ -15,7 +15,6 @@ const userController = {
         const userData = result[0];
         delete userData.password;
         req.session.user = userData;
-        console.log(req.session.user)
         res.render('homePage', {success:"Votre compte a bien été créé !"});
       }
     }

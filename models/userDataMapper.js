@@ -57,12 +57,7 @@ const dataMapper = {
             }
 
             } catch(err){
-                if (err.code === '23505') { // Violation de contrainte unique (e-mail déjà utilisé)
-                    return { error: "Cet e-mail est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
-                } else {
-                    return { error: "Une erreur s'est produite lors de l'ajout de l'utilisateur.", code: "DATABASE_ERROR", result: null };
-                }
-
+                return { error: "Une erreur s'est produite lors de l'ajout de l'utilisateur.", code: "DATABASE_ERROR", result: null };
             }
 
             return {error, result};

@@ -29,7 +29,7 @@
     gap: 20px;
     width: fit-content;
     height: fit-content;
-    
+
 }
 
 .cocktail-title{
@@ -52,34 +52,34 @@
 /*#### SEARCH BAR ####*/
 .drink-list-form {
     grid-area: form;
-  
+
     border-radius: 10px 10px 0 0;
-  
+
     padding: 8px 16px 0 16px;
-  
+
     position: relative;
   }
-  #searchbar{
-    margin-left: 15%;
-     padding:15px;
-     border-radius: 10px;
-   }
- 
-   input[type=text] {
-      width: 30%;
-      -webkit-transition: width 0.15s ease-in-out;
-      transition: width 0.15s ease-in-out;
-   }
- 
-   /*Quand on tape, la barre s'aggrandie */
-   input[type=text]:focus {
-     width: 70%;
-   }
-  
-   /*faudrait que la loupe soit dans la searchbar.. */
-   #material-icons {
-    position: absolute;
-    top: 11px;
-    left: 11em;
-    font-size: 1em;
-  }
+#searchbar{
+margin-left: 15%;
+    padding:15px;
+    border-radius: 10px;
+}
+
+.drink-list-form input[type=text] {
+    width: 30%;
+    -webkit-transition: width 0.15s ease-in-out;
+    transition: width 0.15s ease-in-out;
+}
+
+/*Quand on tape, la barre s'aggrandie */
+.drink-list-form input[type=text]:focus {
+    width: 70%;
+}
+
+/*faudrait que la loupe soit dans la searchbar.. */
+#material-icons {
+position: absolute;
+top: 11px;
+left: 11em;
+font-size: 1em;
+}
