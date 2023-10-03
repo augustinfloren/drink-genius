@@ -51,35 +51,22 @@
 
 /*#### SEARCH BAR ####*/
 .drink-list-form {
-    grid-area: form;
-  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-radius: 10px 10px 0 0;
-  
-    padding: 8px 16px 0 16px;
-  
     position: relative;
+    margin:auto;
   }
   #searchbar{
-    margin-left: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
      padding:15px;
      border-radius: 10px;
    }
  
    input[type=text] {
-      width: 30%;
-      -webkit-transition: width 0.15s ease-in-out;
-      transition: width 0.15s ease-in-out;
+      width: 150%;
    }
  
-   /*Quand on tape, la barre s'aggrandie */
-   input[type=text]:focus {
-     width: 70%;
-   }
-  
-   /*faudrait que la loupe soit dans la searchbar.. */
-   #material-icons {
-    position: absolute;
-    top: 11px;
-    left: 11em;
-    font-size: 1em;
-  }
