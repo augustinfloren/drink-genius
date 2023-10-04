@@ -1,75 +1,72 @@
-let machine = document.getElementById("generator");
-let generateRandomButton = document.querySelector(".generator-generate-btn");
-let startMachine = machine.innerHTML;
-let randomIngredients = [];
-/* let softBox = document.getElementById("generator-virgin-option-label"); */
-
-
-// RECUPERER DES INGREDIENTS ALEATOIRES ET LES AJOUTER DANS UN TABLEAU EXTERIEUR
-function fetchRandomIngredients(){
-return fetch('/random', {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json'
-    }
-})
-.then(response => {
-    if (!response.ok){
-        throw new Error('la requete a échoué')
-    }
-    return response.json();
-})
-.then(data => {
-    // Réinitialiser le tableau des ingrédients
-    randomIngredients = [];
-    data.forEach(ingredient => {
-        randomIngredients.push(ingredient);
-    });
-})
-.catch(error => {
-    console.error('Erreur', error)
-})}
-;
-
-// AJOUTER DES INGREDIENTS ALEATOIRES AU DOM
-function addRandomIngredients(){
-    machine.innerHTML = "";
-    randomIngredients.forEach(ingredient => {
+const random = {
+    machine : document.getElementById("generator"),
+    generateRandomButton : document.querySelector(".generator-generate-btn"),
+    startMachine : document.getElementById("generator").innerHTML,
+    randomIngredients : [],
+    
+    // RECUPERER LES INGREDIENTS ALEATOIRES
+    fetchRandomIngredients: ()=>{
+        return fetch('/random', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok){
+                throw new Error('la requete a échoué')
+            }
+            return response.json();
+        })
+        .then(data => {
+            random.randomIngredients = data;
+        })
+        .catch(error => {
+            console.error('Erreur', error)
+        })},
+    
+    // AJOUTER DES INGREDIENTS ALEATOIRES AU DOM
+    addRandomIngredients: ()=>{
+        random.machine.innerHTML = "";
+        random.randomIngredients.forEach(ingredient => {
         const randomIngredientDiv = document.createElement('div');
         randomIngredientDiv.classList.add('random-ingredient');
         randomIngredientDiv.textContent =  ingredient.name + ' : ' + ingredient.quantity + ' ' + ingredient.unit;
-        machine.appendChild(randomIngredientDiv)
+        random.machine.appendChild(randomIngredientDiv)
     });
-};
+    },
 
-// AJOUTER LE BOUTON DE RETOUR A LA PAGE PRINCIPAL
-function addNewRandomIngredientsBtn(){
-    const newRandomButton = document.createElement('button');
-    newRandomButton.textContent = "Nouveau cocktail !";
-    machine.appendChild(newRandomButton);
+    // AJOUTER LE BOUTON DE RETOUR A LA PAGE PRINCIPAL
+    addNewRandomIngredientsBtn: ()=>{
+        const newRandomButton = document.createElement('button');
+        newRandomButton.textContent = "Nouveau cocktail !";
+        random.machine.appendChild(newRandomButton);
 
-    newRandomButton.addEventListener('click', function(event){
+        newRandomButton.addEventListener('click', function(event){
         event.preventDefault();
-        machine.innerHTML = startMachine;
-        addGenerateRandomButtonEventListener();
+        random.machine.innerHTML = random.startMachine;
+        random.addGenerateRandomButtonEventListener();
     });
-};
+    },
 
-function addGenerateRandomButtonEventListener(){
-    let generateRandomButton = document.querySelector(".generator-generate-btn");
-    generateRandomButton.addEventListener('click', async function (event){
-        event.preventDefault();
-        await fetchRandomIngredients();
-        addRandomIngredients();
-        addNewRandomIngredientsBtn();
-    })
+    // AJOUTER LE LISTENER SUR LE BOUTON DE GENERATION ALEATOIRE
+    addGenerateRandomButtonEventListener: ()=>{
+        let generateRandomButton = document.querySelector(".generator-generate-btn");
+        generateRandomButton.addEventListener('click', async function (event){
+            event.preventDefault();
+            await random.fetchRandomIngredients();
+            random.addRandomIngredients();
+            random.addNewRandomIngredientsBtn();
+        })
+    }
 }
 
-// EVENEMENT SUR LE BOUTON DE GENERATION DE COCKTAIL ALEATOIRE
-generateRandomButton.addEventListener('click', async function(event){
+
+// EVENEMENT DE DEPART SUR LE BOUTON DE GENERATION DE COCKTAIL ALEATOIRE
+random.generateRandomButton.addEventListener('click', async function(event){
     event.preventDefault();
-    await fetchRandomIngredients();
-    addRandomIngredients();
-    addNewRandomIngredientsBtn();
-    addGenerateRandomButtonEventListener();
+    await random.fetchRandomIngredients();
+    random.addRandomIngredients();
+    random.addNewRandomIngredientsBtn();
+    random.addGenerateRandomButtonEventListener();
     });
