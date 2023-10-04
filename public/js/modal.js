@@ -1,55 +1,87 @@
-// Chercher la modale
-const modalContainer = document.querySelector(".modal-container");
+document.addEventListener("DOMContentLoaded", function () {
 
-// POUR INSCRIPTION
-// Chercher l'élément qui va déclencher la modale pour Inscription
-const modalTriggerInscription = document.querySelector(".modal-trigger-inscription");
+  // Modale
+  const modalContainer = document.querySelector(".modal-container");
 
-// Par défaut, tous les champs du formulaire apparaissent mais pour la modale Connexion
-// Je n'ai besoin que du champs "email" et "mot de passe" donc :
-const nomInput = document.getElementById("nom-input");
-const prenomInput = document.getElementById("prenom-input");
-const dateInput = document.getElementById("date-input");
-const confirmationInput = document.getElementById("confirmation-input");
-const form = document.getElementById("auth-modal-form");
-const btn = document.getElementById("auth-modal-btn");
+  // Lien already registered
+  const alreadyRegisteredLink = document.getElementById("already-registered-link")
 
-// Lorsque je clique sur Inscription
-modalTriggerInscription.addEventListener("click", toggleModalInscription);
+  // Par défaut, tous les champs du formulaire apparaissent mais pour la modale Connexion
+  // Je n'ai besoin que du champs "email" et "mot de passe" donc :
+  const nomInput = document.getElementById("nom-input");
+  const prenomInput = document.getElementById("prenom-input");
+  const dateInput = document.getElementById("date-input");
+  const confirmationInput = document.getElementById("confirmation-input");
+  const form = document.getElementById("auth-modal-form");
+  const btn = document.getElementById("auth-modal-btn");
 
-function toggleModalInscription() {
-  modalContainer.classList.toggle("active");
-  nomInput.style.display = "block";
-  prenomInput.style.display = "block";
-  dateInput.style.display = "block";
-  confirmationInput.style.display = "block";
-  form.style.marginTop = "0px";
-  btn.innerText = "S'enregistrer";
-}
+  let isRegistrationModal = false;
 
-// POUR CONNEXION
-// Chercher l'élément qui va déclencher la modale pour Connexion
-const modalTriggerConnexion = document.querySelector(".modal-trigger-connexion");
+  const modalTriggerConnexion = document.querySelector(".modal-trigger-connexion");
 
-// Lorsque je clique sur Connexion
-modalTriggerConnexion.addEventListener("click", toggleModalConnexion);
+  // Lorsque je clique sur Connexion
+  modalTriggerConnexion.addEventListener("click", toggleModalConnexion);
 
-function toggleModalConnexion() {
-  modalContainer.classList.toggle("active");
-  nomInput.style.display = "none";
-  prenomInput.style.display = "none";
-  dateInput.style.display = "none";
-  confirmationInput.style.display = "none";
-  form.style.marginTop = "-40px";
-  btn.innerText = "Se connecter";
-}
+  function toggleModalConnexion() {
+    modalContainer.classList.toggle("active");
+    nomInput.style.display = "none";
+    prenomInput.style.display = "none";
+    dateInput.style.display = "none";
+    confirmationInput.style.display = "none";
+    form.style.marginTop = "-20px";
+    btn.style.marginTop = "0px";
+    btn.innerText = "Se connecter";
+    alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
+    isRegistrationModal = false;
+  }
 
-// Fermeture des modales (CONNEXION ET INSCRIPTION)
-const modalTriggers = document.querySelectorAll(".modal-trigger");
-modalTriggers.forEach((trigger) =>
-  trigger.addEventListener("click", toggleModalClosure)
-);
+  // Lorsque que je bascule sur inscription
+  function toggleModalInscription() {
+    nomInput.style.display = "block";
+    prenomInput.style.display = "block";
+    dateInput.style.display = "block";
+    confirmationInput.style.display = "block";
+    form.style.marginTop = "0px";
+    btn.style.marginTop = "10px";
+    btn.innerText = "S'enregistrer";
+    alreadyRegisteredLink.innerText = "Déjà inscrit ? Par ici !";
+    isRegistrationModal = true;
+  }
 
-function toggleModalClosure() {
-  modalContainer.classList.toggle("active");
-}
+  // Lorsque je bascule d'inscription à connexion
+  modalTriggerConnexion.addEventListener("click", toggleModalConnexion);
+
+  function switchModalConnexion() {
+    nomInput.style.display = "none";
+    prenomInput.style.display = "none";
+    dateInput.style.display = "none";
+    confirmationInput.style.display = "none";
+    form.style.marginTop = "-20px";
+    btn.innerText = "Se connecter";
+    alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
+    isRegistrationModal = false;
+  }
+
+  // basculer entre connexion et inscription
+  alreadyRegisteredLink.addEventListener("click", function (event) {
+    event.preventDefault();
+    if (isRegistrationModal) {
+      // Si l'inscription est affichée, basculez vers la connexion
+      switchModalConnexion();
+    } else {
+      // Sinon, basculez vers l'inscription
+      toggleModalInscription();
+    }
+  });
+
+  // Fermeture des modales (CONNEXION ET INSCRIPTION)
+  const modalTriggers = document.querySelectorAll(".modal-trigger");
+  modalTriggers.forEach((trigger) =>
+    trigger.addEventListener("click", toggleModalClosure)
+  );
+
+  function toggleModalClosure() {
+    modalContainer.classList.toggle("active");
+  }
+
+});
