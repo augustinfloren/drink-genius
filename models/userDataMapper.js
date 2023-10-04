@@ -23,10 +23,10 @@ const dataMapper = {
             const response = await client.query(sqlQuery);
             result = response.rows[0];
             if (!result) {
-                error = { error: "Utilisateur non trouvé.", code: "USER_NOT_FOUND", result: null };
+                return { error: "Utilisateur non trouvé.", code: "USER_NOT_FOUND", result: null };
             }
         } catch(err) {
-            error = { error: "Une erreur s'est produite de l'authentification.", code: "DATABASE_ERROR", result: null };
+            return { error: "Une erreur s'est produite de l'authentification.", code: "DATABASE_ERROR", result: null };
         }
 
         return {error, result};
