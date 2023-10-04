@@ -20,6 +20,6 @@ router.get("/random", cw(randomController.getRandomIngredients));
 router.post("/signin", validationService.checkSignUpData, userController.signUpAndRedirect)
 router.post("/login", userController.logInAndRedirect)
 router.get("/profile", cw(userController.getProfilePage));
-router.get("/logout", cw(userController.logOutPage));
+router.get("/logout", userController.logOutAndRedirect);
 
 module.exports = router;

@@ -30,8 +30,6 @@ const userController = {
       if(correctPassword){
         delete user.password;
         req.session.user = user;
-        res.locals.user = user;
-        console.log(res.locals.user)
         res.status(200).redirect('/');
       } else {
         res.send(error);
@@ -44,9 +42,8 @@ const userController = {
     res.render('profilePage', {userId});
   },
 
-  async logOutPage(req, res){
-    req.session.user = [];
-    console.log(req.session.user)
+  async logOutAndRedirect(req, res){
+    req.session.user = null;
     res.redirect('/')
   }
 }
