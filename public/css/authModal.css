@@ -23,6 +23,8 @@
 }
 
 .modal{
+  width: 90%;
+  height: 70%;
   font-family: 'Mooli', sans-serif;
   text-align: center;
   display: flex;
@@ -36,8 +38,6 @@
   position:absolute;
   top:50%;
   left:50%;
-  /* transform: translate(-50%, calc(-50% - 50px)); */
-  /* transition: opacity 0.4s ease-out, transform 0.4s ease-out; */
   border-radius: 25px;
   height: fit-content;
 }
@@ -67,8 +67,7 @@
   background-color: #2d213f15;
   border-radius: 30px;
   padding: 5px;
-
-  width: 320px;
+  width: 270px;
 }
 
 #auth-modal-form label {

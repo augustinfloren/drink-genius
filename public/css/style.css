@@ -181,13 +181,12 @@ h2 {
 
 @media screen and (max-width: 790px) {
 
-.modal {
-    width: 90%;
-    height: 70%;
+#header-title {
+    font-size: 1.9em;
 }
 
-#auth-modal-form {
-
+#header-logo {
+    width: 50px;
 }
 
 #header-nav-menu {
@@ -249,6 +248,14 @@ h2 {
     height: 350px;
     width: 350px;
     gap: 50px;
+}
+
+#generator h2 {
+    font-size: 1.7em;
+}
+
+#generator-virgin-option-label {
+    font-size: 1.3em;
 }
 
 #legal-notices {
