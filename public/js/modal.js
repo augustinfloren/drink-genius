@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dateInput.style.display = "none";
     confirmationInput.style.display = "none";
     form.style.marginTop = "-20px";
+    form.action = "/login"
     btn.style.marginTop = "0px";
     btn.innerText = "Se connecter";
     alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dateInput.style.display = "block";
     confirmationInput.style.display = "block";
     form.style.marginTop = "0px";
+    form.action = "/signIn"
     btn.style.marginTop = "10px";
     btn.innerText = "S'enregistrer";
     alreadyRegisteredLink.innerText = "Déjà inscrit ? Par ici !";
