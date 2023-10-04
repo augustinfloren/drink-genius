@@ -1,5 +1,5 @@
 const mainController = {
-  getHomePage: (req,res) => {
+  async getHomePage (req,res){
     const message = req.session.errorMessage
     res.render('homePage', {message});
   }
