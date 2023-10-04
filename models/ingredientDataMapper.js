@@ -11,6 +11,19 @@ const ingredientDataMapper = {
         return result.rows
         },
 
+    async getRandomVirginIngredients(){
+        const result = await client.query(`SELECT name, unit,
+        CEIL(random()*( (max_quantity - min_quantity) + min_quantity)) AS quantity 
+        FROM ingredient
+        WHERE ingredient.id NOT IN (
+          SELECT ingredient_id
+          FROM ingredient_has_label
+          WHERE label_id = 1) 
+        ORDER BY name(random())
+        LIMIT (3 + random() * (6 - 3))`);
+        return result.rows
+    },
+
     async getAllIngredients(){
         const result = await client.query(`SELECT name FROM ingredient`);
         return result.rows;
@@ -45,6 +58,16 @@ const ingredientDataMapper = {
         return result.rowCount;
     },
 
+    // RECUPERER TOUS LES INGREDIENTS NON ALCOOLISES
+    async getVirginIngredients(){
+        const result = await client.query(`SELECT ingredient.name AS ingredient, label.name AS label FROM ingredient
+        JOIN ingredient_has_label AS labeling ON labeling.ingredient_id = id
+        JOIN label ON labeling.label_id = label.id
+        WHERE labeling.label_id<>1`)
+        return result.rows;
+    },
+
+    // RECUPERER LES INGREDIENTS SELON LEUR LABEL
     async getIngredientByLabel(){
         const result = await client.query(`SELECT ingredient.name AS ingredient, label.name AS label FROM ingredient
         JOIN ingredient_has_label AS labeling ON labeling.ingredient_id = id

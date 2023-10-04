@@ -3,9 +3,6 @@ const { mainController, cocktailsController, userController, randomController } 
 const cw = require("./controllerWrapper");
 const validationService = require("./services/validationService");
 
-
-// VISITEUR
-
 // Accueil
 router.get("/", cw(mainController.getHomePage));
 
@@ -14,7 +11,10 @@ router.get("/cocktails", cw(cocktailsController.getAllCocktailsPage));
 router.get("/cocktail/:id", cw(cocktailsController.getCocktailInfoPage));
 router.post("/profile/newcocktail", cw(cocktailsController.addCocktailByUserPage));
 router.post("/admin/newcocktail", cw(cocktailsController.addCocktailByAdminPage));
+
+// Générateur
 router.get("/random", cw(randomController.getRandomIngredients));
+router.get("/randomvirgin", cw(randomController.getRandomVirginIngredients));
 
 // User
 router.post("/signin", validationService.checkSignUpData, userController.signInPage)
