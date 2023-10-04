@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
     dateInput.style.display = "none";
     confirmationInput.style.display = "none";
     form.style.marginTop = "-20px";
-    form.action = "/login"
+    form.action = "/login";
+    form.method="get";
     btn.style.marginTop = "0px";
     btn.innerText = "Se connecter";
     alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
@@ -39,11 +40,16 @@ document.addEventListener("DOMContentLoaded", function () {
   // Lorsque que je bascule sur inscription
   function toggleModalInscription() {
     nomInput.style.display = "block";
+    nomInput.setAttribute("required", true);
     prenomInput.style.display = "block";
+    prenomInput.setAttribute("required", true);
     dateInput.style.display = "block";
+    dateInput.setAttribute("required", true);
     confirmationInput.style.display = "block";
+    confirmationInput.setAttribute("required", true);
     form.style.marginTop = "0px";
-    form.action = "/signIn"
+    form.action = "/signIn";
+    form.method="get";
     btn.style.marginTop = "10px";
     btn.innerText = "S'enregistrer";
     alreadyRegisteredLink.innerText = "Déjà inscrit ? Par ici !";
@@ -55,9 +61,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function switchModalConnexion() {
     nomInput.style.display = "none";
+    nomInput.removeAttribute("required");
     prenomInput.style.display = "none";
+    prenomInput.removeAttribute("required");
     dateInput.style.display = "none";
+    dateInput.removeAttribute("required");
     confirmationInput.style.display = "none";
+    confirmationInput.removeAttribute("required");
     form.style.marginTop = "-20px";
     btn.innerText = "Se connecter";
     alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
