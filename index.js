@@ -4,6 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const router = require("./router");
+const loadSessionUserInLocals = require("./services/loadSessionUserInLocals");
 
 const PORT = process.env.PORT || 3000;
 
@@ -17,9 +18,12 @@ app.use(express.static("./public"));
 // Configuration des sessions
 app.use(session({
   resave: false,
-  saveUninitialized: false,
-  secret: process.env.SECRET_SESSION
+  saveUninitialized: true,
+  secret: process.env.SECRET_SESSION,
+  cookie: { secure: false, maxAge: 1000 * 60 * 60 }
 }));
+
+app.use(loadSessionUserInLocals);
 
 // Body parser
 app.use(express.urlencoded({ extended: true }));

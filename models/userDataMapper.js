@@ -8,13 +8,23 @@ const dataMapper = {
     },
 
     // CONNEXION
+
     async getUserByEmail(email){
-        const sqlQuery = {
-            text: `SELECT * FROM "user" WHERE email=$1`,
-            values: [email]
-        };
-        const result = await client.query(sqlQuery);
-        return result.rows[0];
+
+        let result;
+        let error;
+
+        try {
+            const sqlQuery = {
+                text: `SELECT * FROM "user" WHERE email=$1`,
+                values: [email]
+            };
+            const response = await client.query(sqlQuery);
+            user = response.rows[0];
+        } catch(err) {
+            return { error: "Utilisateur non trouvé.", code: "USER_NOT_FOUND", user: null };
+        }
+        return {error, user};
     },
 
     // AFFICHER LE PROFIL USER

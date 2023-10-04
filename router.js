@@ -17,12 +17,9 @@ router.get("/random", cw(randomController.getRandomIngredients));
 router.get("/randomvirgin", cw(randomController.getRandomVirginIngredients));
 
 // User
-router.post("/signin", validationService.checkSignUpData, userController.signInPage)
-router.get("/login", cw(userController.logInPage))
+router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
+router.post("/login", cw(userController.logInAndRedirect))
 router.get("/profile", cw(userController.getProfilePage));
-router.get("/logout", cw(userController.logOutPage));
-
-
-
+router.get("/logout", userController.logOutAndRedirect);
 
 module.exports = router;

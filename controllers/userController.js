@@ -2,39 +2,37 @@ const userDataMapper = require('../models/userDataMapper');
 const bcrypt = require('bcrypt');
 
 const userController = {
-  async signInPage (req, res, next){
+  async signUpAndRedirect (req, res, next){
     const newUser = req.body;
     newUser.roleId = 2;
     if(newUser.password === newUser.confirmation){
       newUser.password = await bcrypt.hash(newUser.password, parseInt(process.env.SALT));
-      const {error,result} = await userDataMapper.addOneUser(newUser);
-
+      const { error,result } = await userDataMapper.addOneUser(newUser);
       if (error) {
-        next(error);
+        res.send(error);
       } else {
-        const userData = result[0];
-        delete userData.password;
-        req.session.user = userData;
-        res.render('homePage', {success:"Votre compte a bien été créé !"});
+        const user = result[0];
+        delete user.password;
+        // req.session.user = user;
+        res.status(200).redirect('/');
       }
     }
   },
 
-  async logInPage(req, res){
+  async logInAndRedirect(req, res, next){
     const { email, password } = req.body;
-    const userInfo = await userDataMapper.getUserByEmail(email);
-    if(userInfo){
-      const correctPassword = await bcrypt.compare(password, userInfo.password);
-        if(correctPassword){
-        delete userInfo.password;
-        req.session.user = userInfo;
-        console.log(req.session.user);
-        res.render('homePage');
-        } else {
-        res.status(400).redirect('/');
-        }
+    const { error, user } = await userDataMapper.getUserByEmail(email);
+    if(error){
+      res.send(error);
     } else {
-      res.status(500).redirect('/')
+      const correctPassword = await bcrypt.compare(password, user.password);
+      if(correctPassword){
+        delete user.password;
+        req.session.user = user;
+        res.status(200).redirect('/');
+      } else {
+        res.send(error);
+      }
     }
   },
 
@@ -43,9 +41,8 @@ const userController = {
     res.render('profilePage', {userId});
   },
 
-  async logOutPage(req, res){
-    req.session.user = [];
-    console.log(req.session.user)
+  async logOutAndRedirect(req, res){
+    req.session.user = null;
     res.redirect('/')
   }
 }
