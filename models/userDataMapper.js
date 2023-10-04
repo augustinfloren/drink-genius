@@ -14,17 +14,22 @@ const dataMapper = {
         let result;
         let error;
 
+        const sqlQuery = {
+            text: `SELECT * FROM "user" WHERE email=$1`,
+            values: [email]
+        };
+
         try {
-            const sqlQuery = {
-                text: `SELECT * FROM "user" WHERE email=$1`,
-                values: [email]
-            };
             const response = await client.query(sqlQuery);
-            user = response.rows[0];
+            result = response.rows[0];
+            if (!result) {
+                error = { error: "Utilisateur non trouvé.", code: "USER_NOT_FOUND", result: null };
+            }
         } catch(err) {
-            return { error: "Utilisateur non trouvé.", code: "USER_NOT_FOUND", user: null };
+            error = { error: "Une erreur s'est produite de l'authentification.", code: "DATABASE_ERROR", result: null };
         }
-        return {error, user};
+
+        return {error, result};
     },
 
     // AFFICHER LE PROFIL USER

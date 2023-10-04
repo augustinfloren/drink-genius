@@ -21,18 +21,21 @@ const userController = {
 
   async logInAndRedirect(req, res, next){
     const { email, password } = req.body;
-    const { error, user } = await userDataMapper.getUserByEmail(email);
-    if(error){
-      res.send(error);
-    } else {
-      const correctPassword = await bcrypt.compare(password, user.password);
+    const { error, result } = await userDataMapper.getUserByEmail(email);
+    if (result) {
+      const correctPassword = await bcrypt.compare(password, result.password);
       if(correctPassword){
-        delete user.password;
-        req.session.user = user;
+        delete result.password;
+        req.session.user = result;
         res.status(200).redirect('/');
       } else {
-        res.send(error);
+        res.json(error);
+        console.log(error)
       }
+    }
+    if (error) {
+        res.json(error);
+        console.log(error)
     }
   },
 
