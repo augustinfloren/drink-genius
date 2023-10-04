@@ -23,7 +23,6 @@
 }
 
 .modal{
-  width: 90%;
   height: 70%;
   font-family: 'Mooli', sans-serif;
   text-align: center;
@@ -68,13 +67,14 @@
   border-radius: 30px;
   padding: 5px;
   width: 270px;
+  height: 40px;
 }
 
 #auth-modal-form label {
   cursor: alias;
 }
 
-#auth-modal-form ul button {
+#auth-modal-btn {
   font-family: 'Mooli', sans-serif;
   border-radius: 50px;
   border: 2px solid var(--theme-purple);
@@ -123,13 +123,13 @@
 }
 
 @media screen and (max-width: 790px) {
- .modal {
+.modal {
   top: 50%;
   padding: 20px;
   max-width: 400px;
 }
 
- #auth-modal-form {
+#auth-modal-form {
    width: 90%;
    gap: 10px;
 }
@@ -139,6 +139,10 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+#auth-modal-form input {
+  height: 30px;
 }
 
 #auth-modal-form ul button {
