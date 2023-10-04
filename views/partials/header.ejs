@@ -60,7 +60,7 @@
               <input class="input" type="text" name="lastname" id="prenom-input" placeholder="Votre prénom" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$" required>
             </li>
             <li>
-              <input class="input" type="date" name="birthdate" id="date-input" placeholder="Votre date de naissance" pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$" required>
+              <input class="input" type="text" name="birthdate" id="date-input" placeholder="Votre date de naissance" pattern="/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/" required>
             </li>
             <li>
               <input class="input" type="email" name="email" id="email-input" placeholder="Votre email" required>
