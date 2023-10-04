@@ -17,8 +17,8 @@ router.post("/admin/newcocktail", cw(cocktailsController.addCocktailByAdminPage)
 router.get("/random", cw(randomController.getRandomIngredients));
 
 // User
-router.post("/signin", validationService.checkSignUpData, userController.signUpAndRedirect)
-router.post("/login", userController.logInAndRedirect)
+router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
+router.post("/login", cw(userController.logInAndRedirect))
 router.get("/profile", cw(userController.getProfilePage));
 router.get("/logout", userController.logOutAndRedirect);
 

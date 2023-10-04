@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const userController = {
   async signUpAndRedirect (req, res, next){
     const newUser = req.body;
-    console.log(req.body)
     newUser.roleId = 2;
     if(newUser.password === newUser.confirmation){
       newUser.password = await bcrypt.hash(newUser.password, parseInt(process.env.SALT));
@@ -12,9 +11,9 @@ const userController = {
       if (error) {
         res.send(error);
       } else {
-        const userData = result[0];
-        delete userData.password;
-        req.session.user = userData;
+        const user = result[0];
+        delete user.password;
+        // req.session.user = user;
         res.status(200).redirect('/');
       }
     }
