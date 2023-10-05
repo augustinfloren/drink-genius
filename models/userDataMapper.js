@@ -8,13 +8,28 @@ const dataMapper = {
     },
 
     // CONNEXION
+
     async getUserByEmail(email){
+
+        let result;
+        let error;
+
         const sqlQuery = {
             text: `SELECT * FROM "user" WHERE email=$1`,
             values: [email]
         };
-        const result = await client.query(sqlQuery);
-        return result.rows[0];
+
+        try {
+            const response = await client.query(sqlQuery);
+            result = response.rows[0];
+            if (!result) {
+                return { error: "Utilisateur non trouvé.", code: "USER_NOT_FOUND", result: null };
+            }
+        } catch(err) {
+            return { error: "Une erreur s'est produite de l'authentification.", code: "DATABASE_ERROR", result: null };
+        }
+
+        return {error, result};
     },
 
     // AFFICHER LE PROFIL USER
