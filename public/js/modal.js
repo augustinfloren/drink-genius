@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Par défaut, tous les champs du formulaire apparaissent mais pour la modale Connexion
   // Je n'ai besoin que du champs "email" et "mot de passe" donc :
+
+  const modalTitle = document.getElementById("modalTitle");
   const nomInput = document.getElementById("nom-input");
   const prenomInput = document.getElementById("prenom-input");
   const dateInput = document.getElementById("date-input");
@@ -26,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function toggleModalConnexion() {
     modalContainer.classList.toggle("active");
+    modalTitle.innerText = "Connexion";
     nomInput.style.display = "none";
     prenomInput.style.display = "none";
     dateInput.style.display = "none";
@@ -40,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Lorsque que je bascule sur inscription
   function toggleModalInscription() {
+
+    modalTitle.innerText = "Remplissez ce formulaire puis remplissez votre verre !";
     nomInput.style.display = "block";
     nomInput.value = "";
     nomInput.setAttribute("required", true);
@@ -66,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
   modalTriggerConnexion.addEventListener("click", toggleModalConnexion);
 
   function switchModalConnexion() {
+    modalTitle.innerText = "Connexion";
     nomInput.style.display = "none";
     nomInput.removeAttribute("required");
     nomInput.value = "";

@@ -97,7 +97,6 @@
 
 .close-modal{
   font-family: 'Mooli', sans-serif;
-
   padding: 20px 20px;
   border:none;
   font-size: 18px;
@@ -106,7 +105,6 @@
   right:10px;
   cursor: pointer;
   color: var(--theme-purple);
-  background-color: white;
   font-weight: bold;
 }
 
