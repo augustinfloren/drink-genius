@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Lien already registered
   const alreadyRegisteredLink = document.getElementById("already-registered-link")
 
+  const main = document.querySelector("main");
   const modalTitle = document.getElementById("modalTitle");
   const nomInput = document.getElementById("nom-input");
   const prenomInput = document.getElementById("prenom-input");
@@ -38,6 +39,12 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.innerText = "Se connecter";
     alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
     isRegistrationModal = false;
+
+    //Lorsque que je soumet le form
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      fetchLogin();
+    })
   }
 
   // Lorsque que je bascule sur inscription
@@ -69,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Lorsque que je soumet le form
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      fetchAuthMessages();
+      fetchSignup();
     })
   }
 
@@ -123,8 +130,8 @@ document.addEventListener("DOMContentLoaded", function () {
     modalContainer.classList.toggle("active");
   }
 
-  // Récupération des messages de succès et d'erreurs
-  async function fetchAuthMessages() {
+  // Signup : Récupération des messages de succès et d'erreurs
+  async function fetchSignup() {
     fetch('/signin', {
       method: 'POST',
       body:  JSON.stringify(Object.fromEntries(new FormData(form))),
@@ -153,6 +160,67 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     })
   }
+
+  // Login : Récupération des messages de succès et d'erreurs
+
+
+  async function fetchLogin() {
+    const formData = Object.fromEntries(new FormData(form));
+
+    const loginForm = {
+      "email": formData.email,
+      "password": formData.password
+    };
+
+    console.log(loginForm)
+    fetch('/login', {
+      method: 'POST',
+      body:  JSON.stringify(loginForm),
+      headers: { "Content-Type": "application/json" },
+    })
+    .then(response => {
+      if (!response.ok){
+        return response.json().then(errorData => {
+        throw new Error(errorData);
+      });
+      }
+      return response.json();
+    })
+    .then(data => {
+      const urlParams = new URLSearchParams();
+      urlParams.append('message', data);
+      window.location.href = '/?' + urlParams.toString();
+      // const succesMessage = document.createElement("p");
+      // succesMessage.textContent = "truc";
+      // main.appendChild(succesMessage);
+      // setTimeout(() => {
+      //   succesMessage.style.display = 'none';
+      // }, 3000);
+    })
+    .catch(error => {
+      console.log(error)
+      modalTitle.style.color = "red";
+      modalTitle.style.fontSize = "1.3em";
+      if (error.message.includes('Utilisateur')) {
+        modalTitle.innerText = "Utilisateur non trouvé.";
+      } else if (error.message.includes('Mot de passe')) {
+        modalTitle.innerText = "Mot de passe incorrect.";
+      } else {
+        modalTitle.innerText = "Une erreur s'est produite de l'authentification.";
+      }
+    })
+  }
+
+  let params = (new URL(document.location)).searchParams;
+  // const urlParams = new URLSearchParams(window.location.search);
+  console.log(params)
+
+  const message = params.get('message');
+  console.log(message)
+  console.log(message)
+  const succesMessage = document.createElement("p");
+  succesMessage.textContent = message;
+  main.appendChild(succesMessage);
 });
 
 

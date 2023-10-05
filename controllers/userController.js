@@ -20,18 +20,19 @@ const userController = {
     const { email, password } = req.body;
     const { error, result } = await userDataMapper.getUserByEmail(email);
     if (error) {
-      res.json(error);
+      res.status(400).json(error);
     }
     else {
       const correctPassword = await bcrypt.compare(password, result.password);
       if(correctPassword){
         delete result.password;
         req.session.user = result;
-        res.status(200).redirect('/');
+        console.log(req.session.user)
+        res.status(200).json("Vous êtes maintenant connecté !");
       }
       else {
         error = "Mot de passe incorrect";
-        res.json(error);
+        res.status(500).json(error);
       }
     }
   },
