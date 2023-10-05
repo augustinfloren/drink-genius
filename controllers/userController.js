@@ -53,6 +53,16 @@ const userController = {
     const userId = 2;
     const favourites = await userDataMapper.getFavouriteCocktailsByUser(userId)
     res.json(favourites);
+  },
+
+  async addNewCocktail(req, res){
+    
+  },
+
+  async getCocktailsCreatedByUser(req, res){
+    const userId = req.params.id;
+    const cocktails = await userDataMapper.getCocktailByUserId(userId);
+    res.json(cocktails);
   }
 }
 

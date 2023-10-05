@@ -109,6 +109,15 @@ const dataMapper = {
         };
         const result = await client.query(sqlQuery);
         return result.rows;
+    },
+
+    // RECUPERER LES COCKTAILS PAR UTILISATEUR
+    async getCocktailByUserId(user_id){
+        const sqlQuery = {
+            text: 'SELECT * FROM cocktail WHERE user_id=$1',
+            values: [user_id]
+        };
+        const result = await client.query(sqlQuery)
     }
 
 };
