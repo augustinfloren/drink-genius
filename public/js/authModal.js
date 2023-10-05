@@ -6,9 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Lien already registered
   const alreadyRegisteredLink = document.getElementById("already-registered-link")
 
-  // Par défaut, tous les champs du formulaire apparaissent mais pour la modale Connexion
-  // Je n'ai besoin que du champs "email" et "mot de passe" donc :
-
   const modalTitle = document.getElementById("modalTitle");
   const nomInput = document.getElementById("nom-input");
   const prenomInput = document.getElementById("prenom-input");
@@ -65,6 +62,13 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.innerText = "S'enregistrer";
     alreadyRegisteredLink.innerText = "Déjà inscrit ? Par ici !";
     isRegistrationModal = true;
+
+    // Lorsque que je soumet le form
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+      fetchAuthMessages();
+      // document.createElement("div");
+    })
   }
 
   // Lorsque je bascule d'inscription à connexion
@@ -93,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     isRegistrationModal = false;
   }
 
-  // basculer entre connexion et inscription
+  // Clic pour basculer
   alreadyRegisteredLink.addEventListener("click", function (event) {
     event.preventDefault();
     if (isRegistrationModal) {
@@ -105,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Fermeture des modales (CONNEXION ET INSCRIPTION)
+  // Fermeture de la modale
   const modalTriggers = document.querySelectorAll(".modal-trigger");
   modalTriggers.forEach((trigger) =>
     trigger.addEventListener("click", toggleModalClosure)
@@ -115,4 +119,33 @@ document.addEventListener("DOMContentLoaded", function () {
     modalContainer.classList.toggle("active");
   }
 
+  // Lorsque que je soumet le form
+
+  // Récupération des messages de succès et d'erreurs
+  function fetchAuthMessages() {
+    return fetch('/signin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (!response.ok){
+        throw new Error('la requete a échoué')
+      }
+      console.log(response)
+      return response.json();
+    })
+    .then(data => {
+      modalTitle.innerText = data;
+      console.log(data)
+    })
+    .catch(error => {
+      console.log(error)
+      error.json()
+    })
+  }
+
 });
+
+
+
+

@@ -13,7 +13,7 @@ const userController = {
       } else {
         const user = result[0];
         delete user.password;
-        res.status(200).redirect('/');
+        res.json("Inscription validée, vous pouvez maintenant vous connecter");
       }
     }
   },

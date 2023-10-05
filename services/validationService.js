@@ -17,10 +17,8 @@ module.exports = {
         next();
     }
     else{
-        // let error = new APIError();
-        // next(error);
         console.log(error)
-        res.send(error)
+        res.json(error)
     }
 },
 }
