@@ -122,8 +122,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Lorsque que je soumet le form
 
   // Récupération des messages de succès et d'erreurs
-  function fetchAuthMessages() {
-    return fetch('/signin', {
+  async function fetchAuthMessages() {
+    return await fetch('/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
     })
@@ -136,7 +136,6 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .then(data => {
       modalTitle.innerText = data;
-      console.log(data)
     })
     .catch(error => {
       console.log(error)
