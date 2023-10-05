@@ -18,7 +18,7 @@ router.get("/randomvirgin", cw(randomController.getRandomVirginIngredients));
 
 // User
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
-router.post("/login", userController.logInAndRedirect)
+router.post("/login", validationService.checkSignUpData, userController.logInAndRedirect)
 router.get("/profile", cw(userController.getProfilePage));
 router.get("/logout", userController.logOutAndRedirect);
 

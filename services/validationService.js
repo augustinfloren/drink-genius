@@ -17,7 +17,6 @@ module.exports = {
         next();
     }
     else{
-        console.log(error)
         res.json(error)
     }
 },

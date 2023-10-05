@@ -9,11 +9,10 @@ const userController = {
       newUser.password = await bcrypt.hash(newUser.password, parseInt(process.env.SALT));
       const { error,result } = await userDataMapper.addOneUser(newUser);
       if (error) {
-        res.json(error);
+        console.log(error)
+        res.status(400).json(error);
       } else {
-        const user = result[0];
-        delete user.password;
-        res.json("Inscription validée, vous pouvez maintenant vous connecter");
+        res.status(200).json("Inscription validée, vous pouvez maintenant vous connecter");
       }
     }
   },

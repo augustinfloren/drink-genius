@@ -63,11 +63,10 @@ document.addEventListener("DOMContentLoaded", function () {
     alreadyRegisteredLink.innerText = "Déjà inscrit ? Par ici !";
     isRegistrationModal = true;
 
-    // Lorsque que je soumet le form
-    btn.addEventListener("click", (event) => {
+    //Lorsque que je soumet le form
+    form.addEventListener("submit", (event) => {
       event.preventDefault();
       fetchAuthMessages();
-      // document.createElement("div");
     })
   }
 
@@ -123,26 +122,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Récupération des messages de succès et d'erreurs
   async function fetchAuthMessages() {
-    return await fetch('/signin', {
+    fetch('/signin', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' }
+      body:  JSON.stringify(Object.fromEntries(new FormData(form))),
+      headers: { "Content-Type": "application/json" },
     })
     .then(response => {
       if (!response.ok){
-        throw new Error('la requete a échoué')
+        return response.json().then(errorData => {
+        throw new Error(errorData.error);
+      });
       }
-      console.log(response)
       return response.json();
     })
     .then(data => {
       modalTitle.innerText = data;
+      switchModalConnexion();
     })
     .catch(error => {
       console.log(error)
-      error.json()
+      modalTitle.innerText = error;
     })
   }
-
 });
 
 
