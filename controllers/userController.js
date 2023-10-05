@@ -32,7 +32,7 @@ const userController = {
         res.status(200).redirect('/');
       }
       else {
-        let error = "Mot de passe incorrect";
+        error = "Mot de passe incorrect";
         res.json(error);
       }
     }
