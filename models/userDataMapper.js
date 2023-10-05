@@ -65,9 +65,8 @@ const dataMapper = {
             const emailExists = emailCheckResult.rows[0];
 
             if (emailExists) {
-                return { error: "Cet e-mail est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
+                return { error: "Cet email est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
             } else {
-                console.log("ok")
                 const response = await client.query(insertQuery);
                 result = response.rows;
             }

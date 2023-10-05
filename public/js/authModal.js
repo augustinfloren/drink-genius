@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
   modalTriggerConnexion.addEventListener("click", toggleModalConnexion);
 
   function toggleModalConnexion() {
+    modalTitle.style.color = "var(--theme-purple)";
+    modalTitle.style.fontSize = "1.5em";
     modalContainer.classList.toggle("active");
     modalTitle.innerText = "Connexion";
     nomInput.style.display = "none";
@@ -40,7 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Lorsque que je bascule sur inscription
   function toggleModalInscription() {
-
+    modalTitle.style.color = "var(--theme-purple)";
+    modalTitle.style.fontSize = "1.5em";
     modalTitle.innerText = "Remplissez ce formulaire puis remplissez votre verre !";
     nomInput.style.display = "block";
     nomInput.value = "";
@@ -74,6 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
   modalTriggerConnexion.addEventListener("click", toggleModalConnexion);
 
   function switchModalConnexion() {
+    modalTitle.style.color = "var(--theme-purple)";
+    modalTitle.style.fontSize = "1.5em";
     modalTitle.innerText = "Connexion";
     nomInput.style.display = "none";
     nomInput.removeAttribute("required");
@@ -118,8 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
     modalContainer.classList.toggle("active");
   }
 
-  // Lorsque que je soumet le form
-
   // Récupération des messages de succès et d'erreurs
   async function fetchAuthMessages() {
     fetch('/signin', {
@@ -130,18 +133,24 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(response => {
       if (!response.ok){
         return response.json().then(errorData => {
-        throw new Error(errorData.error);
+        throw new Error(errorData);
       });
       }
       return response.json();
     })
     .then(data => {
-      modalTitle.innerText = data;
       switchModalConnexion();
+      modalTitle.innerText = data;
+      modalTitle.style.fontSize = "1.3em";
     })
     .catch(error => {
-      console.log(error)
-      modalTitle.innerText = error;
+      modalTitle.style.color = "red";
+      modalTitle.style.fontSize = "1.3em";
+      if (error.message.includes('email')) {
+        modalTitle.innerText = "Cet e-mail est déjà enregistré.";
+      } else {
+        modalTitle.innerText = "Une erreur s'est produite lors de l'inscription.";
+      }
     })
   }
 });
