@@ -11,8 +11,33 @@
         <div class="drink-list-form">
             <input id="searchbar" onkeyup="search_cocktail()" type="text"
             name="search" placeholder="Rechercher par cocktail...">
-
           </div>
+          <a class="spirit-modal-trigger-open" id="btn-spirit"> Filtrer par Alcool</a>
+
+    <!-- MODALE FILTRE -->
+    <div class="modal-container-spirit">
+        <div class="overlay spirit-modal-trigger"></div>
+        <div class="modal-spirit">
+            <button class="close-modal-spirit spirit-modal-trigger">X</button>
+                <h2 id="modalTitle">Filtre avec notre sélection d'alcools</h1>
+                <form class="spirit-selection-form" method="POST" action ="/cocktails">
+                    <div class="modal-checkbox-container">
+                        <% spirits.forEach(spirit => { %>
+                            
+                            <div class="modal-checkbox">
+                                <input class="checkbox"type="checkbox" name="<%= spirits.name %>" value="<%= spirit.id %>" data-info="<% spirit.name %>"> 
+                                <label class="spirit-name" for="<%= spirit.name %>"><%=spirit.name.charAt(0).toUpperCase() + spirit.name.slice(1)%></label>
+                            </div>
+                        <% }) %>
+                    </div>
+                                <div class="spirit-btn-validation">
+                                    <button type="submit" class="spirit-modal-btn">Valider</button>
+                                </div>
+                </form>
+        </div>
+	</div>
+
+          <!-- COCKTAILS CONTAINER-->
                 <div class="cocktails" id="cocktails-container">
                     <% cocktails.forEach(cocktail => { %>
                         <a class="cocktail cocktails-container-item" href="/cocktail/<%=cocktail.id%>">

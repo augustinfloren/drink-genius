@@ -140,8 +140,7 @@ h2 {
     cursor: pointer;
 }
 
-/*#### modal ####*/
-
+/*#### MODAL CONNECTION/INSCRIPTION ####*/
 .modal-container {
     display: none;
     position: fixed;
@@ -211,7 +210,6 @@ display: block;
     display:block;
     margin-bottom: 5px;
 }
-
 
 /*#### FOOTER ####*/
 

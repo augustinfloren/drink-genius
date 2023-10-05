@@ -45,16 +45,8 @@ const ingredientDataMapper = {
         return result.rowCount;
     },
 
-    async getIngredientByLabel(label_id){
-        const sqlQuery = {
-            text: `SELECT ingredient.name AS ingredient, label.name AS category FROM ingredient
-            JOIN ingredient_has_label AS labeling ON labeling.ingredient_id = id
-            JOIN label ON labeling.label_id = label.id
-            WHERE labeling.label_id=$1`,
-            values: [label_id]
-        };
-
-        const result = await client.query(sqlQuery)
+    async getSpiritsName(){
+        const result = await client.query(`SELECT ingredient.name AS name, ingredient.id FROM ingredient WHERE ingredient.id IN (SELECT ingredient_id FROM ingredient_has_label WHERE label_id = 1)`)
         return result.rows;
     },
     
@@ -70,5 +62,6 @@ const ingredientDataMapper = {
         return result.rows;
     }
 };
+//console.log("alors c'est quoi:",)
 
 module.exports = ingredientDataMapper;

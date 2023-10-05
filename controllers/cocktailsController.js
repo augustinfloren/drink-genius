@@ -1,10 +1,18 @@
 const cocktailDataMapper = require("../models/cocktailDataMapper");
+const ingredientDataMapper = require("../models/ingredientDataMapper");
 
 const cocktailsController = {
   async getAllCocktailsPage(req, res){
     const cocktails = await cocktailDataMapper.getValidatedCocktails();
-    res.render('cocktailsListPage', {cocktails});
+    const spirits = await ingredientDataMapper.getSpiritsName();
+    res.render('cocktailsListPage', {cocktails, spirits});
   },
+  async getCocktailsBySpirits(req, res) {
+    const ingredient_id = req.body.spirits;
+    const cocktails = await cocktailDataMapper.getCocktailBySpirits(ingredient_id);
+    res.json(cocktails);
+},
+
 
   async getCocktailInfoPage(req, res){
     const cocktailId = parseInt(req.params.id, 10);
