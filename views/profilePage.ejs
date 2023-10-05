@@ -4,26 +4,23 @@
 <main id="main">
     <nav id="user-nav">
         <ul id="nav-profile-link">
-            <li class="nav-item"><div id="favourite-link" class="nav-item-link">Paramètres du compte</div></li>
-            <li class="nav-item"><div id="mycocktails-link" class="nav-item-link">Mes favoris</div></li>
-            <li class="nav-item"><div id="parameters-link" class="nav-item-link">Mes recettes</div></li>
+            <li class="nav-item"><div id="parameters-link " class="nav-item-link">Paramètres du compte</div></li>
+            <li class="nav-item"><div id="favourite-link" class="nav-item-link">Mes favoris</div></li>
+            <li class="nav-item"><div id="mycocktails-link" class="nav-item-link">Mes création</div></li>
             <li class="nav-item"><div id="contact-admin-link" class="nav-item-link">Contacter un admin</div></li>
         </ul>
     </nav>
     <div id="profile-main-container">
         <% if (userInfo) { %>
         <ul>
-        <li id="fullname"><%= userInfo.firstname %> <%= user.Info.lastname %></li>                
-        <li id="birthdate"><%= userInfo.birthdate %></li>
-        <li id="email"><%= userInfo.email %></li>
-        <li id="location"><%= userInfo.location %></li>
-        <li id="hobbies"></li>
+        <li id="fullname"><%= userInfo.firstname %> <%= userInfo.lastname %></li>                
+        <li id="birthdate">Date de naissance : <%= userInfo.birthdate %></li>
+        <li id="email">Email : <%= userInfo.email %></li>
+        <li id="location"> Ville : <%= userInfo.location %></li>
+        <li id="hobbies">Loisirs : </li>
         </ul>
         <% } %>
 
-        <div id="main-container-profile">
-
-        </div>
     </div>
                     
 </main>
