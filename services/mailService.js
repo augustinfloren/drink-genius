@@ -10,19 +10,20 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Définissez les dé
-const confirmation_inscription = {
-    from: "drink.genious@gmail.com", // Adresse e-mail de l'expéditeur
-    to: 'stephane.andre85@gmail.com', // Adresse e-mail du destinataire
-    subject: 'Votre compte a été crée',
-    text: 'test' // Corps de l'e-mail au format texte
-};
-
-// Envoyez l'e-mail
-transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.error('Erreur lors de l\'envoi de l\'e-mail :', error);
-    } else {
-      console.log('E-mail envoyé avec succès:', info.response);
-    }
-  });
+// Mail de confirmation d'inscription
+async function confirmation_inscription(email, username) {
+  const mailConfirmation = {
+    from:"drink.genious@gmail.com",
+    to: `${email}`,
+    subject:"Confirmation d'inscription",
+    text:`Bonjour ${username}, votre inscription a bien été confirmée! 
+    Va profiter de notre application "Drink Genius" de manière responsable`
+  };
+  try {
+    const info = await transporter.sendMail(mailConfirmation);
+    console.log("E-mail de confirmation envoyé : " + info.response);
+} catch (error) {
+    console.error("Erreur lors de l'envoi de l'e-mail : " + error);
+}
+}
+confirmation_inscription(`${email}`,`${username}`)

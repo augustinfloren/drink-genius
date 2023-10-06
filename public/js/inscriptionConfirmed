@@ -1,0 +1,35 @@
+//On récupére le form de la modal
+const inscriptionModal = document.getElementById(auth-modal-form)
+//On met un listener
+inscriptionModal.addEventListener("submit", async (event)=>{
+    event.preventDefault();
+})
+
+//On met les données nécessaires du form pour l'envoi d email de confirmation d'inscription
+    // Collectez les données du formulaire
+    const email = document.getElementById("email-input").value;
+    const firstname = document.getElementById("prenom-input").value;
+    const lastname = document.getElementById("nom-input").value;
+
+    // Créez un objet JSON avec les données d'inscription
+    const inscriptionData = {
+        email,
+        firstname,
+        lastname,
+        // Ajoutez d'autres champs au besoin
+    };
+
+    // Envoyez l'e-mail de confirmation
+    await sendConfirmationEmail(inscriptionData);
+
+    // Affichez un message de succès ou redirigez l'utilisateur vers une page de confirmation
+    alert('Inscription réussie. Un e-mail de confirmation a été envoyé à votre adresse.');
+
+    // Réinitialisez le formulaire ou redirigez l'utilisateur vers une autre page
+    document.getElementById('inscription-form').reset();
+});
+
+async function sendConfirmationEmail(data) {
+    // Envoyez l'e-mail de confirmation en utilisant Nodemailer
+    // Vous pouvez personnaliser le contenu de l'e-mail en utilisant les données dans l'objet "data"
+}
