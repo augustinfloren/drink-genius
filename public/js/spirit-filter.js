@@ -1,3 +1,5 @@
+
+
 //-----------LA MODALE FILTRE-----------//
 // Chercher la modale pour le spirit filtre
 const modalSpirit = document.querySelector(".modal-container-spirit");
@@ -21,33 +23,48 @@ function toggleModalClosure() {
 }
 
 //-----------LA SELECTION D'ALCOOL(S)-----------//
+const form = document.getElementById("spiritsForm");
+form.addEventListener("submit", (event)=>{
+  event.preventDefault()
+  console.log("je:",event)
+const checkboxes = Array.from(document.getElementsByName("spirit"))
+console.log("je je", checkboxes)
 
- const submitSpirits = document.querySelector(".spirit-selection-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
+const checkedCheckboxes = checkboxes.filter((checkbox)=>{
+  return checkbox.checked
+})
+console.log("jejejeje:", checkedCheckboxes)
+const ids = checkedCheckboxes.map((checkbox)=>{
+  return checkbox.id
+})
+const cocktails = getCocktailBySpirits(ids)
+console.log("toitoi:",cocktails)
+});
 
-  const ingredient_id = Array.from(document.querySelectorAll('input[name="spirits"]:checked')).map(checkbox => checkbox.value);
-
+/*
+ const spirit_id = Array.from(document.querySelectorAll('input[name="spirits"]:checked')).map(checkbox => checkbox.value);
+console.log("je:",spirit_id)
 //Récuperer les spirits
-const response = await fetch("/cocktails", {
+const response = fetch("/cocktails", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
   },
-  body: JSON.stringify({ spirits: ingredient_id }),
+  body: JSON.stringify({ spirits: spirit_id }),
 });
 
 if (response.ok) {
-  const cocktails = await response.json();
+  const cocktails = response.json();
   // Traitez les données (cocktails) renvoyées par le serveur ici
   console.log(cocktails);
 } else {
   // Gérez les erreurs de réponse ici
-  const errorMessage = await response.text();
+  const errorMessage = response.text();
   console.error("Erreur de serveur :", errorMessage);
 }
-});
+;
 
-console.log("là:", ingredient_id)
+console.log("là:", spirit_id)*/
 
 
 

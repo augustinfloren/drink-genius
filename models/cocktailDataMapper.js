@@ -8,13 +8,10 @@ const cocktailDataMapper = {
     },
     
     //OBTENIR LES COCKTAILS AVEC LES INGREDIENTS
-    async getCocktailBySpirits(ingredient_id) {
-      
-           
-   
+    async getCocktailBySpirits(ingredient_ids) {
     const sqlQuery = {
         text: `SELECT * FROM cocktail WHERE cocktail.id IN (SELECT cocktail_id FROM cocktail_contain_ingredient WHERE ingredient_id IN ($1))`,
-        values: [ingredient_id]
+        values: [ingredient_ids]
     }
         const result = await client.query(sqlQuery);
         return result.rows;

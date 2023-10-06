@@ -15,9 +15,6 @@ router.get("/cocktail/:id", cw(cocktailsController.getCocktailInfoPage));
 router.post("/profile/newcocktail", cw(cocktailsController.addCocktailByUserPage));
 router.post("/admin/newcocktail", cw(cocktailsController.addCocktailByAdminPage));
 
-//filtre avec alcool
-router.get("/cocktailsFilter", cw(cocktailsController.getCocktailsBySpirits));
-
 
 // User
 router.post("/signin", validationService.checkSignUpData, userController.signInPage)

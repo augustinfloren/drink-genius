@@ -20,12 +20,12 @@
         <div class="modal-spirit">
             <button class="close-modal-spirit spirit-modal-trigger">X</button>
                 <h2 id="modalTitle">Filtre avec notre sélection d'alcools</h1>
-                <form class="spirit-selection-form" method="POST" action ="/cocktails">
+                <form class="spirit-selection-form" id="spiritsForm">
                     <div class="modal-checkbox-container">
                         <% spirits.forEach(spirit => { %>
-                            
+            
                             <div class="modal-checkbox">
-                                <input class="checkbox"type="checkbox" name="<%= spirits.name %>" value="<%= spirit.id %>" data-info="<% spirit.name %>"> 
+                            <input class="checkbox"type="checkbox"  name="spirit" id="<%= spirit.id %>"> 
                                 <label class="spirit-name" for="<%= spirit.name %>"><%=spirit.name.charAt(0).toUpperCase() + spirit.name.slice(1)%></label>
                             </div>
                         <% }) %>

@@ -44,7 +44,7 @@ const ingredientDataMapper = {
         const result = await client.query(sqlQuery);
         return result.rowCount;
     },
-
+    
     async getSpiritsName(){
         const result = await client.query(`SELECT ingredient.name AS name, ingredient.id FROM ingredient WHERE ingredient.id IN (SELECT ingredient_id FROM ingredient_has_label WHERE label_id = 1)`)
         return result.rows;
