@@ -1,10 +1,37 @@
 const random = {
     machine : document.getElementById("generator"),
-    generateRandomButton : document.querySelector(".generator-generate-btn"),
+    title : document.querySelector("#generator h2"),
+    virginLabel : document.getElementById("generator-virgin-option-label"),
+    filters : document.getElementById("generator-preferences-btn"),
+    buttonContainer: document.querySelector(".generator-generate-btn"),
+    button : document.querySelector(".generator-generate-btn-link"),
     startMachine : document.getElementById("generator").innerHTML,
     randomIngredients : [],
     virginCheckbox : document.getElementById("generator-virgin-option-checkbox"),
-    
+
+    generateListener: async (event) => {
+        event.preventDefault();
+        if(random.virginCheckbox.checked){
+            await random.fetchRandomVirginIngredients();
+        } else {
+        await random.fetchRandomIngredients();
+        }
+        random.addRandomIngredients();
+    },
+
+    newCocktailListener: async (event) => {
+        event.preventDefault();
+        random.title.textContent = ("Générer un cocktail aléatoire !");
+        random.virginLabel.style.display = ("block");
+        random.filters.style.display = ("block");
+        const list = document.querySelector(".random-list");
+        list.remove();
+        random.button.textContent = ("Générer");
+        random.button.removeEventListener('click', random.newCocktailListener);
+        random.button.addEventListener('click', random.generateListener);
+        random.virginCheckbox.checked = false;
+    },
+
     // RECUPERER LES INGREDIENTS SANS ALCOOL ALEATOIRES
     fetchRandomVirginIngredients: ()=>{
         return fetch('/randomvirgin', {
@@ -47,58 +74,33 @@ const random = {
         .catch(error => {
             console.error('Erreur', error)
         })},
-    
+
     // AJOUTER DES INGREDIENTS ALEATOIRES AU DOM
     addRandomIngredients: ()=>{
-        random.machine.innerHTML = "";
+        // random.machine.innerHTML = "";
+        random.virginLabel.style.display = "none";
+        random.filters.style.display = "none";
+        random.title.textContent = "Tadaaa !";
+
+        const randomIngredientList = document.createElement('ul');
+        randomIngredientList.classList.add('random-list');
+        randomIngredientList.style.display = ("flex");
+        randomIngredientList.style.flexDirection = ("column");
+        randomIngredientList.style.gap = ("10px");
+        randomIngredientList.style.fontSize = ("1.5em");
         random.randomIngredients.forEach(ingredient => {
-        const randomIngredientDiv = document.createElement('div');
-        randomIngredientDiv.classList.add('random-ingredient');
-        randomIngredientDiv.textContent =  ingredient.name + ' : ' + ingredient.quantity + ' ' + ingredient.unit;
-        random.machine.appendChild(randomIngredientDiv)
-    });
+            const randomIngredient = document.createElement('li');
+            randomIngredient.classList.add('random-ingredient');
+            randomIngredient.textContent = '- ' + ingredient.name + ' : ' + ingredient.quantity + ' ' + ingredient.unit;
+            randomIngredientList.appendChild(randomIngredient)
+        });
+        random.machine.appendChild(randomIngredientList);
+        random.buttonContainer.style.order = ("4");
+        random.button.removeEventListener('click', random.generateListener);
+        random.button.addEventListener('click', random.newCocktailListener);
+        random.button.innerText = "Faire un nouveau cocktail";
     },
-
-    // AJOUTER LE BOUTON DE RETOUR A LA PAGE PRINCIPAL
-    addNewRandomIngredientsBtn: ()=>{
-        const newRandomButton = document.createElement('button');
-        newRandomButton.textContent = "Nouveau cocktail !";
-        random.machine.appendChild(newRandomButton);
-
-        newRandomButton.addEventListener('click', function(event){
-        event.preventDefault();
-        random.machine.innerHTML = random.startMachine;
-        random.addGenerateRandomButtonEventListener();
-    });
-    },
-
-    // AJOUTER LE LISTENER SUR LE BOUTON DE GENERATION ALEATOIRE
-    addGenerateRandomButtonEventListener: ()=>{
-        let generateRandomButton = document.querySelector(".generator-generate-btn");
-        let virginCheckbox = document.getElementById("generator-virgin-option-checkbox")
-        generateRandomButton.addEventListener('click', async function (event){
-            event.preventDefault();
-            if(virginCheckbox.checked){
-                await random.fetchRandomVirginIngredients();
-            } else {
-            await random.fetchRandomIngredients();
-            }
-            random.addRandomIngredients();
-            random.addNewRandomIngredientsBtn();
-        })
-    }
 }
 
-
 // EVENEMENT DE DEPART SUR LE BOUTON DE GENERATION DE COCKTAIL ALEATOIRE
-random.generateRandomButton.addEventListener('click', async function(event){
-    event.preventDefault();
-    if(random.virginCheckbox.checked){
-        await random.fetchRandomVirginIngredients();
-    } else {
-    await random.fetchRandomIngredients();
-    }
-    random.addRandomIngredients();
-    random.addNewRandomIngredientsBtn();
-    random.addGenerateRandomButtonEventListener();
-    });
+random.button.addEventListener('click', random.generateListener);

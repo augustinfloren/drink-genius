@@ -128,14 +128,14 @@ h2 {
     cursor: pointer;
 }
 
-#generator-generate-btn-link{
+.generator-generate-btn-link{
     font-size: 1.5em;
     padding: 15px 25px 15px 25px;
     border: 2px solid white;
     border-radius: 45px;
 }
 
-#generator-generate-btn-link:hover {
+.generator-generate-btn-link:hover {
     background-color: white;
     color: var(--theme-purple);
     cursor: pointer;
