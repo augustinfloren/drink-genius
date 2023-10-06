@@ -91,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
     dateInput.addEventListener("keyup", (event) => {
       const inputValue = event.target.value;
       const currentYear = new Date().getFullYear();
-      console.log(inputValue)
       if (parseInt(inputValue) > currentYear - 18) {
           dateSpan.style.display = "block";
           dateSpan.innerText = "Vous devez avoir au moins 18 ans";
@@ -100,6 +99,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 2000);
       }
     });
+
+    form.removeEventListener("submit", loginListener);
 
     //Lorsque que je soumet le form
     form.addEventListener("submit", signupListener);
