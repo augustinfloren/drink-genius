@@ -41,7 +41,7 @@ function showFavouriteCocktails(){
     const title = document.createElement('h2')
     title.textContent = 'Vos cocktails préférés :'
     mainContainer.appendChild(title);
-    if(favouriteCocktails){
+    if(favouriteCocktails.length > 0){
         const cocktailContainer = document.createElement('div');
         cocktailContainer.classList.add('cocktails');
         cocktailContainer.id = 'cocktails-container';
