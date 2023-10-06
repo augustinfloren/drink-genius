@@ -7,8 +7,8 @@ const schemaUserInput = Joi.object({
     lastname:Joi.string().pattern(new RegExp("^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$")).required(),
     password:Joi.string().pattern(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$')).required(),
     confirmation:Joi.string().pattern(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$')).required(),
-    birthdate:Joi.date().required(),
-}).required();
+    birthdate:Joi.number().integer().min(1900).max(2005).required()
+});
 
 module.exports = {
   checkSignUpData(req,res,next){
@@ -17,7 +17,8 @@ module.exports = {
         next();
     }
     else{
-        res.json(error)
+        console.log(error)
+        res.status(400).json(error)
     }
 },
 }
