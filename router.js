@@ -21,5 +21,10 @@ router.post("/signin", validationService.checkSignUpData, cw(userController.sign
 router.post("/login", userController.logInAndRedirect)
 router.get("/profile", cw(userController.getProfilePage));
 router.get("/logout", userController.logOutAndRedirect);
+router.get("/profile/favourites", cw(userController.getFavouriteCocktails));
+router.post("/newcocktail", cw(userController.addNewCocktail));
+router.get("/profile/createdcocktail", cw(userController.getCocktailsCreatedByUser));
+
+
 
 module.exports = router;

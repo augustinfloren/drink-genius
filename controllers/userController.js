@@ -37,13 +37,29 @@ const userController = {
   },
 
   async getProfilePage (req, res) {
-    const userId = req.session.user.id;
-    res.render('profilePage', {userId});
+    const userInfo = req.session.user;
+    res.render('profilePage', {userInfo});
   },
 
   async logOutAndRedirect(req, res){
     req.session.user = null;
     res.redirect('/')
+  },
+
+  async getFavouriteCocktails(req, res){
+    const userId = req.session.user.id;
+    const favourites = await userDataMapper.getFavouriteCocktailsByUser(userId)
+    res.json(favourites);
+  },
+
+  async addNewCocktail(req, res){
+    
+  },
+
+  async getCocktailsCreatedByUser(req, res){
+    const userId = req.session.user.id;
+    const cocktails = await userDataMapper.getCocktailByUserId(userId);
+    res.json(cocktails);
   }
 }
 
