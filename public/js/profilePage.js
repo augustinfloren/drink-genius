@@ -104,15 +104,54 @@ function fetchCocktailsByUser (){
         console.error('Erreur', error)
     })};
 
-creationButton.addEventListener('click', function(){
+function showCreatedCocktails(){
     mainContainer.textContent = "";
-    createdCocktails.forEach(cocktail => {
-        const createdCocktail = document.createElement('div');
-        createdCocktail.classList.add('created-cocktail');
-        createdCocktail.textContent = cocktail.name;
-        mainContainer.appendChild(createdCocktail);
-    })
+    const title = document.createElement('h2')
+    title.textContent = 'Vos créations :'
+    mainContainer.appendChild(title);
+    if(createdCocktails.length > 0){
+        const cocktailContainer = document.createElement('div');
+        cocktailContainer.classList.add('cocktails');
+        cocktailContainer.id = 'cocktails-container';
+
+        createdCocktails.forEach(cocktail => {
+            const createdCocktail = document.createElement('a');
+            createdCocktail.classList.add('cocktails-container-item');
+            createdCocktail.href = `/cocktail/${cocktail.id}`;
+            const cocktailTitle = document.createElement('h3');
+            cocktailTitle.classList.add('cocktail-title');
+            cocktailTitle.textContent = cocktail.name;
+            const cocktailPicture = document.createElement('div')
+            cocktailPicture.classList.add('cocktail-img');
+            cocktailPicture.style = `background-image: url('/images/${cocktail.picture} `;
+            cocktailPicture.alt = `Image de ${cocktail.name}`;
+
+            createdCocktail.appendChild(cocktailTitle);
+            createdCocktail.appendChild(cocktailPicture);
+
+            cocktailContainer.appendChild(createdCocktail);
+
+            mainContainer.appendChild(cocktailContainer);
+        })
+    } else {
+        const emptyMessage = document.createElement('div')
+        emptyMessage.textContent = 'Rien à afficher ici !';
+        mainContainer.appendChild(emptyMessage);
+    }
+}
+
+creationButton.addEventListener('click', async function(){
+    await fetchCocktailsByUser();
+    showCreatedCocktails();
 })
+
+// ECOUTE SUR LE BOUTON FAVORIS
+favouritesButton.addEventListener('click', async function(){
+    await fetchFavouriteCocktails();
+    showFavouriteCocktails();
+})
+    
+    
 
 
 /***************** NOUVEAU COCKTAIL *****************/

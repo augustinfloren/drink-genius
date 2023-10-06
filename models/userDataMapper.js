@@ -118,6 +118,7 @@ const dataMapper = {
             values: [user_id]
         };
         const result = await client.query(sqlQuery)
+        return result.rows;
     }
 
 };
