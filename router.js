@@ -1,9 +1,5 @@
 const router = require("express").Router();
-<<<<<<< HEAD
-const { mainController, cocktailsController, userController,ingredientsController, searchCocktailController } = require('./controllers')
-=======
 const { mainController, cocktailsController, userController, randomController } = require('./controllers')
->>>>>>> d68411c99594e2f095f79ff1d2e1e07e54830d48
 const cw = require("./controllerWrapper");
 const validationService = require("./services/validationService");
 
@@ -16,12 +12,12 @@ router.get("/cocktail/:id", cw(cocktailsController.getCocktailInfoPage));
 router.post("/profile/newcocktail", cw(cocktailsController.addCocktailByUserPage));
 router.post("/admin/newcocktail", cw(cocktailsController.addCocktailByAdminPage));
 
-<<<<<<< HEAD
-=======
+//Filtre
+//router.get("/cocktailsFilter",cw(cocktailsController.getCocktailsBySpirits));
+
 // Générateur
 router.get("/random", cw(randomController.getRandomIngredients));
 router.get("/randomvirgin", cw(randomController.getRandomVirginIngredients));
->>>>>>> d68411c99594e2f095f79ff1d2e1e07e54830d48
 
 // User
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))

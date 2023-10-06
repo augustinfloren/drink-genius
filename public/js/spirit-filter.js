@@ -6,9 +6,10 @@ const modalSpirit = document.querySelector(".modal-container-spirit");
 
 // Pour ouvrir la modale
 const openModal = document.querySelector(".spirit-modal-trigger-open");
-
+console.log("euh??:",openModal);
 //Lorsque je clique sur "Filtres"
-openModal.addEventListener("click", openModalSpirit);
+openModal.addEventListener("click", openModalSpirit)
+console.log("euh:",openModal);
 function openModalSpirit() {
   modalSpirit.classList.toggle("active");
 }
@@ -23,6 +24,41 @@ function toggleModalClosure() {
 }
 
 //-----------LA SELECTION D'ALCOOL(S)-----------//
+/*const form = {
+formSpirit : document.getElementById("spiritsForm"),
+checkboxes : Array.from(document.getElementsByName("spirit")),
+spirits: [],
+
+handleClicked: async(event) => {
+  event.preventDefault();
+  if(form.checkboxes.checked){
+    await form.getCocktailsBySpirits()
+  }
+},
+getCocktailsBySpirits: ()=> {
+  return fetch("/cocktailsFilter",{
+    method: "GET",
+    header:{
+      "content-Type": "application/json"
+    }
+  })
+  .then(response => {
+    if (!response.ok){
+        throw new Error('la requete a échoué')
+    }
+    return response.json();
+})
+.then(data => {
+  form.spirits = data;
+  console.log("tralalala:",form.spirits)
+})
+.catch(error => {
+  console.error('Erreur', error)
+})},
+}*/
+
+
+
 const form = document.getElementById("spiritsForm");
 form.addEventListener("submit", (event)=>{
   event.preventDefault()

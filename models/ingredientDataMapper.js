@@ -57,28 +57,9 @@ const ingredientDataMapper = {
         const result = await client.query(sqlQuery);
         return result.rowCount;
     },
-<<<<<<< HEAD
     
     async getSpiritsName(){
         const result = await client.query(`SELECT ingredient.name AS name, ingredient.id FROM ingredient WHERE ingredient.id IN (SELECT ingredient_id FROM ingredient_has_label WHERE label_id = 1)`)
-=======
-
-    // RECUPERER TOUS LES INGREDIENTS NON ALCOOLISES
-    async getVirginIngredients(){
-        const result = await client.query(`SELECT ingredient.name AS ingredient, label.name AS label FROM ingredient
-        JOIN ingredient_has_label AS labeling ON labeling.ingredient_id = id
-        JOIN label ON labeling.label_id = label.id
-        WHERE labeling.label_id<>1`)
-        return result.rows;
-    },
-
-    // RECUPERER LES INGREDIENTS SELON LEUR LABEL
-    async getIngredientByLabel(){
-        const result = await client.query(`SELECT ingredient.name AS ingredient, label.name AS label FROM ingredient
-        JOIN ingredient_has_label AS labeling ON labeling.ingredient_id = id
-        JOIN label ON labeling.label_id = label.id
-        WHERE labeling.label_id=1`)
->>>>>>> d68411c99594e2f095f79ff1d2e1e07e54830d48
         return result.rows;
     },
     

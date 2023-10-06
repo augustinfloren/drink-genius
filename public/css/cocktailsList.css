@@ -21,15 +21,6 @@
 }
 
 .cocktails-container-item {
-<<<<<<< HEAD
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 20px;
-  width: fit-content;
-  height: fit-content;
-=======
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -38,7 +29,6 @@
     width: fit-content;
     height: fit-content;
 
->>>>>>> d68411c99594e2f095f79ff1d2e1e07e54830d48
 }
 
 .cocktail-title {
@@ -125,103 +115,6 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-<<<<<<< HEAD
-    align-content: center;
-    gap: 30px;
-    background: #fff;
-    border-radius: 5px;
-    position:absolute;
-    top:50%;
-    left:50%;
-    border-radius: 25px;
-    height: fit-content;
-}
-
-.modal-container-spirit.active .modal-spirit {
-  transform: translate(-50%, -50%);
-  transition: opacity 0.4s 0.2s ease-out, transform 0.4s 0.2s ease-out;
-}
-
-.close-modal-spirit {
-    font-family: 'Mooli', sans-serif;
-
-    padding: 20px 20px;
-    border:none;
-    font-size: 18px;
-    position:absolute;
-    top:10px;
-    right:10px;
-    cursor: pointer;
-    color: var(--theme-purple);
-    background-color: white;
-    font-weight: bold;
-}
-
-
-
-.modal-spirit h2 {
-    font-size: 1em;
-    font-weight: bold;
-    line-height: 150%;
-}
-.modal-checkbox-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  padding-left: 30px;
-}
-
-.modal-checkbox {
-  display: flex;
-  padding-right: 10px;
-  padding-bottom: 3px;
-}
-
-.modal-spirit label {
-  display: block;
-}
-.modal-spirit input {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.spirit-btn-validation {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding:15px;
-  border-radius: 10px;
-}
-
-.spirit-modal-btn {
-  font-family: "Mooli", sans-serif;
-  border-radius: 50px;
-  border: 2px solid var(--theme-purple);
-  background-color: white;
-  margin-top: 20px;
-  padding: 15px;
-  font-size: 1.2em;
-  width: 200px;
-}
-
-.spirit-modal-btn:hover {
-  color: white;
-  background-color: var(--theme-purple);
-}
-
-@media screen and (max-width: 790px) {
-    .modal-spirit {
-      top: 50%;
-      padding: 20px;
-      max-width: 400px;
-    }
-
-    .close-modal-spirit {
-        background-color: rgba(255, 255, 255, 0);
-        color: var(--theme-purple);
-      }
-      }
-=======
     border-radius: 10px 10px 0 0;
     position: relative;
     margin:auto;
@@ -239,4 +132,3 @@ input[type="text"] {
    }
 
    
->>>>>>> d68411c99594e2f095f79ff1d2e1e07e54830d48
