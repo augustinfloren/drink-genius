@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS public."user"
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     lastname text COLLATE pg_catalog."default" NOT NULL,
     firstname text COLLATE pg_catalog."default" NOT NULL,
-    birthdate date NOT NULL,
+    birthdate int NOT NULL,
     location text COLLATE pg_catalog."default",
     email text COLLATE pg_catalog."default" NOT NULL UNIQUE,
     password text COLLATE pg_catalog."default" NOT NULL,

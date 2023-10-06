@@ -8,13 +8,28 @@ const dataMapper = {
     },
 
     // CONNEXION
+
     async getUserByEmail(email){
+
+        let result;
+        let error;
+
         const sqlQuery = {
             text: `SELECT * FROM "user" WHERE email=$1`,
             values: [email]
         };
-        const result = await client.query(sqlQuery);
-        return result.rows[0];
+
+        try {
+            const response = await client.query(sqlQuery);
+            result = response.rows[0];
+            if (!result) {
+                return { error: "Utilisateur non trouvé.", code: "USER_NOT_FOUND", result: null };
+            }
+        } catch(err) {
+            return { error: "Une erreur s'est produite de l'authentification.", code: "DATABASE_ERROR", result: null };
+        }
+
+        return {error, result};
     },
 
     // AFFICHER LE PROFIL USER
@@ -31,7 +46,7 @@ const dataMapper = {
     async addOneUser(user){
         // Récupère données du formulaire
         const { lastname, firstname, birthdate, email, password, roleId } = user;
-        const sqlQuery = {
+        const insertQuery = {
             text: `INSERT INTO "user"(lastname, firstname, birthdate, email, password, role_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
             values: [lastname, firstname, birthdate, email, password, roleId]
         }
@@ -50,19 +65,14 @@ const dataMapper = {
             const emailExists = emailCheckResult.rows[0];
 
             if (emailExists) {
-                return { error: "Cet e-mail est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
+                return { error: "Cet email est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
             } else {
-                const response = await client.query(sqlQuery);
+                const response = await client.query(insertQuery);
                 result = response.rows;
             }
 
             } catch(err){
-                if (err.code === '23505') { // Violation de contrainte unique (e-mail déjà utilisé)
-                    return { error: "Cet e-mail est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
-                } else {
-                    return { error: "Une erreur s'est produite lors de l'ajout de l'utilisateur.", code: "DATABASE_ERROR", result: null };
-                }
-
+                return { error: "Une erreur s'est produite lors de l'ajout de l'utilisateur.", code: "DATABASE_ERROR", result: null };
             }
 
             return {error, result};

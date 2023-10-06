@@ -4,11 +4,11 @@ const Joi = require('joi');
 const schemaUserInput = Joi.object({
     email:Joi.string().email().required(),
     firstname:Joi.string().pattern(new RegExp("^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$")).required(),
-    lastname:Joi.string().pattern(new RegExp('^[a-zA-Z][a-zA-Z0-9_-]{2,14}$')).required(),
+    lastname:Joi.string().pattern(new RegExp("^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$")).required(),
     password:Joi.string().pattern(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$')).required(),
     confirmation:Joi.string().pattern(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$')).required(),
-    birthdate:Joi.date().required(),
-}).required();
+    birthdate:Joi.number().integer().min(1900).max(2005).required()
+});
 
 module.exports = {
   checkSignUpData(req,res,next){
@@ -17,10 +17,8 @@ module.exports = {
         next();
     }
     else{
-        // let error = new APIError();
-        // next(error);
         console.log(error)
-        res.send(error)
+        res.status(400).json(error)
     }
 },
 }

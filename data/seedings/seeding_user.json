@@ -2,7 +2,7 @@
     {
     "lastname": "admin",
     "firstname": "admin",
-    "birthdate": "1992-03-31",
+    "birthdate": "1992",
     "location": "",
     "email": "admin@admin.fr",
     "password": "admin",
@@ -12,7 +12,7 @@
     {
     "lastname": "user",
     "firstname": "user",
-    "birthdate": "1992-03-31",
+    "birthdate": "1992",
     "location": "",
     "email": "user@user.fr",
     "password": "user",

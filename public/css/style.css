@@ -84,6 +84,7 @@ body {
 #generator {
     width: 500px;
     height: 500px;
+    margin: 20px 0px;
     border-radius: 15%;
     background-color: var(--theme-purple);
     color: white;
@@ -127,19 +128,20 @@ h2 {
     cursor: pointer;
 }
 
-#generator-generate-btn-link{
+.generator-generate-btn-link{
     font-size: 1.5em;
     padding: 15px 25px 15px 25px;
     border: 2px solid white;
     border-radius: 45px;
 }
 
-#generator-generate-btn-link:hover {
+.generator-generate-btn-link:hover {
     background-color: white;
     color: var(--theme-purple);
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 /*#### MODAL CONNECTION/INSCRIPTION ####*/
 .modal-container {
     display: none;
@@ -211,6 +213,8 @@ display: block;
     margin-bottom: 5px;
 }
 
+=======
+>>>>>>> d68411c99594e2f095f79ff1d2e1e07e54830d48
 /*#### FOOTER ####*/
 
 #footer {
@@ -251,22 +255,33 @@ display: block;
 
 @media screen and (max-width: 790px) {
 
+#header-title {
+    font-size: 1.9em;
+}
+
+#header-logo {
+    width: 50px;
+}
+
 #header-nav-menu {
+    margin-top: 20px;
     position: absolute;
     left: 0;
-    top: 100px;
-    height: 100%;
+    height: 90%;
     width: 100%;
     flex-direction: column;
-    font-size: 1.5em;
     background-color: var(--theme-purple);
     color: white;
-    padding-top: 130px;
+    padding-top: 23%;
     box-shadow: #2d213f;
-    gap: 100px;
+    gap: 20%;
+    align-content: center;
     transform: translateX(-100%);
     font-size: 1.3em;
-    transition: transform 0.3s;
+}
+
+#header-nav-menu .nav-item-link {
+    font-size: 1.1em;
 }
 
 #header-nav-toggle{
@@ -299,9 +314,6 @@ display: block;
     justify-content: space-between;
 }
 
-#header-logo-container {
-}
-
 h2 {
     margin: 0rem 1rem 0rem 1rem;
 }
@@ -312,33 +324,20 @@ h2 {
     gap: 50px;
 }
 
+#generator h2 {
+    font-size: 1.7em;
+}
+
+#generator-virgin-option-label {
+    font-size: 1.3em;
+}
+
 #legal-notices {
     width: 300px;
 }
 
 #footer {
     height: 170px;
-}
-
-}
-
-@media screen and (max-width: 375px) {
-
-#generator {
-    height: 300px;
-    width: 330px;
-}
-
-h2 {
-    font-size: 1.5em;
-}
-
-#generator-virgin-option-label {
-    font-size: 1em;
-}
-
-#generator-preferences-btn {
-    font-size: 0.8em;
 }
 
 }
