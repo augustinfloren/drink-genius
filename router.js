@@ -24,7 +24,7 @@ router.get("/logout", userController.logOutAndRedirect);
 router.get("/profile/favourites", cw(userController.getFavouriteCocktails));
 router.post("/newcocktail", cw(userController.addNewCocktail));
 router.get("/profile/createdcocktail", cw(userController.getCocktailsCreatedByUser));
-
+router.get("/ingredients", userController.getAllIngredients);
 
 
 module.exports = router;

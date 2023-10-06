@@ -143,50 +143,122 @@ function showCreatedCocktails(){
 creationButton.addEventListener('click', async function(){
     await fetchCocktailsByUser();
     showCreatedCocktails();
-})
-
-// ECOUTE SUR LE BOUTON FAVORIS
-favouritesButton.addEventListener('click', async function(){
-    await fetchFavouriteCocktails();
-    showFavouriteCocktails();
-})
-    
-    
+}) 
 
 
 /***************** NOUVEAU COCKTAIL *****************/
 // AFFICHER LA PAGE POUR PROPOSER UN NOUVEAU COCKTAIL
 let newCocktailButton = document.getElementById('newcocktail-link');
+let ingredients = [];
 
-// CREATION DU FORMULAIRE
+// RECUPERER LES INGREDIENTS
+function fetchIngredients (){
+    return fetch('/ingredients', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok){
+            throw new Error('la requete a échoué')
+        }
+        return response.json();
+    })
+    .then(data => {
+        ingredients = data;
+    })
+    .catch(error => {
+        console.error('Erreur', error)
+    })};
+
+
 function createForm(){
+    // TITRE
+    const title = document.createElement('h2');
+    title.textContent = 'Votre cocktail :'
+    mainContainer.appendChild(title);
+
+    // FORMULAIRE
     const cocktailForm = document.createElement('form');
     cocktailForm.id = "new-cocktail-form";
 
+    // TITRE DE LA RECETTE
+    const nameLabel = document.createElement('label');
+    nameLabel.setAttribute('for', 'name-input');
+    const nameLabelText = document.createTextNode('Nom de la recette :');
+    nameLabel.appendChild(nameLabelText);
     const nameInput = document.createElement('input');
+    nameInput.classList.add('input');
+    nameInput.id = 'name-input';
     nameInput.type = 'text';
     nameInput.name = 'cocktail_name';
     nameInput.placeholder = 'Nom du cocktail';
 
+    // INSTRUCTIONS
+    const instructionLabel = document.createElement('label');
+    instructionLabel.setAttribute('for', 'instruction-input');
+    const instructionLabelText = document.createTextNode('Recette :');
+    instructionLabel.appendChild(instructionLabelText);
     const instructionInput = document.createElement('input');
+    instructionInput.classList.add('input');
+    instructionInput.id = 'instruction-input';
     instructionInput.type = 'text';
     instructionInput.name = 'cocktail_instruction';
     instructionInput.placeholder = 'Instructions du cocktail';
+
+    // INGREDIENTS
+    function createIngredientDropdown(){
+    const ingredientLabel = document.createElement('label');
+    ingredientLabel.setAttribute('for', 'ingredient-input');
+    const ingredientLabelText = document.createTextNode('Ingrédient 1 :');
+    ingredientLabel.appendChild(ingredientLabelText);
+    const ingredientInput = document.createElement('select');
+    ingredientInput.classList.add('dropdown-menu');
+    ingredientInput.id = 'ingredient-1';
+    ingredientInput.name = 'ingredient-1';
+
+    ingredients.forEach(ingredient => {
+        const newOption = document.createElement('option');
+        newOption.value = ingredient.name;
+        newOption.text = ingredient.name;
+        ingredientInput.appendChild(newOption);
+    })
+
+    cocktailForm.appendChild(ingredientLabel)
+    cocktailForm.appendChild(ingredientInput);
+};
+
+    createIngredientDropdown();
+
+    // CREATION D'UN BOUTON "AJOUTER UN INGREDIENT" 
+    const addIngredientButton = document.createElement('div');
+    addIngredientButton.textContent = "Ajouter un ingrédient";
+    addIngredientButton.classList.add('add-ingredient-button');
+    addIngredientButton.addEventListener('click', function(){
+        createIngredientDropdown();
+    })
+
 
     const submitButton = document.createElement('button');
     submitButton.type = 'submit';
     submitButton.id = 'new-cocktail-button'
     submitButton.textContent = 'Envoyer'
 
+    cocktailForm.appendChild(nameLabel);
     cocktailForm.appendChild(nameInput);
+    cocktailForm.appendChild(instructionLabel);
     cocktailForm.appendChild(instructionInput);
+    cocktailForm.appendChild(addIngredientButton);
     cocktailForm.appendChild(submitButton);
+
     
     mainContainer.textContent = '';
     mainContainer.appendChild(cocktailForm);
 };
 
-newCocktailButton.addEventListener('click', function(){
+newCocktailButton.addEventListener('click', async function(){
+    await fetchIngredients();
     createForm();
 });
 

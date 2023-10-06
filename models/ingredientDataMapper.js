@@ -25,7 +25,7 @@ const ingredientDataMapper = {
     },
 
     async getAllIngredients(){
-        const result = await client.query(`SELECT name FROM ingredient`);
+        const result = await client.query(`SELECT * FROM ingredient`);
         return result.rows;
     },
     
