@@ -48,7 +48,6 @@ const random = {
         })
         .then(data => {
             random.randomIngredients = data;
-            console.log(random.randomIngredients)
         })
         .catch(error => {
             console.error('Erreur', error)

@@ -97,6 +97,28 @@ const dataMapper = {
         };
         const result = await client.query(sqlQuery);
         return result.rowCount;
+    },
+
+    // RECUPERER LES COCKTAILS FAVORIS PAR UTILISATEUR
+    async getFavouriteCocktailsByUser(user_id){
+        const sqlQuery = {
+            text: `SELECT * FROM cocktail
+            JOIN user_like_cocktail AS favourites ON cocktail.id = favourites.cocktail_id
+            WHERE favourites.user_id =$1`,
+            values: [user_id]
+        };
+        const result = await client.query(sqlQuery);
+        return result.rows;
+    },
+
+    // RECUPERER LES COCKTAILS PAR UTILISATEUR
+    async getCocktailByUserId(user_id){
+        const sqlQuery = {
+            text: 'SELECT * FROM cocktail WHERE user_id=$1',
+            values: [user_id]
+        };
+        const result = await client.query(sqlQuery)
+        return result.rows;
     }
 
 };

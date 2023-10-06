@@ -1,0 +1,53 @@
+/* nav  */
+
+#user-nav {
+    float: left;
+    position: fixed;
+    top: 38vh;
+    left: 7vw;
+    border: solid;
+    border-radius: 15%;
+    border-color: var(--theme-purple);
+    text-align: center; 
+     
+}
+
+#user-nav .nav-item {
+    margin:  1.7em;
+    font-size: 1.2em;
+}
+
+#favourite-link {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+
+#profile-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 70px;
+}
+
+#profile-main-container h2 {
+    margin-top: 70px;
+}
+
+#profile-container {
+    width: 40vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 100px;
+}
+
+.heart-icon {
+    color: red;
+    width: 1.5em;
+    height: 1.5em;
+}
+

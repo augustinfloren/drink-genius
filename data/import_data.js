@@ -7,6 +7,7 @@ const cocktailContainIngredient = require('./seedings/seeding_cocktail_contain_i
 const garnishes = require('./seedings/seeding_garnish.json');
 const garnishAddIntoCocktail = require('./seedings/seeding_garnish_add_into_cocktail.json');
 const ingredientHasLabel = require('./seedings/seeding_ingredient_has_label.json');
+const userLikesCocktail = require('./seedings/seeding_user_like_cocktail.json');
 const client = require('../models/dbClient');
 
 async function importRoles(){
@@ -235,6 +236,31 @@ async function importIngredientHasLabel(){
     };
 };
 
+async function importUserLikeCocktail(){
+    let counter = 1;
+    let sqlValues = [];
+    let sqlParameters = [];
+
+    for(const relation of userLikesCocktail){
+        sqlParameters.push(`($${counter}, $${counter +1})`);
+        counter+=2;
+
+        sqlValues.push(relation.user_id);
+        sqlValues.push(relation.cocktail_id);
+    };
+
+    const sqlQuery = `
+    INSERT INTO "user_like_cocktail"("user_id", "cocktail_id")
+    VALUES ${sqlParameters.join()};
+    `;    
+
+    const response = await client.query(sqlQuery, sqlValues);
+    if(response.rowCount>0){
+        console.log("Les données ont bien été ajoutées dans la table 'user_like_cocktail' !")
+    };
+};
+
+
 
 importRoles();
 importUsers();
@@ -245,3 +271,4 @@ importCocktailContainIngredient();
 importGarnish();
 importGarnishAddIntoCocktail();
 importIngredientHasLabel();
+importUserLikeCocktail();
