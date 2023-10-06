@@ -187,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(data => {
       form.style.display = "none";
       alreadyRegisteredLink.style.display = "none";
+      modalTitle.style.color = "var(--theme-purple)";
       modalTitle.innerText = data;
       setTimeout(() => {
         window.location.href = '/';

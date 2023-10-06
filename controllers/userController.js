@@ -31,8 +31,7 @@ const userController = {
         res.status(200).json("Vous êtes maintenant connecté !");
       }
       else {
-        error = "Mot de passe incorrect";
-        res.status(500).json(error);
+        res.status(400).json("Mot de passe incorrect.");
       }
     }
   },
