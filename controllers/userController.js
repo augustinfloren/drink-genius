@@ -49,8 +49,7 @@ const userController = {
   },
 
   async getFavouriteCocktails(req, res){
-    // ATTENTION A ADAPTER AVEC LES SESSIONS
-    const userId = 2;
+    const userId = req.session.user.id;
     const favourites = await userDataMapper.getFavouriteCocktailsByUser(userId)
     res.json(favourites);
   },
@@ -60,7 +59,7 @@ const userController = {
   },
 
   async getCocktailsCreatedByUser(req, res){
-    const userId = req.params.id;
+    const userId = req.session.user.id;
     const cocktails = await userDataMapper.getCocktailByUserId(userId);
     res.json(cocktails);
   }

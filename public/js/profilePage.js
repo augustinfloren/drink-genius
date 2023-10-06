@@ -11,7 +11,7 @@ accountParametersButton.addEventListener('click', function(){
 
 
 /**************** FAVORIS  ****************/
-// RECUPERER LES INGREDIENTS ALEATOIRES
+// RECUPERER LES COCKTAILS FAVORIS
 let favouritesButton = document.getElementById("favourite-link");
 let favouriteCocktails = [];
 
@@ -38,12 +38,38 @@ function fetchFavouriteCocktails (){
 // BOUCLER SUR LES COCKTAILS FAVORIS ET LES AFFICHER
 function showFavouriteCocktails(){
     mainContainer.textContent = "";
-    favouriteCocktails.forEach(cocktail => {
-        const likedCocktail = document.createElement('div');
-        likedCocktail.classList.add('favourite-cocktail');
-        likedCocktail.textContent = cocktail.name;
-        mainContainer.appendChild(likedCocktail);
-    })
+    const title = document.createElement('h2')
+    title.textContent = 'Vos cocktails préférés :'
+    mainContainer.appendChild(title);
+    if(favouriteCocktails){
+        const cocktailContainer = document.createElement('div');
+        cocktailContainer.classList.add('cocktails');
+        cocktailContainer.id = 'cocktails-container';
+
+        favouriteCocktails.forEach(cocktail => {
+            const likedCocktail = document.createElement('a');
+            likedCocktail.classList.add('cocktails-container-item');
+            likedCocktail.href = `/cocktail/${cocktail.id}`;
+            const cocktailTitle = document.createElement('h3');
+            cocktailTitle.classList.add('cocktail-title');
+            cocktailTitle.textContent = cocktail.name;
+            const cocktailPicture = document.createElement('div')
+            cocktailPicture.classList.add('cocktail-img');
+            cocktailPicture.style = `background-image: url('/images/${cocktail.picture} `;
+            cocktailPicture.alt = `Image de ${cocktail.name}`;
+
+            likedCocktail.appendChild(cocktailTitle);
+            likedCocktail.appendChild(cocktailPicture);
+
+            cocktailContainer.appendChild(likedCocktail);
+
+            mainContainer.appendChild(cocktailContainer);
+        })
+    } else {
+        const emptyMessage = document.createElement('div')
+        emptyMessage.textContent = 'Rien à afficher ici !';
+        mainContainer.appendChild(emptyMessage);
+    }
 }
 
 // ECOUTE SUR LE BOUTON FAVORIS
@@ -58,8 +84,8 @@ let creationButton = document.getElementById('mycocktails-link');
 let createdCocktails = [];
 
 // RECUPERER LES COCKTAILS D'UN UTILISATEUR
-function fetchCocktailsByUser (user_id){
-    return fetch(`/profile/cocktail/${user_id}`, {
+function fetchCocktailsByUser (){
+    return fetch('/profile/createdcocktail', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -80,11 +106,12 @@ function fetchCocktailsByUser (user_id){
 
 creationButton.addEventListener('click', function(){
     mainContainer.textContent = "";
-    // NE FONCTIONNE PAS, COMMENT RECUPERER L'ID DE L'UTILISATEUR?
-    const user_id = locals.user.id;
-    fetchCocktailsByUser(user_id);
-    console.log(createdCocktails);
-
+    createdCocktails.forEach(cocktail => {
+        const createdCocktail = document.createElement('div');
+        createdCocktail.classList.add('created-cocktail');
+        createdCocktail.textContent = cocktail.name;
+        mainContainer.appendChild(createdCocktail);
+    })
 })
 
 

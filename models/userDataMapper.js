@@ -102,7 +102,7 @@ const dataMapper = {
     // RECUPERER LES COCKTAILS FAVORIS PAR UTILISATEUR
     async getFavouriteCocktailsByUser(user_id){
         const sqlQuery = {
-            text: `SELECT cocktail.name FROM cocktail
+            text: `SELECT * FROM cocktail
             JOIN user_like_cocktail AS favourites ON cocktail.id = favourites.cocktail_id
             WHERE favourites.user_id =$1`,
             values: [user_id]
