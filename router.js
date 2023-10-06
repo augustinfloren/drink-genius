@@ -20,7 +20,7 @@ router.get("/randomvirgin", cw(randomController.getRandomVirginIngredients));
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
 router.post("/login", userController.logInAndRedirect)
 router.get("/profile", cw(userController.getProfilePage));
-router.get("/logout", cw(userController.logOutPage));
+router.get("/logout", userController.logOutAndRedirect);
 router.get("/profile/favourites", cw(userController.getFavouriteCocktails));
 router.post("/newcocktail", cw(userController.addNewCocktail));
 router.get("/profile/createdcocktail", cw(userController.getCocktailsCreatedByUser));
