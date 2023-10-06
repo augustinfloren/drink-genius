@@ -6,6 +6,7 @@ const session = require("express-session");
 const router = require("./router");
 const loadSessionUserInLocals = require("./services/loadSessionUserInLocals");
 
+
 const PORT = process.env.PORT || 3000;
 
 // Configuration de l'app
@@ -30,6 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(router);
+
 
 // Lancement du serveur
 app.listen(PORT, () => {
