@@ -21,6 +21,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const modalTriggerConnexion = document.querySelector(".modal-trigger-connexion");
 
+  const loginListener = (event) => {
+    event.preventDefault();
+    fetchLogin();
+  }
+
+  const signupListener = (event) => {
+    event.preventDefault();
+    fetchSignup();
+  }
+
   // Lorsque je clique sur Connexion
   modalTriggerConnexion.addEventListener("click", toggleModalConnexion);
 
@@ -40,11 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
     alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
     isRegistrationModal = false;
 
+    form.removeEventListener("submit", signupListener);
+
     //Lorsque que je soumet le form
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      fetchLogin();
-    })
+    form.addEventListener("submit", loginListener);
   }
 
   // Lorsque que je bascule sur inscription
@@ -73,11 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
     alreadyRegisteredLink.innerText = "Déjà inscrit ? Par ici !";
     isRegistrationModal = true;
 
+    form.removeEventListener("submit", loginListener);
+
     //Lorsque que je soumet le form
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      fetchSignup();
-    })
+    form.addEventListener("submit", signupListener);
   }
 
   // Lorsque je bascule d'inscription à connexion
@@ -106,6 +114,11 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.innerText = "Se connecter";
     alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
     isRegistrationModal = false;
+
+    form.removeEventListener("submit", signupListener);
+
+    //Lorsque que je soumet le form
+    form.addEventListener("submit", loginListener);
   }
 
   // Clic pour basculer
