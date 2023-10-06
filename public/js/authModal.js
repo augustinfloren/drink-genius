@@ -17,6 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("auth-modal-form");
   const btn = document.getElementById("auth-modal-btn");
 
+  //spans
+  const dateSpan = document.querySelector("#date-field span");
+  dateSpan.style.display = "none";
+  dateSpan.style.fontSize = "0.7em";
+  dateSpan.style.color = "red";
+
   let isRegistrationModal = false;
 
   const modalTriggerConnexion = document.querySelector(".modal-trigger-connexion");
@@ -82,7 +88,18 @@ document.addEventListener("DOMContentLoaded", function () {
     alreadyRegisteredLink.innerText = "Déjà inscrit ? Par ici !";
     isRegistrationModal = true;
 
-    form.removeEventListener("submit", loginListener);
+    dateInput.addEventListener("keyup", (event) => {
+      const inputValue = event.target.value;
+      const currentYear = new Date().getFullYear();
+      console.log(inputValue)
+      if (parseInt(inputValue) > currentYear - 18) {
+          dateSpan.style.display = "block";
+          dateSpan.innerText = "Vous devez avoir au moins 18 ans";
+        setTimeout(() => {
+          dateSpan.style.display="none";
+        }, 2000);
+      }
+    });
 
     //Lorsque que je soumet le form
     form.addEventListener("submit", signupListener);
@@ -114,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.innerText = "Se connecter";
     alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
     isRegistrationModal = false;
+    dateSpan.style.display = "none";
 
     form.removeEventListener("submit", signupListener);
 
