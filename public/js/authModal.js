@@ -162,8 +162,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Login : Récupération des messages de succès et d'erreurs
-
-
   async function fetchLogin() {
     const formData = Object.fromEntries(new FormData(form));
 
@@ -187,15 +185,12 @@ document.addEventListener("DOMContentLoaded", function () {
       return response.json();
     })
     .then(data => {
-      const urlParams = new URLSearchParams();
-      urlParams.append('message', data);
-      window.location.href = '/?' + urlParams.toString();
-      // const succesMessage = document.createElement("p");
-      // succesMessage.textContent = "truc";
-      // main.appendChild(succesMessage);
-      // setTimeout(() => {
-      //   succesMessage.style.display = 'none';
-      // }, 3000);
+      form.style.display = "none";
+      alreadyRegisteredLink.style.display = "none";
+      modalTitle.innerText = data;
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
     })
     .catch(error => {
       console.log(error)
@@ -210,17 +205,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     })
   }
-
-  let params = (new URL(document.location)).searchParams;
-  // const urlParams = new URLSearchParams(window.location.search);
-  console.log(params)
-
-  const message = params.get('message');
-  console.log(message)
-  console.log(message)
-  const succesMessage = document.createElement("p");
-  succesMessage.textContent = message;
-  main.appendChild(succesMessage);
 });
 
 
