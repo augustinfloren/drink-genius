@@ -46,7 +46,7 @@ const dataMapper = {
     async addOneUser(user){
         // Récupère données du formulaire
         const { lastname, firstname, birthdate, email, password, roleId } = user;
-        const sqlQuery = {
+        const insertQuery = {
             text: `INSERT INTO "user"(lastname, firstname, birthdate, email, password, role_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
             values: [lastname, firstname, birthdate, email, password, roleId]
         }
@@ -65,9 +65,9 @@ const dataMapper = {
             const emailExists = emailCheckResult.rows[0];
 
             if (emailExists) {
-                return { error: "Cet e-mail est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
+                return { error: "Cet email est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
             } else {
-                const response = await client.query(sqlQuery);
+                const response = await client.query(insertQuery);
                 result = response.rows;
             }
 
