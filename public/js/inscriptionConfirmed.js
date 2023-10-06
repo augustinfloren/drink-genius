@@ -19,11 +19,8 @@ console.log("je passe:",inscriptionModal)
     };
     console.log("je passe la:",inscriptionData)
 // J'envoie le mail de confirmation 
-    await confirmation_inscription(inscriptionData);
+    const  confirmation_inscription =(inscriptionData) => {
 
-
-// Mail de confirmation d'inscription
-async function confirmation_inscription(email, firstname) {
     const mailConfirmation = {
       from:"drink.genious@gmail.com",
       to: `${email}`,
@@ -32,10 +29,11 @@ async function confirmation_inscription(email, firstname) {
     };
     try {
       const info = await transporter.sendMail(mailConfirmation);
-      console.log("E-mail de confirmation envoyé : " + info.response);
+      console.log("E-mail de confirmation envoyé ");
   } catch (error) {
-      console.error("Erreur lors de l'envoi de l'e-mail : " + error);
+      console.error("Erreur lors de l'envoi de l'e-mail ");
   }
-  }
+  };
+
   confirmation_inscription(email, firstname)
   
