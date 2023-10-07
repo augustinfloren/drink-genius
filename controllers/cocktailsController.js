@@ -9,8 +9,8 @@ const cocktailsController = {
   
   },
   async getCocktailsBySpirits(req, res) {
-    const ingredient_id = req.body.spirits;
-    const cocktailsBySpirit = await cocktailDataMapper.getCocktailBySpirits(ingredient_id);
+    const spirits_id = req.body;
+    const cocktailsBySpirit = await cocktailDataMapper.getCocktailBySpirits(spirit_id);
     res.json(cocktailsBySpirit);
 },
 

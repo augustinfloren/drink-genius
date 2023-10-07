@@ -24,6 +24,32 @@ function toggleModalClosure() {
 }
 
 //-----------LA SELECTION D'ALCOOL(S)-----------//
+
+const spiritForm = document.getElementById("spiritsForm")
+spiritForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  try {
+    const response = await fetch('/cocktails', {
+      method: 'POST',
+      body: JSON.stringify(Object.fromEntries(new FormData(spiritForm))),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      throw new Error('Erreur lors de la requête');
+    }
+
+    const data = await response.json();
+
+    // Traitez les données (par exemple, mettez-les à jour dans votre interface utilisateur)
+    console.log(data);
+  } catch (error) {
+    console.error('Erreur', error);
+  }
+});
+
+
 /*const form = {
 formSpirit : document.getElementById("spiritsForm"),
 checkboxes : Array.from(document.getElementsByName("spirit")),
@@ -37,7 +63,7 @@ handleClicked: async(event) => {
 },
 getCocktailsBySpirits: ()=> {
   return fetch("/cocktailsFilter",{
-    method: "GET",
+    method: "POST",
     header:{
       "content-Type": "application/json"
     }
@@ -55,11 +81,11 @@ getCocktailsBySpirits: ()=> {
 .catch(error => {
   console.error('Erreur', error)
 })},
-}*/
+}
+form.formSpirit.addEventListener("click", form.handleClicked);
+*/
 
-
-
-const form = document.getElementById("spiritsForm");
+/*const form = document.getElementById("spiritsForm");
 form.addEventListener("submit", (event)=>{
   event.preventDefault()
   console.log("je:",event)
@@ -75,7 +101,7 @@ const ids = checkedCheckboxes.map((checkbox)=>{
 })
 const cocktails = getCocktailBySpirits(ids)
 console.log("toitoi:",cocktails)
-});
+});*/
 
 /*
  const spirit_id = Array.from(document.querySelectorAll('input[name="spirits"]:checked')).map(checkbox => checkbox.value);

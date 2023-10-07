@@ -13,7 +13,7 @@ router.post("/profile/newcocktail", cw(cocktailsController.addCocktailByUserPage
 router.post("/admin/newcocktail", cw(cocktailsController.addCocktailByAdminPage));
 
 //Filtre
-//router.get("/cocktailsFilter",cw(cocktailsController.getCocktailsBySpirits));
+router.post("/cocktails",cw(cocktailsController.getCocktailsBySpirits));
 
 // Générateur
 router.get("/random", cw(randomController.getRandomIngredients));
