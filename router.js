@@ -5,6 +5,7 @@ const validationService = require("./services/validationService");
 
 // Accueil
 router.get("/", cw(mainController.getHomePage));
+router.get("/legalnotice", cw(mainController.getLegalNoticePage));
 
 // Cocktails
 router.get("/cocktails", cw(cocktailsController.getAllCocktailsPage));
