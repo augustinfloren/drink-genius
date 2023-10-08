@@ -15,6 +15,10 @@ const userController = {
       }
     }
   },
+  async sendingMailConfirmation (req,res){
+    const {email, firstname} = req.body
+    res.status(200).json({email, firstname});
+  },
 
   async logInAndRedirect(req, res, next){
     const { email, password } = req.body;

@@ -25,6 +25,8 @@ router.get("/profile/favourites", cw(userController.getFavouriteCocktails));
 router.post("/newcocktail", cw(userController.addNewCocktail));
 router.get("/profile/createdcocktail", cw(userController.getCocktailsCreatedByUser));
 
+//Sending email
+router.post("/confirmationsent", userController.sendingMailConfirmation )
 
 
 module.exports = router;

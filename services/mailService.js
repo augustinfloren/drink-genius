@@ -1,5 +1,3 @@
-
-
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
@@ -13,17 +11,22 @@ const transporter = nodemailer.createTransport({
 });
     
 
-const mailConfirmation = {
-    from:"drink.genious@gmail.com",
-    to: `stephane.andre85@gmail.com`,
-    subject:"Confirmation d'inscription",
-    text:`Bonjour toi, votre inscription a bien été confirmée! Va profiter de notre application "Drink Genius" de manière responsable`
-  };
-  try {
-    const info = transporter.sendMail(mailConfirmation);
-    console.log("E-mail de confirmation envoyé");
-} catch (error) {
-    console.error("Erreur lors de l'envoi de l'e-mail");
-}
 
-
+    // On envoie le mail de confirmation
+    const mailConfirmation = {
+      from: "drink.genius@gmail.com",
+      to: `${email}`,
+      subject: "Confirmation d'inscription",
+      text: `Bonjour ${firstname}, votre inscription a bien été confirmée! Va profiter de notre application "Drink Genius" de manière responsable`
+    };
+  
+    transporter.sendMail(mailConfirmation, (error, info) => {
+        if (error) {
+            console.error(`Erreur lors de l'envoi de l'e-mail`);
+            res.status(500).json({ error: `Erreur lors de l'envoi de l'e-mail` });
+        } else {
+            console.log(`E-mail de confirmation envoyé`);
+            res.json({ message: `E-mail de confirmation envoyé avec succès` });
+        }
+    });
+});
