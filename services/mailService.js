@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
     },
 });
     
-
+function sendConfirmationMail (email,firstname) {
 
     // On envoie le mail de confirmation
     const mailConfirmation = {
@@ -19,7 +19,6 @@ const transporter = nodemailer.createTransport({
       subject: "Confirmation d'inscription",
       text: `Bonjour ${firstname}, votre inscription a bien été confirmée! Va profiter de notre application "Drink Genius" de manière responsable`
     };
-  
     transporter.sendMail(mailConfirmation, (error, info) => {
         if (error) {
             console.error(`Erreur lors de l'envoi de l'e-mail`);
@@ -29,4 +28,6 @@ const transporter = nodemailer.createTransport({
             res.json({ message: `E-mail de confirmation envoyé avec succès` });
         }
     });
-});
+};
+
+module.exports = sendConfirmationMail
