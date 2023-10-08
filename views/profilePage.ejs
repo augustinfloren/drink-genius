@@ -1,7 +1,7 @@
 <%- include("partials/header") %>
 
 <!-- MAIN -->
-<main id="main">
+<main id="profile-main-container">
     <nav id="user-nav">
         <ul id="nav-profile-link">
             <li class="nav-item"><div id="parameters-link" class="nav-item-link">Paramètres du compte</div></li>
@@ -11,27 +11,20 @@
             <li class="nav-item"><div id="contact-admin-link" class="nav-item-link">Contacter un admin</div></li>
         </ul>
     </nav>
-    <div id="profile-main-container">
+    <div id="profile-flex-content">
         <% if (userInfo) { %>
-        <form action="POST">
-            <label for="lastname">Votre prénom</label>
-                <input type="text"  name="lastname" value="<%= userInfo.lastname %>">
-            <label for="firstname">Votre nom</label>
-                <input type="text"  name="firstname" value="<%= userInfo.firstname %>">
-            <label for="birthdate">Votre date de naissance</label>
-                <input type="text"  name="birthdate" value="<%= userInfo.birthdate %>">
-            <label for="email">Votre email</label>
-                <input type="text"  name="email" value="<%= userInfo.email %>">
-            <label for="email">Votre ville</label>
-                <input type="text"  name="location" value="<%= userInfo.location %>">
-            <label for="email">Vos loisirs</label>
-                <input type="text"  name="hobbies" value="<%= userInfo.hobbies %>">
-        </form>
+            <h2>Paramètres du compte</h2>
+                <ul id="parameters-list">
+                    <li class="parameters">Votre nom : <%= userInfo.firstname %></li>
+                    <li class="parameters">Votre prénom : <%= userInfo.lastname %></li>
+                    <li class="parameters">Votre année de naissance : <%= userInfo.birthdate %></li>
+                    <li class="parameters">Votre email : <%= userInfo.email %></li>
+                    <li class="parameters">Votre ville : <%= userInfo.location %></li>
+                    <li class="parameters">Vos loisirs : <%= userInfo.hobbies %></li>
+                </ul>
+                <button id="parameters-modification-btn" class="" type="button">Modifier</button>
         <% } %>
     </div>                  
 </main>
-
-
-  
 
 <%- include("partials/footer") %>

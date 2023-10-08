@@ -1,5 +1,5 @@
-let mainContainer = document.getElementById("profile-main-container");
-let startParameters = document.getElementById("profile-main-container").innerHTML;
+let mainContainer = document.getElementById("profile-flex-content");
+let startParameters = document.getElementById("profile-flex-content").innerHTML;
 
 
 /**************** PARAMETRES  ****************/
