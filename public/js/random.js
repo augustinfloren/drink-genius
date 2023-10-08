@@ -1,13 +1,11 @@
 const random = {
-    machine : document.getElementById("generator"),
-    title : document.querySelector("#generator h2"),
+    machine : document.getElementById("bloc"),
     virginLabel : document.getElementById("generator-virgin-option-label"),
-    filters : document.getElementById("generator-preferences-btn"),
-    buttonContainer: document.querySelector(".generator-generate-btn"),
-    button : document.querySelector(".generator-generate-btn-link"),
-    startMachine : document.getElementById("generator").innerHTML,
-    randomIngredients : [],
     virginCheckbox : document.getElementById("generator-virgin-option-checkbox"),
+    filters : document.getElementById("generator-preferences-btn"),
+    // buttonContainer: document.querySelector(".generator-generate-btn"),
+    button : document.getElementById("boule"),
+    randomIngredients : [],
 
     generateListener: async (event) => {
         event.preventDefault();
@@ -21,7 +19,6 @@ const random = {
 
     newCocktailListener: async (event) => {
         event.preventDefault();
-        random.title.textContent = ("Générer un cocktail aléatoire !");
         random.virginLabel.style.display = ("block");
         random.filters.style.display = ("block");
         const list = document.querySelector(".random-list");
@@ -79,7 +76,6 @@ const random = {
         // random.machine.innerHTML = "";
         random.virginLabel.style.display = "none";
         random.filters.style.display = "none";
-        random.title.textContent = "Tadaaa !";
 
         const randomIngredientList = document.createElement('ul');
         randomIngredientList.classList.add('random-list');
@@ -94,7 +90,7 @@ const random = {
             randomIngredientList.appendChild(randomIngredient)
         });
         random.machine.appendChild(randomIngredientList);
-        random.buttonContainer.style.order = ("4");
+        // random.buttonContainer.style.order = ("4");
         random.button.removeEventListener('click', random.generateListener);
         random.button.addEventListener('click', random.newCocktailListener);
         random.button.innerText = "Faire un nouveau cocktail";
