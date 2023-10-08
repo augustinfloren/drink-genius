@@ -14,7 +14,7 @@ const slotSound = new Audio('../audio/slot-sound.mp3');
 const liquidSound = new Audio('../audio/liquid.mp3');
 const shakerSound = new Audio('../audio/shaker.mp3');
 const glassSound = new Audio('../audio/glass.mp3');
-
+const ding = new Audio('../audio/ding.mp3');
 
 document.addEventListener("DOMContentLoaded", () => {
     boule.addEventListener('click', animateMachine);
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout (() => {
             shakerSound.play();
-            // slotSound.volume = "0.3";
+            shakerSound.volume = "0.4";
             machine.classList.add('animate__tada');
         }, "2400")
 
@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 liquidOne.style.height = "0%";
                 liquidOne.style.transition = "all 1.5s ease-in-out";
                 liquidSound.play();
-                // liquidSound.volume = "0.3";
             }, "0800")
             setTimeout (() => {
                 liquidOne.style.height = `${randomNumber}%`;
@@ -68,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout (() => {
                 liquidTwo.style.height = "0%";
                 liquidTwo.style.transition = "height 0.4s ease-in-out";
-            }, "2100")
+            }, "2300")
             setTimeout (() => {
                 liquidTwo.style.height = "100%";
                 liquidTwo.style.transition = "all 0.4s ease-in-out";
@@ -89,11 +88,15 @@ document.addEventListener("DOMContentLoaded", () => {
             door.style.height = "0";
             door.style.bottom = "100%";
             door.style.transition = "all 1s ease-in-out";
-        }, "3400")
+            generatorTitle.textContent = "Tadaaa !";
+          }, "3400")
+        setTimeout (() => {
+          ding.play();
+          ding.volume = "0.6";
+        }, "3000")
         setTimeout (() => {
             glassSound.play();
-            // slotSound.volume = "0.3";
-            generatorTitle.textContent = "Tadaaa !"
+            glassSound.volume = "0.4";
             stream.style.width = "5px";
             glassLiquid.style.height = "30px";
         }, "4400")

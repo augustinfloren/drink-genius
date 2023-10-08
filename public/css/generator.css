@@ -8,6 +8,61 @@
   display: flex;
   flex-direction: column;
 }
+
+#generator-main-container {
+  flex: auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 45px 0px;
+}
+
+#generator {
+  width: 500px;
+  height: 500px;
+  margin: 20px 0px;
+  border-radius: 15%;
+  background-color: var(--theme-purple);
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  box-shadow: 10px 10px 40px #081a1971;
+}
+
+#generator h2 {
+  margin: -1rem 3rem 0rem 3rem;
+}
+
+#generator-virgin-option-label {
+  font-size: 1.5em;
+  margin-top: -20px;
+}
+
+#generator-virgin-option-label:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#generator-preferences-btn {
+  font-size: 1em;
+  margin-top: -20px;
+  border-bottom: 2px solid var(--theme-purple);
+  padding-bottom: 5px;
+  width: 70px;
+}
+
+#generator-preferences-btn:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
 #machine-container {
   display: flex;
   flex-direction: row;
@@ -18,14 +73,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
   width: 450px;
   height: fit-content;
+  padding: 5% 0%;
   border-radius: 40px;
   background: linear-gradient(90deg, rgb(199, 199, 199) 0%, rgba(208,208,208,1) 50%, rgb(208, 208, 208) 50%);
+  transition : height 1s ease-in-out;
 }
-#recipe-container {
-  font-size: 0.7em;
+.generator-text-container {
   text-align: center;
   width: 70%;
   color: white;
@@ -33,6 +89,16 @@
   background-color: #191124;
   border-radius: 50px;
   padding: 20px 10px;
+}
+.generator-text-container h2 {
+  font-size: 1.5em;
+}
+.random-list {
+  font-size: 1em;
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 #glass-container{
   position: relative;
@@ -43,7 +109,7 @@
   flex-direction: column;
   height: 60px;
   width: 70px;
-  /* border-radius: 5px; */
+  order: 4;
   background: linear-gradient(-35deg, rgb(161, 161, 161) 50%, rgba(142,142,142,1) 100%);
 }
 #glass {
@@ -113,6 +179,7 @@
   background: var(--metal);
 }
 #boule{
+  cursor: grab;
   height: 43px;
   width: 43px;
   background: radial-gradient(circle, rgba(149,110,207,1) 0%, rgb(102, 75, 142) 100%);
@@ -200,9 +267,35 @@
   opacity: 0.7;
   animation: bg-scrolling-reverse 0.92s infinite linear;
 }
+#new-cocktail {
+  display: none;
+}
 
 @keyframes bg-scrolling-reverse {
   0% { background-position: 0 30px; }
   100% { background-position: 0 0; }
 }
 
+@media screen and (max-width: 790px) {
+#bloc {
+  width: 300px;
+}
+#bottles-container{
+  height: 71px;
+}
+#generator-main-container {
+  padding: 10px 10px;
+}
+.generator-text-container{
+  padding: 10px 10px;
+}
+#generator-title{
+  font-size: 1.3em;
+}
+.random-list{
+  font-size: 0.9em;
+}
+#bloc-levier{
+  margin-bottom: -65px;
+}
+}

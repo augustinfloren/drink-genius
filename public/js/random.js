@@ -3,12 +3,19 @@ const random = {
     virginLabel : document.getElementById("generator-virgin-option-label"),
     virginCheckbox : document.getElementById("generator-virgin-option-checkbox"),
     filters : document.getElementById("generator-preferences-btn"),
-    // buttonContainer: document.querySelector(".generator-generate-btn"),
     button : document.getElementById("boule"),
+    newCocktail: document.getElementById("new-cocktail"),
+    door: document.getElementById('door'),
+    generatorTitle: document.getElementById('generator-title'),
     randomIngredients : [],
 
     generateListener: async (event) => {
         event.preventDefault();
+        random.button.removeEventListener('click', random.generateListener);
+        setTimeout (() => {
+            random.button.addEventListener('click', random.generateListener);
+        }, "6400")
+
         if(random.virginCheckbox.checked){
             await random.fetchRandomVirginIngredients();
         } else {
@@ -23,10 +30,11 @@ const random = {
         random.filters.style.display = ("block");
         const list = document.querySelector(".random-list");
         list.remove();
-        random.button.textContent = ("Générer");
-        random.button.removeEventListener('click', random.newCocktailListener);
-        random.button.addEventListener('click', random.generateListener);
         random.virginCheckbox.checked = false;
+        random.newCocktail.style.display = "none";
+        random.door.style.height = "60px";
+        random.door.style.bottom = "";
+        random.generatorTitle.innerText = "Générer un cocktail";
     },
 
     // RECUPERER LES INGREDIENTS SANS ALCOOL ALEATOIRES
@@ -73,29 +81,34 @@ const random = {
 
     // AJOUTER DES INGREDIENTS ALEATOIRES AU DOM
     addRandomIngredients: ()=>{
-        // random.machine.innerHTML = "";
         random.virginLabel.style.display = "none";
         random.filters.style.display = "none";
 
+        // Suppression de la liste d'ingrédients
+        if (document.querySelector(".random-list")){
+            document.querySelector(".random-list").remove();
+        }
+
         const randomIngredientList = document.createElement('ul');
-        randomIngredientList.classList.add('random-list');
-        randomIngredientList.style.display = ("flex");
-        randomIngredientList.style.flexDirection = ("column");
-        randomIngredientList.style.gap = ("10px");
-        randomIngredientList.style.fontSize = ("1.5em");
-        random.randomIngredients.forEach(ingredient => {
-            const randomIngredient = document.createElement('li');
-            randomIngredient.classList.add('random-ingredient');
-            randomIngredient.textContent = '- ' + ingredient.name + ' : ' + ingredient.quantity + ' ' + ingredient.unit;
-            randomIngredientList.appendChild(randomIngredient)
-        });
-        random.machine.appendChild(randomIngredientList);
-        // random.buttonContainer.style.order = ("4");
-        random.button.removeEventListener('click', random.generateListener);
-        random.button.addEventListener('click', random.newCocktailListener);
-        random.button.innerText = "Faire un nouveau cocktail";
+            randomIngredientList.classList.add('random-list');
+            randomIngredientList.classList.add('generator-text-container');
+            random.randomIngredients.forEach(ingredient => {
+                const randomIngredient = document.createElement('li');
+                randomIngredient.classList.add('random-ingredient');
+                randomIngredient.textContent = '- ' + ingredient.name + ' : ' + ingredient.quantity + ' ' + ingredient.unit;
+                randomIngredientList.appendChild(randomIngredient)
+            });
+            setTimeout (() => {
+            random.machine.appendChild(randomIngredientList);
+            random.newCocktail.style.order = ("3");
+            random.newCocktail.style.display = "block";
+        }, "3400");
+        random.newCocktail.style.display = "none";
     },
 }
 
 // EVENEMENT DE DEPART SUR LE BOUTON DE GENERATION DE COCKTAIL ALEATOIRE
 random.button.addEventListener('click', random.generateListener);
+
+// Ajout de l'event sur newCocktail
+random.newCocktail.addEventListener("click", random.newCocktailListener);
