@@ -1,5 +1,6 @@
 const userDataMapper = require('../models/userDataMapper');
 const bcrypt = require('bcrypt');
+const sendConfirmationMail = require ("../services/mailService")
 
 const userController = {
   async signUpAndRedirect (req, res, next){
@@ -11,9 +12,14 @@ const userController = {
       if (error) {
         res.status(400).json(error);
       } else {
+        sendConfirmationMail(newUser.email,newUser.firstname)
         res.status(200).json("Inscription validée ! vous pouvez maintenant vous connecter");
       }
     }
+  },
+  async sendingMailConfirmation (req,res){
+    const {email, firstname} = req.body
+    res.status(200).json(true);
   },
 
   async logInAndRedirect(req, res, next){
