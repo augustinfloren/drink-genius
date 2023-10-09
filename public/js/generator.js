@@ -37,12 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout (() => {
             machine.classList.add('animate__animated');
             machine.classList.add('animate__rubberBand');
+        }, "0500")
+        setTimeout (() => {
             slotSound.play();
             slotSound.volume = "0.3";
-        }, "0500")
-
-        setTimeout (() => {
-        }, "0500")
+        }, "0150")
 
         setTimeout (() => {
             shakerSound.play();
@@ -93,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout (() => {
           ding.play();
           ding.volume = "0.6";
-        }, "3000")
+        }, "2600")
         setTimeout (() => {
             glassSound.play();
             glassSound.volume = "0.4";
