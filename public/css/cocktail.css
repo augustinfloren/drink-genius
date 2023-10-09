@@ -28,6 +28,26 @@ html {
   border-radius: 70px;
   box-shadow: 5px 5px 40px #081a1941;
 }
+#cocktail-top-section {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+#labels-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cocktail-label{
+  text-align: center;
+  font-size: 1.5em;
+  background-color: var(--theme-purple);
+  padding: 10px 20px;
+  color: white;
+  border-radius: 30px;
+}
 
 #recipe-container {
   display: flex;
@@ -42,14 +62,14 @@ html {
   font-weight: bold;
 }
 
-#ingredients-container {
+.ingredients-container {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   align-items: center;
 }
 
-#ingredients-list {
+.ingredients-list {
   display: flex;
   flex-direction: column;
   gap: 10px;

@@ -8,19 +8,19 @@
 }
 
 /* Style des titres */
-h2 {
+#new-cocktail-form h2 {
     font-size: 1.5em;
     margin-bottom: 20px;
 }
 
 /* Style des étiquettes */
-label {
+#new-cocktail-form label {
     display: block;
     margin-bottom: 5px;
 }
 
 /* Style des champs de saisie */
-.input,
+#new-cocktail-form .input,
 .quantity-input,
 textarea,
 .select-dropdown {

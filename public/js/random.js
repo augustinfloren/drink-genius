@@ -2,7 +2,7 @@ const random = {
     machine : document.getElementById("bloc"),
     virginLabel : document.getElementById("generator-virgin-option-label"),
     virginCheckbox : document.getElementById("generator-virgin-option-checkbox"),
-    filters : document.getElementById("generator-preferences-btn"),
+    filters : document.querySelector(".preferences-btn"),
     button : document.getElementById("boule"),
     newCocktail: document.getElementById("new-cocktail"),
     door: document.getElementById('door'),
