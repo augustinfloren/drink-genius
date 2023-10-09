@@ -9,21 +9,37 @@ const glassLiquid = document.getElementById('glass-liquid');
 const stream = document.getElementById('stream');
 const generatorTitle = document.getElementById('generator-title');
 
-const stickSound = new Audio('../audio/stick.mp3');
-const slotSound = new Audio('../audio/slot-sound.mp3');
-const liquidSound = new Audio('../audio/liquid.mp3');
-const shakerSound = new Audio('../audio/shaker.mp3');
-const glassSound = new Audio('../audio/glass.mp3');
-const ding = new Audio('../audio/ding.mp3');
+const audio = {
+    stickSound: new Audio('../audio/stick.mp3'),
+    slotSound: new Audio('../audio/slot-sound.mp3'),
+    liquidSound: new Audio('../audio/liquid.mp3'),
+    shakerSound: new Audio('../audio/shaker.mp3'),
+    glassSound: new Audio('../audio/glass.mp3'),
+    ding: new Audio('../audio/ding.mp3'),
+}
+
+const muteBtn = document.querySelector('.fa-solid');
+let isMuted = false;
 
 document.addEventListener("DOMContentLoaded", () => {
     boule.addEventListener('click', animateMachine);
 
+    muteBtn.addEventListener('click', () => {
+        muteBtn.classList.toggle("fa-volume-xmark");
+        muteBtn.classList.toggle("fa-volume-high");
+        isMuted = !isMuted; // Inverser l'état du son
+        for (var key in audio) {
+            if (audio.hasOwnProperty(key)) {
+              audio[key].muted = isMuted; // Appliquer l'état du son à tous les fichiers audio
+            }
+          }
+    })
+
     function animateMachine() {
         boule.removeEventListener('click', animateMachine);
 
-        stickSound.play();
-        stickSound.volume = "0.3";
+        audio.stickSound.play();
+        audio.stickSound.volume = "0.3";
 
         generatorTitle.textContent = "...";
 
@@ -39,13 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
             machine.classList.add('animate__rubberBand');
         }, "0500")
         setTimeout (() => {
-            slotSound.play();
-            slotSound.volume = "0.3";
+            audio.slotSound.play();
+            audio.slotSound.volume = "0.3";
         }, "0150")
 
         setTimeout (() => {
-            shakerSound.play();
-            shakerSound.volume = "0.4";
+            audio.shakerSound.play();
+            audio.shakerSound.volume = "0.4";
             machine.classList.add('animate__tada');
         }, "2400")
 
@@ -54,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout (() => {
                 liquidOne.style.height = "0%";
                 liquidOne.style.transition = "all 1.5s ease-in-out";
-                liquidSound.play();
+                audio.liquidSound.play();
             }, "0800")
             setTimeout (() => {
                 liquidOne.style.height = `${randomNumber}%`;
@@ -90,12 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
             generatorTitle.textContent = "Tadaaa !";
           }, "3400")
         setTimeout (() => {
-          ding.play();
-          ding.volume = "0.6";
+            audio.ding.play();
+            audio.ding.volume = "0.6";
         }, "2600")
         setTimeout (() => {
-            glassSound.play();
-            glassSound.volume = "0.4";
+            audio.glassSound.play();
+            audio.glassSound.volume = "0.4";
             stream.style.width = "5px";
             glassLiquid.style.height = "30px";
         }, "4400")
