@@ -46,7 +46,8 @@ const userController = {
 
   async getProfilePage (req, res) {
     const userInfo = req.session.user;
-    res.render('profilePage', {userInfo});
+    let currentRoute = "profile";
+    res.render('profilePage', {userInfo, currentRoute});
   },
 
   async logOutAndRedirect(req, res){

@@ -19,6 +19,23 @@ body {
   flex-grow: 1;
 }
 
+.button {
+  font-family: 'Mooli', sans-serif;
+  background-color: white;
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 50px;
+  padding: 20px 40px;
+  width: fit-content;
+}
+
+.button:hover {
+    background-color: white;
+    color: var(--theme-purple);
+    cursor: pointer;
+}
 
 /*#### HEADER ####*/
 
@@ -52,11 +69,15 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 25px;
+    gap: 35px;
     font-size: 1em;
 }
 
-.nav-item-link:hover {
+.header-nav-bold {
+    font-weight: bold;
+}
+
+.nav-item:hover {
     font-weight: bold;
     cursor: pointer;
 }

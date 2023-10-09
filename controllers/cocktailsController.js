@@ -5,8 +5,9 @@ const cocktailsController = {
   async getAllCocktailsPage(req, res){
     const cocktails = await cocktailDataMapper.getValidatedCocktails();
     const spirits = await ingredientDataMapper.getSpiritsName();
-    res.render('cocktailsListPage', {cocktails, spirits});
-  
+    let currentRoute = 'cocktails';
+    res.render('cocktailsListPage', {cocktails, spirits, currentRoute});
+
   },
   async getCocktailsBySpirits(req, res) {
     const spirits_id = (req.body.spirits);
@@ -18,8 +19,9 @@ const cocktailsController = {
   async getCocktailInfoPage(req, res){
     const cocktailId = parseInt(req.params.id, 10);
     const cocktailInfo = await cocktailDataMapper.getCocktailInformation(cocktailId);
+    let currentRoute = "cocktail";
     if(cocktailInfo){
-        res.render('cocktailPage', { cocktailInfo });
+        res.render('cocktailPage', { cocktailInfo, currentRoute });
     } else {
       res.status(500).json("cocktail introuvable");
     };

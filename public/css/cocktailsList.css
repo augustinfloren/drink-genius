@@ -79,6 +79,9 @@
 }
 
 /*#### MODAL FILTRE####*/
+#message-container{
+  display: none;
+}
 .modal-container-spirit {
   display: none;
   position: fixed;
@@ -140,7 +143,6 @@
     background-color: white;
     font-weight: bold;
 }
-
 
 
 .modal-spirit h2 {
