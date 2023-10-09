@@ -70,6 +70,8 @@ spiritForm.addEventListener("submit", async (event) => {
       cocktailsElt.map((element_id) => {
         cocktails[element_id].style.display = "flex";
       });
+
+      
       toggleModalClosure();
     });
 });
