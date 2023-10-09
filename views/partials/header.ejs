@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="utf-8">
@@ -13,10 +13,16 @@
     <link rel="stylesheet" href="../css/authModal.css">
     <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="../css/newCocktail.css">
+    <link rel="stylesheet" href="../css/legalNotice.css">
+    <link rel="stylesheet" href="../css/generator.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mooli&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 
   </head>
@@ -41,7 +47,7 @@
                 <li class="nav-item"> <a class="nav-item-link"  href="/cocktails">Liste des cocktails</a></li>
                 <% if (locals.user) { %>
                   <li class="nav-item"><a class="nav-item-link" href="/profile">Profil</a></li>
-                  <li class="nav-item"><a class="nav-item-link" href="/logout">Deconnexion</a></li>
+                  <li class="nav-item"><a class="nav-item-link" href="/logout">Déconnexion</a></li>
                 <% } else { %>
                   <li class="nav-item modal-trigger-connexion"><div class="nav-item-link">Connexion</div></li>
                 <% } %>
@@ -60,10 +66,10 @@
 	      <form id="auth-modal-form" action="/signIn" method="post">
           <ul>
             <li>
-              <input class="input" type="text" name="firstname" id="nom-input" placeholder="Votre nom" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$">
+              <input class="input" type="text" name="lastname" id="nom-input" placeholder="Votre nom" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$">
             </li>
             <li>
-              <input class="input" type="text" name="lastname" id="prenom-input" placeholder="Votre prénom" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$">
+              <input class="input" type="text" name="firstname" id="prenom-input" placeholder="Votre prénom" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$">
             </li>
             <li id="date-field">
               <input class="input" type="number" name="birthdate" id="date-input" placeholder="Votre année de naissance" pattern="[0-9]{4}">
