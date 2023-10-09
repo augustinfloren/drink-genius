@@ -8,6 +8,7 @@
   height: 100vh;
 }
 .modal-container.active{
+  z-index: 5;
   display: block;
 }
 .overlay{
@@ -23,6 +24,7 @@
 }
 
 .modal{
+  z-index: 6;
   height: 70%;
   font-family: 'Mooli', sans-serif;
   text-align: center;
