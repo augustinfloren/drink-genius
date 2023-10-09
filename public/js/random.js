@@ -9,13 +9,17 @@ const random = {
     generatorTitle: document.getElementById('generator-title'),
     randomIngredients : [],
 
+    // Fonction principale
     generateListener: async (event) => {
         event.preventDefault();
+
+        // Desactivation du clic sur le levier le temps de l'animation
         random.button.removeEventListener('click', random.generateListener);
         setTimeout (() => {
             random.button.addEventListener('click', random.generateListener);
         }, "6400")
 
+        // Checkbox Filtre sans alcool
         if(random.virginCheckbox.checked){
             await random.fetchRandomVirginIngredients();
         } else {
@@ -24,6 +28,7 @@ const random = {
         random.addRandomIngredients();
     },
 
+    // Réinitialisation machine au clic sur faire un noveau cocktail
     newCocktailListener: async (event) => {
         event.preventDefault();
         random.virginLabel.style.display = ("block");
@@ -37,28 +42,7 @@ const random = {
         random.generatorTitle.innerText = "Générer un cocktail";
     },
 
-    // RECUPERER LES INGREDIENTS SANS ALCOOL ALEATOIRES
-    fetchRandomVirginIngredients: ()=>{
-        return fetch('/randomvirgin', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            if (!response.ok){
-                throw new Error('la requete a échoué')
-            }
-            return response.json();
-        })
-        .then(data => {
-            random.randomIngredients = data;
-        })
-        .catch(error => {
-            console.error('Erreur', error)
-        })},
-
-    // RECUPERER LES INGREDIENTS ALEATOIRES
+    // Récupération des ingrédients
     fetchRandomIngredients: ()=>{
         return fetch('/random', {
             method: 'GET',
@@ -77,18 +61,40 @@ const random = {
         })
         .catch(error => {
             console.error('Erreur', error)
-        })},
+    })},
 
-    // AJOUTER DES INGREDIENTS ALEATOIRES AU DOM
+    // Récupération des ingrédients sans alcool
+    fetchRandomVirginIngredients: ()=>{
+        return fetch('/randomvirgin', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok){
+                throw new Error('la requete a échoué')
+            }
+            return response.json();
+        })
+        .then(data => {
+            random.randomIngredients = data;
+        })
+        .catch(error => {
+            console.error('Erreur', error)
+    })},
+
+    // Affichage des ingrédients
     addRandomIngredients: ()=>{
         random.virginLabel.style.display = "none";
         random.filters.style.display = "none";
 
-        // Suppression de la liste d'ingrédients
+        // Réinitialisation liste d'ingrédients
         if (document.querySelector(".random-list")){
             document.querySelector(".random-list").remove();
         }
 
+        // Création de la liste d'ingrédients
         const randomIngredientList = document.createElement('ul');
             randomIngredientList.classList.add('random-list');
             randomIngredientList.classList.add('generator-text-container');
@@ -107,7 +113,7 @@ const random = {
     },
 }
 
-// EVENEMENT DE DEPART SUR LE BOUTON DE GENERATION DE COCKTAIL ALEATOIRE
+// Ajout de l'event sur le levier
 random.button.addEventListener('click', random.generateListener);
 
 // Ajout de l'event sur newCocktail
