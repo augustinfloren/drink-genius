@@ -1,0 +1,30 @@
+<%- include("partials/header") %>
+
+<!-- MAIN -->
+<main id="profile-main-container">
+    <nav id="user-nav">
+        <ul id="nav-profile-link">
+            <li class="nav-item"><div id="parameters-link" class="nav-item-link">Paramètres du compte</div></li>
+            <li class="nav-item"><div id="favourite-link" class="nav-item-link">Mes favoris</div></li>
+            <li class="nav-item"><div id="mycocktails-link" class="nav-item-link">Mes créations</div></li>
+            <li class="nav-item"><div id="newcocktail-link" class="nav-item-link">Proposer une recette</div></li>
+            <li class="nav-item"><div id="contact-admin-link" class="nav-item-link">Contacter un admin</div></li>
+        </ul>
+    </nav>
+    <div id="profile-flex-content">
+        <% if (userInfo) { %>
+            <h2>Paramètres du compte</h2>
+                <ul id="parameters-list">
+                    <li class="parameters">Votre nom : <%= userInfo.firstname %></li>
+                    <li class="parameters">Votre prénom : <%= userInfo.lastname %></li>
+                    <li class="parameters">Votre année de naissance : <%= userInfo.birthdate %></li>
+                    <li class="parameters">Votre email : <%= userInfo.email %></li>
+                    <li class="parameters">Votre ville : <%= userInfo.location %></li>
+                    <li class="parameters">Vos loisirs : <%= userInfo.hobbies %></li>
+                </ul>
+                <button id="parameters-modification-btn" class="" type="button">Modifier</button>
+        <% } %>
+    </div>                  
+</main>
+
+<%- include("partials/footer") %>

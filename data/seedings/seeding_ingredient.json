@@ -6,7 +6,7 @@
         "max_quantity": 6
     },
     {
-        "name": "sirop sucre canne",
+        "name": "sirop de sucre de canne",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 4
@@ -18,7 +18,7 @@
         "max_quantity": 10
     },
     {
-        "name": "jus citron vert",
+        "name": "jus de citron vert",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 6
@@ -54,7 +54,7 @@
         "max_quantity": 12
     },
     {
-        "name": "lait coco",
+        "name": "lait de coco",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 4
@@ -66,7 +66,7 @@
         "max_quantity": 12
     },
     {
-        "name": "jus citron",
+        "name": "jus de citron",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 6
@@ -84,7 +84,7 @@
         "max_quantity": 6
     },
     {
-        "name": "jus tomates",
+        "name": "jus de tomates",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 12
@@ -114,7 +114,7 @@
         "max_quantity": 6
     },
     {
-        "name": "jus cranberry",
+        "name": "jus de cranberry",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 12
@@ -138,7 +138,7 @@
         "max_quantity": 12
     },
     {
-        "name": "sirop grenadine",
+        "name": "sirop de grenadine",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 2
@@ -174,7 +174,7 @@
         "max_quantity": 6
     },
     {
-        "name": "angostura",
+        "name": "liqueur d'orange",
         "unit": "gouttes",
         "min_quantity": 1,
         "max_quantity": 6
@@ -204,13 +204,13 @@
         "max_quantity": 12
     },
     {
-        "name": "sucre canne liquide",
+        "name": "sucre de canne liquide",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 3
     },
     {
-        "name": "jus pamplemousse",
+        "name": "jus de pamplemousse",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 12
@@ -240,7 +240,7 @@
         "max_quantity": 12
     },
     {
-        "name": "sirop pêche",
+        "name": "sirop de pêche",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 3
@@ -252,7 +252,7 @@
         "max_quantity": 6
     },
     {
-        "name": "jus fraise",
+        "name": "jus de fraise",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 12
@@ -270,7 +270,7 @@
         "max_quantity": 6
     },
     {
-        "name": "jus fruits la passion",
+        "name": "jus de fruits de la passion",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 9
@@ -282,67 +282,67 @@
         "max_quantity": 3
     },
     {
-        "name": "nectar mangue",
+        "name": "nectar de mangue",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 12
     },
     {
-        "name": "crème coco",
+        "name": "crème de coco",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 6
     },
     {
-        "name": "jus goyave",
+        "name": "jus de goyave",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 12
     },
     {
-        "name": "jus framboise",
+        "name": "jus de framboise",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 9
     },
     {
-        "name": "jus litchi",
+        "name": "jus de litchi",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 9
     },
     {
-        "name": "jus pomme",
+        "name": "jus de pomme",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 12
     },
     {
-        "name": "jus mangue",
+        "name": "jus de mangue",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 12
     },
     {
-        "name": "jus poire",
+        "name": "jus de poire",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 12
     },
     {
-        "name": "jus kiwi",
+        "name": "jus de kiwi",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 9
     },
     {
-        "name": "sirop cassis",
+        "name": "sirop de cassis",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 3
     },
     {
-        "name": "sirop mûre",
+        "name": "sirop de mûre",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 3
@@ -360,7 +360,7 @@
         "max_quantity": 9
     },
     {
-        "name": "baileys",
+        "name": "crème de whisky",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 6
@@ -372,13 +372,13 @@
         "max_quantity": 6
     },
     {
-        "name": "liqueur menthe",
+        "name": "liqueur de menthe",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 5
     },
     {
-        "name": "liqueur cerises",
+        "name": "liqueur de cerise",
         "unit": "cl",
         "min_quantity": 1,
         "max_quantity": 6
@@ -389,5 +389,4 @@
         "min_quantity": 1,
         "max_quantity": 12
     }
-
 ]

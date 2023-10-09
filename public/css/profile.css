@@ -1,0 +1,67 @@
+
+#profile-main-container {
+    display: flex;
+    flex-direction: row;
+    flex: auto;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center; 
+    color: var(--theme-purple);
+}
+
+/*#### NAV ####*/
+
+#user-nav {
+    border: solid;
+    border-radius: 15%;
+    border-color: var(--theme-purple);
+    text-align: center;   
+}
+
+#user-nav .nav-item {
+    margin:  1.7em;
+    font-size: 1.2em;
+}
+
+#parameters-link {
+    font-style: italic;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#profile-flex-content {
+    width: 50vw;
+}
+
+#profile-flex-content h2 {
+    color: var(--theme-purple);
+    margin-bottom: 1.5em; 
+}
+
+#parameters-list {
+    padding-bottom: 1em;
+}
+
+.parameters {
+    padding-bottom: 1em;
+    font-size: 1.2em;
+}
+
+#parameters-modification-btn {
+    font-size: 1em;
+    padding: 15px 25px 15px 25px;
+    border: 2px solid white;
+    border-radius: 45px;
+}
+
+#parameters-modification-btn:hover {
+    background-color: white;
+    color: var(--theme-purple);
+    cursor: pointer;
+}
+
+.heart-icon {
+    color: red;
+    width: 1.5em;
+    height: 1.5em;
+}
