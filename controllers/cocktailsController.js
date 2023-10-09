@@ -5,8 +5,9 @@ const cocktailsController = {
   async getAllCocktailsPage(req, res){
     const cocktails = await cocktailDataMapper.getValidatedCocktails();
     const spirits = await ingredientDataMapper.getSpiritsName();
-    res.render('cocktailsListPage', {cocktails, spirits});
-  
+    let currentRoute = 'cocktails';
+    res.render('cocktailsListPage', {cocktails, spirits, currentRoute});
+
   },
   async getCocktailsBySpirits(req, res) {
     const spirits_id = (req.body.spirits);
