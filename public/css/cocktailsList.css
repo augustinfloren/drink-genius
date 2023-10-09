@@ -55,7 +55,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 40%;
+  width: 500px;
   gap: 5%;
 }
 #searchbar {
@@ -194,6 +194,11 @@
 }
 
 @media screen and (max-width: 790px) {
+    .drink-list-form {
+      flex-direction: column;
+      gap: 50px;
+    }
+
     .modal-spirit {
       top: 50%;
       padding: 20px;
@@ -207,14 +212,4 @@
     position: relative;
     margin:auto;
   }
-  #searchbar{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-     padding:15px;
-     border-radius: 10px;
-  }
-
-   input[type=text] {
-      width: 150%;
-   }}
+}
