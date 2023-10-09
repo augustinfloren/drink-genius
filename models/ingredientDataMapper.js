@@ -48,8 +48,7 @@ const ingredientDataMapper = {
         return result.rowCount;
     },
 
-    async addIngredientToCocktail(relation){
-        const { cocktail_id, ingredient_id, quantity } = relation;
+    async addIngredientToCocktail(cocktail_id, ingredient_id, quantity){
         const sqlQuery = {
             text: 'INSERT INTO cocktail_contain_ingredient(cocktail_id, ingredient_id, quantity) VALUES ($1, $2, $3)',
             values: [cocktail_id, ingredient_id, quantity]

@@ -1,4 +1,5 @@
 const ingredientDataMapper = require('../models/ingredientDataMapper');
+const cocktailDataMapper = require('../models/cocktailDataMapper');
 const userDataMapper = require('../models/userDataMapper');
 const bcrypt = require('bcrypt');
 
@@ -54,7 +55,14 @@ const userController = {
   },
 
   async addNewCocktail(req, res){
-    
+    const { name, instruction } = req.body;
+    const userId = req.session.user.id;
+    const cocktailResult = await cocktailDataMapper.addOneCocktailByUser(name, instruction, userId);
+    const cocktailId = cocktailResult[0].id;
+    console.log(req.body);
+    const { ingredientId, quantity } = req.body
+    const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, ingredientId, quantity)
+    res.json('Le cocktail a bien été ajouté !');
   },
 
   async getCocktailsCreatedByUser(req, res){
