@@ -1,7 +1,18 @@
 :root {
   --border: 5px solid rgb(255, 0, 0);
   --purple: #6f4f9f;
-  --metal: linear-gradient(90deg, rgb(170, 170, 170) 0%, rgba(208,208,208,1) 50%, rgb(208, 208, 208) 50%);
+  --metal: linear-gradient(
+    120deg,
+    #dadada 5%,
+    #fff 10%,
+    #ccc 30%,
+    #ddd 50%,
+    #dbdbdb 70%,
+    #fff 80%,
+    #bbbbbb 95%
+  );
+  --metaltwo: linear-gradient(90deg, rgb(201, 200, 200) 0%, rgb(226, 226, 226) 50%, rgb(223, 222, 222) 50%);
+
 }
 
 #generator-container {
@@ -78,8 +89,9 @@
   height: fit-content;
   padding: 5% 0%;
   border-radius: 40px;
-  background: linear-gradient(90deg, rgb(199, 199, 199) 0%, rgba(208,208,208,1) 50%, rgb(208, 208, 208) 50%);
-  transition : height 1s ease-in-out;
+  /* background: linear-gradient(90deg, rgb(199, 199, 199) 0%, rgba(208,208,208,1) 50%, rgb(208, 208, 208) 50%); */
+  transition: height 1s ease-in-out;
+  background: var(--metal);
 }
 .generator-text-container {
   text-align: center;
@@ -157,12 +169,12 @@
 #bloc1 {
   width: 22px;
   height: 105px;
-  background: var(--metal);
+  background: var(--metaltwo);
   }
 #bloc2 {
   width: 16px;
   height: 60px;
-  background: var(--metal);
+  background: var(--metaltwo);
   }
 #levier {
   display: flex;
@@ -176,7 +188,7 @@
 #bras {
   width: 8px;
   height: 192px;
-  background: var(--metal);
+  background: var(--metaltwo);
 }
 #boule{
   cursor: grab;
