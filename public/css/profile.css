@@ -4,18 +4,16 @@
     flex-direction: row;
     flex: auto;
     width: 100%;
-    justify-content: space-around;
-    align-items: center; 
+    gap: 60px;
+    justify-content: center;
     color: var(--theme-purple);
 }
 
 /*#### NAV ####*/
 
 #user-nav {
-    border: solid;
-    border-radius: 15%;
-    border-color: var(--theme-purple);
-    text-align: center;   
+    height: 100%;
+    width: 300px;
 }
 
 #user-nav .nav-item {
@@ -24,18 +22,18 @@
 }
 
 #parameters-link {
-    font-style: italic;
-    text-decoration: underline;
-    font-weight: bold;
 }
 
 #profile-flex-content {
-    width: 50vw;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
 }
 
 #profile-flex-content h2 {
     color: var(--theme-purple);
-    margin-bottom: 1.5em; 
+    margin-bottom: 1.5em;
 }
 
 #parameters-list {
@@ -45,19 +43,6 @@
 .parameters {
     padding-bottom: 1em;
     font-size: 1.2em;
-}
-
-#parameters-modification-btn {
-    font-size: 1em;
-    padding: 15px 25px 15px 25px;
-    border: 2px solid white;
-    border-radius: 45px;
-}
-
-#parameters-modification-btn:hover {
-    background-color: white;
-    color: var(--theme-purple);
-    cursor: pointer;
 }
 
 .heart-icon {
