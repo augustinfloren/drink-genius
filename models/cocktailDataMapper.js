@@ -15,6 +15,7 @@ const cocktailDataMapper = {
     }
         const result = await client.query(sqlQuery);
         return result.rows;
+    
     },
     
 

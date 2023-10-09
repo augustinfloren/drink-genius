@@ -10,6 +10,7 @@
 }
 
 #cocktails-container {
+
   width: 70vw;
   height: fit-content;
   display: flex;
@@ -21,6 +22,7 @@
 }
 
 .cocktails-container-item {
+  
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -51,6 +53,7 @@
 
 /*#### SEARCH BAR ####*/
 
+
 .drink-list-form {
   display: flex;
   flex-direction: row;
@@ -77,6 +80,7 @@
 .spirit-modal-trigger {
   width: 28.5%;
 }
+
 
 /*#### MODAL FILTRE####*/
 .modal-container-spirit {
@@ -215,3 +219,4 @@
     margin:auto;
   }
 }
+
