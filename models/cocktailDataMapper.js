@@ -6,6 +6,17 @@ const cocktailDataMapper = {
         const result = await client.query(`SELECT * FROM cocktail WHERE validation=true`);
         return result.rows;
     },
+    
+    //OBTENIR LES COCKTAILS AVEC LES INGREDIENTS
+    async getCocktailBySpirits(ingredient_ids) {
+    const sqlQuery = {
+        text: `SELECT * FROM cocktail WHERE cocktail.id IN (SELECT cocktail_id FROM cocktail_contain_ingredient WHERE ingredient_id = ANY ($1))`,
+        values: [ingredient_ids]
+    }
+        const result = await client.query(sqlQuery);
+        return result.rows;
+    },
+    
 
     // OBTENIR TOUS LES COCKTAILS EN ATTENTE DE VALIDATION
     async getNotValidatedCocktails() {
