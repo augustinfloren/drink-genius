@@ -17,7 +17,7 @@ function sendConfirmationMail (email,firstname) {
       from: "drink.genius@gmail.com",
       to: `${email}`,
       subject: "Confirmation d'inscription",
-      text: `Bonjour ${firstname}, votre inscription a bien été confirmée! Va profiter de notre application "Drink Genius" de manière responsable.\n L'équipe de Drink Genious `
+      text: `Bonjour ${firstname}, votre inscription a bien été confirmée! Va profiter de notre application "Drink Genius" de manière responsable.\n L'équipe de Drink Genius `
     };
     transporter.sendMail(mailConfirmation)
 };
