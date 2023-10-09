@@ -19,8 +19,9 @@ const cocktailsController = {
   async getCocktailInfoPage(req, res){
     const cocktailId = parseInt(req.params.id, 10);
     const cocktailInfo = await cocktailDataMapper.getCocktailInformation(cocktailId);
+    let currentRoute = "cocktail";
     if(cocktailInfo){
-        res.render('cocktailPage', { cocktailInfo });
+        res.render('cocktailPage', { cocktailInfo, currentRoute });
     } else {
       res.status(500).json("cocktail introuvable");
     };

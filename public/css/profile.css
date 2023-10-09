@@ -11,14 +11,33 @@
 
 /*#### NAV ####*/
 
+
 #user-nav {
     height: 100%;
-    width: 300px;
+    width: 350px;
+}
+
+.user-active-btn {
+    background-color: var(--theme-purple);
+    color: white;
+}
+
+.user-btn {
+    background-color: #2d213f0c;
+    color: var(--theme-purple);
 }
 
 #user-nav .nav-item {
+    text-align: center;
     margin:  1.7em;
     font-size: 1.2em;
+    border-radius: 20px;
+    padding : 10px 20px;
+}
+
+#user-nav .nav-item:hover {
+    background-color: var(--theme-purple);
+    color: white;
 }
 
 #profile-flex-content {
