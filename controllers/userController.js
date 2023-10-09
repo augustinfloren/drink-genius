@@ -60,8 +60,11 @@ const userController = {
     const cocktailResult = await cocktailDataMapper.addOneCocktailByUser(name, instruction, userId);
     const cocktailId = cocktailResult[0].id;
     console.log(req.body);
-    const { ingredientId, quantity } = req.body
-    const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, ingredientId, quantity)
+    const { ingredientId, quantity } = req.body;
+    ingredientId.forEach(async (givenIngredient, index) => {
+      let givenQuantity = quantity[index];
+      const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, givenIngredient, givenQuantity);
+    });
     res.json('Le cocktail a bien été ajouté !');
   },
 
