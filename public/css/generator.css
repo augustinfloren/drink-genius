@@ -61,15 +61,14 @@
   cursor: pointer;
 }
 
-#generator-preferences-btn {
+.preferences-btn {
   font-size: 1em;
   margin-top: -20px;
   border-bottom: 2px solid var(--theme-purple);
   padding-bottom: 5px;
-  width: 70px;
 }
 
-#generator-preferences-btn:hover {
+.preferences-btn:hover {
   font-weight: bold;
   cursor: pointer;
 }
