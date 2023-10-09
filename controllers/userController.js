@@ -1,3 +1,4 @@
+const ingredientDataMapper = require('../models/ingredientDataMapper');
 const userDataMapper = require('../models/userDataMapper');
 const bcrypt = require('bcrypt');
 
@@ -60,6 +61,11 @@ const userController = {
     const userId = req.session.user.id;
     const cocktails = await userDataMapper.getCocktailByUserId(userId);
     res.json(cocktails);
+  },
+
+  async getAllIngredients(req, res){
+    const ingredients = await ingredientDataMapper.getAllIngredients();
+    res.json(ingredients);
   }
 }
 
