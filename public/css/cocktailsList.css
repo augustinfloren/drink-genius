@@ -159,10 +159,12 @@
   display: flex;
   padding-right: 10px;
   padding-bottom: 3px;
+  width: 25%;
 }
 
 .modal-spirit label {
   display: block;
+  text-align: start;
 }
 .modal-spirit input {
   display: block;

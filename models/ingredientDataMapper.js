@@ -74,6 +74,6 @@ const ingredientDataMapper = {
         return result.rows;
     }
 };
-//console.log("alors c'est quoi:",)
+
 
 module.exports = ingredientDataMapper;
