@@ -10,7 +10,6 @@ const cocktailsController = {
   },
   async getCocktailsBySpirits(req, res) {
     const spirits_id = (req.body.spirits);
-    console.log("je passe:",spirits_id)
     const cocktailsBySpirit = await cocktailDataMapper.getCocktailBySpirits(spirits_id);
     res.json(cocktailsBySpirit);
 },
