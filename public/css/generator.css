@@ -79,6 +79,11 @@
   flex-direction: row;
   align-items: center;
 }
+#machine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 #bloc {
   display: flex;
   flex-direction: column;
@@ -106,6 +111,8 @@
   font-size: 1.5em;
 }
 .random-list {
+  width: 85%;
+  border-radius: 50px;
   font-size: 1em;
   order: 2;
   display: flex;
@@ -315,6 +322,7 @@
   width: 300px;
 }
 #bottles-container{
+  width: 93%;
   height: 71px;
 }
 #generator-main-container {

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { mainController, cocktailsController, userController, randomController } = require('./controllers')
-const cw = require("./controllerWrapper");
+const cw = require("./services/controllerWrapper");
 const validationService = require("./services/validationService");
 
 // Accueil

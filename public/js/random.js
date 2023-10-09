@@ -52,15 +52,15 @@ const random = {
         })
         .then(response => {
             if (!response.ok){
-                throw new Error('la requete a échoué')
+                throw new Error();
             }
             return response.json();
         })
         .then(data => {
             random.randomIngredients = data;
         })
-        .catch(error => {
-            console.error('Erreur', error)
+        .catch(() => {
+         random.generatorTitle.innerText = "La machine semble être en panne. Merci de réessayer plus tard.";
     })},
 
     // Récupération des ingrédients sans alcool
