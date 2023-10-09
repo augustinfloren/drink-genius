@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { mainController, cocktailsController, userController, randomController } = require('./controllers')
-const cw = require("./controllerWrapper");
+const cw = require("./services/controllerWrapper");
 const validationService = require("./services/validationService");
 
 // Accueil
@@ -28,7 +28,7 @@ router.get("/logout", userController.logOutAndRedirect);
 router.get("/profile/favourites", cw(userController.getFavouriteCocktails));
 router.post("/newcocktail", cw(userController.addNewCocktail));
 router.get("/profile/createdcocktail", cw(userController.getCocktailsCreatedByUser));
-
+router.get("/ingredients", userController.getAllIngredients);
 
 
 

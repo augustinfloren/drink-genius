@@ -104,20 +104,18 @@ const cocktailDataMapper = {
     },
 
     // AJOUT D'UN COCKTAIL PAR UTILISATEUR
-    async addOneCocktailByUser(cocktail) {
-        const { name, instruction, user_id } = cocktail;
+    async addOneCocktailByUser(name, instruction, user_id) {
         const validation = false;
         const sqlQuery = {
-            text: 'INSERT INTO cocktail(name, instruction, validation, user_id) VALUES ($1, $2, $3, $4)',
+            text: 'INSERT INTO cocktail(name, instruction, validation, user_id) VALUES ($1, $2, $3, $4) RETURNING cocktail.id',
             values: [name, instruction, validation, user_id]
         };
         const result = await client.query(sqlQuery);
-        return result.rowCount;
+        return result.rows;
     },
 
     // AJOUT D'UN COCKTAIL PAR ADMIN
-    async addOneCocktailByAdmin(cocktail) {
-        const { name, instruction, user_id } = cocktail;
+    async addOneCocktailByAdmin(name, instruction, user_id) {
         const validation = true;
         const sqlQuery = {
             text: 'INSERT INTO cocktail(name, instruction, validation, user_id) VALUES ($1, $2, $3, $4)',

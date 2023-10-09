@@ -17,17 +17,9 @@ function sendConfirmationMail (email,firstname) {
       from: "drink.genius@gmail.com",
       to: `${email}`,
       subject: "Confirmation d'inscription",
-      text: `Bonjour ${firstname}, votre inscription a bien été confirmée! Va profiter de notre application "Drink Genius" de manière responsable`
+      text: `Bonjour ${firstname}, votre inscription a bien été confirmée! Va profiter de notre application "Drink Genius" de manière responsable.\n L'équipe de Drink Genius `
     };
-    transporter.sendMail(mailConfirmation, (error, info) => {
-        if (error) {
-            console.error(`Erreur lors de l'envoi de l'e-mail`);
-            res.status(500).json({ error: `Erreur lors de l'envoi de l'e-mail` });
-        } else {
-            console.log(`E-mail de confirmation envoyé`);
-            res.json({ message: `E-mail de confirmation envoyé avec succès` });
-        }
-    });
+    transporter.sendMail(mailConfirmation)
 };
 
 module.exports = sendConfirmationMail
