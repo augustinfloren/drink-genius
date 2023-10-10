@@ -27,7 +27,7 @@ router.get("/profile", cw(userController.getProfilePage));
 router.patch("/profile", cw(userController.updateProfile));
 router.get("/logout", userController.logOutAndRedirect);
 router.get("/profile/favourites", cw(userController.renderFavouritesPages));
-router.get("/newcocktail", cw(userController.getNewCocktailpage));
+router.get("/profile/newcocktail", cw(userController.renderNewCocktailPage));
 router.post("/newcocktail", cw(userController.addNewCocktail));
 router.get("/profile/usercocktails", cw(userController.renderUserCocktailsPage));
 router.get("/ingredients", userController.getAllIngredients);

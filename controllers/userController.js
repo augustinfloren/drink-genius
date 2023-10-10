@@ -63,7 +63,7 @@ const userController = {
     res.render('favouritesPage', {favourites, currentRoute});
   },
 
-  async getNewCocktailpage(req,res){
+  async renderNewCocktailPage(req,res){
     const ingredients = await ingredientDataMapper.getAllIngredients();
     currentRoute = "newCocktail";
     res.render('newCocktail', {ingredients, currentRoute});
@@ -86,7 +86,8 @@ const userController = {
   async renderUserCocktailsPage(req, res){
     const userId = req.session.user.id;
     const userCocktails = await userDataMapper.getUserCocktails(userId);
-    res.render('userCocktailsPage', {userCocktails});
+    currentRoute = "usercocktails";
+    res.render('userCocktailsPage', {userCocktails, currentRoute});
   },
 
   async getAllIngredients(req, res){
