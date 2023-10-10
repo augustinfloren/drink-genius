@@ -86,7 +86,7 @@ const dataMapper = {
             values:[firstname, lastname, birthdate, email, location, hobbies, id]
         };
         const result = await client.query(sqlQuery);
-        return result.fields;
+        return result.rows[0];
     },
 
     // DESINSCRIPTION

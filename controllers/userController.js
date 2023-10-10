@@ -99,7 +99,7 @@ const userController = {
     const userId = req.session.user.id;
     const parameters = req.body;
     const userInfo = await userDataMapper.updateUser(parameters, userId);
-    res.header('Cache-Control', 'no-cache');
+    req.session.user = userInfo;
     res.json(userInfo);
   },
 
