@@ -100,7 +100,7 @@ const dataMapper = {
     },
 
     // RECUPERER LES COCKTAILS FAVORIS PAR UTILISATEUR
-    async getFavouriteCocktailsByUser(user_id){
+    async getFavourites(user_id){
         const sqlQuery = {
             text: `SELECT * FROM cocktail
             JOIN user_like_cocktail AS favourites ON cocktail.id = favourites.cocktail_id
@@ -112,7 +112,7 @@ const dataMapper = {
     },
 
     // RECUPERER LES COCKTAILS PAR UTILISATEUR
-    async getCocktailByUserId(user_id){
+    async getUserCocktails(user_id){
         const sqlQuery = {
             text: 'SELECT * FROM cocktail WHERE user_id=$1',
             values: [user_id]

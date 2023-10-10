@@ -22,14 +22,14 @@ router.get("/randomvirgin", cw(randomController.getRandomVirginIngredients));
 
 // User
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
-router.post("/login", userController.logInAndRedirect)
+router.post("/login", userController.logInAndRedirect);
 router.get("/profile", cw(userController.getProfilePage));
 router.patch("/profile", cw(userController.updateProfile));
 router.get("/logout", userController.logOutAndRedirect);
-router.get("/profile/favourites", cw(userController.getFavouriteCocktails));
+router.get("/profile/favourites", cw(userController.renderFavouritesPages));
 router.get("/newcocktail", cw(userController.getNewCocktailpage));
 router.post("/newcocktail", cw(userController.addNewCocktail));
-router.get("/profile/createdcocktail", cw(userController.getCocktailsCreatedByUser));
+router.get("/profile/usercocktails", cw(userController.renderUserCocktailsPage));
 router.get("/ingredients", userController.getAllIngredients);
 
 
