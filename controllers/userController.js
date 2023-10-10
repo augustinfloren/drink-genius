@@ -54,10 +54,9 @@ const userController = {
     res.redirect('/')
   },
 
-  async getFavouriteCocktails(req, res){
+  async renderFavouritePages(req, res){
     const userId = req.session.user.id;
-    const favourites = await userDataMapper.getFavouriteCocktailsByUser(userId)
-    console.log(favourites)
+    const favourites = await userDataMapper.getFavourites(userId)
     res.render('favouritesPage', {favourites});
   },
 
@@ -75,10 +74,10 @@ const userController = {
     res.json('Le cocktail a bien été ajouté !');
   },
 
-  async getCocktailsCreatedByUser(req, res){
+  async renderUserCocktailsPage(req, res){
     const userId = req.session.user.id;
-    const cocktails = await userDataMapper.getCocktailByUserId(userId);
-    res.json(cocktails);
+    const userCocktails = await userDataMapper.getUserCocktails(userId);
+    res.render('userCocktailsPage', {userCocktails});
   },
 
   async getAllIngredients(req, res){
