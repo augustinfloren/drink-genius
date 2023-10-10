@@ -90,6 +90,20 @@ const userController = {
   async getAllIngredients(req, res){
     const ingredients = await ingredientDataMapper.getAllIngredients();
     res.json(ingredients);
+  },
+
+  async updateProfile(req, res) {
+    const userId = req.session.user.id;
+    const parameters = req.body;
+    const userInfo = await userDataMapper.updateUser(parameters, userId);
+    res.header('Cache-Control', 'no-cache');
+    res.json(userInfo);
+  },
+
+  async deleteProfile(req,res){
+    const userId = req.session.user.id;
+    const deletedProfile = await userDataMapper.deleteUser(userId);
+    res.redirect('/');
   }
 }
 
