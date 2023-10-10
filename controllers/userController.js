@@ -61,6 +61,12 @@ const userController = {
     res.json(favourites);
   },
 
+  async getNewCocktailpage(req,res){
+    const ingredients = await ingredientDataMapper.getAllIngredients();
+    let currentRoute = "newCocktail";
+    res.render('newCocktail', {ingredients, currentRoute});
+  },
+
   async addNewCocktail(req, res){
     const { name, instruction } = req.body;
     const userId = req.session.user.id;

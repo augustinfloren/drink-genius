@@ -40,7 +40,7 @@
     color: white;
 }
 
-#profile-flex-content {
+.profile-content {
     margin-top: 60px;
     display: flex;
     flex-direction: column;
