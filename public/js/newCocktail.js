@@ -48,6 +48,7 @@ function createForm(){
     cocktailForm.method = 'POST';
     cocktailForm.action = '/newcocktail';
     cocktailForm.id = "new-cocktail-form";
+    mainContainer.style.justifyContent = "left";
 
     // TITRE DE LA RECETTE
     const nameLabel = document.createElement('label');
@@ -59,7 +60,6 @@ function createForm(){
     nameInput.id = 'name-input';
     nameInput.type = 'text';
     nameInput.name = 'name';
-    nameInput.placeholder = 'Nom du cocktail';
 
     // INSTRUCTIONS
     const instructionLabel = document.createElement('label');
@@ -70,7 +70,6 @@ function createForm(){
     instructionInput.classList.add('input');
     instructionInput.id = 'instruction-input';
     instructionInput.name = 'instruction';
-    instructionInput.placeholder = 'Instructions du cocktail';
 
     // INGREDIENTS
     let ingredientCounter = 1;
@@ -116,9 +115,9 @@ function createForm(){
     createIngredientDropdown();
     createQuantityInput();
 
-    // CREATION D'UN BOUTON "AJOUTER UN INGREDIENT" 
+    // CREATION D'UN BOUTON "AJOUTER UN INGREDIENT"
     const addIngredientButton = document.createElement('div');
-    addIngredientButton.textContent = "Ajouter un ingrédient";
+    addIngredientButton.textContent = "+ Ajouter un ingrédient";
     addIngredientButton.classList.add('add-ingredient-button');
     addIngredientButton.addEventListener('click', function(){
         ingredientCounter++;
@@ -129,7 +128,7 @@ function createForm(){
     // CREATION DU BOUTON POUR SOUMETTRE LE COCKTAIL
     const submitButton = document.createElement('button');
     submitButton.type = 'submit';
-    submitButton.id = 'new-cocktail-button'
+    submitButton.classList.add("button");
     submitButton.textContent = 'Envoyer'
 
     // AJOUT DES ELEMENTS AU FORMULAIRE

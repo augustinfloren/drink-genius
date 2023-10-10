@@ -9,9 +9,8 @@
   margin-top: 70px;
 }
 
-#cocktails-container {
-
-  width: 70vw;
+.cocktails-container {
+  width: 70%;
   height: fit-content;
   display: flex;
   flex-direction: row;
@@ -19,6 +18,14 @@
   justify-content: center;
   gap: 50px 5%;
   margin-bottom: 100px;
+}
+
+.cocktail-mini {
+  height: 150px;
+  width: 150px;
+  background-size: 150px;
+  border-radius: 40px;
+  box-shadow: 5px 5px 40px #081a1941;
 }
 
 .cocktails-container-item {
@@ -36,6 +43,10 @@
 
 .cocktail-title {
   font-size: 1.5em;
+}
+
+.cocktail-title-mini {
+  font-size: 1em;
 }
 
 .cocktail-img {
@@ -83,6 +94,9 @@
 
 
 /*#### MODAL FILTRE####*/
+#message-container{
+  display: none;
+}
 .modal-container-spirit {
   display: none;
   position: fixed;
@@ -144,7 +158,6 @@
     background-color: white;
     font-weight: bold;
 }
-
 
 
 .modal-spirit h2 {

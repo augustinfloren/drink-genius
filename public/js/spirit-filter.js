@@ -68,8 +68,8 @@ spiritForm.addEventListener("submit", async (event) => {
 
     // Réinitialise la variable spiritFound pour chaque itération
         spiritFound = false;
-        
-      
+
+
         data.map((cocktailListFiltered) => {
     //Si le spirit correspond à un spirit apparenant à un cocktail,
     //on le push
@@ -85,19 +85,20 @@ spiritForm.addEventListener("submit", async (event) => {
         spiritToSearch = spiritFound
       }
     // Crée un élément div pour le message d'erreur
-      const messageDiv = document.createElement("div");
     // Vérifie si aucun spirit n'a été trouvé
-      if (cocktailsElt.length === 0) {
+    if (cocktailsElt.length === 0) {
+        const messageDiv = document.createElement("div");
+        messageContainer.style.display ="block";
         messageDiv.textContent =
         `Désolé, nous n'avons pas de cocktails à base de ${selectedSpirits.join(', ')}`;
+        messageContainer.appendChild(messageDiv);
       } else {
-      //on fait apparaitre les cocktails contenant le spirit sélectionné
+        //on fait apparaitre les cocktails contenant le spirit sélectionné
         cocktailsElt.map((element_id) => {
           cocktails[element_id].style.display = "flex";
         });
       }
       // Ajoute le message au conteneur HTML
-messageContainer.appendChild(messageDiv);
       toggleModalClosure();
     });
 }); 

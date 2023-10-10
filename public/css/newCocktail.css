@@ -1,10 +1,10 @@
 /* Style du conteneur principal */
 #new-cocktail-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     border-radius: 5px;
+    max-width: 400px;
 }
 
 /* Style des titres */
@@ -13,10 +13,20 @@
     margin-bottom: 20px;
 }
 
+#instruction-input {
+    border-radius: 50px;
+    height: 130px;
+}
+
+.dropdown-menu {
+    border-radius: 20px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
 /* Style des étiquettes */
 #new-cocktail-form label {
     display: block;
-    margin-bottom: 5px;
 }
 
 /* Style des champs de saisie */
@@ -29,13 +39,13 @@ textarea,
     margin-bottom: 15px;
     box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 20px;
+    font-family: "Mooli", sans-serif;
+    resize: none;
 }
 
 /* Style du bouton "Ajouter un ingrédient" */
 .add-ingredient-button {
-    background-color: #4caf50;
-    color: white;
     padding: 10px;
     border: none;
     border-radius: 4px;
@@ -43,19 +53,5 @@ textarea,
 }
 
 .add-ingredient-button:hover {
-    background-color: #45a049;
-}
-
-/* Style du bouton "Envoyer" */
-#new-cocktail-button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-#new-cocktail-button:hover {
-    background-color: #45a049;
+    font-weight: bold;
 }
