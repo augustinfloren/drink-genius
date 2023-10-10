@@ -4,7 +4,8 @@
 <div class="profile-content" id="parameters-content">
         <% if (userInfo) { %>
             <h2>Paramètres du compte</h2>
-                <ul id="parameters-list">
+            <div id="parameters-list">
+                <ul>
                     <li class="parameters">Votre nom : <%= userInfo.firstname %></li>
                     <li class="parameters">Votre prénom : <%= userInfo.lastname %></li>
                     <li class="parameters">Votre année de naissance : <%= userInfo.birthdate %></li>
@@ -12,7 +13,17 @@
                     <li class="parameters">Votre ville : <%= userInfo.location %></li>
                     <li class="parameters">Vos loisirs : <%= userInfo.hobbies %></li>
                 </ul>
-                <button id="parameters-modification-btn" class="button" type="button">Modifier</button>
+                <button id="parameters-modification-btn" class="" type="button">Modifier</button>
+            </div>
+                <form id="parameters-form" style="display : none;">
+                    <input type="text" name="firstname" value="<%= userInfo.firstname %>">
+                    <input type="text" name="lastname" value="<%= userInfo.lastname %>">
+                    <input type="text" name="birthdate" value="<%= userInfo.birthdate %>">
+                    <input type="text" name="email" value="<%= userInfo.email %>">
+                    <input type="text" name="location" value="<%= userInfo.location %>">
+                    <input type="text" name="hobbies" value="<%= userInfo.hobbies %>">
+                <button id="parameters-save-changes-btn">Enregistrer</button>    
+                </form>
         <% } %>
     </div>
 </main>

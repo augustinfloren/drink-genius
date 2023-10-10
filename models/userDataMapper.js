@@ -79,14 +79,14 @@ const dataMapper = {
     },
 
     // MODIFICATION PROFIL
-    async updateUser(user){
-        const { location, hobbies, id } = user;
+    async updateUser(userInfo, id){
+        const { firstname, lastname, birthdate, email, location, hobbies } = userInfo;
         const sqlQuery = {
-            text: `UPDATE "user" SET location =$1, hobbies =$2 WHERE id=$3`,
-            values:[location, hobbies, id]
+            text: `UPDATE "user" SET firstname = $1, lastname = $2, birthdate = $3, email = $4, location =$5, hobbies =$6 WHERE id=$7 RETURNING firstname, lastname, birthdate, email, location, hobbies`,
+            values:[firstname, lastname, birthdate, email, location, hobbies, id]
         };
         const result = await client.query(sqlQuery);
-        return result.rowCount;
+        return result.fields;
     },
 
     // DESINSCRIPTION

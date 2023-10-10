@@ -16,7 +16,8 @@ function updateUserInfo (userInfo){
     method: "PATCH",
     body: JSON.stringify(Object.fromEntries(new FormData(userInfo))),
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Cache-Control": "no-cache"
     },
   })
     .then(response => {
@@ -26,8 +27,8 @@ function updateUserInfo (userInfo){
       return response.json();
     })
     .then(data => {
-      console.log(data);
-      window.location.reload();
+        console.log('Données mises à jour : ', data);
+        window.location.reload();
     })
     .catch(error => {
       console.error("Erreur", error);
