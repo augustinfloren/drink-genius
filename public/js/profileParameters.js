@@ -42,3 +42,9 @@ registerBtn.addEventListener("click", async function (event) {
   const updateForm = document.getElementById("parameters-form");
   await updateUserInfo(updateForm);
 });
+
+/**************** SUPPRIMER SON COMPTE ****************/
+const deleteButton = document.getElementById('delete-account-button');
+deleteButton.addEventListener('click', function(){
+  
+})
