@@ -50,10 +50,10 @@ function showCreatedCocktails(){
             createdCocktail.classList.add('cocktails-container-item');
             createdCocktail.href = `/cocktail/${cocktail.id}`;
             const cocktailTitle = document.createElement('h3');
-            cocktailTitle.classList.add('cocktail-title');
+            cocktailTitle.classList.add('cocktail-title-mini');
             cocktailTitle.textContent = cocktail.name;
             const cocktailPicture = document.createElement('div')
-            cocktailPicture.classList.add('cocktail-img');
+            cocktailPicture.classList.add('cocktail-mini');
             cocktailPicture.style = `background-image: url('/images/${cocktail.picture} `;
             cocktailPicture.alt = `Image de ${cocktail.name}`;
 
