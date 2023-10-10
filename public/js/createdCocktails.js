@@ -44,6 +44,7 @@ function showCreatedCocktails(){
         const cocktailContainer = document.createElement('div');
         cocktailContainer.classList.add('cocktails');
         cocktailContainer.classList.add('cocktails-container');
+        cocktailContainer.style.justifyContent = "left";
 
         createdCocktails.forEach(cocktail => {
             const createdCocktail = document.createElement('a');
