@@ -2,7 +2,8 @@ const ingredientDataMapper = require('../models/ingredientDataMapper');
 const cocktailDataMapper = require('../models/cocktailDataMapper');
 const userDataMapper = require('../models/userDataMapper');
 const bcrypt = require('bcrypt');
-const sendConfirmationMail = require ("../services/mailService")
+const sendConfirmationMail = require ("../services/mailService");
+let currentRoute = "";
 
 const userController = {
   async signUpAndRedirect (req, res, next){
@@ -46,6 +47,7 @@ const userController = {
 
   async getProfilePage (req, res) {
     const userInfo = req.session.user;
+    currentRoute = "profile";
     res.render('profilePage', {userInfo, currentRoute});
   },
 
@@ -54,10 +56,17 @@ const userController = {
     res.redirect('/')
   },
 
-  async renderFavouritePages(req, res){
+  async renderFavouritesPages(req, res){
     const userId = req.session.user.id;
-    const favourites = await userDataMapper.getFavourites(userId)
-    res.render('favouritesPage', {favourites});
+    const favourites = await userDataMapper.getFavourites(userId);
+    currentRoute = 'favourites';
+    res.render('favouritesPage', {favourites, currentRoute});
+  },
+
+  async getNewCocktailpage(req,res){
+    const ingredients = await ingredientDataMapper.getAllIngredients();
+    currentRoute = "newCocktail";
+    res.render('newCocktail', {ingredients, currentRoute});
   },
 
   async addNewCocktail(req, res){

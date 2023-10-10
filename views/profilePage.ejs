@@ -1,17 +1,7 @@
 <%- include("partials/header") %>
+<%- include('partials/profileNav') %>
 
-<!-- MAIN -->
-<main id="profile-main-container">
-    <nav id="user-nav">
-        <ul id="nav-profile-link">
-            <li class="nav-item <%= currentRoute === 'profile' ? 'user-active-btn' : '' %>" id="parameters-link" ><div class="nav-item-link">Paramètres du compte</div></li>
-            <li class="nav-item user-btn" id="favourite-link"><div class="nav-item-link">Mes favoris</div></li>
-            <li class="nav-item user-btn" id="mycocktails-link"><div class="nav-item-link">Mes créations</div></li>
-            <li class="nav-item user-btn" id="newcocktail-link"><div class="nav-item-link">Proposer une recette</div></li>
-            <li class="nav-item user-btn" id="contact-admin-link"><div class="nav-item-link">Contacter un admin</div></li>
-        </ul>
-    </nav>
-    <div id="profile-flex-content">
+<div class="profile-content" id="parameters-content">
         <% if (userInfo) { %>
             <h2>Paramètres du compte</h2>
                 <ul id="parameters-list">

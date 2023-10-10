@@ -25,9 +25,10 @@ router.post("/signin", validationService.checkSignUpData, cw(userController.sign
 router.post("/login", userController.logInAndRedirect);
 router.get("/profile", cw(userController.getProfilePage));
 router.get("/logout", userController.logOutAndRedirect);
-router.get("/profile/favourites", cw(userController.renderFavouritePages));
+router.get("/profile/favourites", cw(userController.renderFavouritesPages));
+router.get("/newcocktail", cw(userController.getNewCocktailpage));
 router.post("/newcocktail", cw(userController.addNewCocktail));
-router.get("/profile/user-cocktails", cw(userController.renderUserCocktailsPage));
+router.get("/profile/usercocktails", cw(userController.renderUserCocktailsPage));
 router.get("/ingredients", userController.getAllIngredients);
 
 

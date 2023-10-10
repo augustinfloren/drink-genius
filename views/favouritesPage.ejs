@@ -1,17 +1,23 @@
 <%- include("partials/header") %>
+<%- include("partials/profileNav") %>
 
-<h2>Vos cocktails préférés</h2>
+<div class="profile-content" id="favourites-content">
 
-<!-- COCKTAILS CONTAINER-->
-<div class="cocktails cocktails-container">
-          <% favourites.forEach(favourite => { %>
-              <a class="cocktail cocktails-container-item" href="/cocktail/<%=favourite.id%>">
-                  <h3 class="cocktail-title-mini"><%=favourite.name.charAt(0).toUpperCase() + favourite.name.slice(1)%></h3>
-                  <div class="cocktail-mini" style="background-image: url('/images/<%= favourite.picture %> ');" alt="Image de <%= favourite.name %>" id="<%= favourite.id %>"></div>
-              </a>
-          <% }) %>
+  <h2>Vos cocktails préférés</h2>
 
-      </div>
-  </div>
+  <!-- COCKTAILS CONTAINER-->
+  <div class="cocktails-container">
+            <% favourites.forEach(favourite => { %>
+                <a class="cocktail cocktails-container-item" href="/cocktail/<%=favourite.id%>">
+                    <h3 class="cocktail-title-mini"><%=favourite.name.charAt(0).toUpperCase() + favourite.name.slice(1)%></h3>
+                    <div class="cocktail-mini" style="background-image: url('/images/<%= favourite.picture %> ');" alt="Image de <%= favourite.name %>" id="<%= favourite.id %>"></div>
+                </a>
+            <% }) %>
+
+        </div>
+    </div>
+
+</div>
+
 
 <%- include("partials/footer") %>

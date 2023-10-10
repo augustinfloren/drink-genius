@@ -1,0 +1,13 @@
+<!-- MAIN -->
+<main id="profile-main-container">
+
+<nav id="user-nav">
+    <ul id="user-nav-ul">
+        <li><a href="/profile"><div class="nav-item <%= currentRoute === 'profile' ? 'user-active-btn' : 'user-btn' %>" >Paramètres du compte</div></a></li>
+        <li><a href="/profile/favourites"><div class="nav-item <%= currentRoute === 'favourites' ? 'user-active-btn' : 'user-btn' %>" >Mes favoris</div></a></li>
+        <li><a href="/mycocktails"><div class="nav-item <%= currentRoute === 'mycocktails' ? 'createdCoktail' : 'user-btn' %>" >Mes créations</div></a></li>
+        <li><a href="newcocktail"><div class="nav-item <%= currentRoute === 'newcocktail' ? 'user-active-btn' : 'user-btn' %>" >Proposer une recette</div></a></li>
+        <li><a href="contactadmin"><div class="nav-item <%= currentRoute === 'contactadmin' ? 'user-active-btn' : 'user-btn' %>" >Contacter un admin</div></a></li>
+    </ul>
+</nav>
+

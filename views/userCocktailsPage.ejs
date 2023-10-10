@@ -1,9 +1,10 @@
 <%- include("partials/header") %>
+<%- include("partials/profileNav") %>
 
 <h2>Vos créations</h2>
 
 <!-- COCKTAILS CONTAINER-->
-<div class="cocktails cocktails-container">
+<div class="profile-content" id="parameters-content">
           <% userCocktails.forEach(userCocktail => { %>
               <a class="cocktail cocktails-container-item" href="/cocktail/<%=userCocktail.id%>">
                   <h3 class="cocktail-title-mini"><%=userCocktail.name.charAt(0).toUpperCase() + userCocktail.name.slice(1)%></h3>
