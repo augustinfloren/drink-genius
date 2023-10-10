@@ -46,7 +46,6 @@ const userController = {
 
   async getProfilePage (req, res) {
     const userInfo = req.session.user;
-    let currentRoute = "profile";
     res.render('profilePage', {userInfo, currentRoute});
   },
 
@@ -58,7 +57,8 @@ const userController = {
   async getFavouriteCocktails(req, res){
     const userId = req.session.user.id;
     const favourites = await userDataMapper.getFavouriteCocktailsByUser(userId)
-    res.json(favourites);
+    console.log(favourites)
+    res.render('favouritesPage', {favourites});
   },
 
   async addNewCocktail(req, res){
