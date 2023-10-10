@@ -24,6 +24,7 @@ router.get("/randomvirgin", cw(randomController.getRandomVirginIngredients));
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
 router.post("/login", userController.logInAndRedirect)
 router.get("/profile", cw(userController.getProfilePage));
+router.patch("/profile", cw(userController.updateProfile));
 router.get("/logout", userController.logOutAndRedirect);
 router.get("/profile/favourites", cw(userController.getFavouriteCocktails));
 router.get("/newcocktail", cw(userController.getNewCocktailpage));
