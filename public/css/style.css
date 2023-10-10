@@ -21,19 +21,20 @@ body {
 
 .button {
   font-family: 'Mooli', sans-serif;
-  background-color: white;
+  background: transparent;
   font-size: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 50px;
-  padding: 20px 40px;
+  padding: 10px 20px;
   width: fit-content;
+  border-color: var(--theme-purple);
 }
 
 .button:hover {
-    background-color: white;
-    color: var(--theme-purple);
+    background-color: var(--theme-purple);
+    color: white;
     cursor: pointer;
 }
 

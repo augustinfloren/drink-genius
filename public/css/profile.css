@@ -31,8 +31,8 @@
     text-align: center;
     margin:  1.7em;
     font-size: 1.2em;
-    border-radius: 20px;
-    padding : 10px 20px;
+    border-radius: 57px;
+    padding: 17px 20px;
 }
 
 #user-nav .nav-item:hover {
@@ -60,6 +60,33 @@
     padding-bottom: 1em;
     font-size: 1.2em;
 }
+/*
+#parameters-modification-btn {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+
+    background: transparent;
+
+    /* inherit font & color from ancestor */
+    color: inherit;
+    font: inherit;
+
+    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+    line-height: normal;
+
+    /* Corrects font smoothing for webkit */
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+
+    /* Corrects inability to style clickable `input` types in iOS */
+    -webkit-appearance: none;
+    text-align: inherit;
+
+    outline: 1px solid var(--theme-purple);
+} */
 
 .heart-icon {
     color: red;
