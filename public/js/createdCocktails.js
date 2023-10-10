@@ -43,7 +43,7 @@ function showCreatedCocktails(){
     if(createdCocktails.length > 0){
         const cocktailContainer = document.createElement('div');
         cocktailContainer.classList.add('cocktails');
-        cocktailContainer.id = 'cocktails-container';
+        cocktailContainer.classList.add('cocktails-container');
 
         createdCocktails.forEach(cocktail => {
             const createdCocktail = document.createElement('a');
@@ -74,4 +74,4 @@ function showCreatedCocktails(){
 creationButton.addEventListener('click', async function(){
     await fetchCocktailsByUser();
     showCreatedCocktails();
-}) 
+})
