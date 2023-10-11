@@ -47,7 +47,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /**************** SUPPRIMER SON COMPTE ****************/
   const deleteButton = document.getElementById('delete-account-button');
+  const confirmation = document.getElementById('deletion-confirmation');
   deleteButton.addEventListener('click', function(){
-  });
+    confirmation.style.display = "flex";
+    parametersForm.style.display = "none";
+    const validation = document.getElementById('validation');
+    validation.addEventListener('click', function (){
+      fetch('/profile', {
+          method: 'DELETE',
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+      .then(response => {
+        if (!response.ok){
+            throw new Error('la requete a échoué');
+        }
+        return response.json();
+    })
+    .then(data => {
+        window.location.href = '/'
+        console.log(data);
+    })
+      .catch(error => {
+          console.error('Erreur', error)
+      })
+    });
+
+    const refusal = document.getElementById('refusal');
+    refusal.addEventListener('click', function(){
+      confirmation.style.display = "none";
+      parametersForm.style.display = "flex";
+    })
+    });
 
 });

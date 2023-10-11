@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     flex: auto;
-    width: 100%;
+    margin-right: 200px;
     gap: 20px;
     justify-content: center;
     color: var(--theme-purple);
@@ -15,6 +15,7 @@
 #user-nav {
     height: fit-content;
     width: 350px;
+    margin-left: -40px;
 }
 
 #user-nav-ul {
@@ -90,7 +91,7 @@
     width: 250px;
 }
 
-#parameters-modification-btn {
+.btn-mini {
     font-family: "Mooli", sans-serif;
     margin-top: 20px;
     text-align: center;
@@ -100,8 +101,44 @@
     border: none;
 }
 
-#parameters-modification-btn:hover {
+.btn-mini:not([disabled]):hover {
     background: var(--theme-purple);
+    color: white;
+}
+
+#delete-account-button {
+    font-family: "Mooli", sans-serif;
+    color: red;
+    margin-top: 20px;
+    text-align: center;
+    background: none;
+    border: none;
+}
+
+#delete-account-button:hover {
+    font-weight: bold;
+}
+
+#deletion-confirmation {
+    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+#deletion-confirmation button {
+    width: 300px;
+}
+
+#validation {
+    color: red;
+}
+
+#validation:hover {
+    font-weight: bold;
+    background-color: red;
     color: white;
 }
 
