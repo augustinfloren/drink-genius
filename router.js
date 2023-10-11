@@ -70,6 +70,5 @@ router.delete("/profile", cw(userController.deleteProfile))
 // Admin
 router.get("/admin/cocktails", cw(userController.getCocktailsManagementPage));
 router.post("/admin/cocktail", cw(userController.validateCocktail))
->>>>>>> 903cf82d1124332886afc62bd05854b1fffb8175
 
 module.exports = router;
