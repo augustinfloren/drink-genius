@@ -111,6 +111,24 @@ const userController = {
     req.session.user = null;
     res.json("Compte supprimé")
     }
+  },
+
+  async getCocktailsManagementPage(req, res){
+    const notValidatedCocktails = await cocktailDataMapper.getNotValidatedCocktails();
+    const userInfo = req.session.user;
+    currentRoute = "admin/cocktails"
+    res.render('manageCocktails', {notValidatedCocktails, userInfo, currentRoute });
+  },
+
+  async validateCocktail(req, res){
+    console.log("le body dans le controlleur", req.body);
+    const cocktailId = req.body.cocktailId;
+    const validation = await cocktailDataMapper.updateCocktailStatus(cocktailId);
+    if(validation.rowCount>0){
+    res.json("Cocktail validé");
+  } else {
+    console.log(result.error)
+  }
   }
 }
 

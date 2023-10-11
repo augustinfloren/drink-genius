@@ -7,9 +7,9 @@
         <li><a href="/profile/favourites"><div class="nav-item <%= currentRoute === 'favourites' ? 'user-active-btn' : 'user-btn' %>" >Mes favoris</div></a></li>
         <li><a href="/profile/usercocktails"><div class="nav-item <%= currentRoute === 'usercocktails' ? 'user-active-btn' : 'user-btn' %>" >Mes créations</div></a></li>
         <li><a href="/profile/newcocktail"><div class="nav-item <%= currentRoute === 'newCocktail' ? 'user-active-btn' : 'user-btn' %>" >Proposer une recette</div></a></li>
-        <li><a href="contactadmin"><div class="nav-item <%= currentRoute === 'contactadmin' ? 'user-active-btn' : 'user-btn' %>" >Contacter un admin</div></a></li>
+        <li><a href="/contactadmin"><div class="nav-item <%= currentRoute === 'contactadmin' ? 'user-active-btn' : 'user-btn' %>" >Contacter un admin</div></a></li>
         <% if (userInfo.role_id === 1) { %>
-            <li><a href="admin/cocktails"><div class="nav-item <%= currentRoute === 'admin/cocktails' ? 'user-active-btn' : 'user-btn' %>" >Valider les cocktails en attente</div></a></li>
+            <li><a href="/admin/cocktails"><div class="nav-item <%= currentRoute === 'admin/cocktails' ? 'user-active-btn' : 'user-btn' %>" >Valider les cocktails en attente</div></a></li>
         <% } %>
     </ul>
 </nav>
