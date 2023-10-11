@@ -111,7 +111,8 @@ const userController = {
       res.status(400).json(result.error);
     } else {
       res.status(200).json("Cocktail ajouté aux favoris avec succès!");
-    },
+    }
+  },
 
   async updateProfile(req, res) {
     const userId = req.session.user.id;
