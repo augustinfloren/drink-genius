@@ -104,7 +104,10 @@ const userController = {
   async deleteProfile(req,res){
     const userId = req.session.user.id;
     const deletedProfile = await userDataMapper.deleteUser(userId);
-    res.redirect('/');
+    if(deletedProfile>0){
+      req.session.user = null;
+      res.json("Compte supprimé")
+    }
   }
 }
 
