@@ -24,7 +24,6 @@ router.get("/randomvirgin", cw(randomController.getRandomVirginIngredients));
 // User
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
 router.post("/login", userController.logInAndRedirect);
-<<<<<<< HEAD
 router.get("/profile", isAuthed, cw(userController.getProfilePage));
 router.patch("/profile", isAuthed, cw(userController.updateProfile));
 router.get("/logout", isAuthed, userController.logOutAndRedirect);
