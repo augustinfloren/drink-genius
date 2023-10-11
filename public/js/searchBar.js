@@ -24,20 +24,6 @@ let cocktailTitleElt = cocktails[i].getElementsByClassName("cocktail-title")
   }
 }
 
-  //Utiliser la searchbar lorsqu'il y a déja eu un 1er filtre par alcool
-function filterCocktailsByName(name) {
-  let cocktails = document.getElementsByClassName("cocktail");
-
-  for (let i = 0; i < cocktails.length; i++) {
-    let cocktailTitleElt = cocktails[i].getElementsByClassName("cocktail-title");
-
-    if (!cocktailTitleElt[0].innerHTML.toLowerCase().includes(name)) {
-      cocktails[i].style.display = "none";
-    } else {
-      cocktails[i].style.display = "flex";
-    }
-  }
-}
   // Désélectionner toutes les cases à cocher
 function resetSpiritFilters() {
   const checkboxes = document.getElementsByName("spirit");
