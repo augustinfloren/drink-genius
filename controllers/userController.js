@@ -15,13 +15,13 @@ const userController = {
       if (error) {
         res.status(400).json(error);
       } else {
-        sendConfirmationMail(newUser.email,newUser.firstname)
+        sendConfirmationMail(newUser.email,newUser.firstname);
         res.status(200).json("Inscription validée ! vous pouvez maintenant vous connecter");
       }
     }
   },
   async sendingMailConfirmation (req,res){
-    const {email, firstname} = req.body
+    const {email, firstname} = req.body;
     res.status(200).json(true);
   },
 
@@ -52,7 +52,7 @@ const userController = {
 
   async logOutAndRedirect(req, res){
     req.session.user = null;
-    res.redirect('/')
+    res.redirect("/");
   },
 
   async renderFavouritesPages(req, res){
@@ -99,6 +99,20 @@ const userController = {
     res.json(ingredients);
   },
 
+  // AJOUT DE COCKTAILS FAVORIS AU COMPTE DE L'UTILISATEUR
+  async addToFavouritesByUser(req, res) {
+    const cocktailId = req.body.cocktailId;
+    const userId = req.session.user.id;
+    console.log("cocktailId du controller :", cocktailId);
+    console.log("userId du controller :", userId);
+    const result = await userDataMapper.addToFavourites(userId, cocktailId);
+    console.log(result);
+    if (result.error) {
+      res.status(400).json(result.error);
+    } else {
+      res.status(200).json("Cocktail ajouté aux favoris avec succès!");
+    },
+
   async updateProfile(req, res) {
     const userId = req.session.user.id;
     const parameters = req.body;
@@ -132,8 +146,7 @@ const userController = {
   } else {
     console.log(result.error)
   }
-
   }
-}
+};
 
 module.exports = userController;
