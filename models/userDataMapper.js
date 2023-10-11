@@ -79,14 +79,14 @@ const dataMapper = {
     },
 
     // MODIFICATION PROFIL
-    async updateUser(user){
-        const { location, hobbies, id } = user;
+    async updateUser(userInfo, id){
+        const { firstname, lastname, birthdate, email, location, hobbies } = userInfo;
         const sqlQuery = {
-            text: `UPDATE "user" SET location =$1, hobbies =$2 WHERE id=$3`,
-            values:[location, hobbies, id]
+            text: `UPDATE "user" SET firstname = $1, lastname = $2, birthdate = $3, email = $4, location =$5, hobbies =$6 WHERE id=$7 RETURNING id, lastname, firstname, birthdate, location, email, hobbies, role_id`,
+            values:[firstname, lastname, birthdate, email, location, hobbies, id]
         };
         const result = await client.query(sqlQuery);
-        return result.rowCount;
+        return result.rows[0];
     },
 
     // DESINSCRIPTION
@@ -100,7 +100,7 @@ const dataMapper = {
     },
 
     // RECUPERER LES COCKTAILS FAVORIS PAR UTILISATEUR
-    async getFavouriteCocktailsByUser(user_id){
+    async getFavourites(user_id){
         const sqlQuery = {
             text: `SELECT * FROM cocktail
             JOIN user_like_cocktail AS favourites ON cocktail.id = favourites.cocktail_id
@@ -112,7 +112,7 @@ const dataMapper = {
     },
 
     // RECUPERER LES COCKTAILS PAR UTILISATEUR
-    async getCocktailByUserId(user_id){
+    async getUserCocktails(user_id){
         const sqlQuery = {
             text: 'SELECT * FROM cocktail WHERE user_id=$1',
             values: [user_id]

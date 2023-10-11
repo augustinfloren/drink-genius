@@ -2,7 +2,8 @@ const ingredientDataMapper = require('../models/ingredientDataMapper');
 const cocktailDataMapper = require('../models/cocktailDataMapper');
 const userDataMapper = require('../models/userDataMapper');
 const bcrypt = require('bcrypt');
-const sendConfirmationMail = require ("../services/mailService")
+const sendConfirmationMail = require ("../services/mailService");
+let currentRoute = "";
 
 const userController = {
   async signUpAndRedirect (req, res, next){
@@ -35,7 +36,6 @@ const userController = {
       if(correctPassword){
         delete result.password;
         req.session.user = result;
-        console.log(req.session.user)
         res.status(200).json("Vous êtes maintenant connecté !");
       }
       else {
@@ -46,7 +46,7 @@ const userController = {
 
   async getProfilePage (req, res) {
     const userInfo = req.session.user;
-    let currentRoute = "profile";
+    currentRoute = "profile";
     res.render('profilePage', {userInfo, currentRoute});
   },
 
@@ -55,10 +55,19 @@ const userController = {
     res.redirect('/')
   },
 
-  async getFavouriteCocktails(req, res){
+  async renderFavouritesPages(req, res){
     const userId = req.session.user.id;
-    const favourites = await userDataMapper.getFavouriteCocktailsByUser(userId)
-    res.json(favourites);
+    const favourites = await userDataMapper.getFavourites(userId);
+    currentRoute = 'favourites';
+    const userInfo = req.session.user;
+    res.render('favouritesPage', {favourites, currentRoute, userInfo});
+  },
+
+  async renderNewCocktailPage(req,res){
+    const ingredients = await ingredientDataMapper.getAllIngredients();
+    currentRoute = "newCocktail";
+    const userInfo = req.session.user;
+    res.render('newCocktail', {ingredients, currentRoute, userInfo});
   },
 
   async addNewCocktail(req, res){
@@ -66,24 +75,64 @@ const userController = {
     const userId = req.session.user.id;
     const cocktailResult = await cocktailDataMapper.addOneCocktailByUser(name, instruction, userId);
     const cocktailId = cocktailResult[0].id;
-    console.log(req.body);
     const { ingredientId, quantity } = req.body;
+    if(Array.isArray(ingredientId)){
     ingredientId.forEach(async (givenIngredient, index) => {
       let givenQuantity = quantity[index];
       const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, givenIngredient, givenQuantity);
-    });
-    res.json('Le cocktail a bien été ajouté !');
+    });} else {
+      const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, ingredientId, quantity);
+    }
+    res.redirect('/profile/usercocktails');
   },
 
-  async getCocktailsCreatedByUser(req, res){
+  async renderUserCocktailsPage(req, res){
     const userId = req.session.user.id;
-    const cocktails = await userDataMapper.getCocktailByUserId(userId);
-    res.json(cocktails);
+    const userCocktails = await userDataMapper.getUserCocktails(userId);
+    const userInfo = req.session.user;
+    currentRoute = "usercocktails";
+    res.render('userCocktailsPage', {userCocktails, currentRoute, userInfo});
   },
 
   async getAllIngredients(req, res){
     const ingredients = await ingredientDataMapper.getAllIngredients();
     res.json(ingredients);
+  },
+
+  async updateProfile(req, res) {
+    const userId = req.session.user.id;
+    const parameters = req.body;
+    const userInfo = await userDataMapper.updateUser(parameters, userId);
+    req.session.user = userInfo;
+    res.json(userInfo);
+  },
+
+  async deleteProfile(req,res){
+    const userId = req.session.user.id;
+    const deletedProfile = await userDataMapper.deleteUser(userId);
+    if(deletedProfile>0){
+    req.session.user = null;
+    res.json("Compte supprimé")
+    }
+  },
+
+  async getCocktailsManagementPage(req, res){
+    const notValidatedCocktails = await cocktailDataMapper.getNotValidatedCocktails();
+    const userInfo = req.session.user;
+    currentRoute = "admin/cocktails"
+    res.render('manageCocktails', {notValidatedCocktails, userInfo, currentRoute });
+  },
+
+  async validateCocktail(req, res){
+    console.log("le body dans le controlleur", req.body);
+    const cocktailId = req.body.cocktailId;
+    const validation = await cocktailDataMapper.updateCocktailStatus(cocktailId);
+    if(validation.rowCount>0){
+    res.json("Cocktail validé");
+  } else {
+    console.log(result.error)
+  }
+
   }
 }
 
