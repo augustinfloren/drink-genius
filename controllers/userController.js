@@ -74,10 +74,13 @@ const userController = {
     const cocktailResult = await cocktailDataMapper.addOneCocktailByUser(name, instruction, userId);
     const cocktailId = cocktailResult[0].id;
     const { ingredientId, quantity } = req.body;
+    if(Array.isArray(ingredientId)){
     ingredientId.forEach(async (givenIngredient, index) => {
       let givenQuantity = quantity[index];
       const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, givenIngredient, givenQuantity);
-    });
+    });} else {
+      const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, ingredientId, quantity);
+    }
     res.redirect('/profile/usercocktails');
   },
 
@@ -104,7 +107,10 @@ const userController = {
   async deleteProfile(req,res){
     const userId = req.session.user.id;
     const deletedProfile = await userDataMapper.deleteUser(userId);
-    res.redirect('/');
+    if(deletedProfile>0){
+    req.session.user = null;
+    res.json("Compte supprimé")
+    }
   }
 }
 
