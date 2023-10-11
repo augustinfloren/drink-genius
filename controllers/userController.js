@@ -1,8 +1,8 @@
-const ingredientDataMapper = require('../models/ingredientDataMapper');
-const cocktailDataMapper = require('../models/cocktailDataMapper');
-const userDataMapper = require('../models/userDataMapper');
-const bcrypt = require('bcrypt');
-const sendConfirmationMail = require ("../services/mailService")
+const ingredientDataMapper = require("../models/ingredientDataMapper");
+const cocktailDataMapper = require("../models/cocktailDataMapper");
+const userDataMapper = require("../models/userDataMapper");
+const bcrypt = require("bcrypt");
+const sendConfirmationMail = require ("../services/mailService");
 
 const userController = {
   async signUpAndRedirect (req, res, next){
@@ -14,13 +14,13 @@ const userController = {
       if (error) {
         res.status(400).json(error);
       } else {
-        sendConfirmationMail(newUser.email,newUser.firstname)
+        sendConfirmationMail(newUser.email,newUser.firstname);
         res.status(200).json("Inscription validée ! vous pouvez maintenant vous connecter");
       }
     }
   },
   async sendingMailConfirmation (req,res){
-    const {email, firstname} = req.body
+    const {email, firstname} = req.body;
     res.status(200).json(true);
   },
 
@@ -35,7 +35,7 @@ const userController = {
       if(correctPassword){
         delete result.password;
         req.session.user = result;
-        console.log(req.session.user)
+        console.log(req.session.user);
         res.status(200).json("Vous êtes maintenant connecté !");
       }
       else {
@@ -47,17 +47,17 @@ const userController = {
   async getProfilePage (req, res) {
     const userInfo = req.session.user;
     let currentRoute = "profile";
-    res.render('profilePage', {userInfo, currentRoute});
+    res.render("profilePage", {userInfo, currentRoute});
   },
 
   async logOutAndRedirect(req, res){
     req.session.user = null;
-    res.redirect('/')
+    res.redirect("/");
   },
 
   async getFavouriteCocktails(req, res){
     const userId = req.session.user.id;
-    const favourites = await userDataMapper.getFavouriteCocktailsByUser(userId)
+    const favourites = await userDataMapper.getFavouriteCocktailsByUser(userId);
     res.json(favourites);
   },
 
@@ -72,7 +72,7 @@ const userController = {
       let givenQuantity = quantity[index];
       const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, givenIngredient, givenQuantity);
     });
-    res.json('Le cocktail a bien été ajouté !');
+    res.json("Le cocktail a bien été ajouté !");
   },
 
   async getCocktailsCreatedByUser(req, res){
@@ -84,7 +84,22 @@ const userController = {
   async getAllIngredients(req, res){
     const ingredients = await ingredientDataMapper.getAllIngredients();
     res.json(ingredients);
+  },
+
+  // AJOUT DE COCKTAILS FAVORIS AU COMPTE DE L'UTILISATEUR
+  async addToFavouritesByUser(req, res) {
+    const cocktailId = req.body.cocktailId;
+    const userId = req.session.user.id;
+    console.log("cocktailId du controller :", cocktailId);
+    console.log("userId du controller :", userId);
+    const result = await userDataMapper.addToFavourites(userId, cocktailId);
+    console.log(result);
+    if (result.error) {
+      res.status(400).json(result.error);
+    } else {
+      res.status(200).json("Cocktail ajouté aux favoris avec succès!");
+    }
   }
-}
+};
 
 module.exports = userController;
