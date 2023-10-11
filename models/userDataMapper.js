@@ -119,8 +119,18 @@ const dataMapper = {
         };
         const result = await client.query(sqlQuery)
         return result.rows;
-    }
+    },
 
+  // AJOUTER UN COCKTAIL AUX FAVORIS DE L'UTILISATEUR
+  async addToFavourites(user_id, cocktail_id) {
+    const sqlQuery = {
+      text: "INSERT INTO user_like_cocktail(user_id, cocktail_id) VALUES ($1, $2) RETURNING *",
+      values: [user_id, cocktail_id],
+    };
+    const result = await client.query(sqlQuery);
+    console.log(result);
+    return result;
+  },
 };
 
 module.exports = dataMapper;

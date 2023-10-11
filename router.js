@@ -24,6 +24,7 @@ router.get("/randomvirgin", cw(randomController.getRandomVirginIngredients));
 // User
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
 router.post("/login", userController.logInAndRedirect);
+<<<<<<< HEAD
 router.get("/profile", isAuthed, cw(userController.getProfilePage));
 router.patch("/profile", isAuthed, cw(userController.updateProfile));
 router.get("/logout", isAuthed, userController.logOutAndRedirect);
@@ -55,5 +56,22 @@ function isAdmin(req, res, next){
 }
 
 router.use(middleware404);
+=======
+router.get("/profile", cw(userController.getProfilePage));
+router.patch("/profile", cw(userController.updateProfile));
+router.get("/logout", userController.logOutAndRedirect);
+router.get("/profile/favourites", cw(userController.renderFavouritesPages));
+router.get("/profile/newcocktail", cw(userController.renderNewCocktailPage));
+router.delete("/profile", cw(userController.deleteProfile));
+router.post("/newcocktail", cw(userController.addNewCocktail));
+router.get("/profile/usercocktails", cw(userController.renderUserCocktailsPage));
+router.get("/ingredients", userController.getAllIngredients);
+router.post("/profile/favourites", cw(userController.addToFavouritesByUser));
+router.delete("/profile", cw(userController.deleteProfile))
+
+// Admin
+router.get("/admin/cocktails", cw(userController.getCocktailsManagementPage));
+router.post("/admin/cocktail", cw(userController.validateCocktail))
+>>>>>>> 903cf82d1124332886afc62bd05854b1fffb8175
 
 module.exports = router;
