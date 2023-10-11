@@ -4,7 +4,7 @@
     flex-direction: row;
     flex: auto;
     width: 100%;
-    gap: 60px;
+    gap: 20px;
     justify-content: center;
     color: var(--theme-purple);
 }
@@ -51,13 +51,14 @@
     margin-top: 60px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 30px;
-    width: 40%;
+    width: 30%;
+    padding-bottom: 60px;
 }
 
 #profile-main-container .cocktails-container {
     width: 100%;
+    margin-bottom: 0px;
 }
 
 #profile-flex-content h2 {
@@ -65,19 +66,46 @@
     margin-bottom: 1.5em;
 }
 
-#parameters-list {
-    padding-bottom: 1em;
+/* Onglet Paramètres */
+
+#parameters-content {
+    align-items: center;
 }
 
-.parameters {
-    padding-bottom: 1em;
-    font-size: 1.2em;
+#parameters-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
 }
 
-.heart-icon {
-    color: red;
-    width: 1.5em;
-    height: 1.5em;
+#parameters-form input {
+    font-family: "Mooli", sans-serif;
+    background: #ffffff;
+    border: none;
+    padding: 7px 15px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    width: 250px;
+}
+
+#parameters-modification-btn {
+    font-family: "Mooli", sans-serif;
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 57px;
+    padding: 15px 30px;
+    background: #2d213f0c;
+    border: none;
+}
+
+#parameters-modification-btn:hover {
+    background: var(--theme-purple);
+    color: white;
+}
+
+#favourites-content {
+    align-items: center;
 }
 
 @media screen and (max-width: 790px) {
