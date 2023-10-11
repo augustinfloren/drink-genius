@@ -80,6 +80,7 @@
 }
 
 #parameters-form input {
+    text-align: center;
     font-family: "Mooli", sans-serif;
     background: #ffffff;
     border: none;
