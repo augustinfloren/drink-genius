@@ -1,7 +1,6 @@
 const validateButton = document.getElementById('validate-cocktail');
 validateButton.addEventListener('click', function(){
     const cocktailId = this.getAttribute('data-info');
-    console.log("l'ID dans le script", cocktailId)
     fetch('/admin/cocktail', {
         method: 'POST',
         body: JSON.stringify({ cocktailId: cocktailId }),

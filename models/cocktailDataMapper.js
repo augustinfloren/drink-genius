@@ -53,7 +53,7 @@ const cocktailDataMapper = {
     // OBTENIR TOUTES LES INFORMATIONS D'UN COCKTAIL
     async getCocktailInformation(cocktail_id){
         const sqlQuery = {
-            text: `SELECT cocktail.name, cocktail.instruction, cocktail.picture,
+            text: `SELECT cocktail.name, cocktail.instruction, cocktail.picture, cocktail.id,
             CASE 
                 WHEN COUNT(DISTINCT gaic.quantity) = 0 THEN NULL
                 ELSE ARRAY_AGG(DISTINCT 
@@ -76,7 +76,7 @@ const cocktailDataMapper = {
         LEFT JOIN ingredient_has_label AS labeling ON ingredient.id = labeling.ingredient_id
         LEFT JOIN label ON label.id = labeling.label_id
         WHERE cocktail.id = $1
-        GROUP BY cocktail.name, cocktail.instruction, cocktail.picture`,
+        GROUP BY cocktail.name, cocktail.instruction, cocktail.picture, cocktail.id`,
             values: [cocktail_id]
         };
         const result = await client.query(sqlQuery);
@@ -112,9 +112,10 @@ const cocktailDataMapper = {
     // AJOUT D'UN COCKTAIL PAR UTILISATEUR
     async addOneCocktailByUser(name, instruction, user_id) {
         const validation = false;
+        const picture = "cocktail.png";
         const sqlQuery = {
-            text: 'INSERT INTO cocktail(name, instruction, validation, user_id) VALUES ($1, $2, $3, $4) RETURNING cocktail.id',
-            values: [name, instruction, validation, user_id]
+            text: 'INSERT INTO cocktail(name, instruction, validation, picture, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING cocktail.id',
+            values: [name, instruction, validation, picture, user_id]
         };
         const result = await client.query(sqlQuery);
         return result.rows;
