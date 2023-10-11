@@ -82,7 +82,7 @@ const dataMapper = {
     async updateUser(userInfo, id){
         const { firstname, lastname, birthdate, email, location, hobbies } = userInfo;
         const sqlQuery = {
-            text: `UPDATE "user" SET firstname = $1, lastname = $2, birthdate = $3, email = $4, location =$5, hobbies =$6 WHERE id=$7 RETURNING firstname, lastname, birthdate, email, location, hobbies`,
+            text: `UPDATE "user" SET firstname = $1, lastname = $2, birthdate = $3, email = $4, location =$5, hobbies =$6 WHERE id=$7 RETURNING id, lastname, firstname, birthdate, location, email, hobbies, role_id`,
             values:[firstname, lastname, birthdate, email, location, hobbies, id]
         };
         const result = await client.query(sqlQuery);

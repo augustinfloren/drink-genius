@@ -45,5 +45,4 @@ registerBtn.addEventListener("click", async function (event) {
 /**************** SUPPRIMER SON COMPTE ****************/
 const deleteButton = document.getElementById('delete-account-button');
 deleteButton.addEventListener('click', function(){
-  document.querySelector('.modal-deletion-confirmation')
-})
+});
