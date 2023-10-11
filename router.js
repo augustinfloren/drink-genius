@@ -28,6 +28,7 @@ router.patch("/profile", cw(userController.updateProfile));
 router.get("/logout", userController.logOutAndRedirect);
 router.get("/profile/favourites", cw(userController.renderFavouritesPages));
 router.get("/profile/newcocktail", cw(userController.renderNewCocktailPage));
+router.delete("/profile", cw(userController.deleteProfile));
 router.post("/newcocktail", cw(userController.addNewCocktail));
 router.get("/profile/usercocktails", cw(userController.renderUserCocktailsPage));
 router.get("/ingredients", userController.getAllIngredients);
@@ -36,7 +37,6 @@ router.delete("/profile", cw(userController.deleteProfile))
 // Admin
 router.get("/admin/cocktails", cw(userController.getCocktailsManagementPage));
 router.post("/admin/cocktail", cw(userController.validateCocktail))
-
 
 
 module.exports = router;

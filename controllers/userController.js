@@ -129,6 +129,7 @@ const userController = {
   } else {
     console.log(result.error)
   }
+    
   }
 }
 
