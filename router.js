@@ -55,7 +55,6 @@ function isAdmin(req, res, next){
 }
 
 router.use(middleware404);
-=======
 router.get("/profile", cw(userController.getProfilePage));
 router.patch("/profile", cw(userController.updateProfile));
 router.get("/logout", userController.logOutAndRedirect);
