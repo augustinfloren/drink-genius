@@ -116,4 +116,5 @@ spiritForm.addEventListener("submit", async (event) => {
      
     });
   toggleModalClosure();
+  resetSpiritFilters();
 });
