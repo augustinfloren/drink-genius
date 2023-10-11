@@ -74,10 +74,13 @@ const userController = {
     const cocktailResult = await cocktailDataMapper.addOneCocktailByUser(name, instruction, userId);
     const cocktailId = cocktailResult[0].id;
     const { ingredientId, quantity } = req.body;
+    if(Array.isArray(ingredientId)){
     ingredientId.forEach(async (givenIngredient, index) => {
       let givenQuantity = quantity[index];
       const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, givenIngredient, givenQuantity);
-    });
+    });} else {
+      const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, ingredientId, quantity);
+    }
     res.redirect('/profile/usercocktails');
   },
 
