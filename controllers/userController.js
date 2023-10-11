@@ -86,7 +86,8 @@ const userController = {
   async renderUserCocktailsPage(req, res){
     const userId = req.session.user.id;
     const userCocktails = await userDataMapper.getUserCocktails(userId);
-    res.render('userCocktailsPage', {userCocktails});
+    const currentRoute = 'usercocktails';
+    res.render('userCocktailsPage', {userCocktails, currentRoute});
   },
 
   async getAllIngredients(req, res){
