@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-
-  /**************** PARAMETRES  ****************/
+ /**************** PARAMETRES  ****************/
 
   // ECOUTE SUR LE BOUTON MODIFIER ET AFFICHE LE FORMULAIRE DE MODIFICATION
   const parametersModificationBtn = document.getElementById("parameters-modification-btn");

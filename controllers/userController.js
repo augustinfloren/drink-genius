@@ -59,13 +59,15 @@ const userController = {
     const userId = req.session.user.id;
     const favourites = await userDataMapper.getFavourites(userId);
     currentRoute = 'favourites';
-    res.render('favouritesPage', {favourites, currentRoute});
+    const userInfo = req.session.user;
+    res.render('favouritesPage', {favourites, currentRoute, userInfo});
   },
 
   async renderNewCocktailPage(req,res){
     const ingredients = await ingredientDataMapper.getAllIngredients();
     currentRoute = "newCocktail";
-    res.render('newCocktail', {ingredients, currentRoute});
+    const userInfo = req.session.user;
+    res.render('newCocktail', {ingredients, currentRoute, userInfo});
   },
 
   async addNewCocktail(req, res){
@@ -87,8 +89,9 @@ const userController = {
   async renderUserCocktailsPage(req, res){
     const userId = req.session.user.id;
     const userCocktails = await userDataMapper.getUserCocktails(userId);
+    const userInfo = req.session.user;
     currentRoute = "usercocktails";
-    res.render('userCocktailsPage', {userCocktails, currentRoute});
+    res.render('userCocktailsPage', {userCocktails, currentRoute, userInfo});
   },
 
   async getAllIngredients(req, res){
@@ -129,7 +132,7 @@ const userController = {
   } else {
     console.log(result.error)
   }
-    
+
   }
 }
 
