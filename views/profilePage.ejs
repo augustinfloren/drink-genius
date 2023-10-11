@@ -2,7 +2,6 @@
 <%- include('partials/profileNav') %>
 
     <div class="profile-content" id="parameters-content">
-        <% if (userInfo) { %>
             <h2>Paramètres du compte</h2>
                 <form id="parameters-form">
                     <label for="firstname">Nom</label>
@@ -26,8 +25,6 @@
                     <button class="btn-mini" id="validation">Oui, supprimer mon compte et toutes mes créations de cocktails</button>
                     <button class="btn-mini" id="refusal">Non, je garde mon compte <br> Drink Genius</button>
                 </div>
-        <% } %>
-
     </div>
 
     <div id="deletion-confirmation" style="display : none;">

@@ -124,7 +124,6 @@ const userController = {
   },
 
   async validateCocktail(req, res){
-    console.log("le body dans le controlleur", req.body);
     const cocktailId = req.body.cocktailId;
     const validation = await cocktailDataMapper.updateCocktailStatus(cocktailId);
     if(validation.rowCount>0){
