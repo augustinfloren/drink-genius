@@ -31,6 +31,7 @@ router.get("/profile/newcocktail", cw(userController.renderNewCocktailPage));
 router.post("/newcocktail", cw(userController.addNewCocktail));
 router.get("/profile/usercocktails", cw(userController.renderUserCocktailsPage));
 router.get("/ingredients", userController.getAllIngredients);
+router.delete("/profile", cw(userController.deleteProfile))
 
 
 

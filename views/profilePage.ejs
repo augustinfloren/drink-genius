@@ -28,16 +28,11 @@
         <% } %>
     </div>
 
-    <!-- MODALE SUPPRESSION -->
-    <div class="modal-container" id="deletion">
-        <div class="overlay modal-trigger"></div>
-        <div class="modal-deletion">
-            <i class="fas fa-times close-modal modal-trigger" aria-label="close modal"></i>
-                <h3 id="modalTitle">Voulez-vous vraiment supprimer votre compte ?</h3>
-                    <button id="confirmed-deletion" type="button">Oui</button>
-                    <button id="no-deletion" type="button">Non</button>
-        </div>
-	</div>
+    <div id="deletion-confirmation" style="display : none;">
+        <h3>Voulez-vous vraiment supprimer votre compte ?</h3>
+        <button id="validation">Oui, supprimer mon compte et tous mes créations de cocktails</button>
+        <button id="refusal">Non, je garde mon compte Drink Genius</button>
+    </div>
 </main>
 
 <%- include("partials/footer") %>
