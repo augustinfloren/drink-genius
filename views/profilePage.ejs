@@ -14,6 +14,7 @@
                     <li class="parameters">Vos loisirs : <%= userInfo.hobbies %></li>
                 </ul>
                 <button id="parameters-modification-btn" class="" type="button">Modifier</button>
+                <button id="delete-account-button" type="button">Supprimer mon compte</button>            
             </div>
                 <form id="parameters-form" style="display : none;">
                     <input type="text" name="firstname" value="<%= userInfo.firstname %>">
@@ -26,6 +27,7 @@
                 </form>
         <% } %>
     </div>
+
 </main>
 
 <%- include("partials/footer") %>
