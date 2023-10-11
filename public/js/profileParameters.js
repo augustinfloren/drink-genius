@@ -16,8 +16,7 @@ function updateUserInfo (userInfo){
     method: "PATCH",
     body: JSON.stringify(Object.fromEntries(new FormData(userInfo))),
     headers: {
-      "Content-Type": "application/json",
-      "Cache-Control": "no-cache"
+      "Content-Type": "application/json"
     },
   })
     .then(response => {
@@ -41,4 +40,9 @@ registerBtn.addEventListener("click", async function (event) {
     event.preventDefault();
   const updateForm = document.getElementById("parameters-form");
   await updateUserInfo(updateForm);
+});
+
+/**************** SUPPRIMER SON COMPTE ****************/
+const deleteButton = document.getElementById('delete-account-button');
+deleteButton.addEventListener('click', function(){
 });

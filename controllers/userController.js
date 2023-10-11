@@ -36,7 +36,6 @@ const userController = {
       if(correctPassword){
         delete result.password;
         req.session.user = result;
-        console.log(req.session.user)
         res.status(200).json("Vous êtes maintenant connecté !");
       }
       else {
@@ -74,13 +73,12 @@ const userController = {
     const userId = req.session.user.id;
     const cocktailResult = await cocktailDataMapper.addOneCocktailByUser(name, instruction, userId);
     const cocktailId = cocktailResult[0].id;
-    console.log(req.body);
     const { ingredientId, quantity } = req.body;
     ingredientId.forEach(async (givenIngredient, index) => {
       let givenQuantity = quantity[index];
       const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, givenIngredient, givenQuantity);
     });
-    res.json('Le cocktail a bien été ajouté !');
+    res.redirect('/profile/usercocktails');
   },
 
   async renderUserCocktailsPage(req, res){
@@ -99,7 +97,7 @@ const userController = {
     const userId = req.session.user.id;
     const parameters = req.body;
     const userInfo = await userDataMapper.updateUser(parameters, userId);
-    res.header('Cache-Control', 'no-cache');
+    req.session.user = userInfo;
     res.json(userInfo);
   },
 
