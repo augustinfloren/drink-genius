@@ -58,6 +58,10 @@
     padding-bottom: 60px;
 }
 
+.profile-content h2 {
+    text-align: center;
+}
+
 #profile-main-container .cocktails-container {
     width: 100%;
     margin-bottom: 0px;
@@ -70,14 +74,14 @@
 
 /* Onglet Paramètres */
 
-#parameters-form {
+.profil-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
 }
 
-#parameters-form input {
+.profil-form input {
     text-align: center;
     font-family: "Mooli", sans-serif;
     background: #ffffff;
@@ -137,6 +141,39 @@
     font-weight: bold;
     background-color: red;
     color: white;
+}
+
+/* Onglet Proposer un cocktail */
+
+#new-cocktail-form :nth-child(4) {
+    border-radius: 25px;
+    border: none;
+}
+
+#ingredients-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+#ingredients-section input {
+    width: 100px;
+    margin-bottom: 25px;
+}
+
+#ingredients-section select {
+    margin-bottom: 10px;
+    text-align: center;
+    background-color: white;
+}
+
+/* Responsive */
+
+@media screen and (max-width: 1400px) {
+    #profile-main-container {
+        margin-right: 0px;
+    }
 }
 
 @media screen and (max-width: 790px) {

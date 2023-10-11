@@ -4,7 +4,7 @@
     <div class="profile-content" id="parameters-content">
         <% if (userInfo) { %>
             <h2>Paramètres du compte</h2>
-                <form id="parameters-form">
+                <form class="profil-form" id="parameters-form">
                     <label for="firstname">Nom</label>
                     <input type="text" name="firstname" value="<%= userInfo.firstname %>" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$">
                     <label for="lastname">Prénom</label>

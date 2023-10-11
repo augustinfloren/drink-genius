@@ -54,7 +54,7 @@ a, del, ins {
 a {
 	color: inherit;
 }
-label, button {
+button {
 	cursor: pointer;
 }
 html {

@@ -33,10 +33,15 @@ async function createNewDropDown(){
 
     const ingredientLabel = document.createElement('label');
     ingredientLabel.setAttribute('for', 'ingredient-input');
-    const ingredientLabelText = document.createTextNode(`Ingrédient ${ingredientCounter} :`);
+    const deleteBtn = document.createElement('span');
+    deleteBtn.textContent = "  - retirer";
+    deleteBtn.style.color = "red";
+    deleteBtn.style.cursor = "pointer";
+    const ingredientLabelText = document.createTextNode(`Ingrédient ${ingredientCounter} `);
     ingredientLabel.appendChild(ingredientLabelText);
+    ingredientLabel.appendChild(deleteBtn);
     const ingredientInput = document.createElement('select');
-    ingredientInput.classList.add('dropdown-menu');
+    ingredientInput.classList.add('new-cocktail-dropdown');
     ingredientInput.id = `ingredient-${ingredientCounter}`;
     ingredientInput.name = `ingredientId`;
 
@@ -53,9 +58,17 @@ async function createNewDropDown(){
     const quantityLabelText = document.createTextNode(`Quantité pour l'ingrédient ${ingredientCounter}`);
     quantityLabel.appendChild(quantityLabelText);
     const quantityInput = document.createElement('input');
+    quantityInput.setAttribute('type', 'number');
     quantityInput.classList.add('quantity-input');
     quantityInput.id = `quantity-${ingredientCounter}`;
     quantityInput.name = `quantity`;
+
+    deleteBtn.addEventListener("click", () => {
+        ingredientLabel.remove();
+        ingredientInput.remove();
+        quantityLabel.remove();
+        quantityInput.remove();
+    });
 
     ingredientSection.appendChild(ingredientLabel)
     ingredientSection.appendChild(ingredientInput);
