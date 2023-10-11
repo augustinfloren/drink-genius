@@ -43,10 +43,10 @@
               <i class="fas fa-times close"></i>
             </div>
             <ul id="header-nav-menu">
-                <li class="nav-item"><a class="nav-item-link <%= currentRoute === 'accueil' ? 'header-nav-bold' : '' %>" href="/">Accueil</a></li>
-                <li class="nav-item"> <a class="nav-item-link <%= currentRoute === 'cocktails' ? 'header-nav-bold' : '' %>"  href="/cocktails">Liste des cocktails</a></li>
+                <li class="nav-item"><a class="nav-item-link" href="/">Accueil</a></li>
+                <li class="nav-item"> <a class="nav-item-link"  href="/cocktails">Liste des cocktails</a></li>
                 <% if (locals.user) { %>
-                  <li class="nav-item"><a class="nav-item-link <%= currentRoute === 'profile' ? 'header-nav-bold' : '' %>" href="/profile">Profil</a></li>
+                  <li class="nav-item"><a class="nav-item-link" href="/profile">Profil</a></li>
                   <li class="nav-item"><a class="nav-item-link" href="/logout">Déconnexion</a></li>
                 <% } else { %>
                   <li class="nav-item modal-trigger-connexion"><div class="">Connexion</div></li>

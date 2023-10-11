@@ -10,11 +10,16 @@ const cocktailDataMapper = {
     //OBTENIR LES COCKTAILS AVEC LES INGREDIENTS
     async getCocktailBySpirits(ingredient_ids) {
     const sqlQuery = {
-        text: `SELECT * FROM cocktail WHERE cocktail.id IN (SELECT cocktail_id FROM cocktail_contain_ingredient WHERE ingredient_id = ANY ($1))`,
+        text: `SELECT DISTINCT ON (cocktail.id) cocktail.*, cocktail_contain_ingredient.ingredient_id
+        FROM cocktail
+        LEFT JOIN cocktail_contain_ingredient
+        ON cocktail.id = cocktail_contain_ingredient.cocktail_id
+        WHERE cocktail_contain_ingredient.ingredient_id =ANY($1)`,
         values: [ingredient_ids]
     }
         const result = await client.query(sqlQuery);
         return result.rows;
+    
     },
     
 
@@ -25,13 +30,14 @@ const cocktailDataMapper = {
     },
 
     // CHANGER LE STATUT D'UN COCKTAIL PAR L'ADMIN
-    async updateCocktailStatus(validation, cocktail_id){
+    async updateCocktailStatus(cocktail_id){
+        validation = true;
         const sqlQuery = {
             text:'UPDATE cocktail SET validation=$1 WHERE id=$2',
             values: [validation, cocktail_id]
         };
         const result = await client.query(sqlQuery);
-        return result.rowCount;
+        return result;
         },
 
     // OBTENIR UN COCKTAIL
