@@ -1,7 +1,12 @@
 // ECOUTE SUR LE BOUTON AJOUTER AUX FAVORIS
+const messageContainer = document.getElementById("labels-container");
+const successMessage = document.createElement("div");
+successMessage.textContent = "Cocktail ajouté aux favoris!";
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const addFavouritesBtn = document.getElementById("add-favourites-btn");
+  console.log("addFavouritesBtn:", addFavouritesBtn);
   
   if (addFavouritesBtn) {
     addFavouritesBtn.addEventListener("click", function () {
@@ -21,16 +26,16 @@ document.addEventListener("DOMContentLoaded", function () {
           return response.json();
         })
         .then(data => {
-          const successMessage = document.getElementById("add-to-favourites-success-message");
-          successMessage.textContent = "Cocktail ajouté aux favoris!";
-          successMessage.style.display = "block";
+          messageContainer.insertBefore(successMessage, addFavouritesBtn);
           setTimeout(() => {
-            successMessage.style.display = "none";
+            successMessage.remove();
           }, 1500);
-          console.log(data);    
+             
         })
         .catch(error => {
           console.error("Erreur : ", error);
+          
+          
         });
     });
   } else {
