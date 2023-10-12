@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (addFavouritesBtn) {
     addFavouritesBtn.addEventListener("click", function () {
       const cocktailId = this.getAttribute("data-cocktail-id");
+      
       fetch("/profile/favourites", {
         method: "POST",
         headers: {
@@ -20,7 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
           return response.json();
         })
         .then(data => {
-          console.log("data", data);    
+          const successMessage = document.getElementById("add-to-favourites-success-message");
+          successMessage.textContent = "Cocktail ajouté aux favoris!";
+          successMessage.style.display = "block";
+          setTimeout(() => {
+            successMessage.style.display = "none";
+          }, 1500);
+          console.log(data);    
         })
         .catch(error => {
           console.error("Erreur : ", error);
