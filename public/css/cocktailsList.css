@@ -29,7 +29,7 @@
 }
 
 .cocktails-container-item {
-  
+
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -213,9 +213,24 @@
 }
 
 @media screen and (max-width: 790px) {
+
+    #cocktails-main-container, #favourites-content {
+      gap: 40px;
+    }
+
+    #cocktails-main-container h2, #favourites-content h2 {
+      display: none;
+    }
+
     .drink-list-form {
       flex-direction: column;
       gap: 50px;
+      width: 360px;
+    }
+
+    #searchbar {
+      width: 90%;
+      padding: 10px 10px;
     }
 
     .modal-spirit {
@@ -225,11 +240,22 @@
     }
 
     .close-modal-spirit {
-        background-color: rgba(255, 255, 255, 0);
-        color: var(--theme-purple);
-    border-radius: 10px 10px 0 0;
-    position: relative;
-    margin:auto;
-  }
+      background-color: rgba(255, 255, 255, 0);
+      color: var(--theme-purple);
+      border-radius: 10px 10px 0 0;
+      position: relative;
+      margin:auto;
+    }
+
+    .cocktails-container {
+      gap: 30px 5%;
+      margin-bottom: 100px;
+    }
+
+    .cocktail-img {
+      width: 100px;
+      height: 100px;
+      background-size: 100px;
+    }
 }
 
