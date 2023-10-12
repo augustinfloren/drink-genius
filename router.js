@@ -37,7 +37,10 @@ router.get("/ingredients", isAuthed, userController.getAllIngredients);
 
 // Admin
 router.get("/admin/cocktails", isAdmin, cw(userController.getCocktailsManagementPage));
-router.post("/admin/cocktail", isAdmin, cw(userController.validateCocktail))
+router.post("/admin/cocktail", isAdmin, cw(userController.validateCocktail));
+router.delete("/admin/cocktail", isAdmin, cw(userController.deleteCocktail));
+router.get("/admin/users", isAdmin, cw(userController.renderUsersManagementPage));
+router.delete("/admin/user", isAdmin, cw(userController.deleteProfileByAdmin))
 
 function isAuthed(req, res, next){
     if (!req.session.user){

@@ -1,9 +1,9 @@
 const client = require('./dbClient');
 
 const dataMapper = {
-    // AFFICHER TOUS LES UTILISATEURS
+    // AFFICHER TOUS LES UTILISATEURS NON-ADMIN
     async getAllUsers(){
-        const result = await client.query(`SELECT * FROM user`);
+        const result = await client.query(`SELECT * FROM "user" WHERE role_id=2`);
         return result.rows;
     },
 
@@ -96,6 +96,7 @@ const dataMapper = {
             values:[userId]
         };
         const result = await client.query(sqlQuery);
+
         return result.rowCount;
     },
 
@@ -128,7 +129,6 @@ const dataMapper = {
       values: [user_id, cocktail_id],
     };
     const result = await client.query(sqlQuery);
-    console.log(result);
     return result;
   },
 };
