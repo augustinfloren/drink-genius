@@ -241,19 +241,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Empêcher le zoom
 
-  const inputs = document.querySelectorAll('input');
 
   inputs.forEach(input => {
     input.addEventListener('focus', () => {
-      // Empêcher le zoom lorsqu'un champ est en focus
-      document.body.style.zoom = '100%';
-  });
+        // Empêcher le zoom lorsqu'un champ est en focus en fixant maximum-scale à 1
+        document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
+    });
 
     input.addEventListener('blur', () => {
-      // Rétablir le zoom après avoir quitté le champ
-      document.body.style.zoom = 'auto';
-  });
-  })
+        // Rétablir le zoom automatique lorsque le champ perd le focus
+        document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=10'); // Ajustez maximum-scale selon vos besoins
+    });
+});
 
 });
 
