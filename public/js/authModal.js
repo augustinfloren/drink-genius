@@ -202,7 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "password": formData.password
     };
 
-    console.log(loginForm)
     fetch('/login', {
       method: 'POST',
       body:  JSON.stringify(loginForm),
