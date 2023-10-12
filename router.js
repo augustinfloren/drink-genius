@@ -29,6 +29,7 @@ router.patch("/profile", isAuthed, cw(userController.updateProfile));
 router.get("/logout", isAuthed, userController.logOutAndRedirect);
 router.get("/profile/favourites", isAuthed, cw(userController.renderFavouritesPages));
 router.post("/profile/favourites", isAuthed, cw(userController.addToFavouritesByUser));
+router.delete("/profile/favourites", isAuthed, cw(userController.deleteFavourite))
 router.get("/profile/newcocktail", isAuthed, cw(userController.renderNewCocktailPage));
 router.delete("/profile", isAuthed, cw(userController.deleteProfile));
 router.post("/newcocktail", isAuthed, cw(userController.addNewCocktail));

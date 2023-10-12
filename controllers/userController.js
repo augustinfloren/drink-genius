@@ -111,6 +111,17 @@ const userController = {
     }
   },
 
+  async deleteFavourite(req, res){
+    const userId = req.session.user.id;
+    const cocktailId = req.body.cocktailId;
+    const result = await userDataMapper.deleteFromFavourites(userId, cocktailId);
+    if (result.error) {
+      res.status(400).json(result.error);
+    } else {
+      res.status(200).json("Cocktail supprimé des favoris avec succès!");
+    }
+  },
+
   async updateProfile(req, res) {
     const userId = req.session.user.id;
     const parameters = req.body;
