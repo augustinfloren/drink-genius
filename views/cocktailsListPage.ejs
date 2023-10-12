@@ -7,9 +7,9 @@
 
         <!-- SEARCH BAR -->
         <div class="drink-list-form">
-            <input id="searchbar" onkeyup="search_cocktail()" onchange="search_cocktail()" type="text"
-            name="search" placeholder="Rechercher par cocktail...">
-
+         
+            <input id="searchbar" onkeyup="search_cocktail()"type="text"
+            name="search" placeholder="Rechercher par cocktail...">            
             <a class="spirit-modal-trigger-open preferences-btn"> Filtrer par Alcool</a>
         </div>
 
@@ -18,7 +18,7 @@
         <div class="overlay spirit-modal-trigger"></div>
         <div class="modal-spirit">
             <button class="close-modal-spirit spirit-modal-trigger">X</button>
-                <h2 id="modalTitle">Filtre avec notre sélection d'alcools</h1>
+                <h2 id="modalTitle">Filtre avec notre sélection d'alcools</h2>
                 <form class="spirit-selection-form" id="spiritsForm">
                     <div class="modal-checkbox-container">
                         <% spirits.forEach(spirit => { %>
@@ -49,5 +49,6 @@
                 </div>
             </div>
         </main>
-
+        <script src="/js/searchBar.js" defer></script>
+        <script src="/js/spirit-filter.js"> defer</script>
 <%- include("partials/footer") %>

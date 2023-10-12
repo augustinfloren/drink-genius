@@ -12,7 +12,8 @@
                     <h3 class="cocktail-title"><%=cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)%></h3>
                     <div class="cocktail-img" style="background-image: url('/images/<%= cocktail.picture %> ');" alt="Image de <%= cocktail.name %>" id="<%= cocktail.id %>"></div>
                 </a>
-                <button id="validate-cocktail" class ="button" type="button" data-info="<%= cocktail.id %>">Valider</button>
+                <button class ="button validate-cocktail" type="button" data-info="<%= cocktail.id %>">Valider</button>
+                <button class="button delete-cocktail" type="button" data-info="<%= cocktail.id %>">Supprimer</button>
             <% }) %>
             <% } else { %>
                 <p>Il n'y a pas de cocktails en attente de validation.</p>
@@ -21,5 +22,5 @@
     </div>
 
 </main>
-
+<script type="module" src="/js/cocktailManagement.js" defer></script>
 <%- include("partials/footer") %>

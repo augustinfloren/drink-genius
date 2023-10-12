@@ -1,0 +1,24 @@
+<%- include("partials/header") %>
+
+
+<%- include('partials/profileNav') %>
+    <div class="profile-content" id="manage-users">
+        <h2>Liste des comptes utilisateurs :</h2>
+        <div class="cocktails cocktails-container">
+            <% if (userAccounts.length>0) { %>
+            <ul>
+            <% userAccounts.forEach(user => { %>
+                <li><%= user.firstname %> <%= user.lastname %></li>
+                <button class="button delete-user" type="button" user-info="<%= user.id %>">Supprimer</button>
+            
+            <% }) %>
+            </ul>
+            <% } else { %>
+                <p>Il n'y a pas de comptes à afficher.</p>
+                <% } %>
+        </div>
+    </div>
+
+</main>
+<script type="module" src="/js/userManagement.js" defer></script>
+<%- include("partials/footer") %>
