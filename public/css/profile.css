@@ -235,6 +235,10 @@ textarea,
 
 @media screen and (max-width: 790px) {
 
+    #favourites-content, #user-cocktails-content {
+        width: 70%;
+    }
+
     .profile-content h2 {
         display: none;
     }
