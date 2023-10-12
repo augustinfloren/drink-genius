@@ -167,9 +167,12 @@
 }
 
 #ingredients-section select {
+    height: 20px;
     margin-bottom: 5px;
     text-align: center;
     background-color: white;
+    -webkit-appearance: menulist-button;
+    -moz-appearance:none;
 }
 
 /* Responsive */
