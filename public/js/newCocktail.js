@@ -1,4 +1,3 @@
-
 /*********** AJOUTER UN NOUVEL INGREDIENT ET SA QUANTITE ***********/
 // let ingredientCounter = 1;
 let ingredients = [];
@@ -32,18 +31,14 @@ async function createNewDropDown(){
     await fetchIngredients();
 
     const ingredientLabel = document.createElement('label');
-    // ingredientLabel.setAttribute('for', 'ingredient-input');
     const ingredientInputContainer = document.createElement('div');
     ingredientInputContainer.classList.add('ingredient-input-container');
     const deleteBtn = document.createElement('span');
     deleteBtn.textContent = " retirer";
     deleteBtn.style.color = "red";
     deleteBtn.style.cursor = "pointer";
-    // const ingredientLabelText = document.createTextNode(`Ingrédient ${ingredientCounter} `);
-    // ingredientLabel.appendChild(ingredientLabelText);
     const ingredientInput = document.createElement('select');
     ingredientInput.classList.add('new-cocktail-dropdown');
-    // ingredientInput.id = `ingredient-${ingredientCounter}`;
     ingredientInput.name = `ingredientId`;
     ingredientInputContainer.appendChild(ingredientInput);
     ingredientInputContainer.appendChild(deleteBtn);
@@ -70,14 +65,11 @@ async function createNewDropDown(){
         quantityInput.remove();
     });
 
-    // ingredientSection.appendChild(ingredientLabel);
     ingredientSection.appendChild(ingredientInputContainer);
     ingredientSection.appendChild(quantityLabel);
     ingredientSection.appendChild(quantityInput);
 };
 
 newIngredientButton.addEventListener('click', async function(){
-    // ingredientCounter++;
     await createNewDropDown();
 })
-
