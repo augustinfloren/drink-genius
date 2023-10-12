@@ -130,6 +130,16 @@ const cocktailDataMapper = {
         };
         const result = await client.query(sqlQuery);
         return result.rowCount;
+    },
+
+    // SUPPRESSION D'UN COCKTAIL
+    async deleteCocktail(cocktailId){
+        const sqlQuery = {
+            text: 'DELETE FROM cocktail WHERE cocktail.id = $1',
+            values: [cocktailId]
+        };
+        const result = await client.query(sqlQuery);
+        return result;
     }
 }
 

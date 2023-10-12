@@ -142,10 +142,20 @@ const userController = {
     const cocktailId = req.body.cocktailId;
     const validation = await cocktailDataMapper.updateCocktailStatus(cocktailId);
     if(validation.rowCount>0){
-    res.json("Cocktail validé");
-  } else {
-    console.log(result.error)
-  }
+      res.json("Cocktail validé");
+    } else {
+      console.log(result.error)
+    }
+  },
+
+  async deleteCocktail(req, res){
+    const cocktailId = req.body.cocktailId;
+    const deletion = await cocktailDataMapper.deleteCocktail(cocktailId);
+    if(deletion.rowCount>0){
+      res.json("Cocktail supprimé");
+    } else {
+      console.log(result.error)
+    }
   }
 };
 
