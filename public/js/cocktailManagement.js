@@ -1,4 +1,13 @@
+const manageDiv = document.getElementById('manage-cocktails');
+const firstChild = document.getElementById('first-child');
+
 const validateButton = document.querySelectorAll('.validate-cocktail');
+const validationMessage = document.createElement('div');
+validationMessage.textContent = 'Le cocktail a bien été validé.';
+
+const deleteMessage = document.createElement('div');
+deleteMessage.textContent = 'Le cocktail a bien été supprimé.'
+
 validateButton.forEach(button => {
 button.addEventListener('click', function(){
     const cocktailId = this.getAttribute('data-info');
@@ -16,8 +25,11 @@ button.addEventListener('click', function(){
       return response.json();
     })
     .then(data => {
-      console.log(data);
-      window.location.reload();
+    manageDiv.insertBefore(validationMessage, firstChild);
+    setTimeout(() => {
+        validationMessage.remove();
+        window.location.reload();
+      }, 1500);
     })
     .catch(error => {
         console.error('Erreur', error)
@@ -43,9 +55,12 @@ button.addEventListener('click', function (){
         return response.json();
     })
     .then(data => {
-        window.location.reload();
-        console.log(data);
-    })
+        manageDiv.insertBefore(deleteMessage, firstChild);
+        setTimeout(() => {
+            deleteMessage.remove();
+            window.location.reload();
+          }, 1500);
+        })
     .catch(error => {
         console.error('Erreur', error)
     })

@@ -4,7 +4,7 @@
 <%- include('partials/profileNav') %>
     <div class="profile-content" id="manage-users">
         <h2>Liste des comptes utilisateurs :</h2>
-        <div class="cocktails cocktails-container">
+        <div class="cocktails cocktails-container" id="first-child">
             <% if (userAccounts.length>0) { %>
             <ul>
             <% userAccounts.forEach(user => { %>
