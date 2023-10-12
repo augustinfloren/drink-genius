@@ -28,6 +28,7 @@ router.get("/profile", isAuthed, cw(userController.getProfilePage));
 router.patch("/profile", isAuthed, cw(userController.updateProfile));
 router.get("/logout", isAuthed, userController.logOutAndRedirect);
 router.get("/profile/favourites", isAuthed, cw(userController.renderFavouritesPages));
+router.post("/profile/favourites", isAuthed, cw(userController.addToFavouritesByUser));
 router.get("/profile/newcocktail", isAuthed, cw(userController.renderNewCocktailPage));
 router.delete("/profile", isAuthed, cw(userController.deleteProfile));
 router.post("/newcocktail", isAuthed, cw(userController.addNewCocktail));
@@ -55,20 +56,5 @@ function isAdmin(req, res, next){
 }
 
 router.use(middleware404);
-router.get("/profile", cw(userController.getProfilePage));
-router.patch("/profile", cw(userController.updateProfile));
-router.get("/logout", userController.logOutAndRedirect);
-router.get("/profile/favourites", cw(userController.renderFavouritesPages));
-router.get("/profile/newcocktail", cw(userController.renderNewCocktailPage));
-router.delete("/profile", cw(userController.deleteProfile));
-router.post("/newcocktail", cw(userController.addNewCocktail));
-router.get("/profile/usercocktails", cw(userController.renderUserCocktailsPage));
-router.get("/ingredients", userController.getAllIngredients);
-router.post("/profile/favourites", cw(userController.addToFavouritesByUser));
-router.delete("/profile", cw(userController.deleteProfile))
-
-// Admin
-router.get("/admin/cocktails", cw(userController.getCocktailsManagementPage));
-router.post("/admin/cocktail", cw(userController.validateCocktail))
 
 module.exports = router;
