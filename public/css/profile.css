@@ -157,13 +157,17 @@
     align-items: center;
 }
 
+#ingredients-label {
+    margin-bottom: 10px;
+}
+
 #ingredients-section input {
     width: 100px;
     margin-bottom: 25px;
 }
 
 #ingredients-section select {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     text-align: center;
     background-color: white;
 }

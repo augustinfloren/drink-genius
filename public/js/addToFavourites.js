@@ -2,7 +2,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   const addFavouritesBtn = document.getElementById("add-favourites-btn");
-  console.log("addFavouritesBtn:", addFavouritesBtn);
   
   if (addFavouritesBtn) {
     addFavouritesBtn.addEventListener("click", function () {
