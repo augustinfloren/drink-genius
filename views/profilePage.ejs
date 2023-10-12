@@ -19,13 +19,13 @@
                     <button type="submit" class="btn-mini" id="parameters-modification-btn" disabled>Enregistrer</button>
                     <button id="delete-account-button" type="button">Supprimer mon compte</button>
                 </form>
+                <div id="deletion-confirmation" style="display : none;">
+                    <h3>Voulez-vous vraiment supprimer votre compte ?</h3>
+                    <button class="btn-mini" id="validation">Oui, supprimer mon compte et tous mes créations de cocktails</button>
+                    <button class="btn-mini" id="refusal">Non, je garde mon compte Drink Genius</button>
+                </div>
     </div>
 
-    <div id="deletion-confirmation" style="display : none;">
-        <h3>Voulez-vous vraiment supprimer votre compte ?</h3>
-        <button id="validation">Oui, supprimer mon compte et tous mes créations de cocktails</button>
-        <button id="refusal">Non, je garde mon compte Drink Genius</button>
-    </div>
 </main>
 <script type="module" src="/js/profileParameters.js" defer></script>
 <%- include("partials/footer") %>

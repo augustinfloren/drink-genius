@@ -142,11 +142,25 @@
 
 #validation {
     color: red;
+    padding: 20px;
 }
 
 #validation:hover {
+    border-radius: 30px;
     font-weight: bold;
     background-color: red;
+    color: white;
+}
+
+#refusal {
+    padding: 20px;
+}
+
+#refusal:hover {
+    padding: 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    background-color: var(--theme-purple);
     color: white;
 }
 
