@@ -17,7 +17,9 @@
                         <div id="cocktail-img-big" style="background-image: url('/images/<%= cocktailInfo.picture %> ');" alt="Image de <%= cocktailInfo.name %>"></div>
                         <% if (cocktailInfo.labels) { %>
                             <div id="labels-container">
+                                <% if (locals.user) { %>
                                 <button id="add-favourites-btn" class="button" type="button" data-cocktail-id="<%= cocktailInfo.id %>">Ajouter aux favoris</button>
+                                <% } %>
                                 <ul id="labels-list">
                                     <% cocktailInfo.labels.forEach(label => { %>
                                         <li class="cocktail-label"><%= label %></li>
