@@ -9,13 +9,13 @@
                     <label for="instruction-input">Recette</label>
                     <textarea id ="instruction-input" name="instruction"></textarea>
                     <div id="ingredients-section">
-                        <label for="ingredient-input">Ingrédient 1</label>
+                        <label id="ingredients-label" for="ingredient-input">Ingrédients</label>
                         <select class="new-cocktail-dropdown" id="ingredient-1" name="ingredientId">
                             <% ingredients.forEach(ingredient => { %>
                                 <option value="<%= ingredient.id %>"><%= ingredient.name %>(<%= ingredient.unit %>)</option>
                             <% }) %>
                         </select>
-                        <label for="quantity-input">Quantité pour l'ingrédient 1</label>
+                        <label for="quantity-input">Quantité</label>
                         <input type="number" id="quantity-1" name="quantity">
                     </div>
                     <div class="add-ingredient-button">+ Ajouter un ingrédient</div>

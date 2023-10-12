@@ -1,6 +1,6 @@
 
 /*********** AJOUTER UN NOUVEL INGREDIENT ET SA QUANTITE ***********/
-let ingredientCounter = 1;
+// let ingredientCounter = 1;
 let ingredients = [];
 const newIngredientButton = document.querySelector('.add-ingredient-button')
 
@@ -32,18 +32,21 @@ async function createNewDropDown(){
     await fetchIngredients();
 
     const ingredientLabel = document.createElement('label');
-    ingredientLabel.setAttribute('for', 'ingredient-input');
+    // ingredientLabel.setAttribute('for', 'ingredient-input');
+    const ingredientInputContainer = document.createElement('div');
+    ingredientInputContainer.classList.add('ingredient-input-container');
     const deleteBtn = document.createElement('span');
-    deleteBtn.textContent = "  - retirer";
+    deleteBtn.textContent = " retirer";
     deleteBtn.style.color = "red";
     deleteBtn.style.cursor = "pointer";
-    const ingredientLabelText = document.createTextNode(`Ingrédient ${ingredientCounter} `);
-    ingredientLabel.appendChild(ingredientLabelText);
-    ingredientLabel.appendChild(deleteBtn);
+    // const ingredientLabelText = document.createTextNode(`Ingrédient ${ingredientCounter} `);
+    // ingredientLabel.appendChild(ingredientLabelText);
     const ingredientInput = document.createElement('select');
     ingredientInput.classList.add('new-cocktail-dropdown');
-    ingredientInput.id = `ingredient-${ingredientCounter}`;
+    // ingredientInput.id = `ingredient-${ingredientCounter}`;
     ingredientInput.name = `ingredientId`;
+    ingredientInputContainer.appendChild(ingredientInput);
+    ingredientInputContainer.appendChild(deleteBtn);
 
     ingredients.forEach(ingredient => {
         const newOption = document.createElement('option');
@@ -55,29 +58,26 @@ async function createNewDropDown(){
 
     const quantityLabel = document.createElement('label');
     quantityLabel.setAttribute('for', 'quantity-input');
-    const quantityLabelText = document.createTextNode(`Quantité pour l'ingrédient ${ingredientCounter}`);
-    quantityLabel.appendChild(quantityLabelText);
+    quantityLabel.textContent ="Quantité";
     const quantityInput = document.createElement('input');
     quantityInput.setAttribute('type', 'number');
     quantityInput.classList.add('quantity-input');
-    quantityInput.id = `quantity-${ingredientCounter}`;
     quantityInput.name = `quantity`;
 
     deleteBtn.addEventListener("click", () => {
-        ingredientLabel.remove();
-        ingredientInput.remove();
+        ingredientInputContainer.remove();
         quantityLabel.remove();
         quantityInput.remove();
     });
 
-    ingredientSection.appendChild(ingredientLabel)
-    ingredientSection.appendChild(ingredientInput);
+    // ingredientSection.appendChild(ingredientLabel);
+    ingredientSection.appendChild(ingredientInputContainer);
     ingredientSection.appendChild(quantityLabel);
     ingredientSection.appendChild(quantityInput);
 };
 
 newIngredientButton.addEventListener('click', async function(){
-    ingredientCounter++;
+    // ingredientCounter++;
     await createNewDropDown();
 })
 
