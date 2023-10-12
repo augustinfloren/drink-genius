@@ -20,7 +20,7 @@ function toggleModalClosure() {
   modalSpirit.classList.toggle("active");
 }
 
-//-----------LA SELECTION D'ALCOOL(S)-----------//
+//-----------LA SELECTION D'ALCOOL(S)-----------
 
 // On récupère le formulaire avec les checkboxes
 const spiritForm = document.getElementById("spiritsForm");
@@ -54,17 +54,15 @@ spiritForm.addEventListener("submit", async (event) => {
       return response.json();
     })
     .then((data) => {
-      let isFilteredByAlcohol = true;
-      console.log("blabla5", isFilteredByAlcohol);
       let cocktails = document.getElementsByClassName("cocktail");
       //On crée un tableau pour stocker les spirits présents et utilisés dans les cocktails de la liste
-      window.cocktailsElt = [];
-      console.log("cocktailsF:", cocktails)
-  console.log("cocktailsEltF:", cocktailsElt)
+      window.cocktailsElem = [];
       //Par défaut le spirit tant qu'il n'est pas présent et utilisé il est false, s'il est true il est stocké dans cocktailsElt[]
       let spiritFound = false;
       //On va utiliser ce messageContainer pour faire apparaitre un message à l'utilisateur s'il ne trouve pas de cocktail à base d'un spirit sélectionné
       const messageContainer = document.getElementById("message-container");
+      messageContainer.textContent = "";
+
       // Avec value, on va rechercher le nom du spirit et son id
       const selectedSpirits = checkedCheckboxes.map((checkbox) => {
         return { id: checkbox.id, name: checkbox.value };
@@ -79,7 +77,7 @@ spiritForm.addEventListener("submit", async (event) => {
         //Si on trouve un alcool (via l'id) présent dans un cocktail, on le stock dans cocktailsElt[]
         data.map((cocktailListFiltered) => {
           if (currentCocktailSpiritId == cocktailListFiltered.id) {
-            cocktailsElt.push({
+            cocktailsElem.push({
               element_id: i,
               ingredient_id: cocktailListFiltered.ingredient_id,
               name:cocktailListFiltered.name,
@@ -91,14 +89,19 @@ spiritForm.addEventListener("submit", async (event) => {
 
         //S'il n'y a pas de spirit utilisé dans un cocktail de notre liste on  masque  les cocktails
         if (!spiritFound) {
+        // On met une class "filtered" pour faciliter le second filtre par nom
           cocktails[i].style.display = "none";
+          cocktails[i].classList.remove('filtered');
+        }
+        else {
+          cocktails[i].classList.add('filtered');
         }
       }
       //On va trier les spirits via findIndex: on va vérifier s'il y a une correspondance entre l'id du spirit coché(sélectionné)
       // et  l'ingredient_id (le spirit présent dans le cocktail)
-      if (cocktailsElt.length > 0) {
+      if (cocktailsElem.length > 0) {
         unmatchedSpirits = selectedSpirits.filter((element) => {
-          const isFound = cocktailsElt.findIndex((cocktailDisplayed) => {
+          const isFound = cocktailsElem.findIndex((cocktailDisplayed) => {
             return element.id == cocktailDisplayed.ingredient_id;
           });
 
@@ -132,4 +135,15 @@ spiritForm.addEventListener("submit", async (event) => {
                
       })
 
-
+ // Désélectionner toutes les cases à cocher
+ function resetSpiritFilters() {
+  const checkboxes = document.getElementsByName("spirit");
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
+  // Réafficher tous les cocktails
+  const cocktails = document.getElementsByClassName("cocktail");
+  for (let i = 0; i < cocktails.length; i++) {
+    cocktails[i].style.display = "flex";
+  }
+}
