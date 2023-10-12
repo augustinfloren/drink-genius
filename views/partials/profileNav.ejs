@@ -3,7 +3,7 @@
 
 <nav id="user-nav">
     <ul id="user-nav-ul">
-        <li><a href="/profile"><div class="nav-item <%= currentRoute === 'profile' ? 'user-active-btn' : 'user-btn' %>" >Paramètres du compte</div></a></li>
+        <li><a href="/profile/parameters"><div class="nav-item <%= currentRoute === 'profile' ? 'user-active-btn' : 'user-btn' %>" >Paramètres du compte</div></a></li>
         <li><a href="/profile/favourites"><div class="nav-item <%= currentRoute === 'favourites' ? 'user-active-btn' : 'user-btn' %>" >Mes favoris</div></a></li>
         <li><a href="/profile/usercocktails"><div class="nav-item <%= currentRoute === 'usercocktails' ? 'user-active-btn' : 'user-btn' %>" >Mes créations</div></a></li>
         <li><a href="/profile/newcocktail"><div class="nav-item <%= currentRoute === 'newCocktail' ? 'user-active-btn' : 'user-btn' %>" >Proposer une recette</div></a></li>
@@ -15,3 +15,6 @@
     </ul>
 </nav>
 
+    <a class="return-link" href="/profile/parameters">
+        <i class="fa-solid fa-circle-chevron-left fa-2xl"></i>
+    </a>

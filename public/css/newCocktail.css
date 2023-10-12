@@ -1,36 +1,9 @@
 /* Style du conteneur principal */
-#new-cocktail-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-radius: 5px;
-    max-width: 400px;
-}
 
-/* Style des titres */
-#new-cocktail-form h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-}
 
-#instruction-input {
-    border-radius: 50px;
-    height: 130px;
-}
-
-.dropdown-menu {
-    border-radius: 20px;
-    background-color: white;
-    margin-bottom: 20px;
-}
-
-/* Style des étiquettes */
-#new-cocktail-form label {
-    display: block;
-}
 
 /* Style des champs de saisie */
-#new-cocktail-form .input,
+/* #new-cocktail-form .input,
 .quantity-input,
 textarea,
 .select-dropdown {
@@ -42,16 +15,4 @@ textarea,
     border-radius: 20px;
     font-family: "Mooli", sans-serif;
     resize: none;
-}
-
-/* Style du bouton "Ajouter un ingrédient" */
-.add-ingredient-button {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.add-ingredient-button:hover {
-    font-weight: bold;
-}
+} */

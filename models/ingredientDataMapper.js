@@ -5,7 +5,7 @@ const ingredientDataMapper = {
         const result = await client.query(`SELECT
         name, unit,
         CEIL(random()*( (max_quantity - min_quantity) + min_quantity)) AS quantity
-        FROM ingredient 
+        FROM ingredient
         ORDER BY name(random())
         LIMIT (3 + random() * (6 - 3))`);
         return result.rows
@@ -13,22 +13,22 @@ const ingredientDataMapper = {
 
     async getRandomVirginIngredients(){
         const result = await client.query(`SELECT name, unit,
-        CEIL(random()*( (max_quantity - min_quantity) + min_quantity)) AS quantity 
+        CEIL(random()*( (max_quantity - min_quantity) + min_quantity)) AS quantity
         FROM ingredient
         WHERE ingredient.id NOT IN (
           SELECT ingredient_id
           FROM ingredient_has_label
-          WHERE label_id = 1) 
+          WHERE label_id = 1)
         ORDER BY name(random())
         LIMIT (3 + random() * (6 - 3))`);
         return result.rows
     },
 
     async getAllIngredients(){
-        const result = await client.query(`SELECT * FROM ingredient`);
+        const result = await client.query(`SELECT * FROM ingredient ORDER BY name`);
         return result.rows;
     },
-    
+
     async getOneIngredient(id){
         const sqlQuery = {
             text: 'SELECT * FROM ingredient WHERE id=$1',
@@ -56,12 +56,12 @@ const ingredientDataMapper = {
         const result = await client.query(sqlQuery);
         return result.rowCount;
     },
-    
+
     async getSpiritsName(){
         const result = await client.query(`SELECT ingredient.name AS name, ingredient.id FROM ingredient WHERE ingredient.id IN (SELECT ingredient_id FROM ingredient_has_label WHERE label_id = 1)`)
         return result.rows;
     },
-    
+
     // RECUPERER LES LABELS PAR INGREDIENT
     async getLabelByIngredient(ingredient_id){
         const sqlQuery = {

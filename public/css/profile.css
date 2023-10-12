@@ -11,11 +11,18 @@
 
 /*#### NAV ####*/
 
+.return-link {
+    position: absolute;
+    top: 120px;
+    /* left: 30px; */
+    display: none;
+}
 
 #user-nav {
     height: fit-content;
     width: 350px;
     margin-left: -40px;
+    margin-bottom: 50px;
 }
 
 #user-nav-ul {
@@ -145,9 +152,22 @@
 
 /* Onglet Proposer un cocktail */
 
+#new-cocktail-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 5px;
+    max-width: 400px;
+}
+
 #new-cocktail-form :nth-child(4) {
     border-radius: 25px;
     border: none;
+}
+
+#instruction-input {
+    border-radius: 50px;
+    height: 130px;
 }
 
 #ingredients-section {
@@ -155,6 +175,17 @@
     flex-direction: column;
     gap: 10px;
     align-items: center;
+}
+
+#new-cocktail-form .input,
+.quantity-input,
+textarea,
+.select-dropdown {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    font-family: "Mooli", sans-serif;
+    resize: none;
 }
 
 #ingredients-label {
@@ -172,6 +203,14 @@
     background-color: white;
 }
 
+.add-ingredient-button {
+    cursor: pointer;
+}
+
+.add-ingredient-button:hover {
+    font-weight: bold;
+}
+
 /* Responsive */
 
 @media screen and (max-width: 1400px) {
@@ -181,7 +220,23 @@
 }
 
 @media screen and (max-width: 790px) {
-    #profile-flex-content {
+
+    .profile-content h2 {
         display: none;
     }
+
+    .profile-content {
+        margin-top: 70px;
+        display: none;
+    }
+
+    #user-nav {
+        margin-left: 0px;
+    }
+
+    .user-active-btn {
+        background: #2d213f0c;;
+        color: var(--theme-purple);
+    }
+
 }
