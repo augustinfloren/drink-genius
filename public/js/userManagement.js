@@ -1,3 +1,9 @@
+const manageDiv = document.getElementById('manage-users');
+const firstChild = document.getElementById('first-child');
+
+const deleteMessage = document.createElement('div');
+deleteMessage.textContent = 'Le compte utilisateur a bien été supprimé.'
+
 const deleteButton = document.querySelectorAll('.delete-user');
 deleteButton.forEach(button => {
 button.addEventListener('click', function (){
@@ -17,9 +23,12 @@ button.addEventListener('click', function (){
         return response.json();
     })
     .then(data => {
-        window.location.reload();
-        console.log(data);
-    })
+        manageDiv.insertBefore(deleteMessage, firstChild);
+        setTimeout(() => {
+            deleteMessage.remove();
+            window.location.reload();
+          }, 1500);
+        })
     .catch(error => {
         console.error('Erreur', error)
     })
