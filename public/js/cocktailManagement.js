@@ -1,5 +1,6 @@
-const validateButton = document.getElementById('validate-cocktail');
-validateButton.addEventListener('click', function(){
+const validateButton = document.querySelectorAll('.validate-cocktail');
+validateButton.forEach(button => {
+button.addEventListener('click', function(){
     const cocktailId = this.getAttribute('data-info');
     const messageDiv = document.createElement('div');
     fetch('/admin/cocktail', {
@@ -22,11 +23,12 @@ validateButton.addEventListener('click', function(){
     .catch(error => {
         console.error('Erreur', error)
     })
-
+})
 });
 
-const deleteButton = document.getElementById('delete-cocktail');
-deleteButton.addEventListener('click', function (){
+const deleteButton = document.querySelectorAll('.delete-cocktail');
+deleteButton.forEach(button => {
+button.addEventListener('click', function (){
     const cocktailId = this.getAttribute('data-info');
     fetch('/admin/cocktail', {
         method: 'DELETE',
@@ -48,4 +50,5 @@ deleteButton.addEventListener('click', function (){
     .catch(error => {
         console.error('Erreur', error)
     })
+})
 });

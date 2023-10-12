@@ -10,6 +10,7 @@
         <li><a href="/contactadmin"><div class="nav-item <%= currentRoute === 'contactadmin' ? 'user-active-btn' : 'user-btn' %>" >Contacter un admin</div></a></li>
         <% if (locals.user.role_id === 1) { %>
         <li><a href="/admin/cocktails"><div class="nav-item <%= currentRoute === 'admin/cocktails' ? 'user-active-btn' : 'user-btn' %>" >Valider les cocktails en attente</div></a></li>
+        <li><a href="/admin/users"><div class="nav-item <%= currentRoute === 'admin/users' ? 'user-active-btn' : 'user-btn' %>" >Gérer les comptes utilisateurs</div></a></li>
         <% } %>
     </ul>
 </nav>

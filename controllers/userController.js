@@ -103,10 +103,7 @@ const userController = {
   async addToFavouritesByUser(req, res) {
     const cocktailId = req.body.cocktailId;
     const userId = req.session.user.id;
-    console.log("cocktailId du controller :", cocktailId);
-    console.log("userId du controller :", userId);
     const result = await userDataMapper.addToFavourites(userId, cocktailId);
-    console.log(result);
     if (result.error) {
       res.status(400).json(result.error);
     } else {
@@ -156,7 +153,21 @@ const userController = {
     } else {
       console.log(result.error)
     }
-  }
+  },
+
+  async renderUsersManagementPage(req, res){
+    const userAccounts = await userDataMapper.getAllUsers();
+    currentRoute = "admin/users";
+    res.render('manageUsers', {userAccounts, currentRoute});
+  },
+
+  async deleteProfileByAdmin(req,res){
+    const userId = req.body.userId
+    const deletedProfile = await userDataMapper.deleteUser(userId);
+    if(deletedProfile>0){
+    res.json("Compte supprimé")
+    }
+  },
 };
 
 module.exports = userController;
