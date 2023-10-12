@@ -54,7 +54,7 @@ a, del, ins {
 a {
 	color: inherit;
 }
-label, button {
+button {
 	cursor: pointer;
 }
 html {
@@ -65,4 +65,9 @@ html {
 }
 input, button {
 	outline: 0;
+}
+button {
+	font-family: "Mooli", sans-serif;
+	background: none;
+	border: none;
 }

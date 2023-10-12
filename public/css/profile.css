@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: row;
     flex: auto;
-    width: 100%;
-    gap: 60px;
+    margin-right: 200px;
+    gap: 20px;
     justify-content: center;
     color: var(--theme-purple);
 }
@@ -13,8 +13,29 @@
 
 
 #user-nav {
-    height: 100%;
+    height: fit-content;
     width: 350px;
+    margin-left: -40px;
+}
+
+#user-nav-ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top:50px;
+}
+
+#user-nav .nav-item {
+    text-align: center;
+    font-size: 1.2em;
+    border-radius: 57px;
+    width: 250px;
+    padding: 15px;
+}
+
+.user-btn {
+    background: #2d213f0c;
 }
 
 .user-active-btn {
@@ -22,29 +43,28 @@
     color: white;
 }
 
-.user-btn {
-    background-color: #2d213f0c;
-    color: var(--theme-purple);
-}
-
-#user-nav .nav-item {
-    text-align: center;
-    margin:  1.7em;
-    font-size: 1.2em;
-    border-radius: 57px;
-    padding: 17px 20px;
-}
-
 #user-nav .nav-item:hover {
-    background-color: var(--theme-purple);
+    background: var(--theme-purple);
     color: white;
 }
 
-#profile-flex-content {
+.profile-content {
     margin-top: 60px;
     display: flex;
     flex-direction: column;
-    width: 40%;
+    align-items: center;
+    gap: 30px;
+    width: 30%;
+    padding-bottom: 60px;
+}
+
+.profile-content h2 {
+    text-align: center;
+}
+
+#profile-main-container .cocktails-container {
+    width: 100%;
+    margin-bottom: 0px;
 }
 
 #profile-flex-content h2 {
@@ -52,19 +72,108 @@
     margin-bottom: 1.5em;
 }
 
-#parameters-list {
-    padding-bottom: 1em;
+/* Onglet Paramètres */
+
+.profil-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
 }
 
-.parameters {
-    padding-bottom: 1em;
-    font-size: 1.2em;
+.profil-form input {
+    text-align: center;
+    font-family: "Mooli", sans-serif;
+    background: #ffffff;
+    border: none;
+    padding: 7px 15px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    width: 250px;
 }
 
-.heart-icon {
+.btn-mini {
+    font-family: "Mooli", sans-serif;
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 57px;
+    padding: 15px 30px;
+    background: #2d213f0c;
+    border: none;
+}
+
+.btn-mini:not([disabled]):hover {
+    background: var(--theme-purple);
+    color: white;
+}
+
+#delete-account-button {
+    font-family: "Mooli", sans-serif;
     color: red;
-    width: 1.5em;
-    height: 1.5em;
+    margin-top: 20px;
+    text-align: center;
+    background: none;
+    border: none;
+}
+
+#delete-account-button:hover {
+    font-weight: bold;
+}
+
+#deletion-confirmation {
+    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+#deletion-confirmation button {
+    width: 300px;
+}
+
+#validation {
+    color: red;
+}
+
+#validation:hover {
+    font-weight: bold;
+    background-color: red;
+    color: white;
+}
+
+/* Onglet Proposer un cocktail */
+
+#new-cocktail-form :nth-child(4) {
+    border-radius: 25px;
+    border: none;
+}
+
+#ingredients-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+#ingredients-section input {
+    width: 100px;
+    margin-bottom: 25px;
+}
+
+#ingredients-section select {
+    margin-bottom: 10px;
+    text-align: center;
+    background-color: white;
+}
+
+/* Responsive */
+
+@media screen and (max-width: 1400px) {
+    #profile-main-container {
+        margin-right: 0px;
+    }
 }
 
 @media screen and (max-width: 790px) {

@@ -1,0 +1,25 @@
+<%- include("partials/header") %>
+
+
+<%- include('partials/profileNav') %>
+    <div class="profile-content" id="manage-cocktails">
+        <h2>Liste des cocktails en attente :</h2>
+        <div class="cocktails cocktails-container">
+            <% if (notValidatedCocktails.length>0) { %>
+            
+            <% notValidatedCocktails.forEach(cocktail => { %>
+                <a class="cocktail cocktails-container-item" href="/cocktail/<%=cocktail.id%>">
+                    <h3 class="cocktail-title"><%=cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)%></h3>
+                    <div class="cocktail-img" style="background-image: url('/images/<%= cocktail.picture %> ');" alt="Image de <%= cocktail.name %>" id="<%= cocktail.id %>"></div>
+                </a>
+                <button id="validate-cocktail" class ="button" type="button" data-info="<%= cocktail.id %>">Valider</button>
+            <% }) %>
+            <% } else { %>
+                <p>Il n'y a pas de cocktails en attente de validation.</p>
+                <% } %>
+        </div>
+    </div>
+
+</main>
+
+<%- include("partials/footer") %>

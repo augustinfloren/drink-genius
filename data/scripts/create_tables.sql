@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS public.cocktail
     CONSTRAINT user_id FOREIGN KEY (user_id)
         REFERENCES public."user" (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE CASCADE
 );
 
 
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS public.cocktail_contain_ingredient
     CONSTRAINT cocktail_id FOREIGN KEY (cocktail_id)
         REFERENCES public.cocktail (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE CASCADE
         NOT VALID,
     CONSTRAINT ingredient_id FOREIGN KEY (ingredient_id)
         REFERENCES public.ingredient (id) MATCH SIMPLE
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS public.garnish_add_into_cocktail
     CONSTRAINT cocktail_id FOREIGN KEY (cocktail_id)
         REFERENCES public.cocktail (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE CASCADE,
     CONSTRAINT garnish_id FOREIGN KEY (garnish_id)
         REFERENCES public.garnish (id) MATCH SIMPLE
         ON UPDATE NO ACTION
@@ -152,12 +152,12 @@ CREATE TABLE IF NOT EXISTS public.user_like_cocktail
     CONSTRAINT user_id FOREIGN KEY (user_id)
         REFERENCES public.user (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE CASCADE
         NOT VALID,
     CONSTRAINT cocktail_id FOREIGN KEY (cocktail_id)
         REFERENCES public.cocktail (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE CASCADE
 );
 
 COMMIT;
