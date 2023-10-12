@@ -11,6 +11,12 @@
 
 /*#### NAV ####*/
 
+.return-link {
+    position: absolute;
+    top: 120px;
+    /* left: 30px; */
+    display: none;
+}
 
 #user-nav {
     height: fit-content;
@@ -214,7 +220,13 @@ textarea,
 }
 
 @media screen and (max-width: 790px) {
+
+    .profile-content h2 {
+        display: none;
+    }
+
     .profile-content {
+        margin-top: 70px;
         display: none;
     }
 
