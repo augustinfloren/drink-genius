@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Modale
   const modalContainer = document.querySelector(".modal-container");
+  const modal = document.querySelector(".modal");
 
   // Lien already registered
   const alreadyRegisteredLink = document.getElementById("already-registered-link")
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const confirmationInput = document.getElementById("confirmation-input");
   const form = document.getElementById("auth-modal-form");
   const btn = document.getElementById("auth-modal-btn");
+  const closeBtn = document.getElementById("close-modal");
 
   //spans
   const dateSpan = document.querySelector("#date-field span");
@@ -221,6 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
       alreadyRegisteredLink.style.display = "none";
       modalTitle.style.color = "var(--theme-purple)";
       modalTitle.innerText = data;
+      closeBtn.style.display = "none";
       setTimeout(() => {
         window.location.href = '/';
       }, 1000);
