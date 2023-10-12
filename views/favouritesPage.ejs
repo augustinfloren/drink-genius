@@ -6,7 +6,7 @@
   <h2>Vos cocktails préférés</h2>
 
   <!-- COCKTAILS CONTAINER-->
-  <div class="cocktails-container">
+  <div class="cocktails-container" id="favourite-container">
     <% if(favourites.length === 0) { %>
         <p>Vous n'avez aucun favoris</p>
         <% } else { %>
@@ -15,6 +15,7 @@
                     <h3 class="cocktail-title-mini"><%=favourite.name.charAt(0).toUpperCase() + favourite.name.slice(1)%></h3>
                     <div class="cocktail-mini" style="background-image: url('/images/<%= favourite.picture %> ');" alt="Image de <%= favourite.name %>" id="<%= favourite.id %>"></div>
                 </a>
+                <button class="button delete-favourite" type="button" data-info="<%= favourite.id %>">Supprimer des favoris</button>
         <% }) %>
     <% } %>
   </div>
@@ -22,5 +23,5 @@
 
 </div>
 
-
+<script type="module" src="/js/favourites.js" defer></script>
 <%- include("partials/footer") %>

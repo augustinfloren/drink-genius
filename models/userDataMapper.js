@@ -131,6 +131,16 @@ const dataMapper = {
     const result = await client.query(sqlQuery);
     return result;
   },
+
+  // SUPPRIMER UN COCKTAIL DES FAVORIS
+  async deleteFromFavourites(user_id, cocktail_id){
+    const sqlQuery = {
+        text: "DELETE FROM user_like_cocktail WHERE user_id=$1 AND cocktail_id=$2",
+        values: [user_id, cocktail_id]
+    };
+    const result = await client.query(sqlQuery);
+    return result;
+  }
 };
 
 module.exports = dataMapper;
