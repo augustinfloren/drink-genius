@@ -238,7 +238,25 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     })
   }
+
+  // Empêcher le zoom
+
+  const inputs = document.querySelectorAll('input');
+
+  inputs.forEach(input => {
+    input.addEventListener('focus', () => {
+      // Empêcher le zoom lorsqu'un champ est en focus
+      document.body.style.zoom = '100%';
+  });
+
+    input.addEventListener('blur', () => {
+      // Rétablir le zoom après avoir quitté le champ
+      document.body.style.zoom = 'auto';
+  });
+  })
+
 });
+
 
 
 

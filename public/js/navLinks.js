@@ -28,12 +28,13 @@ if (window.matchMedia("(max-width: 790px)").matches) {
       menu.style.display = "none";
       main.style.display = "flex";
       returnLink.style.display = "block";
-      // returnIcon.style.display = "block";
     })
   } else {
     menu.style.display = "none";
     main.style.display = "flex";
     returnLink.style.display = "block";
-    // returnIcon.style.display = "block";
   }
+} else {
+  menu.style.display = "flex";
+  returnLink.style.display = "none";
 }
