@@ -2,7 +2,6 @@ const validateButton = document.querySelectorAll('.validate-cocktail');
 validateButton.forEach(button => {
 button.addEventListener('click', function(){
     const cocktailId = this.getAttribute('data-info');
-    const messageDiv = document.createElement('div');
     fetch('/admin/cocktail', {
         method: 'POST',
         body: JSON.stringify({ cocktailId: cocktailId }),
