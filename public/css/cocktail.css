@@ -21,13 +21,15 @@ html {
   gap: 50px 30px;
 }
 
-#cocktail-img-big {
-  height: 250px;
-  width: 250px;
-  background-size: 250px;
-  border-radius: 70px;
-  box-shadow: 5px 5px 40px #081a1941;
+/* Bouton Favoris */
+.add-favourite-btn {
+  margin-left: 15px;
+  margin-top: 15px;
+  position: absolute;
+  cursor: pointer;
 }
+
+
 #cocktail-top-section {
   display: flex;
   gap: 30px;
@@ -104,5 +106,9 @@ html {
 @media screen and (max-width: 790px) {
   #cocktail-top-section {
     flex-direction: column;
+  }
+
+  /* Bouton Favoris */
+  .add-favourite-btn {
   }
 }
