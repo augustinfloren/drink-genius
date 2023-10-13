@@ -35,6 +35,7 @@ router.delete("/profile", isAuthed, cw(userController.deleteProfile));
 router.post("/newcocktail", isAuthed, cw(userController.addNewCocktail));
 router.get("/profile/usercocktails", isAuthed, cw(userController.renderUserCocktailsPage));
 router.get("/ingredients", isAuthed, userController.getAllIngredients);
+router.get("/profile/usersfavourites", isAuthed, cw(userController.getFavouriteCocktails))
 
 // Admin
 router.get("/admin/cocktails", isAdmin, cw(userController.getCocktailsManagementPage));
