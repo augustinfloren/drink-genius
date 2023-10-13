@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS public.role CASCADE;
 CREATE TABLE IF NOT EXISTS public.role
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    name text COLLATE pg_catalog."default" NOT NULL,
+    name text  NOT NULL,
     CONSTRAINT role_pkey PRIMARY KEY (id)
 );
 
@@ -24,13 +24,13 @@ CREATE TABLE IF NOT EXISTS public.role
 CREATE TABLE IF NOT EXISTS public."user"
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    lastname text COLLATE pg_catalog."default" NOT NULL,
-    firstname text COLLATE pg_catalog."default" NOT NULL,
+    lastname text  NOT NULL,
+    firstname text  NOT NULL,
     birthdate int NOT NULL,
-    location text COLLATE pg_catalog."default",
-    email text COLLATE pg_catalog."default" NOT NULL UNIQUE,
-    password text COLLATE pg_catalog."default" NOT NULL,
-    hobbies text COLLATE pg_catalog."default",
+    location text,
+    email text  NOT NULL UNIQUE,
+    password text  NOT NULL,
+    hobbies text,
     role_id integer NOT NULL,
     CONSTRAINT user_pkey PRIMARY KEY (id),
     CONSTRAINT role_id FOREIGN KEY (role_id)
@@ -45,9 +45,9 @@ CREATE TABLE IF NOT EXISTS public."user"
 CREATE TABLE IF NOT EXISTS public.cocktail
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    name text COLLATE pg_catalog."default" NOT NULL,
-    instruction text COLLATE pg_catalog."default" NOT NULL,
-    picture text COLLATE pg_catalog."default",
+    name text NOT NULL,
+    instruction text NOT NULL,
+    picture text,
     validation boolean NOT NULL DEFAULT false,
     user_id integer NOT NULL,
     CONSTRAINT cocktail_pkey PRIMARY KEY (id),
@@ -62,8 +62,8 @@ CREATE TABLE IF NOT EXISTS public.cocktail
 CREATE TABLE IF NOT EXISTS public.ingredient
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    name text COLLATE pg_catalog."default" NOT NULL,
-    unit text COLLATE pg_catalog."default",
+    name text NOT NULL,
+    unit text, 
     min_quantity integer NOT NULL,
     max_quantity integer NOT NULL,
     CONSTRAINT ingredient_pkey PRIMARY KEY (id)
@@ -74,8 +74,8 @@ CREATE TABLE IF NOT EXISTS public.ingredient
 CREATE TABLE IF NOT EXISTS public.garnish
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    name text COLLATE pg_catalog."default" NOT NULL,
-    unit text COLLATE pg_catalog."default",
+    name text  NOT NULL,
+    unit text,
     min_quantity integer NOT NULL,
     max_quantity integer NOT NULL,
     CONSTRAINT garnish_pkey PRIMARY KEY (id)
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS public.garnish_add_into_cocktail
 CREATE TABLE IF NOT EXISTS public.label
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    name text COLLATE pg_catalog."default" NOT NULL,
+    name text  NOT NULL,
     CONSTRAINT label_pkey PRIMARY KEY (id)
 );
 

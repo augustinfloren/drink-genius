@@ -1,3 +1,4 @@
+const client = require('../models/dbClient');
 const ingredientDataMapper = require('../models/ingredientDataMapper');
 const cocktailDataMapper = require('../models/cocktailDataMapper');
 const userDataMapper = require('../models/userDataMapper');
@@ -71,20 +72,32 @@ const userController = {
   },
 
   async addNewCocktail(req, res){
-    const { name, instruction } = req.body;
+    const { name, instruction, ingredientId, quantity } = req.body;
     const userId = req.session.user.id;
+      
+    // VERIFICATION DU NOM ENVOYE
+    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\d'-]+$/;
+    if(!regex.test(name)){
+      const errorMessage = "Le nom du cocktail ne doit contenir que des lettres et des chiffres."
+      return res.status(400).render('errorPage', {errorMessage})
+    }
+
+    // ENVOI EN BDD  
+    // AJOUT DANS LA TABLE COCKTAIL
     const cocktailResult = await cocktailDataMapper.addOneCocktailByUser(name, instruction, userId);
     const cocktailId = cocktailResult[0].id;
-    const { ingredientId, quantity } = req.body;
+    
+    // AJOUT DES INGREDIENTS ET QUANTITES DANS LA TABLE D'ASSOCIATION
     if(Array.isArray(ingredientId)){
-    ingredientId.forEach(async (givenIngredient, index) => {
+      ingredientId.forEach(async (givenIngredient, index) => {
       let givenQuantity = quantity[index];
       const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, givenIngredient, givenQuantity);
-    });} else {
+    });
+  } else {
       const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, ingredientId, quantity);
     }
     res.redirect('/profile/usercocktails');
-  },
+},
 
   async renderUserCocktailsPage(req, res){
     const userId = req.session.user.id;
