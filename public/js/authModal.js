@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const modal = document.querySelector(".modal");
 
   // Lien already registered
-  const alreadyRegisteredLink = document.getElementById("already-registered-link")
+  const alreadyRegisteredLink = document.getElementById("already-registered-link");
 
   const main = document.querySelector("main");
   const modalTitle = document.getElementById("modalTitle");
@@ -18,17 +18,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("auth-modal-form");
   const btn = document.getElementById("auth-modal-btn");
   const closeBtn = document.getElementById("close-modal");
-
-  //spans
-  const dateSpan = document.querySelector("#date-field span");
-  dateSpan.style.display = "none";
-  dateSpan.style.fontSize = "0.7em";
-  dateSpan.style.color = "red";
-
-  let isRegistrationModal = false;
-
   const modalTriggerConnexion = document.querySelector(".modal-trigger-connexion");
 
+  // Message d'erreurs pour les champs du form
+  const dateSpan = document.querySelector("#date-field span");
+  dateSpan.style.display = "none";
+  dateSpan.style.fontSize = "0.9em";
+  dateSpan.style.color = "red";
+
+  const passSpan = document.querySelector("#pass-field span");
+  passSpan.style.display = "none";
+  passSpan.style.fontSize = "0.9em";
+  passSpan.style.color = "red";
+  passSpan.style.width = "270px";
+
+  // Flag pour switcher entre login et signup
+  let isRegistrationModal = false;
+
+
+  // Listeners Fetch
   const loginListener = (event) => {
     event.preventDefault();
     fetchLogin();
@@ -37,6 +45,34 @@ document.addEventListener("DOMContentLoaded", function () {
   const signupListener = (event) => {
     event.preventDefault();
     fetchSignup();
+  }
+
+  // Listeners infos champs formulaire
+  // Date
+  const ifWrongDateListener = (event) => {
+    const inputValue = event.target.value;
+    const currentYear = new Date().getFullYear();
+    if (parseInt(inputValue) > currentYear - 18) {
+      dateSpan.style.display = "block";
+      dateSpan.innerText = "Vous devez avoir au moins 18 ans.";
+      setTimeout(() => {
+        dateSpan.style.display="none";
+      }, 2000);
+    }
+  }
+
+  // Mot de passe
+  // Récupération du regex
+  const passRegex = new RegExp(passwordInput.getAttribute("pattern"));
+  const ifWrongPassListener = (event) => {
+    const inputValue = event.target.value;
+    if (!passRegex.test(inputValue)) {
+      passSpan.style.display = "block";
+      passSpan.innerText = "Doit contenir au moins 8 caractères, une majuscule, un chiffre, et un caractère spécial.";
+      setTimeout(() => {
+        passSpan.style.display="none";
+      }, 5000);
+    }
   }
 
   // Lorsque je clique sur Connexion
@@ -90,21 +126,15 @@ document.addEventListener("DOMContentLoaded", function () {
     alreadyRegisteredLink.innerText = "Déjà inscrit ? Par ici !";
     isRegistrationModal = true;
 
-    dateInput.addEventListener("keyup", (event) => {
-      const inputValue = event.target.value;
-      const currentYear = new Date().getFullYear();
-      if (parseInt(inputValue) > currentYear - 18) {
-          dateSpan.style.display = "block";
-          dateSpan.innerText = "Vous devez avoir au moins 18 ans";
-        setTimeout(() => {
-          dateSpan.style.display="none";
-        }, 2000);
-      }
-    });
+    // Infos champs
+    dateInput.addEventListener("keyup", ifWrongDateListener);
+    passwordInput.addEventListener("keyup", ifWrongPassListener);
+    confirmationInput.addEventListener("keyup", ifWrongPassListener);
 
+    // Supression du listener login
     form.removeEventListener("submit", loginListener);
 
-    //Lorsque que je soumet le form
+    // Ajout du listener signup
     form.addEventListener("submit", signupListener);
   }
 
@@ -136,9 +166,10 @@ document.addEventListener("DOMContentLoaded", function () {
     isRegistrationModal = false;
     dateSpan.style.display = "none";
 
+    // Supression du listener signup
     form.removeEventListener("submit", signupListener);
 
-    //Lorsque que je soumet le form
+    // Ajout du listener login
     form.addEventListener("submit", loginListener);
   }
 
@@ -164,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
     modalContainer.classList.toggle("active");
   }
 
-  // Signup : Récupération des messages de succès et d'erreurs
+  // Signup + Récupération des messages de succès et d'erreurs
   async function fetchSignup() {
     fetch('/signin', {
       method: 'POST',
@@ -195,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   }
 
-  // Login : Récupération des messages de succès et d'erreurs
+  // Login + Récupération des messages de succès et d'erreurs
   async function fetchLogin() {
     const formData = Object.fromEntries(new FormData(form));
 
