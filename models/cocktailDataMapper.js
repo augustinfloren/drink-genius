@@ -6,7 +6,7 @@ const cocktailDataMapper = {
         const result = await client.query(`SELECT * FROM cocktail WHERE validation=true`);
         return result.rows;
     },
-    
+
     //OBTENIR LES COCKTAILS AVEC LES INGREDIENTS
     async getCocktailBySpirits(ingredient_ids) {
     const sqlQuery = {
@@ -19,9 +19,9 @@ const cocktailDataMapper = {
     }
         const result = await client.query(sqlQuery);
         return result.rows;
-    
+
     },
-    
+
 
     // OBTENIR TOUS LES COCKTAILS EN ATTENTE DE VALIDATION
     async getNotValidatedCocktails() {
@@ -49,20 +49,20 @@ const cocktailDataMapper = {
         const result = await client.query(sqlQuery);
         return result.rows[0];
     },
- 
+
     // OBTENIR TOUTES LES INFORMATIONS D'UN COCKTAIL
     async getCocktailInformation(cocktail_id){
         const sqlQuery = {
             text: `SELECT cocktail.name, cocktail.instruction, cocktail.picture, cocktail.id,
-            CASE 
+            CASE
                 WHEN COUNT(DISTINCT gaic.quantity) = 0 THEN NULL
-                ELSE ARRAY_AGG(DISTINCT 
+                ELSE ARRAY_AGG(DISTINCT
                     jsonb_build_object(
                         'quantity', gaic.quantity,
                         'unit', garnish.unit,
                         'name', garnish.name))
             END AS garnitures,
-            ARRAY_AGG(DISTINCT 
+            ARRAY_AGG(DISTINCT
                 jsonb_build_object(
                     'quantity', cci.quantity,
                     'unit', ingredient.unit,
