@@ -122,6 +122,12 @@ const userController = {
     }
   },
 
+  async getFavouriteCocktails(req,res){
+    const userId = req.session.user.id;
+    const favourites = await userDataMapper.getFavourites(userId);
+    res.json(favourites);
+  },
+
   async updateProfile(req, res) {
     const userId = req.session.user.id;
     const parameters = req.body;

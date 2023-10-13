@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
           messageContainer.insertBefore(successMessage, addFavouritesBtn);
           setTimeout(() => {
-            successMessage.remove();
+            successMessage.remove()
+            location.reload();
           }, 1500);
              
         })

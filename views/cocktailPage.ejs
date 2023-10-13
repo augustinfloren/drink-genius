@@ -14,11 +14,12 @@
                 <div id="cocktail-container">
                     <h2><%=cocktailInfo.name.charAt(0).toUpperCase() + cocktailInfo.name.slice(1)%></h2>
                     <div id="cocktail-top-section">
-                        <div id="cocktail-img-big" style="background-image: url('/images/<%= cocktailInfo.picture %> ');" alt="Image de <%= cocktailInfo.name %>"></div>
+                        <div id="cocktail-img-big" style="background-image: url('/images/<%= cocktailInfo.picture %>');" alt="Image de <%= cocktailInfo.name %>" data-info="<%= cocktailInfo.id %>"></div>
                         <% if (cocktailInfo.labels) { %>
                             <div id="labels-container">
                                 <% if (locals.user) { %>
-                                <button id="add-favourites-btn" class="button" type="button" data-cocktail-id="<%= cocktailInfo.id %>">Ajouter aux favoris</button>
+                                <button id="add-favourites-btn" class="button" style="display: none;"  type="button" data-cocktail-id="<%= cocktailInfo.id %>">Ajouter aux favoris</button>
+                                <button id="delete-favourite-btn" class="button delete-favourite" style="display: none;" type="button" data-info="<%= cocktailInfo.id %>">Supprimer des favoris</button>
                                 <% } %>
                                 <ul id="labels-list">
                                     <% cocktailInfo.labels.forEach(label => { %>
@@ -59,4 +60,5 @@
         </main>
 
         <script type="module" src="/js/addToFavourites.js" defer></script>
+        <script type="module" src="/js/favouritesToggle.js"></script>
 <%- include("partials/footer") %>
