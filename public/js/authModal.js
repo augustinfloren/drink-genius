@@ -23,12 +23,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Message d'erreurs pour les champs du form
   const dateSpan = document.querySelector("#date-field span");
   dateSpan.style.display = "none";
-  dateSpan.style.fontSize = "0.9em";
+  dateSpan.style.fontSize = "0.8em";
   dateSpan.style.color = "red";
 
   const passSpan = document.querySelector("#pass-field span");
   passSpan.style.display = "none";
-  passSpan.style.fontSize = "0.9em";
+  passSpan.style.fontSize = "0.8em";
   passSpan.style.color = "red";
   passSpan.style.width = "270px";
 
@@ -66,12 +66,28 @@ document.addEventListener("DOMContentLoaded", function () {
   const passRegex = new RegExp(passwordInput.getAttribute("pattern"));
   const ifWrongPassListener = (event) => {
     const inputValue = event.target.value;
-    if (!passRegex.test(inputValue)) {
+    if (inputValue.length > 0 && !passRegex.test(inputValue)) {
       passSpan.style.display = "block";
       passSpan.innerText = "Doit contenir au moins 8 caractères, une majuscule, un chiffre, et un caractère spécial.";
       setTimeout(() => {
         passSpan.style.display="none";
       }, 5000);
+    } else {
+      passSpan.display ="none";
+    }
+  }
+
+  const comparePassListener = (event) => {
+    const password = passwordInput.value
+    const inputValue = event.target.value;
+    if (inputValue.length > 0 && inputValue !== password) {
+      passSpan.style.display = "block";
+      passSpan.innerText = "Les mots de passe doivent correspondrent.";
+      setTimeout(() => {
+        passSpan.style.display="none";
+      }, 2000);
+    } else {
+      passSpan.display ="none";
     }
   }
 
@@ -129,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Infos champs
     dateInput.addEventListener("keyup", ifWrongDateListener);
     passwordInput.addEventListener("keyup", ifWrongPassListener);
-    confirmationInput.addEventListener("keyup", ifWrongPassListener);
+    confirmationInput.addEventListener("keyup", comparePassListener);
 
     // Supression du listener login
     form.removeEventListener("submit", loginListener);
