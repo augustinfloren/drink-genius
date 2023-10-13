@@ -6,14 +6,14 @@
                 <div id="cocktail-container">
                     <h2><%=cocktailInfo.name.charAt(0).toUpperCase() + cocktailInfo.name.slice(1)%></h2>
                     <div id="cocktail-top-section">
-                        <div class="cocktail-img" style="background-image: url('/images/<%= cocktailInfo.picture %>');" alt="Image de <%= cocktailInfo.name %>" data-info="<%= cocktailInfo.id %>"></div>
-                        <% if (cocktailInfo.labels) { %>
-                            <div id="labels-container">
-                                <% if (locals.user) { %>
+                        <div class="cocktail-img" style="background-image: url('/images/<%= cocktailInfo.picture %>');" alt="Image de <%= cocktailInfo.name %>" data-info="<%= cocktailInfo.id %>">
+                        </div>
+                            <% if (locals.user) { %>
                                 <div id="confirmation-message" style="display: none;"></div>
-                                <button id="add-favourites-btn" class="button" style="display: none;"  type="button" data-cocktail-id="<%= cocktailInfo.id %>">Ajouter aux favoris</button>
-                                <button id="delete-favourite-btn" class="button" style="display: none;" type="button" data-info="<%= cocktailInfo.id %>">Supprimer des favoris</button>
-                                <% } %>
+                                <i class="add-favourite-btn fa-regular fa-heart fa-sm" data-cocktail-id="<%= cocktailInfo.id %>"></i>
+                            <% } %>
+                            <% if (cocktailInfo.labels) { %>
+                            <div id="labels-container">
                                 <ul id="labels-list">
                                     <% cocktailInfo.labels.forEach(label => { %>
                                         <li class="cocktail-label"><%= label %></li>
