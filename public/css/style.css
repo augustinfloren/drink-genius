@@ -99,7 +99,7 @@ h2 {
 
 /*#### MODAL PREVENTION ####*/
 .modal-container-prevention{
-    display: flex;
+    display:none;
     position: absolute;
     top: 0;
     width: 100vw;
@@ -182,6 +182,11 @@ h2 {
     font-size: 1.5em;
     margin-bottom: 4em;
   }
+
+  .error-input {
+    border: 2px solid red;
+}
+
 /*#### FOOTER ####*/
 
 #footer {
