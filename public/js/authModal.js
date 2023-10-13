@@ -61,33 +61,31 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Mot de passe
   // Récupération du regex
   const passRegex = new RegExp(passwordInput.getAttribute("pattern"));
+
+  // Listener mot de passe
   const ifWrongPassListener = (event) => {
     const inputValue = event.target.value;
+
     if (inputValue.length > 0 && !passRegex.test(inputValue)) {
       passSpan.style.display = "block";
       passSpan.innerText = "Doit contenir au moins 8 caractères, une majuscule, un chiffre, et un caractère spécial.";
-      setTimeout(() => {
-        passSpan.style.display="none";
-      }, 5000);
-    } else {
-      passSpan.display ="none";
+    } else if (passRegex.test(inputValue)) {
+      passSpan.style.display ="none";
     }
   }
 
+  // listener Confirmation
   const comparePassListener = (event) => {
     const password = passwordInput.value
     const inputValue = event.target.value;
-    if (inputValue.length > 0 && inputValue !== password) {
+
+    if (inputValue.length > 0 && inputValue !== password ) {
       passSpan.style.display = "block";
       passSpan.innerText = "Les mots de passe doivent correspondrent.";
-      setTimeout(() => {
-        passSpan.style.display="none";
-      }, 2000);
     } else {
-      passSpan.display ="none";
+      passSpan.style.display ="none";
     }
   }
 
