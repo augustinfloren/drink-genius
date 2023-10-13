@@ -100,3 +100,9 @@ html {
   line-height: 15pt;
   text-align: center;
 }
+
+@media screen and (max-width: 790px) {
+  #cocktail-top-section {
+    flex-direction: column;
+  }
+}

@@ -3,18 +3,10 @@
         <main id="main">
             <div id="cocktail-main-container">
 
-                <nav>
-                    <ul id="cocktail-nav">
-                        <li><a href="/cocktails">Liste des cocktails</a></li>
-                        <p>></p>
-                        <li id="cocktail-nav-current"><%=cocktailInfo.name%></li>
-                    </ul>
-                </nav>
-
                 <div id="cocktail-container">
                     <h2><%=cocktailInfo.name.charAt(0).toUpperCase() + cocktailInfo.name.slice(1)%></h2>
                     <div id="cocktail-top-section">
-                        <div id="cocktail-img-big" style="background-image: url('/images/<%= cocktailInfo.picture %>');" alt="Image de <%= cocktailInfo.name %>" data-info="<%= cocktailInfo.id %>"></div>
+                        <div id="cocktail-img" style="background-image: url('/images/<%= cocktailInfo.picture %>');" alt="Image de <%= cocktailInfo.name %>" data-info="<%= cocktailInfo.id %>"></div>
                         <% if (cocktailInfo.labels) { %>
                             <div id="labels-container">
                                 <% if (locals.user) { %>
@@ -60,5 +52,9 @@
             </div>
         </main>
 
+        <script>
+            if (window.innerWidth < 790) {
+
+        </script>
         <script type="module" src="/js/favouritesToggle.js"></script>
 <%- include("partials/footer") %>

@@ -80,10 +80,11 @@
               <input class="input" type="email" name="email" id="email-input" placeholder="Votre email" required>
             </li>
             <li>
-              <input class="input" type="password" name="password" id="password-input" placeholder="Votre mot de passe" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" onkeyup="" required>
+              <input class="input" type="password" name="password" id="password-input" placeholder="Votre mot de passe" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" required>
             </li>
-            <li>
+            <li id="pass-field">
               <input class="input" type="password" name="confirmation" id="confirmation-input" placeholder="Confirmation" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$">
+              <span></span>
             </li>
             <button type="submit" id="auth-modal-btn" class="signup-btn">S'enregistrer</button>
           </ul>
