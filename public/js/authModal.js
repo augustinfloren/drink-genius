@@ -180,8 +180,11 @@ document.addEventListener("DOMContentLoaded", function () {
     isRegistrationModal = false;
     dateSpan.style.display = "none";
 
-    // Supression du listener signup
+    // Suppression du listener signup
     form.removeEventListener("submit", signupListener);
+
+    // Suppression du listener infos password
+    passwordInput.removeEventListener("keyup", ifWrongPassListener);
 
     // Ajout du listener login
     form.addEventListener("submit", loginListener);
