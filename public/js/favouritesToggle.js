@@ -1,7 +1,7 @@
 // AFFICHAGE DU BOUTON AJOUTER/SUPPRIMER
 let addFavouriteButton = document.getElementById('add-favourites-btn');
 let deleteFavouriteButton = document.getElementById('delete-favourite-btn');
-const cocktailId = document.getElementById('cocktail-img-big').getAttribute('data-info');
+const cocktailId = document.querySelector('cocktail-img').getAttribute('data-info');
 const message = document.getElementById('confirmation-message');
 let favouritesDb = [];
 
