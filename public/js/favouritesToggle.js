@@ -1,8 +1,11 @@
+// AFFICHAGE DU BOUTON AJOUTER/SUPPRIMER
 let addFavouriteButton = document.getElementById('add-favourites-btn');
 let deleteFavouriteButton = document.getElementById('delete-favourite-btn');
 const cocktailId = document.getElementById('cocktail-img-big').getAttribute('data-info');
+const message = document.getElementById('confirmation-message');
 let favouritesDb = [];
 
+// RECUPERATION DES ID DES COCKTAILS FAVORIS PAR UTILISATEUR CONNECTE
 function getFavouritesId(){
     return fetch("/profile/usersfavourites", {
         method: "GET",
@@ -24,6 +27,7 @@ function getFavouritesId(){
         });
 }
 
+// AFFICHAGE BOUTON AJOUTER/SUPPRIMER
 async function favouritesToggle() {
 await getFavouritesId();
 const presence = favouritesDb.some(el => el.id === parseInt(cocktailId));
@@ -36,14 +40,52 @@ if(presence){
 
 favouritesToggle();
 
-const manageDiv = document.getElementById("labels-container");
-const firstChild = document.getElementById('cocktail-top-section');
+// ECOUTE SUR LE BOUTON AJOUTER AUX FAVORIS
+document.addEventListener("DOMContentLoaded", function () {
+  const addFavouritesBtn = document.getElementById("add-favourites-btn");
+  
+  if (addFavouritesBtn) {
+    addFavouritesBtn.addEventListener("click", function () {
+      const cocktailId = this.getAttribute("data-cocktail-id");
+      
+      // ECRITURE EN BDD DU NOUVEAU COCKTAIL FAVORI
+      fetch("/profile/favourites", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ cocktailId: cocktailId })
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("La requête a échoué");
+          }
+          return response.json();
+        })
+        .then(data => {
+          message.textContent = "Cocktail ajouté aux favoris!";
+          message.style.display = "block";
+          setTimeout(() => {
+            message.style.display = "none";
+            deleteFavouriteButton.style.display = "block";
+            addFavouriteButton.style.display = "none";
+          }, 1500);
+             
+        })
+        .catch(error => {
+          console.error("Erreur : ", error);
+          
+          
+        });
+    });
+  }
+});
 
-const deleteMessage = document.createElement('div');
-deleteMessage.textContent = 'Le cocktail a bien été retiré des favoris.';
-
+// ECOUTE SUR LE BOUTON DE SUPPRESSION DES FAVORIS
 deleteFavouriteButton.addEventListener('click', function(){
     const cocktailId = this.getAttribute('data-info');
+
+    // SUPPRESSION DU COCKTAIL EN BDD
     fetch('/profile/favourites', {
         method: 'DELETE',
         body: JSON.stringify({ cocktailId: cocktailId }),
@@ -58,10 +100,12 @@ deleteFavouriteButton.addEventListener('click', function(){
         return response.json();
     })
     .then(data => {
-    manageDiv.insertBefore(deleteMessage, deleteFavouriteButton);
+        message.textContent = 'Le cocktail a bien été retiré des favoris.';
+        message.style.display = "block";
     setTimeout(() => {
-        deleteMessage.remove();
-        location.reload();
+        message.style.display = "none";
+        deleteFavouriteButton.style.display = "none";
+        addFavouriteButton.style.display = "block";
         }, 1500);
     })
     .catch(error => {

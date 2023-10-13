@@ -18,8 +18,9 @@
                         <% if (cocktailInfo.labels) { %>
                             <div id="labels-container">
                                 <% if (locals.user) { %>
+                                <div id="confirmation-message" style="display: none;"></div>
                                 <button id="add-favourites-btn" class="button" style="display: none;"  type="button" data-cocktail-id="<%= cocktailInfo.id %>">Ajouter aux favoris</button>
-                                <button id="delete-favourite-btn" class="button delete-favourite" style="display: none;" type="button" data-info="<%= cocktailInfo.id %>">Supprimer des favoris</button>
+                                <button id="delete-favourite-btn" class="button" style="display: none;" type="button" data-info="<%= cocktailInfo.id %>">Supprimer des favoris</button>
                                 <% } %>
                                 <ul id="labels-list">
                                     <% cocktailInfo.labels.forEach(label => { %>
@@ -59,6 +60,5 @@
             </div>
         </main>
 
-        <script type="module" src="/js/addToFavourites.js" defer></script>
         <script type="module" src="/js/favouritesToggle.js"></script>
 <%- include("partials/footer") %>
