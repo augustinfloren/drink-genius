@@ -179,6 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
     alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
     isRegistrationModal = false;
     dateSpan.style.display = "none";
+    passSpan.style.display = "none";
 
     // Suppression du listener signup
     form.removeEventListener("submit", signupListener);
