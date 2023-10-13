@@ -23,12 +23,12 @@ html {
 
 /* Bouton Favoris */
 .add-favourite-btn {
-  width: fit-content;
-  position: absolute;
+  margin-left: 15px;
   margin-top: 15px;
-  margin-left: 20px;
+  position: absolute;
   cursor: pointer;
 }
+
 
 #cocktail-top-section {
   display: flex;
