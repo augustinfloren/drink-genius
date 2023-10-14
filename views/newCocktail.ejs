@@ -17,6 +17,15 @@
                         </select>
                         <label for="quantity-input">Quantité</label>
                         <input type="number" id="quantity-1" name="quantity" required>
+                    
+                        <label id="ingredients-label" for="ingredient-input">Ingrédients</label>
+                        <select class="new-cocktail-dropdown" id="ingredient-1" name="ingredientId">
+                            <% ingredients.forEach(ingredient => { %>
+                                <option value="<%= ingredient.id %>"><%= ingredient.name %>(<%= ingredient.unit %>)</option>
+                            <% }) %>
+                        </select>
+                        <label for="quantity-input">Quantité</label>
+                        <input type="number" id="quantity-1" name="quantity" required>
                     </div>
                     <div class="add-ingredient-button">+ Ajouter un ingrédient</div>
                     <button type="submit" class="button">Envoyer</button>

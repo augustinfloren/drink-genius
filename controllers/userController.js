@@ -76,9 +76,9 @@ const userController = {
     const userId = req.session.user.id;
 
     // CONVERSION DES ID EN INTEGER
-    ingredientId = ingredientId.map(el => parseInt(el, 10));
-    quantity = quantity.map(el => parseInt(el, 10));
-      
+      ingredientId = ingredientId.map(el => parseInt(el, 10));
+      quantity = quantity.map(el => parseInt(el, 10));
+
     // VERIFICATION DU NOM ENVOYE
     const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\d'-]+$/;
     if(!regex.test(name)){
@@ -101,25 +101,14 @@ const userController = {
     };
 
     const ingredientJson = convertintoJSON(ingredientId, quantity);
-    console.log(ingredientJson);
 
     const result = await cocktailDataMapper.addOneCocktailFunction(name, instruction, userId, ingredientJson);
-    // ENVOI EN BDD  
-    // AJOUT DANS LA TABLE COCKTAIL
-/*     const cocktailResult = await cocktailDataMapper.addOneCocktailByUser(name, instruction, userId);
-    const cocktailId = cocktailResult[0].id; */
-    
-
-    // AJOUT DES INGREDIENTS ET QUANTITES DANS LA TABLE D'ASSOCIATION
-/*     if(Array.isArray(ingredientId)){
-      ingredientId.forEach(async (givenIngredient, index) => {
-      let givenQuantity = quantity[index];
-      const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, givenIngredient, givenQuantity);
-    });
-  } else {
-      const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, ingredientId, quantity);
-    } */
-    res.redirect('/profile/usercocktails');
+    if(result){
+      res.redirect('/profile/usercocktails');
+    } else {
+      const errorMessage = "Une erreur serveur est survenue."
+      return res.status(500).render('errorPage', {errorMessage})
+  }
 },
 
   async renderUserCocktailsPage(req, res){

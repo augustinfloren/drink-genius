@@ -109,18 +109,6 @@ const cocktailDataMapper = {
         return result.rows;
     },
 
-    // AJOUT D'UN COCKTAIL PAR UTILISATEUR
-    async addOneCocktailByUser(name, instruction, user_id) {
-        const validation = false;
-        const picture = "cocktail.png";
-        const sqlQuery = {
-            text: 'INSERT INTO cocktail(name, instruction, validation, picture, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING cocktail.id',
-            values: [name, instruction, validation, picture, user_id]
-        };
-        const result = await client.query(sqlQuery);
-        return result.rows;
-    },
-
     // AJOUT D'UN COCKTAIL -- FONCTION
     async addOneCocktailFunction(name, instruction, user_id, ingredientsData){
         const sqlQuery = {
