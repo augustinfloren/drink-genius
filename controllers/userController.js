@@ -72,8 +72,12 @@ const userController = {
   },
 
   async addNewCocktail(req, res){
-    const { name, instruction, ingredientId, quantity } = req.body;
+    let { name, instruction, ingredientId, quantity } = req.body;
     const userId = req.session.user.id;
+
+    // CONVERSION DES ID EN INTEGER
+    ingredientId = ingredientId.map(el => parseInt(el, 10));
+    quantity = quantity.map(el => parseInt(el, 10));
       
     // VERIFICATION DU NOM ENVOYE
     const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\d'-]+$/;
@@ -81,21 +85,40 @@ const userController = {
       const errorMessage = "Le nom du cocktail ne doit contenir que des lettres et des chiffres."
       return res.status(400).render('errorPage', {errorMessage})
     }
+    
+    // CONVERSION DE DEUX TABLES EN JSON
+    function convertintoJSON(ingredients, quantities){
+      const elementsJson = [];
+      for (let i = 0; i < ingredients.length; i++){
+        const association = {
+          ingredient_id : ingredients[i],
+          quantity : quantities[i]
+        };
+        elementsJson.push(association);
+      };
+      const jsonObject = JSON.stringify(elementsJson);
+      return jsonObject;
+    };
 
+    const ingredientJson = convertintoJSON(ingredientId, quantity);
+    console.log(ingredientJson);
+
+    const result = await cocktailDataMapper.addOneCocktailFunction(name, instruction, userId, ingredientJson);
     // ENVOI EN BDD  
     // AJOUT DANS LA TABLE COCKTAIL
-    const cocktailResult = await cocktailDataMapper.addOneCocktailByUser(name, instruction, userId);
-    const cocktailId = cocktailResult[0].id;
+/*     const cocktailResult = await cocktailDataMapper.addOneCocktailByUser(name, instruction, userId);
+    const cocktailId = cocktailResult[0].id; */
     
+
     // AJOUT DES INGREDIENTS ET QUANTITES DANS LA TABLE D'ASSOCIATION
-    if(Array.isArray(ingredientId)){
+/*     if(Array.isArray(ingredientId)){
       ingredientId.forEach(async (givenIngredient, index) => {
       let givenQuantity = quantity[index];
       const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, givenIngredient, givenQuantity);
     });
   } else {
       const ingredientResult = await ingredientDataMapper.addIngredientToCocktail(cocktailId, ingredientId, quantity);
-    }
+    } */
     res.redirect('/profile/usercocktails');
 },
 

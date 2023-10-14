@@ -121,6 +121,16 @@ const cocktailDataMapper = {
         return result.rows;
     },
 
+    // AJOUT D'UN COCKTAIL -- FONCTION
+    async addOneCocktailFunction(name, instruction, user_id, ingredientsData){
+        const sqlQuery = {
+            text : 'SELECT * FROM newcocktail($1, $2, $3, $4)',
+            values: [name, instruction, user_id, ingredientsData]
+        };
+        const result = await client.query(sqlQuery);
+        return result;
+    },
+
     // AJOUT D'UN COCKTAIL PAR ADMIN
     async addOneCocktailByAdmin(name, instruction, user_id) {
         const validation = true;
