@@ -1,31 +1,31 @@
 <%- include("partials/header") %>
 
+
+
         <!-- MAIN -->
         <main id="main">
-          <div id="generator-main-container">
 
-            <!--MODAL PREVENTION-->
-<div class="modal-container-prevention">
-    <div class="overlay present"></div>
-      <div class="modal-prevention"role="dialog" aria-labelledby="modalTitle">
-          <h3 id="modalTitle">Bienvenue sur Drink Genius !</h3>
-            <p>Avant que tu puisses profiter de cette application et que tu vives ta meilleure vie de Bartender.</p>
-              <form id="ageForm">
-                
-                <label for="birthYear">Nous aimerions vérifier ton année de naissance: </label>  
-                
-                <input class="birthYear"type="number" id="birthYear" name="birthYear" min="1900">
-                <div id="birthYear-error" style="display: none; color: red;">Ne sois pas timide...</div>              
-                <div class="btn-validation">
-                    <button type="button"class="modal-btn " id="checkAgeButton">Valider</button>
+        <!--MODAL PREVENTION-->
+        <div class="modal-container-prevention">
+            <div class="overlay present"></div>
+            <div class="modal-prevention" role="dialog" aria-labelledby="modalTitle">
+                <h3 id="modalTitle">Bienvenue sur Drink Genius !</h3>
+                <p>Avant que tu puisses profiter de cette application et que tu vives ta meilleure vie de Bartender.</p>
+                <form id="ageForm">
+                    <label for="birthYear">Nous aimerions vérifier ton année de naissance: </label>
+                    <input class="birthYear" type="number" id="birthYear" name="birthYear" min="1900">
+                    <div id="birthYear-error" style="display: none; color: red;">Ne sois pas timide...</div>
+                    <div class="btn-validation">
+                        <button type="button" class="modal-btn " id="checkAgeButton">Valider</button>
                     </div>
-              </form>
-                  <p>Nous rappelons que l’abus d’alcool est dangereux pour la santé, consommez avec modération !</p>
-      </div>
-  </div>
-                    <div id="message-prevention"></div>
-                    
-            <!-- NEW -->
+                </form>
+                <p>Nous rappelons que l’abus d’alcool est dangereux pour la santé, consommez avec modération !</p>
+            </div>
+            <div id="message-prevention"></div>
+        </div>
+
+        <!-- Générateur -->
+        <div id="generator-main-container">
             <div id="generator-container">
               <div id="machine-container">
                   <div id="machine">
@@ -103,7 +103,10 @@
               </div>
             </div>
           </div>
+
         </main>
+
         <script type="module" src="/js/random.js" defer></script>
         <script src="/js/generator.js"></script>
+
 <%- include("partials/footer") %>
