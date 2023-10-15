@@ -48,16 +48,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Listeners infos champs formulaire
-  // Date
+  // Messages d'erreurs date
   const ifWrongDateListener = (event) => {
     const inputValue = event.target.value;
     const currentYear = new Date().getFullYear();
     if (parseInt(inputValue) > currentYear - 18) {
       dateSpan.style.display = "block";
       dateSpan.innerText = "Vous devez avoir au moins 18 ans.";
-      setTimeout(() => {
-        dateSpan.style.display="none";
-      }, 2000);
+    } else {
+      dateSpan.style.display="none";
+    }
+    if (parseInt(inputValue) < 1900) {
+      dateSpan.style.display = "block";
+      dateSpan.innerText = "Veuillez entrer une année de naissance valide.";
+    } else {
+      dateSpan.style.display="none";
     }
   }
 

@@ -36,44 +36,12 @@
   position:absolute;
   top:50%;
   left:50%;
+  max-width: 400px;
   border-radius: 25px;
   height: fit-content;
 }
 
-#auth-modal-form {
-  width: 70%;
-}
-
-#auth-modal-form ul {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-#auth-modal-form ul li {
-  font-size: 1.2em;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-#auth-modal-form input {
-  text-align: center;
-  font-family: 'Mooli', sans-serif;
-  border: none;
-  background-color: #2d213f15;
-  border-radius: 30px;
-  padding: 5px;
-  width: 270px;
-  height: 40px;
-}
-
-#auth-modal-form label {
-  cursor: alias;
-}
-
-#auth-modal-btn {
+.modal-button {
   font-family: 'Mooli', sans-serif;
   border-radius: 50px;
   border: 2px solid var(--theme-purple);
@@ -84,7 +52,7 @@
   width: 200px;
 }
 
-#auth-modal-form ul button:hover {
+.modal-button:hover {
   color: white;
   background-color: var(--theme-purple);
 }
@@ -119,45 +87,96 @@
   margin-bottom: 5px;
 }
 
-@media screen and (max-width: 790px) {
-.modal {
-  top: 50%;
-  padding: 20px;
-  max-width: 400px;
-  gap: 20px;
+/*#### MODALE AUTH ####*/
+#auth-modal-form ul{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
-#auth-modal-form {
-   width: 90%;
-   gap: 10px;
-}
-
-#auth-modal-form ul li {
-  font-size: 0.9em;
+#auth-modal-form ul li{
+  font-size: 1.2em;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-#auth-modal-form input {
-  height: 30px;
+#auth-modal-form input, #prevention-modal-form input{
+  text-align: center;
+  font-family: 'Mooli', sans-serif;
+  border: none;
+  background-color: #2d213f15;
+  border-radius: 30px;
+  padding: 5px;
+  width: 270px;
+  height: 40px;
 }
 
-#auth-modal-form ul button {
-
-  margin-top: 20px;
-  font-size: 1em;
-  padding: 15px;
-  width: 150px;
-  color: white;
-  background-color: var(--theme-purple);
+#auth-modal-form label, #prevention-modal-form label {
+  cursor: alias;
 }
 
-#auth-modal-form ul {
+
+/*#### MODALE PREVENTION ####*/
+#prevention-modal-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 
-#modalTitle {
-  width: 80%;
+#prevention-modal-form input {
+  width: 100px;
 }
+
+#message-prevention {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 1.5em;
+  margin-bottom: 4em;
+}
+
+@media screen and (max-width: 790px) {
+  .modal {
+    top: 50%;
+    padding: 40px 20px;
+    width:330px;
+    gap: 20px;
+  }
+
+  /* AUTH */
+  #auth-modal-form {
+    width: 90%;
+    gap: 10px;
+  }
+
+  #auth-modal-form ul li {
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #auth-modal-form input {
+    height: 30px;
+  }
+
+  #auth-modal-form ul button {
+    margin-top: 20px;
+    font-size: 1em;
+    padding: 15px;
+    width: 150px;
+    color: white;
+    background-color: var(--theme-purple);
+  }
+
+  #auth-modal-form ul {
+    gap: 10px;
+  }
+
+  #modalTitle {
+    width: 80%;
+  }
 }
