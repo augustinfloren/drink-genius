@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   // Modale
-  const modalContainer = document.querySelector(".modal-container");
+  const modalContainer = document.getElementById("auth-modal");
   const modal = document.querySelector(".modal");
 
   // Lien already registered

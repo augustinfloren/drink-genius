@@ -105,11 +105,11 @@ h2 {
     width: 100vw;
     height: 100vh;
 }
- .overlay.present {
+ /* .overlay.present {
     opacity: 0.6;
     background-color: black;
     transition: all 0.4s;
-  }
+  } */
 
   .modal-prevention{
     z-index: 7;

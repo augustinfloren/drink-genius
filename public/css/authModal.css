@@ -11,15 +11,12 @@
   z-index: 5;
   display: block;
 }
+
 .overlay{
-  opacity: 0;
+  opacity: 0.6;
   position:absolute;
   width: 100vw;
   height: 100vh;
-  background-color: black;
-}
-.modal-container.active .overlay{
-  opacity: 0.6;
   background-color: black;
 }
 
