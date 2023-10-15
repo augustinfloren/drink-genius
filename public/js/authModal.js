@@ -22,15 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Message d'erreurs pour les champs du form
   const dateSpan = document.querySelector("#date-field span");
-  dateSpan.style.display = "none";
-  dateSpan.style.fontSize = "0.8em";
-  dateSpan.style.color = "red";
-
   const passSpan = document.querySelector("#pass-field span");
-  passSpan.style.display = "none";
-  passSpan.style.fontSize = "0.8em";
-  passSpan.style.color = "red";
-  passSpan.style.width = "270px";
+  const confirmationSpan = document.querySelector("#confirmation-field span");
 
   // Flag pour switcher entre login et signup
   let isRegistrationModal = false;
@@ -52,13 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const ifWrongDateListener = (event) => {
     const inputValue = event.target.value;
     const currentYear = new Date().getFullYear();
-    if (parseInt(inputValue) > currentYear - 18) {
+    if (inputValue.length === 4 && parseInt(inputValue) > currentYear - 18) {
       dateSpan.style.display = "block";
       dateSpan.innerText = "Vous devez avoir au moins 18 ans.";
-    } else {
-      dateSpan.style.display="none";
-    }
-    if (parseInt(inputValue) < 1900) {
+    } else if (inputValue.length === 4 && parseInt(inputValue) < 1900) {
       dateSpan.style.display = "block";
       dateSpan.innerText = "Veuillez entrer une année de naissance valide.";
     } else {
@@ -87,10 +77,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputValue = event.target.value;
 
     if (inputValue.length > 0 && inputValue !== password ) {
-      passSpan.style.display = "block";
-      passSpan.innerText = "Les mots de passe doivent correspondrent.";
+      confirmationSpan.style.display = "block";
+      confirmationSpan.innerText = "Les mots de passe doivent correspondrent.";
     } else {
-      passSpan.style.display ="none";
+      confirmationSpan.style.display ="none";
     }
   }
 

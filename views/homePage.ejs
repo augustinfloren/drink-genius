@@ -9,16 +9,14 @@
         <div class="modal-container" id="prevention-modal">
             <div class="overlay"></div>
             <div class="modal" role="dialog" aria-labelledby="modalTitle">
-                <h3 id="modalTitle">Bienvenue sur Drink Genius !</h3>
+                <h3 id="modal-title">Bienvenue sur Drink Genius !</h3>
                 <p>Avant que vous puissiez profiter de cette application nous aimerions vérifier votre année de naissance.</p>
                 <form id="prevention-modal-form">
-                    <input class="birthYear" type="number" id="birthYear" name="birthYear" min="1900" pattern="(?:19|20)\d\d">
-                    <div id="birthYear-error" style="display: none; color: red;"></div>
+                    <input type="number" id="birth-year" name="birthYear">
+                    <span></span>
                     <button type="button" class="modal-button" id="checkAgeButton">Valider</button>
                 </form>
-                <!-- <p>Nous rappelons que l’abus d’alcool est dangereux pour la santé, consommez avec modération !</p> -->
             </div>
-            <div id="message-prevention"></div>
         </div>
 
         <!-- Générateur -->
