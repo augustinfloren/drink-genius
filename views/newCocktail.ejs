@@ -5,7 +5,7 @@
             <h2>Votre cocktail</h2>
                 <form class="profil-form" id="new-cocktail-form" method="POST" action="/newcocktail">
                     <label for="name-input">Nom de la recette</label>
-                    <input id="name-input" type="text" name="name"  required>
+                    <input id="name-input" type="text" name="name" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\d'\-\s]+$" required>
                     <label for="instruction-input">Recette</label>
                     <textarea id ="instruction-input" name="instruction"></textarea>
                     <div id="ingredients-section">

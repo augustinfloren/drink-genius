@@ -80,7 +80,7 @@ const userController = {
       quantity = quantity.map(el => parseInt(el, 10));
 
     // VERIFICATION DU NOM ENVOYE
-    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\d'-]+$/;
+    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\d\s'-]+$/;
     if(!regex.test(name)){
       const errorMessage = "Le nom du cocktail ne doit contenir que des lettres et des chiffres."
       return res.status(400).render('errorPage', {errorMessage})
