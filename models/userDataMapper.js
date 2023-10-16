@@ -3,8 +3,12 @@ const client = require('./dbClient');
 const dataMapper = {
     // AFFICHER TOUS LES UTILISATEURS NON-ADMIN
     async getAllUsers(){
-        const result = await client.query(`SELECT * FROM "user" WHERE role_id=2`);
-        return result.rows;
+        try {
+            const result = await client.query(`SELECT * FROM "user" WHERE role_id=2`);
+            return result.rows;
+        } catch(error) {
+            return {error: "Erreur s'est produite avec le serveur."}
+        }
     },
 
     // CONNEXION
@@ -69,67 +73,91 @@ const dataMapper = {
 
     // MODIFICATION PROFIL
     async updateUser(userInfo, id){
-        const { firstname, lastname, birthdate, email, location, hobbies } = userInfo;
-        const sqlQuery = {
-            text: `UPDATE "user" SET firstname = $1, lastname = $2, birthdate = $3, email = $4, location =$5, hobbies =$6 WHERE id=$7 RETURNING id, lastname, firstname, birthdate, location, email, hobbies, role_id`,
-            values:[firstname, lastname, birthdate, email, location, hobbies, id]
-        };
-        const result = await client.query(sqlQuery);
-        return result.rows[0];
+        try {
+            const { firstname, lastname, birthdate, email, location, hobbies } = userInfo;
+            const sqlQuery = {
+                text: `UPDATE "user" SET firstname = $1, lastname = $2, birthdate = $3, email = $4, location =$5, hobbies =$6 WHERE id=$7 RETURNING id, lastname, firstname, birthdate, location, email, hobbies, role_id`,
+                values:[firstname, lastname, birthdate, email, location, hobbies, id]
+            };
+            const result = await client.query(sqlQuery);
+            return result.rows[0];
+        } catch (error) {
+            return {error: "Erreur s'est produite avec le serveur. Le profil n'a pas été modifié."}
+        }
     },
 
     // DESINSCRIPTION
     async deleteUser(userId){
-        const sqlQuery= {
-            text:`DELETE FROM "user" WHERE id=$1`,
-            values:[userId]
-        };
-        const result = await client.query(sqlQuery);
+        try {
+            const sqlQuery= {
+                text:`DELETE FROM "user" WHERE id=$1`,
+                values:[userId]
+            };
+            const result = await client.query(sqlQuery);
 
-        return result.rowCount;
+            return result.rowCount;
+        } catch (error) {
+            return {error: "Erreur s'est produite avec le serveur. L'uilisateur est toujours inscrit."}
+        }
     },
 
     // RECUPERER LES COCKTAILS FAVORIS PAR UTILISATEUR
     async getFavourites(user_id){
-        const sqlQuery = {
-            text: `SELECT * FROM cocktail
-            JOIN user_like_cocktail AS favourites ON cocktail.id = favourites.cocktail_id
-            WHERE favourites.user_id =$1`,
-            values: [user_id]
-        };
-        const result = await client.query(sqlQuery);
-        return result.rows;
+        try {
+            const sqlQuery = {
+                text: `SELECT * FROM cocktail
+                JOIN user_like_cocktail AS favourites ON cocktail.id = favourites.cocktail_id
+                WHERE favourites.user_id =$1`,
+                values: [user_id]
+            };
+            const result = await client.query(sqlQuery);
+            return result.rows;
+        } catch (error) {
+            return {error: "Erreur s'est produite avec le serveur."}
+        }
     },
 
     // RECUPERER LES COCKTAILS PAR UTILISATEUR
     async getUserCocktails(user_id){
-        const sqlQuery = {
-            text: 'SELECT * FROM cocktail WHERE user_id=$1',
-            values: [user_id]
-        };
-        const result = await client.query(sqlQuery)
-        return result.rows;
+        try {
+            const sqlQuery = {
+                text: 'SELECT * FROM cocktail WHERE user_id=$1',
+                values: [user_id]
+            };
+            const result = await client.query(sqlQuery)
+            return result.rows;
+        } catch(error){
+            return {error: "Erreur s'est produite avec le serveur."}
+        }
     },
 
-  // AJOUTER UN COCKTAIL AUX FAVORIS DE L'UTILISATEUR
-  async addToFavourites(user_id, cocktail_id) {
-    const sqlQuery = {
-      text: "INSERT INTO user_like_cocktail(user_id, cocktail_id) VALUES ($1, $2) RETURNING *",
-      values: [user_id, cocktail_id],
-    };
-    const result = await client.query(sqlQuery);
-    return result;
-  },
+    // AJOUTER UN COCKTAIL AUX FAVORIS DE L'UTILISATEUR
+    async addToFavourites(user_id, cocktail_id) {
+        try {
+            const sqlQuery = {
+            text: "INSERT INTO user_like_cocktail(user_id, cocktail_id) VALUES ($1, $2) RETURNING *",
+            values: [user_id, cocktail_id],
+            };
+            const result = await client.query(sqlQuery);
+            return result;
+        } catch(error){
+            return {error: "Erreur s'est produite avec le serveur. Le cocktail n'a pas été ajouté aux favoris."}
+        }
+    },
 
-  // SUPPRIMER UN COCKTAIL DES FAVORIS
-  async deleteFromFavourites(user_id, cocktail_id){
-    const sqlQuery = {
-        text: "DELETE FROM user_like_cocktail WHERE user_id=$1 AND cocktail_id=$2",
-        values: [user_id, cocktail_id]
-    };
-    const result = await client.query(sqlQuery);
-    return result;
-  }
+    // SUPPRIMER UN COCKTAIL DES FAVORIS
+    async deleteFromFavourites(user_id, cocktail_id){
+        try {
+            const sqlQuery = {
+                text: "DELETE FROM user_like_cocktail WHERE user_id=$1 AND cocktail_id=$2",
+                values: [user_id, cocktail_id]
+            };
+            const result = await client.query(sqlQuery);
+            return result;
+        } catch(error){
+            return {error: "Erreur s'est produite avec le serveur. Le cocktail n'a pas été retiré des favoris."}
+        }
+    }
 };
 
 module.exports = dataMapper;

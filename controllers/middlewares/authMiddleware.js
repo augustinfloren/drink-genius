@@ -1,7 +1,7 @@
 // VERIFIE SI UN UTILISATEUR EST CONNECTE
 function isAuthed(req, res, next){
     if (!req.session.user){
-        res.redirect('/');
+        res.render('errorPage', {errorMessage: "Veuillez vous connecter."});
     } else {
         next();
     }
@@ -12,7 +12,7 @@ function isAdmin(req, res, next){
     if(req.session.user && req.session.user.role_id === 1){
         next();
     } else {
-        res.status(404).render('404');
+        res.render('errorPage', {errorMessage: "Vous n'avez pas les droits pour accéder à cette page."});
     }
 };
 
