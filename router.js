@@ -17,13 +17,13 @@ router.get("/randomvirgin", cw(mainController.getRandomVirginRecipe));
 router.get("/cocktails", cw(cocktailsController.renderAllCocktailsPage));
 router.get("/cocktail/:id", cw(cocktailsController.renderCocktailInfoPage));
 
-//Filtre
+// Filtre
 router.post("/cocktails",cw(cocktailsController.filterCocktailsBySpirits));
 
 // User - Connexion
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
-router.post("/login", userController.logInAndRedirect);
-router.get("/logout", auth.isAuthed, userController.logOutAndRedirect);
+router.post("/login", cw(userController.logInAndRedirect));
+router.get("/logout", auth.isAuthed, cw(userController.logOutAndRedirect));
 router.delete("/profile", auth.isAuthed, cw(userController.deleteProfile));
 
 // User - Profil
@@ -35,7 +35,7 @@ router.post("/profile/favourites", auth.isAuthed, cw(userController.addToFavouri
 router.delete("/profile/favourites", auth.isAuthed, cw(userController.deleteFavourite))
 router.get("/profile/newcocktail", auth.isAuthed, cw(userController.renderNewCocktailPage));
 router.post("/profile/newcocktail", auth.isAuthed, cw(userController.addNewCocktail));
-router.get("/ingredients", auth.isAuthed, userController.displayIngredients);
+router.get("/ingredients", auth.isAuthed, cw(userController.displayIngredients));
 router.get("/profile/usercocktails", auth.isAuthed, cw(userController.renderUserCocktailsPage));
 
 // Admin
