@@ -1,6 +1,6 @@
 // AFFICHAGE DU BOUTON AJOUTER/SUPPRIMER
-let favouriteButton = document.querySelector('.add-favourite-btn');
-const cocktailId = document.querySelector('.cocktail-img').getAttribute('data-info');
+let favouriteButton = document.querySelectorAll('.add-favourite-btn');
+// const cocktailId = document.querySelector('.cocktail-img').getAttribute('data-info');
 let favouritesDb = [];
 
 // RECUPERATION DES ID DES COCKTAILS FAVORIS PAR UTILISATEUR CONNECTE
@@ -25,17 +25,28 @@ async function getFavouritesId(){
   });
 }
 
+
 // AFFICHAGE BOUTON AJOUTER
-async function favouritesToggle() {
+
+favouriteButton.forEach(button => {
+    console.log(button)
+    // Vous pouvez accéder au cocktailId à partir de l'élément de bouton actuel ici
+    const cocktailId = button.getAttribute('data-cocktail-id');
+    console.log(cocktailId)
+    favouritesToggle(cocktailId, button);
+});
+  async function favouritesToggle(cocktailId, button) {
   await getFavouritesId();
   const presence = favouritesDb.some(el => el.id === parseInt(cocktailId));
   if(presence){
-    favouriteButton.classList.add('fa-solid');
-    favouriteButton.removeEventListener('click', addFavourite);
-    favouriteButton.addEventListener('click', deleteFavourite);
+    console.log(button);
+    button.classList.add('fa-solid');
+    button.removeEventListener('click', addFavourite);
+    button.addEventListener('click', deleteFavourite);
   } else {
     // ECOUTE SUR LE BOUTON AJOUTER AUX FAVORIS
-    favouriteButton.addEventListener("click", addFavourite);
+    console.log(button);
+    button.addEventListener('click', addFavourite);
   };
 
   function addFavourite() {
@@ -55,44 +66,44 @@ async function favouritesToggle() {
         return response.json();
       })
       .then(data => {
-        favouriteButton.classList.remove('fa-regular');
-        favouriteButton.classList.add('fa-solid');
-        favouriteButton.removeEventListener('click', addFavourite);
-        favouriteButton.addEventListener('click', deleteFavourite);
+        button.classList.remove('fa-regular');
+        button.classList.add('fa-solid');
+        button.removeEventListener('click', addFavourite);
+        button.addEventListener('click', deleteFavourite);
       })
       .catch(error => {
         console.error("Erreur : ", error);
       });
     }
 
-  // ECOUTE SUR LE BOUTON DE SUPPRESSION DES FAVORIS
+    // ECOUTE SUR LE BOUTON DE SUPPRESSION DES FAVORIS
 
   function deleteFavourite() {
     const cocktailId = this.getAttribute('data-cocktail-id');
     // SUPPRESSION DU COCKTAIL EN BDD
     fetch('/profile/favourites', {
-        method: 'DELETE',
+      method: 'DELETE',
         body: JSON.stringify({ cocktailId: cocktailId }),
         headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         }
-    })
-    .then(response => {
+      })
+      .then(response => {
         if (!response.ok){
-            throw new Error('la requete a échoué')
+          throw new Error('la requete a échoué')
         }
         return response.json();
-    })
-    .then(data => {
-        favouriteButton.classList.remove('fa-solid');
-        favouriteButton.classList.add('fa-regular');
-        favouriteButton.removeEventListener('click', deleteFavourite);
-        favouriteButton.addEventListener('click', addFavourite);
+      })
+      .then(data => {
+        button.classList.remove('fa-solid');
+        button.classList.add('fa-regular');
+        button.removeEventListener('click', deleteFavourite);
+        button.addEventListener('click', addFavourite);
     })
     .catch(error => {
         console.error('Erreur', error)
-    })
+      })
+    }
   }
-}
 
-favouritesToggle();
+  favouritesToggle();
