@@ -2,7 +2,6 @@ const random = {
     machine : document.getElementById("bloc"),
     virginLabel : document.getElementById("generator-virgin-option-label"),
     virginCheckbox : document.getElementById("generator-virgin-option-checkbox"),
-    filters : document.querySelector(".preferences-btn"),
     button : document.getElementById("boule"),
     newCocktail: document.getElementById("new-cocktail"),
     door: document.getElementById('door'),
@@ -32,7 +31,6 @@ const random = {
     newCocktailListener: async (event) => {
         event.preventDefault();
         random.virginLabel.style.display = ("block");
-        random.filters.style.display = ("block");
         const list = document.querySelector(".random-list");
         list.remove();
         random.virginCheckbox.checked = false;
@@ -87,7 +85,6 @@ const random = {
     // Affichage des ingrédients
     addRandomIngredients: ()=>{
         random.virginLabel.style.display = "none";
-        random.filters.style.display = "none";
 
         // Réinitialisation liste d'ingrédients
         if (document.querySelector(".random-list")){

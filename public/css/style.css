@@ -19,7 +19,7 @@ body {
   flex-grow: 1;
 }
 
-button {
+.button {
   font-family: 'Mooli', sans-serif;
   border-radius: 50px;
   border: 2px solid var(--theme-purple);
@@ -30,20 +30,14 @@ button {
   width: 200px;
 }
 
-button:disabled {
+.button:disabled {
   border-color: rgba(128, 128, 128, 0.438);
 }
 
-button:not(:disabled):hover {
+.button:not(:disabled):hover {
   color: white;
   background-color: var(--theme-purple);
 }
-
-/* .button:hover {
-    background-color: var(--theme-purple);
-    color: white;
-    cursor: pointer;
-} */
 
 /*#### HEADER ####*/
 
