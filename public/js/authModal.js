@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   // Modale
-  const modalContainer = document.querySelector(".modal-container");
+  const modalContainer = document.getElementById("auth-modal");
   const modal = document.querySelector(".modal");
 
   // Lien already registered
@@ -19,22 +19,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("auth-modal-btn");
   const closeBtn = document.getElementById("close-modal");
   const modalTriggerConnexion = document.querySelector(".modal-trigger-connexion");
+  const fields = form.querySelectorAll("input");
 
   // Message d'erreurs pour les champs du form
   const dateSpan = document.querySelector("#date-field span");
-  dateSpan.style.display = "none";
-  dateSpan.style.fontSize = "0.8em";
-  dateSpan.style.color = "red";
-
   const passSpan = document.querySelector("#pass-field span");
-  passSpan.style.display = "none";
-  passSpan.style.fontSize = "0.8em";
-  passSpan.style.color = "red";
-  passSpan.style.width = "270px";
+  const confirmationSpan = document.querySelector("#confirmation-field span");
+  let dateOK = false;
+  let passOK = false;
+  let confirmationOK = false;
 
   // Flag pour switcher entre login et signup
   let isRegistrationModal = false;
-
 
   // Listeners Fetch
   const loginListener = (event) => {
@@ -48,31 +44,49 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Listeners infos champs formulaire
-  // Date
+  // Messages d'erreurs date
   const ifWrongDateListener = (event) => {
     const inputValue = event.target.value;
     const currentYear = new Date().getFullYear();
-    if (parseInt(inputValue) > currentYear - 18) {
+    if (parseInt(inputValue) < 1900 || inputValue.length > 4) {
+      dateSpan.style.display = "block";
+      dateSpan.innerText = "Veuillez entrer une année de naissance valide.";
+      dateOK = false;
+    } else if (parseInt(inputValue) > currentYear - 18) {
       dateSpan.style.display = "block";
       dateSpan.innerText = "Vous devez avoir au moins 18 ans.";
-      setTimeout(() => {
-        dateSpan.style.display="none";
-      }, 2000);
+      dateOK = false;
+    } else {
+      dateSpan.style.display="none";
+      dateOK = true;
+      if (dateOK && passOK && confirmationOK) {
+        btn.removeAttribute("disabled");
+      }
     }
   }
 
   // Récupération du regex
   const passRegex = new RegExp(passwordInput.getAttribute("pattern"));
-
   // Listener mot de passe
   const ifWrongPassListener = (event) => {
     const inputValue = event.target.value;
-
-    if (inputValue.length > 0 && !passRegex.test(inputValue)) {
+    if (!passRegex.test(inputValue)) {
       passSpan.style.display = "block";
       passSpan.innerText = "Doit contenir au moins 8 caractères, une majuscule, un chiffre, et un caractère spécial.";
-    } else if (passRegex.test(inputValue)) {
+      passOK = false;
+    } else {
       passSpan.style.display ="none";
+      passOK = true;
+    }
+    const confirmation = confirmationInput.value
+    if (inputValue === confirmation) {
+      confirmationOK = true;
+      confirmationSpan.style.display ="none";
+    } else {
+      confirmationOK = false;
+    }
+    if (dateOK && passOK && confirmationOK) {
+      btn.removeAttribute("disabled");
     }
   }
 
@@ -81,11 +95,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const password = passwordInput.value
     const inputValue = event.target.value;
 
-    if (inputValue.length > 0 && inputValue !== password ) {
-      passSpan.style.display = "block";
-      passSpan.innerText = "Les mots de passe doivent correspondrent.";
+    if (inputValue !== password ) {
+      confirmationSpan.style.display = "block";
+      confirmationSpan.innerText = "Les mots de passe doivent correspondrent.";
+      confirmationOK = false;
     } else {
-      passSpan.style.display ="none";
+      confirmationSpan.style.display ="none";
+      confirmationOK = true;
+        if (dateOK && passOK && confirmationOK) {
+          btn.removeAttribute("disabled");
+        }
     }
   }
 
@@ -105,8 +124,17 @@ document.addEventListener("DOMContentLoaded", function () {
     form.action = "/login";
     btn.style.marginTop = "0px";
     btn.innerText = "Se connecter";
+    btn.removeAttribute("disabled");
     alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
     isRegistrationModal = false;
+    dateSpan.style.display = "none";
+    passSpan.style.display = "none";
+    confirmationSpan.style.display = "none";
+
+    // Suppresssion listener vérification champs
+    dateInput.removeEventListener("keyup", ifWrongDateListener);
+    passwordInput.removeEventListener("keyup", ifWrongPassListener);
+    confirmationInput.removeEventListener("keyup", comparePassListener);
 
     form.removeEventListener("submit", signupListener);
 
@@ -137,10 +165,11 @@ document.addEventListener("DOMContentLoaded", function () {
     form.action = "/signIn";
     btn.style.marginTop = "10px";
     btn.innerText = "S'enregistrer";
+    btn.setAttribute("disabled", "true");
     alreadyRegisteredLink.innerText = "Déjà inscrit ? Par ici !";
     isRegistrationModal = true;
 
-    // Infos champs
+    // Vérification champs
     dateInput.addEventListener("keyup", ifWrongDateListener);
     passwordInput.addEventListener("keyup", ifWrongPassListener);
     confirmationInput.addEventListener("keyup", comparePassListener);
@@ -176,10 +205,17 @@ document.addEventListener("DOMContentLoaded", function () {
     form.style.marginTop = "-20px";
     form.action = "/login";
     btn.innerText = "Se connecter";
+    btn.removeAttribute("disabled");
     alreadyRegisteredLink.innerText = "Pas encore membre ? Par ici !";
     isRegistrationModal = false;
     dateSpan.style.display = "none";
     passSpan.style.display = "none";
+    confirmationSpan.style.display = "none";
+
+    // Suppresssion listener vérification champs
+    dateInput.removeEventListener("keyup", ifWrongDateListener);
+    passwordInput.removeEventListener("keyup", ifWrongPassListener);
+    confirmationInput.removeEventListener("keyup", comparePassListener);
 
     // Suppression du listener signup
     form.removeEventListener("submit", signupListener);
@@ -223,7 +259,11 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(response => {
       if (!response.ok){
         return response.json().then(errorData => {
-        throw new Error(errorData);
+          if (errorData.error) {
+            throw new Error(errorData.error); // Erreurs de Joi
+          } else {
+            throw new Error(errorData); // Erreurs du contrôleur
+          }
       });
       }
       return response.json();
@@ -236,8 +276,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(error => {
       modalTitle.style.color = "red";
       modalTitle.style.fontSize = "1.3em";
-      if (error.message.includes('email')) {
+      if (error.message.includes('déjà enregistré')) {
         modalTitle.innerText = "Cet e-mail est déjà enregistré.";
+      } else if (error.message.includes('must be a valid email')){
+        modalTitle.innerText = "E-mail invalide.";
       } else {
         modalTitle.innerText = "Une erreur s'est produite lors de l'inscription.";
       }
@@ -277,7 +319,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 1000);
     })
     .catch(error => {
-      console.log(error)
       modalTitle.style.color = "red";
       modalTitle.style.fontSize = "1.3em";
       if (error.message.includes('Utilisateur')) {

@@ -1,5 +1,8 @@
 const Joi = require('joi');
 
+const currentYear = new Date().getFullYear();
+const eighteenYearsAgo = currentYear - 18;
+
 // Schéma de ce qui est attendu au niveau du formulaire d'inscription
 const schemaUserInput = Joi.object({
     email:Joi.string().email().required(),
@@ -7,7 +10,11 @@ const schemaUserInput = Joi.object({
     lastname:Joi.string().pattern(new RegExp("^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$")).required(),
     password:Joi.string().pattern(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$')).required(),
     confirmation:Joi.string().pattern(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$')).required(),
-    birthdate:Joi.number().integer().min(1900).max(2005).required()
+    birthdate: Joi.number()
+        .integer()
+        .min(1900)
+        .max(eighteenYearsAgo)
+        .required(),
 });
 
 module.exports = {
@@ -17,8 +24,8 @@ module.exports = {
         next();
     }
     else{
-        console.log(error)
-        res.status(400).json(error)
+        res.status(400).json({ error: error.details[0].message });
+        // res.status(400).json(error)
     }
-},
+  },
 }
