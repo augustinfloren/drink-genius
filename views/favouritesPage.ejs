@@ -11,11 +11,14 @@
         <p>Vous n'avez aucun favoris</p>
     <% } else { %>
       <% favourites.forEach(favourite => { %>
-        <a class="cocktail cocktails-container-item" href="/cocktail/<%=favourite.id%>"></a>
-        <h3 class="cocktail-title-mini"><%=favourite.name.charAt(0).toUpperCase() + favourite.name.slice(1)%>
-        </h3>
-        <div class="cocktail-img" style="background-image: url('/images/<%= favourite.picture %> ');" alt="Image de <%= favourite.name %>" data-info="<%= favourite.id %>"></div>
-        <i class="add-favourite-btn fa-regular fa-heart fa-sm" data-cocktail-id="<%= favourite.id %>"></i>
+        <div class="cocktails-container-item">
+          <h3 class="cocktail-title-mini"><%=favourite.name.charAt(0).toUpperCase() + favourite.name.slice(1)%>
+            <i class="add-favourite-btn fa-regular fa-heart fa-sm" data-cocktail-id="<%= favourite.id %>"></i>
+          </h3>
+          <a class="cocktail cocktails-container-item" href="/cocktail/<%=favourite.id%>">
+            <div class="cocktail-img" style="background-image: url('/images/<%= favourite.picture %> ');" alt="Image de <%= favourite.name %>" data-info="<%= favourite.id %>"></div>
+          </a>
+        </div>
       <% }) %>
     <% } %>
   </div>

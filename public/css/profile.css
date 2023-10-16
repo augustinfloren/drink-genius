@@ -164,6 +164,17 @@
     color: white;
 }
 
+/* Onglet Favoris */
+#favourite-container {
+    gap: 50px;
+}
+#favourite-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
 /* Onglet Proposer un cocktail */
 
 #new-cocktail-form {
@@ -234,6 +245,11 @@ textarea,
 }
 
 @media screen and (max-width: 790px) {
+
+    .cocktail-title-mini .add-favourite-btn {
+        margin-left: 5px;
+        font-size: 1em;
+    }
 
     #favourites-content, #user-cocktails-content {
         width: 70%;
