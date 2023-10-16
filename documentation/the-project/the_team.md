@@ -3,8 +3,7 @@
 Four teamates from the the remote classroom: Yellowstone decide to be involved in this project: The bar to Glass.
 All of them followed the Data option in their courses.  
 
-* Mathilde Calon : Lead Dev Back / Technical Ressource Manager Git
-* Augustin Floren : Technical Ressource Manager 
-* Maxime Gaure : Lead Dev Front
-*  Stéphane André : Product Owner /  Scrum Master
-
+* Stéphane André : Product Owner /  Scrum Master
+* Mathilde Calon : Lead Dev Back / Référente technique Git
+* Augustin Floren :  Lead Dev Front
+* Maxime Gaure : Référent technique technos
