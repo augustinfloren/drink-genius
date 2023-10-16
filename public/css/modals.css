@@ -160,14 +160,14 @@
     height: 30px;
   }
 
-  #auth-modal-form ul button {
+  /* #auth-modal-form ul button {
     margin-top: 20px;
     font-size: 1em;
     padding: 15px;
     width: 150px;
     color: white;
     background-color: var(--theme-purple);
-  }
+  } */
 
   #auth-modal-form ul {
     gap: 10px;

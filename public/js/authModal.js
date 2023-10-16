@@ -80,7 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     const confirmation = confirmationInput.value
     if (inputValue === confirmation) {
-      console.log("ok")
       confirmationOK = true;
       confirmationSpan.style.display ="none";
     } else {
@@ -260,7 +259,11 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(response => {
       if (!response.ok){
         return response.json().then(errorData => {
-        throw new Error(errorData);
+          if (errorData.error) {
+            throw new Error(errorData.error); // Erreurs de Joi
+          } else {
+            throw new Error(errorData); // Erreurs du contrôleur
+          }
       });
       }
       return response.json();
@@ -273,8 +276,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(error => {
       modalTitle.style.color = "red";
       modalTitle.style.fontSize = "1.3em";
-      if (error.message.includes('email')) {
+      if (error.message.includes('déjà enregistré')) {
         modalTitle.innerText = "Cet e-mail est déjà enregistré.";
+      } else if (error.message.includes('must be a valid email')){
+        modalTitle.innerText = "E-mail invalide.";
       } else {
         modalTitle.innerText = "Une erreur s'est produite lors de l'inscription.";
       }
