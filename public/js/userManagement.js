@@ -19,7 +19,6 @@ button.addEventListener('click', function (){
         if(!response.ok){
             throw new Error('la requete a échoué')
         }
-        console.log('fetch');
         return response.json();
     })
     .then(data => {

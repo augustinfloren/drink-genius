@@ -36,7 +36,6 @@
         return response.json();
       })
       .then(data => {
-          console.log('Données mises à jour : ', data);
           window.location.reload();
       })
       .catch(error => {
@@ -65,7 +64,6 @@
     })
     .then(data => {
         window.location.href = '/'
-        console.log(data);
     })
       .catch(error => {
           console.error('Erreur', error)
