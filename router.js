@@ -1,64 +1,48 @@
 const router = require("express").Router();
-const { mainController, cocktailsController, userController, randomController } = require('./controllers')
+const { mainController, cocktailsController, userController } = require('./controllers')
 const cw = require("./controllers/middlewares/controllerWrapper");
 const validationService = require("./services/validationService");
 const middleware404 = require("./controllers/middlewares/middleware404");
+const auth = require("./controllers/middlewares/authMiddleware")
 
 // Accueil
-router.get("/", cw(mainController.getHomePage));
-router.get("/legalnotice", cw(mainController.getLegalNoticePage));
-
-// Cocktails
-router.get("/cocktails", cw(cocktailsController.getAllCocktailsPage));
-router.get("/cocktail/:id", cw(cocktailsController.getCocktailInfoPage));
-router.post("/profile/newcocktail", cw(cocktailsController.addCocktailByUserPage));
-router.post("/admin/newcocktail", cw(cocktailsController.addCocktailByAdminPage));
-
-//Filtre
-router.post("/cocktails",cw(cocktailsController.getCocktailsBySpirits));
+router.get("/", cw(mainController.renderHomePage));
+router.get("/legalnotice", cw(mainController.renderLegalNoticePage));
 
 // Générateur
-router.get("/random", cw(randomController.getRandomIngredients));
-router.get("/randomvirgin", cw(randomController.getRandomVirginIngredients));
+router.get("/random", cw(mainController.getRandomRecipe));
+router.get("/randomvirgin", cw(mainController.getRandomVirginRecipe));
 
-// User
+// Cocktails
+router.get("/cocktails", cw(cocktailsController.renderAllCocktailsPage));
+router.get("/cocktail/:id", cw(cocktailsController.renderCocktailInfoPage));
+
+//Filtre
+router.post("/cocktails",cw(cocktailsController.filterCocktailsBySpirits));
+
+// User - Connexion
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
 router.post("/login", userController.logInAndRedirect);
-router.get("/profile/parameters", isAuthed, cw(userController.getProfilePage));
-router.patch("/profile", isAuthed, cw(userController.updateProfile));
-router.get("/logout", isAuthed, userController.logOutAndRedirect);
-router.get("/profile/favourites", isAuthed, cw(userController.renderFavouritesPages));
-router.post("/profile/favourites", isAuthed, cw(userController.addToFavouritesByUser));
-router.delete("/profile/favourites", isAuthed, cw(userController.deleteFavourite))
-router.get("/profile/newcocktail", isAuthed, cw(userController.renderNewCocktailPage));
-router.delete("/profile", isAuthed, cw(userController.deleteProfile));
-router.post("/newcocktail", isAuthed, cw(userController.addNewCocktail));
-router.get("/profile/usercocktails", isAuthed, cw(userController.renderUserCocktailsPage));
-router.get("/ingredients", isAuthed, userController.getAllIngredients);
-router.get("/profile/usersfavourites", isAuthed, cw(userController.getFavouriteCocktails))
+router.get("/logout", auth.isAuthed, userController.logOutAndRedirect);
+router.delete("/profile", auth.isAuthed, cw(userController.deleteProfile));
+
+// User - Profil
+router.get("/profile/parameters", auth.isAuthed, cw(userController.renderProfilePage));
+router.patch("/profile", auth.isAuthed, cw(userController.updateProfile));
+router.get("/profile/favourites", auth.isAuthed, cw(userController.renderFavouritesPages));
+router.post("/profile/favourites", auth.isAuthed, cw(userController.addToFavouritesByUser));
+router.delete("/profile/favourites", auth.isAuthed, cw(userController.deleteFavourite))
+router.get("/profile/newcocktail", auth.isAuthed, cw(userController.renderNewCocktailPage));
+router.post("/profile/newcocktail", auth.isAuthed, cw(userController.addNewCocktail));
+router.get("/ingredients", auth.isAuthed, userController.displayIngredients);
+router.get("/profile/usercocktails", auth.isAuthed, cw(userController.renderUserCocktailsPage));
 
 // Admin
-router.get("/admin/cocktails", isAdmin, cw(userController.getCocktailsManagementPage));
-router.post("/admin/cocktail", isAdmin, cw(userController.validateCocktail));
-router.delete("/admin/cocktail", isAdmin, cw(userController.deleteCocktail));
-router.get("/admin/users", isAdmin, cw(userController.renderUsersManagementPage));
-router.delete("/admin/user", isAdmin, cw(userController.deleteProfileByAdmin))
-
-function isAuthed(req, res, next){
-    if (!req.session.user){
-        res.redirect('/');
-    } else {
-        next();
-    }
-};
-
-function isAdmin(req, res, next){
-    if(req.session.user && req.session.user.role_id === 1){
-        next();
-    } else {
-        res.status(404).render('404');
-    }
-}
+router.get("/admin/cocktails", auth.isAdmin, cw(userController.renderCocktailsManagementPage));
+router.post("/admin/cocktail", auth.isAdmin, cw(userController.validateCocktail));
+router.delete("/admin/cocktail", auth.isAdmin, cw(userController.deleteCocktail));
+router.get("/admin/users", auth.isAdmin, cw(userController.renderUsersManagementPage));
+router.delete("/admin/user", auth.isAdmin, cw(userController.deleteProfileByAdmin));
 
 router.use(middleware404);
 

@@ -1,12 +1,27 @@
+const ingredientDataMapper = require('../models/ingredientDataMapper')
+
 const mainController = {
-  async getHomePage (req,res){
-    const message = req.session.errorMessage;
+  // AFFICHE LA PAGE D'ACCUEIL
+  async renderHomePage (req,res){
     let currentRoute = 'accueil';
-    res.render('homePage', {message, currentRoute});
+    res.render('homePage', {currentRoute});
   },
 
-  async getLegalNoticePage (req,res){
+  // AFFICHE LES MENTIONS LEGALES
+  async renderLegalNoticePage (req,res){
     res.render('legalNoticePage');
+  },
+
+  // GENERE UNE RECETTE ALEATOIRE AVEC ALCOOL
+  async getRandomRecipe(req, res){
+    const randomIngredients = await ingredientDataMapper.getRandomIngredients();
+    res.json(randomIngredients); 
+  },
+
+  // GENERE UNE RECETTE ALEATOIRE SANS ALCOOL
+  async getRandomVirginRecipe(req, res){
+      const randomVirginIngredients = await ingredientDataMapper.getRandomVirginIngredients();
+      res.json(randomVirginIngredients);
   }
 };
 

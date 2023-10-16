@@ -7,7 +7,7 @@ const cocktailDataMapper = {
         return result.rows;
     },
 
-    //OBTENIR LES COCKTAILS AVEC LES INGREDIENTS
+    // OBTENIR LES COCKTAILS AVEC LES INGREDIENTS
     async getCocktailBySpirits(ingredient_ids) {
     const sqlQuery = {
         text: `SELECT DISTINCT ON (cocktail.id) cocktail.*, cocktail_contain_ingredient.ingredient_id
@@ -21,7 +21,6 @@ const cocktailDataMapper = {
         return result.rows;
 
     },
-
 
     // OBTENIR TOUS LES COCKTAILS EN ATTENTE DE VALIDATION
     async getNotValidatedCocktails() {
@@ -39,16 +38,6 @@ const cocktailDataMapper = {
         const result = await client.query(sqlQuery);
         return result;
         },
-
-    // OBTENIR UN COCKTAIL
-    async getOneCocktail(id) {
-        const sqlQuery = {
-            text: 'SELECT * FROM cocktail WHERE id=$1',
-            values: [id]
-        };
-        const result = await client.query(sqlQuery);
-        return result.rows[0];
-    },
 
     // OBTENIR TOUTES LES INFORMATIONS D'UN COCKTAIL
     async getCocktailInformation(cocktail_id){
@@ -83,32 +72,6 @@ const cocktailDataMapper = {
         return result.rows[0];
     },
 
-    // OBTENIR LES INGREDIENTS PAR COCKTAIL
-    async getIngredientByCocktail(cocktail_id) {
-        const sqlQuery = {
-            // cci = cocktail_contain_ingredient
-            text: `SELECT ingredient.name, ingredient.unit, ingredient.id, cci.quantity FROM ingredient
-            JOIN cocktail_contain_ingredient AS cci ON ingredient.id = cci.ingredient_id
-            WHERE cci.cocktail_id=$1`,
-            values: [cocktail_id]
-        };
-        const result = await client.query(sqlQuery);
-        return result.rows;
-    },
-
-    // OBTENIR LES GARNITURES PAR COCKTAIL
-    async getGarnishByCocktail(cocktail_id) {
-        const sqlQuery = {
-            // gaic = garnish_add_into_cocktail
-            text: `SELECT garnish.name, garnish.unit, gaic.quantity FROM garnish
-                JOIN garnish_add_into_cocktail AS gaic ON garnish.id = gaic.garnish_id
-                WHERE gaic.cocktail_id=$1`,
-            values: [cocktail_id]
-        };
-        const result = await client.query(sqlQuery);
-        return result.rows;
-    },
-
     // AJOUT D'UN COCKTAIL -- FONCTION
     async addOneCocktailFunction(name, instruction, user_id, ingredientsData){
         const sqlQuery = {
@@ -117,17 +80,6 @@ const cocktailDataMapper = {
         };
         const result = await client.query(sqlQuery);
         return result;
-    },
-
-    // AJOUT D'UN COCKTAIL PAR ADMIN
-    async addOneCocktailByAdmin(name, instruction, user_id) {
-        const validation = true;
-        const sqlQuery = {
-            text: 'INSERT INTO cocktail(name, instruction, validation, user_id) VALUES ($1, $2, $3, $4)',
-            values: [name, instruction, validation, user_id]
-        };
-        const result = await client.query(sqlQuery);
-        return result.rowCount;
     },
 
     // SUPPRESSION D'UN COCKTAIL

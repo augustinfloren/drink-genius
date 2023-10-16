@@ -8,7 +8,6 @@ const dataMapper = {
     },
 
     // CONNEXION
-
     async getUserByEmail(email){
 
         let result;
@@ -30,16 +29,6 @@ const dataMapper = {
         }
 
         return {error, result};
-    },
-
-    // AFFICHER LE PROFIL USER
-    async getOneUser(id){
-        const sqlQuery = {
-            text: `SELECT * FROM user WHERE id=$1`,
-            values: [id]
-        };
-        const result = await client.query(sqlQuery);
-        return result.rows[0];
     },
 
     // INSCRIPTION USER
