@@ -1,59 +1,34 @@
 # DRINK GENIOUS: the Bar To Glass Project
 
-It is a website that will offer mainly two features.
+This is a website that will offer two main features:
 
-The first feature "classic" is a cocktail search engine based on given ingredients, using a  machine with a handle like interface. The results of this search come exclusively from a database of cocktails validated by the admin (classic cocktails like Mojito, Pina Colada, or approved random ones (made by user and or admin)).
+* A "random" feature that generates a cocktail using ingredients and quantities randomly associated. This creation is illustrated by a kind of animated mixology machine with the possibility of obtaining a cocktail with or without alcohol composed of 3 to 6 ingredients. A logged-in user can save the generated recipe, give it a name, and provide tips for its preparation. An admin need to valid it before appearing in the cocktail's list on the application.
 
-The second feature (maybe the most important and the funniest), "random," is to generate a cocktail from random ingredients in random quantities, with the option to specify one or more ingredients chosen by the user (alcohol, soft drinks, etc.) still using a machine with a handle like interface. The logged-in user can save the generated recipe, choose a name for it, give the instruction to make it and is subject to approval by the admin.
+* A "search" feature for cocktail recipes stored in a database created by us, listing classic recipes and  machine-generated creations that have been validated by an admin. There is an option to filter the search by alcohol type and cocktail name.
 
 ## Examples
-### Example 1: The classic feature
+### Example 1: The "random" feature
 
-It's Friday, I'm finally on holidays. I don't feel like going out, but I'd like to start my holidays with a cocktail. I have at home:
-
-* Whiskey
-* Sugar
-* Lemon
-* Sparkling water
-* Orange juice
-  
-I go to the "Drink Genius" app, select the ingredients I have at home, and specify the ingredient(s) that must absolutely appear. I activate the cocktail machine.
-
-A cocktail appears (has the ingredient(s) requested + optional ingredient(s) + other ingredients that the user didn't mention in their choices): If it doesn't suit their taste, they can restart the machine:
-
-  * 1st round:
-
-#### Appetizer: (3 of 5 requested ingredients): lémon juice / Whiskey / Sugar / Bitter
-
-  * 2nd round:
-  #### Arosa: (2 of 5 ingredients): Orange juice / Cointreau (Orange peel Liqueur)
-
-  The user, surprised by this cocktail, he didn't think about adding an egg white to the drink, and indeed have eggs in the fridge.
-
-  * third round:
-  #### <span  style='color:red'>Whiskey Sour: (3 of 5 ingredients): Whiskey / Lemon juice / white egg / sugar </span>
+Marcus decides to host a birthday party, invites about ten of his friends, and wants to have a cocktail party. He doesn't necessarily want to stay behind the bar (since it's his birthday) and wants to enjoy his friends while having cocktails (with or without alcohol). He purchases various strong spirits, liqueurs, fruit juices, fruits, decorations, etc., and makes everything available to his guests on a table. He explains to his guests that each one can make their own cocktails with their own ingredients using the "Drink Genius" app. They are excited about the idea of making their own drinks and having the option to suggest them to the website later.
 
 ### User Experience:
-  * Quick research on the cocktail list
-  * learn a new cocktail
-  * Have a good time
+* They discover a cocktail that has never been created before.
+* They have a great time and become a mixologist for the evening.
+* They can suggest their own cocktail.
 
-### Example 2: The random feature: be your ownn bartender
+### Example 2: The "search" feature:
 
-Marcus decides to organize a birthday party, invites about ten of his friends, and wants to have a cocktail party. He doesn't necessarily want to stay behind the bar (afterall it's his birthday); he wants to enjoy his friends while drinking cocktails (alcoholic or non-alcoholic).
-
-He buys some spirits, liqueurs, fruit juices, fruits, decorations, etc., and sets everything out for his guests on a table.
-
-He explains to his guests that everyone can make their own cocktails with their own ingredients using the "Drink Genius" app. They are enthusiastic about the idea of making their own drinks and the possibility of suggesting them to the website later.
+I go to my "Drink Genius" app, check the liquors I have, initiate the search, and then see all the recipes made with these liquors, which I can further refine by cocktail name. All that's left is for me to make my choice and follow the recipe instructions!
 
 ### User Experience:
-  * Find out a random cocktail made randomly
-  * Have a good time and become a bartender for the occasion
-  * Can submit his creation.
+* They performed a quick search for cocktails.
+* They learned a new cocktail.
+* They had a great time.
 
 
 ### Purposes and aims:
 #### Purposes:
+
 * Learning about cocktails
 * Demystifying the cocktail process
 * Consuming differently
@@ -67,21 +42,30 @@ He explains to his guests that everyone can make their own cocktails with their 
 * "the casuals": people who wants to make classic cocktails.
 
 ## THE MVP (Minimum Viable Project):
+
 ### As a visitor:
-* Unlimited cocktail searches in "classic" mode
-* Can use the random mode without the ability to save the cocktail
+
+* Access to a cocktail list in "search" mode.
+* Use the "random" mode to generate random recipes.
+  
 ### As a member (user):
-* Unlimited cocktail searches in "classic" mode
-* Can use the random mode with the ability to save the cocktail (subject to admin approval)
-* Creation of a "mixologist" profile with favorite cocktails (mandatory first name, last name, and age, email, password; optional hobbies and location)
-* Can submit a "classic" recipe (subject to admin approval)
-* Can choose a label such as "fizzy", "spicy", or "tangy" for the random mode
-### As a member (admin):
-* Confirm the recipe forms with the right to make corrections, either in random or classic mode.
-* Canban an account
+
+* Create a "mixologist" profile  inputs of first name, last name, age, email, and password are required in order to sign up (you can provide if you want your location and hobbies).
+* Add and remove favorite cocktails.
+* Create cocktails using ingredients from the database, with the option to choose the cocktail name and recipe instructions. These creations must be validated by an admin.
+* Contact an admin via email.
+  
+### As an administrator (admin):
+
+* Validate cocktail creation forms with the ability to modify them.
+* Add and remove cocktails from the database.
+* Delete a member account.
 
 ## THE POTENTIAL EVOLUTIONS:
 ### As a member (user):
+
+* Save a randomly generated cocktail.
+* Filter by ingredients and label before launching the generator.
 * Share user profile (including favorite cocktails, etc.).
 * Rate recipes.
 * Interact with other users.
@@ -92,6 +76,7 @@ He explains to his guests that everyone can make their own cocktails with their 
 * Contact the admin via a messaging system
 
 ### As a member (admin):
+
 * a moderator role in a public chat.
 * Suggest a section for discovering cocktails/alcohol/fruit of the month.
 * Organize live cocktail events through the app.
