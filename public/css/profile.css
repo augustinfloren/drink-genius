@@ -236,6 +236,30 @@ textarea,
     font-weight: bold;
 }
 
+/* Onglet Admin Valider */
+#not-validated-cocktail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.validate-btn {
+    background: #2d213f0c;
+    border-radius: 20px;
+}
+.validate-btn:hover{
+    background-color: var(--theme-purple);
+    color: white;
+}
+
+#users-container {
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
 /* Responsive */
 
 @media screen and (max-width: 1400px) {
