@@ -70,21 +70,24 @@ document.addEventListener("DOMContentLoaded", function () {
   // Listener mot de passe
   const ifWrongPassListener = (event) => {
     const inputValue = event.target.value;
-    const confirmation = confirmationInput.value
-    if (inputValue === confirmation) {
-      confirmationOK = true;
-      confirmationSpan.style.display ="none";
-    }
     if (!passRegex.test(inputValue)) {
       passSpan.style.display = "block";
       passSpan.innerText = "Doit contenir au moins 8 caractères, une majuscule, un chiffre, et un caractère spécial.";
       passOK = false;
-    } else if (passRegex.test(inputValue)) {
+    } else {
       passSpan.style.display ="none";
       passOK = true;
-      if (dateOK && passOK && confirmationOK) {
-        btn.removeAttribute("disabled");
-      }
+    }
+    const confirmation = confirmationInput.value
+    if (inputValue === confirmation) {
+      console.log("ok")
+      confirmationOK = true;
+      confirmationSpan.style.display ="none";
+    } else {
+      confirmationOK = false;
+    }
+    if (dateOK && passOK && confirmationOK) {
+      btn.removeAttribute("disabled");
     }
   }
 
@@ -128,6 +131,11 @@ document.addEventListener("DOMContentLoaded", function () {
     dateSpan.style.display = "none";
     passSpan.style.display = "none";
     confirmationSpan.style.display = "none";
+
+    // Suppresssion listener vérification champs
+    dateInput.removeEventListener("keyup", ifWrongDateListener);
+    passwordInput.removeEventListener("keyup", ifWrongPassListener);
+    confirmationInput.removeEventListener("keyup", comparePassListener);
 
     form.removeEventListener("submit", signupListener);
 
@@ -204,6 +212,11 @@ document.addEventListener("DOMContentLoaded", function () {
     dateSpan.style.display = "none";
     passSpan.style.display = "none";
     confirmationSpan.style.display = "none";
+
+    // Suppresssion listener vérification champs
+    dateInput.removeEventListener("keyup", ifWrongDateListener);
+    passwordInput.removeEventListener("keyup", ifWrongPassListener);
+    confirmationInput.removeEventListener("keyup", comparePassListener);
 
     // Suppression du listener signup
     form.removeEventListener("submit", signupListener);
