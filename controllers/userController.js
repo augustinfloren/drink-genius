@@ -70,6 +70,13 @@ const userController = {
     res.render('favouritesPage', {favourites, currentRoute, userInfo});
   },
 
+  // RECUPERATION DES COCKTAILS FAVORIS
+  async getFavouriteCocktails(req,res){
+    const userId = req.session.user.id;
+    const favourites = await userDataMapper.getFavourites(userId);
+    res.json(favourites);
+  },
+
   // AFFICHE DE LA PAGE D'AJOUT D'UN NOUVEAU COCKTAIL
   async renderNewCocktailPage(req,res){
     const ingredients = await ingredientDataMapper.getAllIngredients();

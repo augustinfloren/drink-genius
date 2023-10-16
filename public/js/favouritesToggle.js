@@ -84,7 +84,6 @@ async function favouritesToggle() {
         return response.json();
     })
     .then(data => {
-        console.log("Delete ok")
         favouriteButton.classList.remove('fa-solid');
         favouriteButton.classList.add('fa-regular');
         favouriteButton.removeEventListener('click', deleteFavourite);
