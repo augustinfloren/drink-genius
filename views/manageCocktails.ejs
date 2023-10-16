@@ -14,8 +14,8 @@
                         <div class="cocktail-img" style="background-image: url('/images/<%= cocktail.picture %> ');" alt="Image de <%= cocktail.name %>" id="<%= cocktail.id %>"></div>
                     </a>
                     <div>
-                        <button class ="user-btn validate-cocktail" type="button" data-info="<%= cocktail.id %>">Valider</button>
-                        <button class="user-btn delete-cocktail" type="button" data-info="<%= cocktail.id %>">Supprimer</button>
+                        <button class ="validate-btn validate-cocktail" type="button" data-info="<%= cocktail.id %>">Valider</button>
+                        <button class="validate-btn delete-cocktail" type="button" data-info="<%= cocktail.id %>">Supprimer</button>
                     </div>
                 </div>
             <% }) %>
