@@ -15,7 +15,9 @@
                     <h3 class="cocktail-title-mini"><%=favourite.name.charAt(0).toUpperCase() + favourite.name.slice(1)%></h3>
                     <div class="cocktail-img" style="background-image: url('/images/<%= favourite.picture %> ');" alt="Image de <%= favourite.name %>" id="<%= favourite.id %>"></div>
                 </a>
-                <button class="button delete-favourite" type="button" data-info="<%= favourite.id %>">Supprimer des favoris</button>
+                <% if (locals.user) { %>
+                  <i class="add-favourite-btn fa-regular fa-heart fa-sm" data-cocktail-id="<%= favourite.id %>"></i>
+              <% } %>
         <% }) %>
     <% } %>
   </div>
