@@ -3,6 +3,7 @@ const cocktailDataMapper = require('../models/cocktailDataMapper');
 const userDataMapper = require('../models/userDataMapper');
 const bcrypt = require('bcrypt');
 const sendConfirmationMail = require ("../services/mailService");
+const jwt = require('jsonwebtoken');
 let currentRoute = "";
 
 const userController = {
@@ -40,7 +41,8 @@ const userController = {
       if(correctPassword){
         delete result.password;
         req.session.user = result;
-        res.status(200).json("Vous êtes maintenant connecté !");
+        const token = jwt.sign(result, process.env.JWT_SECRET);
+        res.status(200).json({ token });
       }
       else {
         res.status(400).json("Mot de passe incorrect.");
@@ -100,7 +102,7 @@ const userController = {
       const errorMessage = "Le nom du cocktail ne doit contenir que des lettres et des chiffres."
       return res.status(400).render('errorPage', {errorMessage})
     }
-    
+
     // CONVERSION DE DEUX TABLEAUX EN JSON
     function convertintoJSON(ingredients, quantities){
       const elementsJson = [];

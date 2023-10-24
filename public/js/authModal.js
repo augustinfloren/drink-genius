@@ -312,7 +312,7 @@ document.addEventListener("DOMContentLoaded", function () {
       form.style.display = "none";
       alreadyRegisteredLink.style.display = "none";
       modalTitle.style.color = "var(--theme-purple)";
-      modalTitle.innerText = data;
+      modalTitle.innerText = "Vous êtes maintenant connecté !";
       closeBtn.style.display = "none";
       setTimeout(() => {
         window.location.href = '/';

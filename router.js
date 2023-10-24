@@ -1,9 +1,10 @@
 const router = require("express").Router();
-const { mainController, cocktailsController, userController } = require('./controllers')
+const { mainController, cocktailsController, userController } = require('./controllers');
 const cw = require("./controllers/middlewares/controllerWrapper");
 const validationService = require("./services/validationService");
 const middleware404 = require("./controllers/middlewares/middleware404");
-const auth = require("./controllers/middlewares/authMiddleware")
+const auth = require("./controllers/middlewares/authMiddleware");
+const token = require('./controllers/middlewares/token');
 
 // Accueil
 router.get("/", cw(mainController.renderHomePage));
@@ -27,7 +28,7 @@ router.get("/logout", auth.isAuthed, cw(userController.logOutAndRedirect));
 router.delete("/profile", auth.isAuthed, cw(userController.deleteProfile));
 
 // User - Profil
-router.get("/profile/parameters", auth.isAuthed, cw(userController.renderProfilePage));
+router.get("/profile/parameters", auth.isAuthed, token, cw(userController.renderProfilePage));
 router.patch("/profile", auth.isAuthed, cw(userController.updateProfile));
 router.get("/profile/usersfavourites", auth.isAuthed, cw(userController.getFavouriteCocktails));
 router.get("/profile/favourites", auth.isAuthed, cw(userController.renderFavouritesPages));
