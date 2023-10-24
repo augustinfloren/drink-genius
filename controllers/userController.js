@@ -64,12 +64,11 @@ const userController = {
   },
 
   // AFFICHAGE DE LA PAGE DES COCKTAILS FAVORIS
-  async renderFavouritesPages(req, res){
-    const userId = req.session.user.id;
-    const favourites = await userDataMapper.getFavourites(userId);
+  async renderFavouritesPage(req, res){
+    const user = req.cookies;
+    const favourites = await userDataMapper.getFavourites(user.id);
     currentRoute = 'favourites';
-    const userInfo = req.session.user;
-    res.render('favouritesPage', {favourites, currentRoute, userInfo});
+    res.render('favouritesPage', {favourites, currentRoute, user});
   },
 
   // RECUPERATION DES COCKTAILS FAVORIS

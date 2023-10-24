@@ -28,10 +28,10 @@ router.get("/logout", auth.isAuthed, cw(userController.logOutAndRedirect));
 router.delete("/profile", auth.isAuthed, cw(userController.deleteProfile));
 
 // User - Profil
-router.get("/profile/parameters", auth.isAuthed, token, cw(userController.renderProfilePage));
+router.get("/profile/parameters", token, cw(userController.renderProfilePage));
 router.patch("/profile", auth.isAuthed, cw(userController.updateProfile));
 router.get("/profile/usersfavourites", auth.isAuthed, cw(userController.getFavouriteCocktails));
-router.get("/profile/favourites", auth.isAuthed, cw(userController.renderFavouritesPages));
+router.get("/profile/favourites", token, cw(userController.renderFavouritesPage));
 router.post("/profile/favourites", auth.isAuthed, cw(userController.addToFavouritesByUser));
 router.delete("/profile/favourites", auth.isAuthed, cw(userController.deleteFavourite))
 router.get("/profile/newcocktail", auth.isAuthed, cw(userController.renderNewCocktailPage));
