@@ -3,11 +3,11 @@ const { mainController, cocktailsController, userController } = require('./contr
 const cw = require("./controllers/middlewares/controllerWrapper");
 const validationService = require("./services/validationService");
 const middleware404 = require("./controllers/middlewares/middleware404");
-const auth = require("./controllers/middlewares/authMiddleware");
-const token = require('./controllers/middlewares/token');
+// const auth = require("./controllers/middlewares/authMiddleware");
+const auth = require('./controllers/middlewares/auth');
 
 // Accueil
-router.get("/", token, cw(mainController.renderHomePage));
+router.get("/", cw(mainController.renderHomePage));
 router.get("/legalnotice", cw(mainController.renderLegalNoticePage));
 
 // Générateur
@@ -24,14 +24,14 @@ router.post("/cocktails",cw(cocktailsController.filterCocktailsBySpirits));
 // User - Connexion
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
 router.post("/login", cw(userController.logInAndRedirect));
-router.get("/logout", token, cw(userController.logOutAndRedirect));
+router.get("/logout", auth.isAuthed, cw(userController.logOutAndRedirect));
 router.delete("/profile", auth.isAuthed, cw(userController.deleteProfile));
 
 // User - Profil
-router.get("/profile/parameters", token, cw(userController.renderProfilePage));
+router.get("/profile/parameters", auth.isAuthed, cw(userController.renderProfilePage));
 router.patch("/profile", auth.isAuthed, cw(userController.updateProfile));
 router.get("/profile/usersfavourites", auth.isAuthed, cw(userController.getFavouriteCocktails));
-router.get("/profile/favourites", token, cw(userController.renderFavouritesPage));
+router.get("/profile/favourites", auth.isAuthed, cw(userController.renderFavouritesPage));
 router.post("/profile/favourites", auth.isAuthed, cw(userController.addToFavouritesByUser));
 router.delete("/profile/favourites", auth.isAuthed, cw(userController.deleteFavourite))
 router.get("/profile/newcocktail", auth.isAuthed, cw(userController.renderNewCocktailPage));

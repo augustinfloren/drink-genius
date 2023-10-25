@@ -1,6 +1,6 @@
 // VERIFIE SI UN UTILISATEUR EST CONNECTE
 function isAuthed(req, res, next){
-    if (!req.session.user){
+    if (!req.locals.userId){
         res.render('errorPage', {errorMessage: "Veuillez vous connecter."});
     } else {
         next();

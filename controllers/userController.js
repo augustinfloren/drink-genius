@@ -41,13 +41,16 @@ const userController = {
       const correctPassword = await bcrypt.compare(password, result.password);
       if(correctPassword){
         const userId = result.id;
-        const token = jwt.sign({ userId }, process.env.JWT_SECRET);
+        const roleId = result.role_id;
+        const token = jwt.sign({ userId, roleId }, process.env.JWT_SECRET);
         const cookieOptions = {
           httpOnly: true,
           maxAge: 60 * 60 * 1000,
           sameSite: 'strict',
           path: '/',
         };
+
+        res.locals.isAuthed = true;
 
         res.setHeader('Set-Cookie', cookie.serialize('jwt', token, cookieOptions));
 

@@ -35,7 +35,7 @@ const dataMapper = {
         return {error, result};
     },
 
-    // INFOS UTILISATEUR
+    // RECUPERATION INFOS UTILISATEUR AVEC ID
     async getUserById(userId){
         let result;
         let error;

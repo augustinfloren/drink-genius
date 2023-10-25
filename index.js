@@ -5,8 +5,8 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const session = require("express-session");
 const router = require("./router");
-const loadSessionUserInLocals = require("./services/loadSessionUserInLocals");
-
+const jwt = require('jsonwebtoken');
+const checkAuth = require('./services/checkAuth');
 
 const PORT = process.env.PORT || 3000;
 
@@ -19,22 +19,13 @@ app.use(express.static("./public"));
 
 app.use(cookieParser());
 
-// Configuration des sessions
-app.use(session({
-  resave: false,
-  saveUninitialized: true,
-  secret: process.env.SECRET_SESSION,
-  cookie: { secure: false, maxAge: 1000 * 60 * 60 }
-}));
-
-app.use(loadSessionUserInLocals);
+app.use(checkAuth);
 
 // Body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(router);
-
 
 // Lancement du serveur
 app.listen(PORT, () => {

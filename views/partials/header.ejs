@@ -40,7 +40,7 @@
             <ul id="header-nav-menu">
                 <li class="nav-item"><a class="nav-item-link" href="/">Accueil</a></li>
                 <li class="nav-item"> <a class="nav-item-link"  href="/cocktails">Liste des cocktails</a></li>
-                <% if (locals.isAuthenticated) { %>
+                <% if (locals.isAuthed) { %>
                   <li class="nav-item"><a class="nav-item-link" href="/profile/parameters">Profil</a></li>
                   <li class="nav-item"><a class="nav-item-link" href="/logout">Déconnexion</a></li>
                 <% } else { %>
