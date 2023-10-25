@@ -223,12 +223,19 @@ const userController = {
 
   // SUPPRESSION D'UN COMPTE UTILISATEUR
   async deleteProfileByAdmin(req,res){
-    const userId = req.body.userId
+    const userId = req.body.userId;
     const deletedProfile = await userDataMapper.deleteUser(userId);
     if(deletedProfile>0){
     res.json("Compte supprimé")
     }
   },
+
+  // MISE A JOUR DU ROLE
+  async updateUserRole(req,res){
+    const userId = req.body.userId;
+    const updatedProfile = await userDataMapper.updateRoleToAdmin(userId);
+    res.json("Role mis à jour")
+  }
 };
 
 module.exports = userController;
