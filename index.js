@@ -1,6 +1,6 @@
 // Modules
 require("dotenv").config();
-const cookies = require("cookie-parser");
+const cookieParser = require("cookie-parser");
 
 const express = require("express");
 const session = require("express-session");
@@ -17,7 +17,7 @@ app.set("views", "./views");
 
 app.use(express.static("./public"));
 
-app.use(cookies());
+app.use(cookieParser());
 
 // Configuration des sessions
 app.use(session({

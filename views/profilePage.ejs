@@ -5,17 +5,17 @@
             <h2>Paramètres du compte</h2>
                 <form class="profil-form" id="parameters-form">
                     <label for="firstname">Nom</label>
-                    <input type="text" name="lastname" value="<%= userInfo.lastname %>" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$">
+                    <input type="text" name="lastname" value="<%= userInfos.lastname %>" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$">
                     <label for="lastname">Prénom</label>
-                    <input type="text" name="firstname" value="<%= userInfo.firstname %>" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$">
+                    <input type="text" name="firstname" value="<%= userInfos.firstname %>" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$">
                     <label for="birthdate">Date de naissance :</label>
-                    <input type="number" name="birthdate" value="<%= userInfo.birthdate %>" pattern="[0-9]{4}">
+                    <input type="number" name="birthdate" value="<%= userInfos.birthdate %>" pattern="[0-9]{4}">
                     <label for="email">E-mail</label>
-                    <input type="email" name="email" value="<%= userInfo.email %>">
+                    <input type="email" name="email" value="<%= userInfos.email %>">
                     <label for="location">Ville</label>
-                    <input type="text" name="location" value="<%= userInfo.location %>" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$">
+                    <input type="text" name="location" value="<%= userInfos.location %>" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$">
                     <label for="hobbies">Loisirs</label>
-                    <input type="text" name="hobbies" value="<%= userInfo.hobbies %>" pattern="^(.|\s)*[a-zA-Z]+(.|\s)*$">
+                    <input type="text" name="hobbies" value="<%= userInfos.hobbies %>" pattern="^(.|\s)*[a-zA-Z]+(.|\s)*$">
                     <button type="submit" class="btn-mini" id="parameters-modification-btn" disabled>Enregistrer</button>
                     <button id="delete-account-button" type="button">Supprimer mon compte</button>
                 </form>

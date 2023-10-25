@@ -35,6 +35,28 @@ const dataMapper = {
         return {error, result};
     },
 
+    // INFOS UTILISATEUR
+    async getUserById(userId){
+        let result;
+        let error;
+
+        const sqlQuery = {
+            text: `SELECT * FROM "user" WHERE id=$1`,
+            values: [userId]
+        };
+
+        try {
+            const response = await client.query(sqlQuery);
+            result = response.rows[0];
+            if (!result) {
+                return { error: "Utilisateur non trouvé.", code: "USER_NOT_FOUND", result: null };
+            }
+        } catch(err) {
+            return { error: "Une erreur s'est produite de l'authentification.", code: "DATABASE_ERROR", result: null };
+        }
+        return {error, result};
+    },
+
     // INSCRIPTION USER
     async addOneUser(user){
         // Récupère données du formulaire

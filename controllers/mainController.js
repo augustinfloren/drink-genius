@@ -3,8 +3,9 @@ const ingredientDataMapper = require('../models/ingredientDataMapper')
 const mainController = {
   // AFFICHE LA PAGE D'ACCUEIL
   async renderHomePage (req,res){
+    const isAuthenticated = res.locals.isAuthenticated;
     let currentRoute = 'accueil';
-    res.render('homePage', {currentRoute});
+    res.render('homePage', { currentRoute, isAuthenticated });
   },
 
   // AFFICHE LES MENTIONS LEGALES
@@ -15,7 +16,7 @@ const mainController = {
   // GENERE UNE RECETTE ALEATOIRE AVEC ALCOOL
   async getRandomRecipe(req, res){
     const randomIngredients = await ingredientDataMapper.getRandomIngredients();
-    res.json(randomIngredients); 
+    res.json(randomIngredients);
   },
 
   // GENERE UNE RECETTE ALEATOIRE SANS ALCOOL

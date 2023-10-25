@@ -7,7 +7,7 @@ const auth = require("./controllers/middlewares/authMiddleware");
 const token = require('./controllers/middlewares/token');
 
 // Accueil
-router.get("/", cw(mainController.renderHomePage));
+router.get("/", token, cw(mainController.renderHomePage));
 router.get("/legalnotice", cw(mainController.renderLegalNoticePage));
 
 // Générateur
@@ -24,7 +24,7 @@ router.post("/cocktails",cw(cocktailsController.filterCocktailsBySpirits));
 // User - Connexion
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
 router.post("/login", cw(userController.logInAndRedirect));
-router.get("/logout", auth.isAuthed, cw(userController.logOutAndRedirect));
+router.get("/logout", token, cw(userController.logOutAndRedirect));
 router.delete("/profile", auth.isAuthed, cw(userController.deleteProfile));
 
 // User - Profil

@@ -4,6 +4,7 @@ const userDataMapper = require('../models/userDataMapper');
 const bcrypt = require('bcrypt');
 const sendConfirmationMail = require ("../services/mailService");
 const jwt = require('jsonwebtoken');
+const cookie = require('cookie');
 let currentRoute = "";
 
 const userController = {
@@ -39,9 +40,17 @@ const userController = {
     else {
       const correctPassword = await bcrypt.compare(password, result.password);
       if(correctPassword){
-        delete result.password;
-        req.session.user = result;
-        const token = jwt.sign(result, process.env.JWT_SECRET);
+        const userId = result.id;
+        const token = jwt.sign({ userId }, process.env.JWT_SECRET);
+        const cookieOptions = {
+          httpOnly: true,
+          maxAge: 60 * 60 * 1000,
+          sameSite: 'strict',
+          path: '/',
+        };
+
+        res.setHeader('Set-Cookie', cookie.serialize('jwt', token, cookieOptions));
+
         res.status(200).json({ token });
       }
       else {
@@ -51,15 +60,19 @@ const userController = {
   },
 
   // AFFICHAGE DE LA PAGE DE PROFIL
+
+  // Récupération des infos de l'utilisateur avec l'id contenu dans son token.
   async renderProfilePage(req, res) {
-    const userInfo = req.session.user;
+    const { error, result } = await userDataMapper.getUserById(res.locals.userId);
+    delete result.password;
+    const userInfos = result;
     currentRoute = "profile";
-    res.render('profilePage', {userInfo, currentRoute});
+    res.render('profilePage', {userInfos, currentRoute});
   },
 
   // DECONNEXION
   async logOutAndRedirect(req, res){
-    req.session.user = null;
+    res.clearCookie('jwt');
     res.redirect("/");
   },
 

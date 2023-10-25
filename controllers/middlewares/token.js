@@ -5,12 +5,12 @@ module.exports = (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(verifiedToken)
-    // const userId = verifiedToken.userId;
-    // req.auth = {
-    //   userId: userId
-    // };
+    const userId = verifiedToken.userId;
+    res.locals.isAuthenticated = true;
+    res.locals.userId = userId;
+    next()
   } catch(error) {
-    res.status(401).json({error});
+    res.locals.isAuthenticated = false;
+    next()
   }
 };

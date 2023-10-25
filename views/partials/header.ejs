@@ -40,7 +40,7 @@
             <ul id="header-nav-menu">
                 <li class="nav-item"><a class="nav-item-link" href="/">Accueil</a></li>
                 <li class="nav-item"> <a class="nav-item-link"  href="/cocktails">Liste des cocktails</a></li>
-                <% if (locals.user) { %>
+                <% if (locals.isAuthenticated) { %>
                   <li class="nav-item"><a class="nav-item-link" href="/profile/parameters">Profil</a></li>
                   <li class="nav-item"><a class="nav-item-link" href="/logout">Déconnexion</a></li>
                 <% } else { %>
@@ -85,3 +85,35 @@
           <a id="already-registered-link" href="">Déjà inscrit ? Connectez-vous</a>
       </div>
 	  </div>
+
+    <!-- <script>
+      import VueJwtDecode from "vue-jwt-decode";
+      export default {
+        data() {
+          return {
+            user: {}
+          };
+        },
+        methods: {
+          getUserDetails() {
+            // get token from localstorage
+            let token = cookies.getItem("user");
+            try {
+            //decode token here and attach to the user object
+            let decoded = VueJwtDecode.decode(token);
+            this.user = decoded;
+            } catch (error) {
+              // return error in production env
+              console.log(error, 'error from decoding token')
+            }
+          },
+          logUserOut() {
+            localStorage.removeItem("user");
+            this.$router.push("/login");
+          }
+        },
+        created() {
+          this.getUserDetails();
+        }
+      };
+      </script> -->
