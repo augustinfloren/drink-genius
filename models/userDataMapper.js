@@ -82,7 +82,7 @@ const dataMapper = {
             const result = await client.query(sqlQuery);
             return result.rows[0];
         } catch (error) {
-            return {error: "Erreur s'est produite avec le serveur. Le profil n'a pas été modifié."}
+            return {error: "Une erreur s'est produite avec le serveur. Le profil n'a pas été modifié."}
         }
     },
 
@@ -97,7 +97,7 @@ const dataMapper = {
 
             return result.rowCount;
         } catch (error) {
-            return {error: "Erreur s'est produite avec le serveur. L'uilisateur est toujours inscrit."}
+            return {error: "Une erreur s'est produite avec le serveur. L'uilisateur est toujours inscrit."}
         }
     },
 
@@ -113,7 +113,7 @@ const dataMapper = {
             const result = await client.query(sqlQuery);
             return result.rows;
         } catch (error) {
-            return {error: "Erreur s'est produite avec le serveur."}
+            return {error: "Une erreur s'est produite avec le serveur."}
         }
     },
 
@@ -127,7 +127,7 @@ const dataMapper = {
             const result = await client.query(sqlQuery)
             return result.rows;
         } catch(error){
-            return {error: "Erreur s'est produite avec le serveur."}
+            return {error: "Une erreur s'est produite avec le serveur."}
         }
     },
 
@@ -141,7 +141,7 @@ const dataMapper = {
             const result = await client.query(sqlQuery);
             return result;
         } catch(error){
-            return {error: "Erreur s'est produite avec le serveur. Le cocktail n'a pas été ajouté aux favoris."}
+            return {error: "Une erreur s'est produite avec le serveur. Le cocktail n'a pas été ajouté aux favoris."}
         }
     },
 
@@ -155,7 +155,21 @@ const dataMapper = {
             const result = await client.query(sqlQuery);
             return result;
         } catch(error){
-            return {error: "Erreur s'est produite avec le serveur. Le cocktail n'a pas été retiré des favoris."}
+            return {error: "Une erreur s'est produite avec le serveur. Le cocktail n'a pas été retiré des favoris."}
+        }
+    },
+
+    // ATTRIBUER LE ROLE ADMIN A UN USER
+    async updateRoleToAdmin(user_id){
+        try {
+            const sqlQuery = {
+                text: `UPDATE "user" SET role_id=1 WHERE id=$1`,
+                values: [user_id]
+            }
+            const result = await client.query(sqlQuery);
+            return result;
+        } catch(error){
+            return {error: "Une erreur s'est produite avec le serveur. Le role n'a pas été changé."}
         }
     }
 };

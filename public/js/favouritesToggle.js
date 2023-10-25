@@ -29,23 +29,19 @@ async function getFavouritesId(){
 // AFFICHAGE BOUTON AJOUTER
 
 favouriteButton.forEach(button => {
-    console.log(button)
     // Vous pouvez accéder au cocktailId à partir de l'élément de bouton actuel ici
     const cocktailId = button.getAttribute('data-cocktail-id');
-    console.log(cocktailId)
     favouritesToggle(cocktailId, button);
 });
   async function favouritesToggle(cocktailId, button) {
   await getFavouritesId();
   const presence = favouritesDb.some(el => el.id === parseInt(cocktailId));
   if(presence){
-    console.log(button);
     button.classList.add('fa-solid');
     button.removeEventListener('click', addFavourite);
     button.addEventListener('click', deleteFavourite);
   } else {
     // ECOUTE SUR LE BOUTON AJOUTER AUX FAVORIS
-    console.log(button);
     button.addEventListener('click', addFavourite);
   };
 

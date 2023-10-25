@@ -44,6 +44,7 @@ router.post("/admin/cocktail", auth.isAdmin, cw(userController.validateCocktail)
 router.delete("/admin/cocktail", auth.isAdmin, cw(userController.deleteCocktail));
 router.get("/admin/users", auth.isAdmin, cw(userController.renderUsersManagementPage));
 router.delete("/admin/user", auth.isAdmin, cw(userController.deleteProfileByAdmin));
+router.patch("/admin/role", auth.isAdmin, cw(userController.updateUserRole));
 
 router.use(middleware404);
 
