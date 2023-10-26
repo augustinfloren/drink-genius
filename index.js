@@ -6,7 +6,7 @@ const express = require("express");
 const session = require("express-session");
 const router = require("./router");
 const jwt = require('jsonwebtoken');
-const checkAuth = require('./services/checkAuth');
+const checkToken = require('./services/checkToken');
 
 const PORT = process.env.PORT || 3000;
 
@@ -19,7 +19,7 @@ app.use(express.static("./public"));
 
 app.use(cookieParser());
 
-app.use(checkAuth);
+app.use(checkToken);
 
 // Body parser
 app.use(express.urlencoded({ extended: true }));
