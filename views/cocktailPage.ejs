@@ -5,7 +5,7 @@
 
                 <div id="cocktail-container">
                     <h2><%=cocktailInfo.name.charAt(0).toUpperCase() + cocktailInfo.name.slice(1)%>
-                        <% if (locals.user) { %>
+                        <% if (locals.isAuthed) { %>
                             <i class="add-favourite-btn fa-regular fa-heart fa-sm" data-cocktail-id="<%= cocktailInfo.id %>"></i>
                         <% } %>
                     </h2>

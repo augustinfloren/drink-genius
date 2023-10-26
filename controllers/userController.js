@@ -89,7 +89,7 @@ const userController = {
 
   // RECUPERATION DES COCKTAILS FAVORIS
   async getFavouriteCocktails(req,res){
-    const userId = req.session.user.id;
+    const userId = res.locals.userId;
     const favourites = await userDataMapper.getFavourites(userId);
     res.json(favourites);
   },
@@ -105,7 +105,7 @@ const userController = {
   // AJOUT D'UN COCKTAIL EN BASE DE DONNEES
   async addNewCocktail(req, res){
     let { name, instruction, ingredientId, quantity } = req.body;
-    const userId = req.session.user.id;
+    const userId = res.locals.userId;
 
     // CONVERSION DES ID EN INTEGER
       ingredientId = ingredientId.map(el => parseInt(el, 10));
@@ -145,7 +145,7 @@ const userController = {
 
 // AFFICHAGE DES COCKTAILS CREES PAR L'UTILISATEUR
   async renderUserCocktailsPage(req, res){
-    const userId = req.session.user.id;
+    const userId = res.locals.userId;
     const userCocktails = await userDataMapper.getUserCocktails(userId);
     const userInfo = req.session.user;
     currentRoute = "usercocktails";
@@ -161,7 +161,7 @@ const userController = {
   // AJOUT DE COCKTAILS FAVORIS AU COMPTE DE L'UTILISATEUR
   async addToFavouritesByUser(req, res) {
     const cocktailId = req.body.cocktailId;
-    const userId = req.session.user.id;
+    const userId = res.locals.userId;
     const result = await userDataMapper.addToFavourites(userId, cocktailId);
     if (result.error) {
       res.status(400).json(result.error);
@@ -172,7 +172,7 @@ const userController = {
 
   // SUPPRESSION D'UN COCKTAIL DES FAVORIS
   async deleteFavourite(req, res){
-    const userId = req.session.user.id;
+    const userId = res.locals.userId;
     const cocktailId = req.body.cocktailId;
     const result = await userDataMapper.deleteFromFavourites(userId, cocktailId);
     if (result.error) {
@@ -184,7 +184,7 @@ const userController = {
 
   // MISE A JOUR DES INFORMATIONS DE PROFIL
   async updateProfile(req, res) {
-    const userId = req.session.user.id;
+    const userId = res.locals.userId;
     const parameters = req.body;
     const userInfo = await userDataMapper.updateUser(parameters, userId);
     req.session.user = userInfo;
@@ -193,7 +193,7 @@ const userController = {
 
   // SUPPRESSION DU COMPTE UTILISATEUR
   async deleteProfile(req,res){
-    const userId = req.session.user.id;
+    const userId = res.locals.userId;
     const deletedProfile = await userDataMapper.deleteUser(userId);
     if(deletedProfile>0){
     req.session.user = null;

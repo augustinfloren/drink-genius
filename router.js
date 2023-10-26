@@ -3,7 +3,7 @@ const { mainController, cocktailsController, userController } = require('./contr
 const cw = require("./controllers/middlewares/controllerWrapper");
 const validationService = require("./services/validationService");
 const middleware404 = require("./controllers/middlewares/middleware404");
-const auth = require('./controllers/middlewares/auth');
+const auth = require('./services/auth');
 
 // Accueil
 router.get("/", cw(mainController.renderHomePage));
