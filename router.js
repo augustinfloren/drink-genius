@@ -3,7 +3,6 @@ const { mainController, cocktailsController, userController } = require('./contr
 const cw = require("./controllers/middlewares/controllerWrapper");
 const validationService = require("./services/validationService");
 const middleware404 = require("./controllers/middlewares/middleware404");
-// const auth = require("./controllers/middlewares/authMiddleware");
 const auth = require('./controllers/middlewares/auth');
 
 // Accueil
