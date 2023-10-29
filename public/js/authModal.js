@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
     emailInput.value = "";
     passwordInput.value = "";
     form.style.marginTop = "0px";
-    form.action = "/signIn";
+    form.action = "/signup";
     btn.style.marginTop = "10px";
     btn.innerText = "S'enregistrer";
     btn.setAttribute("disabled", "true");
@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Signup + Récupération des messages de succès et d'erreurs
   async function fetchSignup() {
-    fetch('/signin', {
+    fetch('/signup', {
       method: 'POST',
       body:  JSON.stringify(Object.fromEntries(new FormData(form))),
       headers: { "Content-Type": "application/json" },

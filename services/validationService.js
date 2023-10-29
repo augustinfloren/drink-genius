@@ -18,7 +18,7 @@ const schemaUserInput = Joi.object({
 });
 
 module.exports = {
-  checkSignUpData(req,res,next){
+  checkSignupData(req,res,next){
     let { error } = schemaUserInput.validate(req.body);
     if(!error){
         next();

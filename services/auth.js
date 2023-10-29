@@ -16,7 +16,7 @@ const auth = {
   isAdmin : (req, res, next) => {
     try {
       if (res.locals.isAuthed) {
-        if(roleId === 1){
+        if(res.locals.roleId === 1){
           next();
         } else {
           res.render('errorPage', {errorMessage: "Vous n'avez pas les droits pour accéder à cette page."});

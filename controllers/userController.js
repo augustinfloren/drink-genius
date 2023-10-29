@@ -9,7 +9,7 @@ let currentRoute = "";
 
 const userController = {
   // INSCRIPTION
-  async signUpAndRedirect (req, res, next){
+  async signupAndRedirect (req, res, next){
     const newUser = req.body;
     newUser.roleId = 2;
     if(newUser.password === newUser.confirmation){
@@ -98,8 +98,7 @@ const userController = {
   async renderNewCocktailPage(req,res){
     const ingredients = await ingredientDataMapper.getAllIngredients();
     currentRoute = "newCocktail";
-    const userInfo = req.session.user;
-    res.render('newCocktail', {ingredients, currentRoute, userInfo});
+    res.render('newCocktail', {ingredients, currentRoute});
   },
 
   // AJOUT D'UN COCKTAIL EN BASE DE DONNEES
@@ -147,9 +146,8 @@ const userController = {
   async renderUserCocktailsPage(req, res){
     const userId = res.locals.userId;
     const userCocktails = await userDataMapper.getUserCocktails(userId);
-    const userInfo = req.session.user;
     currentRoute = "usercocktails";
-    res.render('userCocktailsPage', {userCocktails, currentRoute, userInfo});
+    res.render('userCocktailsPage', {userCocktails, currentRoute});
   },
 
   // RECUPERATION DE TOUS LES INGREDIENTS
@@ -187,7 +185,6 @@ const userController = {
     const userId = res.locals.userId;
     const parameters = req.body;
     const userInfo = await userDataMapper.updateUser(parameters, userId);
-    // req.session.user = userInfo;
     res.json(userInfo);
   },
 
@@ -196,17 +193,15 @@ const userController = {
     const userId = res.locals.userId;
     const deletedProfile = await userDataMapper.deleteUser(userId);
     if(deletedProfile>0){
-    req.session.user = null;
-    res.json("Compte supprimé")
+      res.json("Compte supprimé")
     }
   },
 
   // AFFICHAGE DES COCKTAILS NON VALIDES
   async renderCocktailsManagementPage(req, res){
     const notValidatedCocktails = await cocktailDataMapper.getNotValidatedCocktails();
-    const userInfo = req.session.user;
     currentRoute = "admin/cocktails"
-    res.render('manageCocktails', {notValidatedCocktails, userInfo, currentRoute });
+    res.render('manageCocktails', {notValidatedCocktails, currentRoute });
   },
 
   // VALIDATION D'UN COCKTAIL

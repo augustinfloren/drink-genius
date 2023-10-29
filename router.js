@@ -21,7 +21,7 @@ router.get("/cocktail/:id", cw(cocktailsController.renderCocktailInfoPage));
 router.post("/cocktails",cw(cocktailsController.filterCocktailsBySpirits));
 
 // User - Connexion
-router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect))
+router.post("/signup", validationService.checkSignupData, cw(userController.signupAndRedirect))
 router.post("/login", cw(userController.logInAndRedirect));
 router.get("/logout", auth.isAuthed, cw(userController.logOutAndRedirect));
 router.delete("/profile", auth.isAuthed, cw(userController.deleteProfile));
