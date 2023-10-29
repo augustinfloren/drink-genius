@@ -93,6 +93,19 @@ const dataMapper = {
             return {error, result};
     },
 
+    async validateUser (userId) {
+        try {
+            const sqlQuery = {
+                text : 'UPDATE "user" SET confirmed = true WHERE id=$1',
+                value : userId,
+            }
+
+            const result = await client.query(sqlQuery);
+        } catch (err) {
+            return {error: "Le profil n'a pas pu être validé."}
+        }
+    },
+
     // MODIFICATION PROFIL
     async updateUser(userInfo, id){
         try {
