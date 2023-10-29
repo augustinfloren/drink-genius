@@ -22,7 +22,7 @@
   });
 
   function updateUserInfo (userInfo){
-    return fetch("/profile", {
+    return fetch("/profile/parameters", {
       method: "PATCH",
       body: JSON.stringify(Object.fromEntries(new FormData(userInfo))),
       headers: {

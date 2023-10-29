@@ -187,7 +187,7 @@ const userController = {
     const userId = res.locals.userId;
     const parameters = req.body;
     const userInfo = await userDataMapper.updateUser(parameters, userId);
-    req.session.user = userInfo;
+    // req.session.user = userInfo;
     res.json(userInfo);
   },
 

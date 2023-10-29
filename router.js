@@ -28,7 +28,7 @@ router.delete("/profile", auth.isAuthed, cw(userController.deleteProfile));
 
 // User - Profil
 router.get("/profile/parameters", auth.isAuthed, cw(userController.renderProfilePage));
-router.patch("/profile", auth.isAuthed, cw(userController.updateProfile));
+router.patch("/profile/parameters", auth.isAuthed, cw(userController.updateProfile));
 router.get("/profile/usersfavourites", auth.isAuthed, cw(userController.getFavouriteCocktails));
 router.get("/profile/favourites", auth.isAuthed, cw(userController.renderFavouritesPage));
 router.post("/profile/favourites", auth.isAuthed, cw(userController.addToFavouritesByUser));
