@@ -81,10 +81,10 @@ const userController = {
 
   // AFFICHAGE DE LA PAGE DES COCKTAILS FAVORIS
   async renderFavouritesPage(req, res){
-    const user = req.cookies;
-    const favourites = await userDataMapper.getFavourites(user.id);
+    const userId = res.locals.userId;
+    const favourites = await userDataMapper.getFavourites(userId);
     currentRoute = 'favourites';
-    res.render('favouritesPage', {favourites, currentRoute, user});
+    res.render('favouritesPage', {favourites, currentRoute});
   },
 
   // RECUPERATION DES COCKTAILS FAVORIS
