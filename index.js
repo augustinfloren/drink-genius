@@ -3,6 +3,7 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 
 const express = require("express");
+const cors = require('cors');
 const session = require("express-session");
 const router = require("./router");
 const jwt = require('jsonwebtoken');
@@ -14,6 +15,14 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.set("view engine", "ejs");
 app.set("views", "./views");
+
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+}
+))
 
 app.use(express.static("./public"));
 
