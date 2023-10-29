@@ -38,21 +38,22 @@ async function importUsers(){
     let sqlParameters = [];
 
     for(const user of users){
-        sqlParameters.push(`($${counter}, $${counter +1}, $${counter +2}, $${counter +3}, $${counter +4}, $${counter +5})`);
-        counter+=6;
+        sqlParameters.push(`($${counter}, $${counter +1}, $${counter +2}, $${counter +3}, $${counter +4}, $${counter +5}, $${counter +6})`);
+        counter+=7;
 
         sqlValues.push(user.lastname);
         sqlValues.push(user.firstname);
         sqlValues.push(user.birthdate);
         sqlValues.push(user.email);
         sqlValues.push(user.password);
+        sqlValues.push(user.confirmed);
         sqlValues.push(user.role_id);
     };
 
     const sqlQuery = `
-    INSERT INTO "user"("lastname", "firstname", "birthdate", "email", "password", "role_id")
+    INSERT INTO "user"("lastname", "firstname", "birthdate", "email", "password", "confirmed", "role_id")
     VALUES ${sqlParameters.join()};
-    `;    
+    `;
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
@@ -79,7 +80,7 @@ async function importCocktails(){
     const sqlQuery = `
     INSERT INTO "cocktail"("name", "instruction", "picture", "validation", "user_id")
     VALUES ${sqlParameters.join()};
-    `;    
+    `;
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
@@ -102,8 +103,8 @@ async function importLabels(){
     const sqlQuery = `
     INSERT INTO "label"("name")
     VALUES ${sqlParameters.join()};
-    `;    
-    
+    `;
+
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
         console.log("Les données ont bien été ajoutées dans la table 'label' !")
@@ -124,12 +125,12 @@ async function importIngredients(){
         sqlValues.push(ingredient.min_quantity);
         sqlValues.push(ingredient.max_quantity);
         };
-    
+
         const sqlQuery = `
     INSERT INTO "ingredient"("name", "unit", "min_quantity", "max_quantity")
     VALUES ${sqlParameters.join()};
-    `;    
-    
+    `;
+
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
         console.log("Les données ont bien été ajoutées dans la table 'ingredient' !")
@@ -147,13 +148,13 @@ async function importCocktailContainIngredient(){
 
         sqlValues.push(relation.cocktail_id);
         sqlValues.push(relation.ingredient_id);
-        sqlValues.push(relation.quantity);    
+        sqlValues.push(relation.quantity);
     };
 
     const sqlQuery = `
     INSERT INTO "cocktail_contain_ingredient"("cocktail_id", "ingredient_id", "quantity")
     VALUES ${sqlParameters.join()};
-`;    
+`;
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
@@ -175,12 +176,12 @@ async function importGarnish(){
         sqlValues.push(garnish.min_quantity);
         sqlValues.push(garnish.max_quantity);
         };
-    
+
         const sqlQuery = `
     INSERT INTO "garnish"("name", "unit", "min_quantity", "max_quantity")
     VALUES ${sqlParameters.join()};
-    `;    
-    
+    `;
+
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
         console.log("Les données ont bien été ajoutées dans la table 'garnish' !")
@@ -198,13 +199,13 @@ async function importGarnishAddIntoCocktail(){
 
         sqlValues.push(relation.cocktail_id);
         sqlValues.push(relation.garnish_id);
-        sqlValues.push(relation.quantity);    
+        sqlValues.push(relation.quantity);
     };
 
     const sqlQuery = `
     INSERT INTO "garnish_add_into_cocktail"("cocktail_id", "garnish_id", "quantity")
     VALUES ${sqlParameters.join()};
-`;    
+`;
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
@@ -228,7 +229,7 @@ async function importIngredientHasLabel(){
     const sqlQuery = `
     INSERT INTO "ingredient_has_label"("ingredient_id", "label_id")
     VALUES ${sqlParameters.join()};
-`;    
+`;
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){
@@ -252,7 +253,7 @@ async function importUserLikeCocktail(){
     const sqlQuery = `
     INSERT INTO "user_like_cocktail"("user_id", "cocktail_id")
     VALUES ${sqlParameters.join()};
-    `;    
+    `;
 
     const response = await client.query(sqlQuery, sqlValues);
     if(response.rowCount>0){

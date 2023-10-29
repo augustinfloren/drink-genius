@@ -17,18 +17,19 @@ async function sendConfirmationMail (email,firstname, userId) {
         // Token de validation
         const emailToken = jwt.sign({ userId }, process.env.MAIL_SECRET,
             {
-                maxAge: 60 * 60 * 1000,
-                sameSite: 'strict',
-            });
+                expiresIn: '1d',
+            },
+            );
 
         const url = `http://localhost:3000/confirmation/${emailToken}`;
 
+        console.log(url)
         // Envoie du mail de confirmation
         const mailConfirmation = {
             from: "drink.genius@gmail.com",
             to: `${email}`,
             subject: "Confirmation d'inscription",
-            text: `Bonjour ${firstname}, Cliquez sur ce lien (valable pendant une heure) pour profiter de notre application "Drink Genius" : <a href="${url}">${url}</a> \n L'équipe de Drink Genius `
+            text: `Bonjour ${firstname}, Cliquez sur ce lien (valable pendant une heure) pour profiter de notre application "Drink Genius" : <a href="${url}">${url}</a> \n L'équipe de Drink Genius`,
         };
 
         await transporter.sendMail(mailConfirmation);

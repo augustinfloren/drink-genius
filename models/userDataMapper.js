@@ -60,10 +60,10 @@ const dataMapper = {
     // INSCRIPTION USER
     async addOneUser(user){
         // Récupère données du formulaire
-        const { lastname, firstname, birthdate, email, password, roleId } = user;
+        const { lastname, firstname, birthdate, email, password, confirmed, roleId } = user;
         const insertQuery = {
-            text: `INSERT INTO "user"(lastname, firstname, birthdate, email, password, role_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-            values: [lastname, firstname, birthdate, email, password, roleId]
+            text: `INSERT INTO "user"(lastname, firstname, birthdate, email, password, confirmed, role_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+            values: [lastname, firstname, birthdate, email, password, confirmed, roleId]
         }
 
         let result;
@@ -83,7 +83,7 @@ const dataMapper = {
                 return { error: "Cet email est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
             } else {
                 const response = await client.query(insertQuery);
-                result = response.rows;
+                result = response.rows[0];
             }
 
             } catch(err){

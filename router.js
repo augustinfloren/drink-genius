@@ -22,7 +22,7 @@ router.post("/cocktails",cw(cocktailsController.filterCocktailsBySpirits));
 
 // User - Connexion
 router.post("/signup", validationService.checkSignupData, cw(userController.signupAndRedirect));
-router.get("/confirmation/:token", cw(userController.validateMail));
+router.get("/confirmation/:token", userController.validateMail);
 router.post("/login", cw(userController.logInAndRedirect));
 router.get("/logout", auth.isAuthed, cw(userController.logOutAndRedirect));
 router.delete("/profile", auth.isAuthed, cw(userController.deleteProfile));

@@ -31,14 +31,14 @@ CREATE TABLE IF NOT EXISTS public."user"
     email text  NOT NULL UNIQUE,
     password text  NOT NULL,
     hobbies text,
+    confirmed boolean NOT NULL DEFAULT false,
     role_id integer NOT NULL,
-    -- confirmed BOOLEAN NOT NULL DEFAULT false,
     CONSTRAINT user_pkey PRIMARY KEY (id),
     CONSTRAINT role_id FOREIGN KEY (role_id)
         REFERENCES public.role (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-        NOT VALID,
+        NOT VALID
 );
 
 

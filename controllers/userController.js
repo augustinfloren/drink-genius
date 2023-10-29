@@ -12,26 +12,24 @@ const userController = {
   async signupAndRedirect (req, res, next){
     const newUser = req.body;
     newUser.roleId = 2;
+    newUser.confirmed = false;
     if(newUser.password === newUser.confirmation){
       newUser.password = await bcrypt.hash(newUser.password, parseInt(process.env.SALT));
       const { error,result } = await userDataMapper.addOneUser(newUser);
       if (error) {
         res.status(400).json(error);
       } else {
+        console.log(result)
         sendConfirmationMail(result.email,result.firstname, result.id);
+        console.log(result.email,result.firstname, result.id)
         res.status(200).json("Inscription validée ! vous pouvez maintenant vous connecter");
       }
     }
   },
 
-  // ENVOI DU MAIL DE CONFIRMATION
-  async sendingMailConfirmation (req,res){
-    const {email, firstname} = req.body;
-    res.status(200).json(true);
-  },
-
   // VALIDATION DU MAIL
   async validateMail (req, res) {
+    console.log("ok")
     const verifiedUser = jwt.verify(req.params.token, process.env.MAIL_SECRET);
     await userDataMapper.validateUser(verifiedUser.userId);
   },
