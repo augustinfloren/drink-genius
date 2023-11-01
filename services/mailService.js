@@ -23,7 +23,6 @@ async function sendConfirmationMail (email,firstname, userId) {
 
         const url = `http://localhost:3000/confirmation/${emailToken}`;
 
-        console.log(url)
         // Envoie du mail de confirmation
         const mailConfirmation = {
             from: "drink.genius@gmail.com",

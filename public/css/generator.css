@@ -93,7 +93,6 @@
   height: fit-content;
   padding: 5% 0%;
   border-radius: 40px;
-  /* background: linear-gradient(90deg, rgb(199, 199, 199) 0%, rgba(208,208,208,1) 50%, rgb(208, 208, 208) 50%); */
   transition: height 1s ease-in-out;
   background: var(--metal);
 }

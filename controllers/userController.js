@@ -19,9 +19,7 @@ const userController = {
       if (error) {
         res.status(400).json(error);
       } else {
-        console.log(result)
         sendConfirmationMail(result.email,result.firstname, result.id);
-        console.log(result.email,result.firstname, result.id)
         res.status(200).json("Inscription validée ! vous pouvez maintenant vous connecter");
       }
     }
@@ -29,9 +27,9 @@ const userController = {
 
   // VALIDATION DU MAIL
   async validateMail (req, res) {
-    console.log("ok")
     const verifiedUser = jwt.verify(req.params.token, process.env.MAIL_SECRET);
     await userDataMapper.validateUser(verifiedUser.userId);
+    res.status(200).redirect('/');
   },
 
   // CONNEXION
