@@ -108,6 +108,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Arrivée sur le site après confirmation
+  const urlParams = new URLSearchParams(window.location.search);
+  const isConfirmed = urlParams.get('confirmed');
+
+  if (isConfirmed) {
+    toggleModalConnexion();
+  }
+
   // Lorsque je clique sur Connexion
   modalTriggerConnexion.addEventListener("click", toggleModalConnexion);
 
@@ -269,11 +277,11 @@ document.addEventListener("DOMContentLoaded", function () {
       return response.json();
     })
     .then(data => {
-      switchModalConnexion();
       modalTitle.innerText = data;
-      modalTitle.style.fontSize = "1.3em";
+      modalTitle.style.color = "green";
     })
     .catch(error => {
+      console.log(error)
       modalTitle.style.color = "red";
       modalTitle.style.fontSize = "1.3em";
       if (error.message.includes('déjà enregistré')) {

@@ -19,7 +19,7 @@ async function sendConfirmationMail (email,firstname, userId) {
             {
                 expiresIn: '1d',
             },
-            );
+        );
 
         const url = `http://localhost:3000/confirmation/${emailToken}`;
 
@@ -28,7 +28,7 @@ async function sendConfirmationMail (email,firstname, userId) {
             from: "drink.genius@gmail.com",
             to: `${email}`,
             subject: "Confirmation d'inscription",
-            text: `Bonjour ${firstname}, Cliquez sur ce lien (valable pendant une heure) pour profiter de notre application "Drink Genius" : <a href="${url}">${url}</a> \n L'équipe de Drink Genius`,
+            text: `Bonjour ${firstname}, Cliquez sur ce lien (valable pendant une heure) pour profiter de notre application "Drink Genius" : ${url} \n L'équipe de Drink Genius`,
         };
 
         await transporter.sendMail(mailConfirmation);

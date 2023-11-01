@@ -17,10 +17,11 @@ const userController = {
       newUser.password = await bcrypt.hash(newUser.password, parseInt(process.env.SALT));
       const { error,result } = await userDataMapper.addOneUser(newUser);
       if (error) {
+        console.log(error)
         res.status(400).json(error);
       } else {
         sendConfirmationMail(result.email,result.firstname, result.id);
-        res.status(200).json("Inscription validée ! vous pouvez maintenant vous connecter");
+        res.status(200).json("Merci de cliquer sur le lien envoyé par mail pour valider votre inscription.");
       }
     }
   },
@@ -29,7 +30,7 @@ const userController = {
   async validateMail (req, res) {
     const verifiedUser = jwt.verify(req.params.token, process.env.MAIL_SECRET);
     await userDataMapper.validateUser(verifiedUser.userId);
-    res.status(200).redirect('/');
+    res.status(200).redirect('/?confirmed=true');
   },
 
   // CONNEXION

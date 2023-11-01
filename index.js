@@ -4,7 +4,6 @@ const cookieParser = require("cookie-parser");
 
 const express = require("express");
 const cors = require('cors');
-const session = require("express-session");
 const router = require("./router");
 const jwt = require('jsonwebtoken');
 const checkToken = require('./services/checkToken');
