@@ -311,7 +311,11 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(response => {
       if (!response.ok){
         return response.json().then(errorData => {
-        throw new Error(errorData);
+          const errorInfo = {
+            status: response.status,
+            message: errorData,
+          }
+        throw errorInfo;
       });
       }
       return response.json();
@@ -327,12 +331,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 1000);
     })
     .catch(error => {
+      console.log(error.status)
       modalTitle.style.color = "red";
       modalTitle.style.fontSize = "1.3em";
-      if (error.message.includes('Utilisateur')) {
-        modalTitle.innerText = "Utilisateur non trouvé.";
-      } else if (error.message.includes('Mot de passe')) {
-        modalTitle.innerText = "Mot de passe incorrect.";
+      if (error.status === 400) {
+        modalTitle.innerText = error.message;
       } else {
         modalTitle.innerText = "Une erreur s'est produite de l'authentification.";
       }

@@ -40,9 +40,13 @@ const userController = {
     else {
       const correctPassword = await bcrypt.compare(password, result.password);
       if(correctPassword){
-        delete result.password;
-        req.session.user = result;
-        res.status(200).json("Vous êtes maintenant connecté !");
+        if (result.confirmed) {
+          delete result.password;
+          req.session.user = result;
+          res.status(200).json("Vous êtes maintenant connecté !");
+        } else {
+          res.status(400).json("Email non vérifié.");
+        }
       }
       else {
         res.status(400).json("Mot de passe incorrect.");

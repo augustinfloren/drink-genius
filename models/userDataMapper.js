@@ -29,7 +29,8 @@ const dataMapper = {
                 return { error: "Utilisateur non trouvé.", code: "USER_NOT_FOUND", result: null };
             }
         } catch(err) {
-            return { error: "Une erreur s'est produite de l'authentification.", code: "DATABASE_ERROR", result: null };
+            console.log(err)
+            return { error: "Une erreur s'est produite de l'authentification.", code: "500", result: null };
         }
 
         return {error, result};
