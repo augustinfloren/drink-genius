@@ -61,7 +61,7 @@ const dataMapper = {
                 return { error: "Cet email est déjà enregistré.", code: "DUPLICATE_EMAIL", result: null };
             } else {
                 const response = await client.query(insertQuery);
-                result = response.rows;
+                result = response.rows[0];
             }
 
             } catch(err){
@@ -69,6 +69,19 @@ const dataMapper = {
             }
 
             return {error, result};
+    },
+
+    // VALIDATION MAIL USER
+    async validateUser (userId) {
+        try {
+            const sqlQuery = {
+                text : 'UPDATE "user" SET confirmed = TRUE WHERE id=$1',
+                values : [userId],
+            }
+            const result = await client.query(sqlQuery);
+        } catch (err) {
+            return {error: "Le profil n'a pas pu être validé."}
+        }
     },
 
     // MODIFICATION PROFIL

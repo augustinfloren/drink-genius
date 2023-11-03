@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS public."user"
     email text  NOT NULL UNIQUE,
     password text  NOT NULL,
     hobbies text,
+    confirmed boolean DEFAULT false,
     role_id integer NOT NULL,
     CONSTRAINT user_pkey PRIMARY KEY (id),
     CONSTRAINT role_id FOREIGN KEY (role_id)
@@ -63,7 +64,7 @@ CREATE TABLE IF NOT EXISTS public.ingredient
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     name text NOT NULL,
-    unit text, 
+    unit text,
     min_quantity integer NOT NULL,
     max_quantity integer NOT NULL,
     CONSTRAINT ingredient_pkey PRIMARY KEY (id)
@@ -166,7 +167,7 @@ CREATE OR REPLACE FUNCTION newcocktail(
     p_user_id INTEGER,
     p_ingredients json
 ) RETURNS VOID AS $$
-DECLARE 
+DECLARE
     v_cocktail_id INTEGER;
     v_ingredient json;
     ingredient_id INTEGER;
@@ -174,24 +175,24 @@ DECLARE
 
 BEGIN
 
-    INSERT INTO cocktail(name, instruction, picture, validation, user_id) 
+    INSERT INTO cocktail(name, instruction, picture, validation, user_id)
     VALUES (
-        p_name, 
-        p_instruction, 
+        p_name,
+        p_instruction,
         'cocktail.png',
-        false, 
+        false,
         p_user_id)
     RETURNING id INTO v_cocktail_id;
 
-    FOR v_ingredient IN 
-        SELECT * FROM json_array_elements(p_ingredients) 
+    FOR v_ingredient IN
+        SELECT * FROM json_array_elements(p_ingredients)
     LOOP
         ingredient_id := (v_ingredient->>'ingredient_id')::INTEGER;
         quantity := (v_ingredient->>'quantity')::INTEGER;
 
     INSERT INTO cocktail_contain_ingredient (cocktail_id, ingredient_id, quantity)
     VALUES (
-        v_cocktail_id, 
+        v_cocktail_id,
         ingredient_id,
         quantity
     );

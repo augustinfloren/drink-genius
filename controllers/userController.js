@@ -2,6 +2,7 @@ const ingredientDataMapper = require('../models/ingredientDataMapper');
 const cocktailDataMapper = require('../models/cocktailDataMapper');
 const userDataMapper = require('../models/userDataMapper');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const sendConfirmationMail = require ("../services/mailService");
 let currentRoute = "";
 
@@ -16,16 +17,17 @@ const userController = {
       if (error) {
         res.status(400).json(error);
       } else {
-        sendConfirmationMail(newUser.email,newUser.firstname);
+        sendConfirmationMail(result.email,result.firstname, result.id);
         res.status(200).json("Inscription validée ! vous pouvez maintenant vous connecter");
       }
     }
   },
 
-  // ENVOI DU MAIL DE CONFIRMATION
-  async sendingMailConfirmation (req,res){
-    const {email, firstname} = req.body;
-    res.status(200).json(true);
+  // VALIDATION DU MAIL
+  async validateMail (req, res) {
+    const verifiedUser = jwt.verify(req.params.token, process.env.MAIL_SECRET);
+    await userDataMapper.validateUser(verifiedUser.id);
+    res.status(200).redirect('/?confirmed=true');
   },
 
   // CONNEXION
@@ -100,7 +102,7 @@ const userController = {
       const errorMessage = "Le nom du cocktail ne doit contenir que des lettres et des chiffres."
       return res.status(400).render('errorPage', {errorMessage})
     }
-    
+
     // CONVERSION DE DEUX TABLEAUX EN JSON
     function convertintoJSON(ingredients, quantities){
       const elementsJson = [];

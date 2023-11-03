@@ -108,6 +108,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Arrivée sur le site après confirmation
+  const urlParams = new URLSearchParams(window.location.search);
+  const isConfirmed = urlParams.get('confirmed');
+
+  if (isConfirmed) {
+    toggleModalConnexion();
+  }
+
   // Lorsque je clique sur Connexion
   modalTriggerConnexion.addEventListener("click", toggleModalConnexion);
 
