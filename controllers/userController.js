@@ -27,6 +27,7 @@ const userController = {
   async validateMail (req, res) {
     const verifiedUser = jwt.verify(req.params.token, process.env.MAIL_SECRET);
     await userDataMapper.validateUser(verifiedUser.id);
+    res.clearCookie('jwt');
     res.status(200).redirect('/?confirmed=true');
   },
 
