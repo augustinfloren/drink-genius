@@ -100,7 +100,6 @@ const dataMapper = {
                 values : [userId],
             }
             const result = await client.query(sqlQuery);
-            return result
         } catch (err) {
             return {error: "Le profil n'a pas pu être validé."}
         }
