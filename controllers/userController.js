@@ -18,7 +18,7 @@ const userController = {
         res.status(400).json(error);
       } else {
         sendConfirmationMail(result.email,result.firstname, result.id);
-        res.status(200).json("Inscription validée ! vous pouvez maintenant vous connecter");
+        res.status(200).json("Merci de cliquer sur le lien envoyé par mail pour valider l'inscription.");
       }
     }
   },
