@@ -277,9 +277,11 @@ document.addEventListener("DOMContentLoaded", function () {
       return response.json();
     })
     .then(data => {
-      switchModalConnexion();
+      form.style.display = "none";
+      alreadyRegisteredLink.style.display = "none";
       modalTitle.innerText = data;
       modalTitle.style.fontSize = "1.3em";
+      modalTitle.style.color = "green";
     })
     .catch(error => {
       modalTitle.style.color = "red";
@@ -337,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (error.status === 400) {
         modalTitle.innerText = error.message;
       } else {
-        modalTitle.innerText = "Une erreur s'est produite de l'authentification.";
+        modalTitle.innerText = "Une erreur s'est produite lors de l'authentification.";
       }
     })
   }
