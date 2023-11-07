@@ -102,15 +102,14 @@ const userController = {
       quantity = quantity.map(el => parseInt(el, 10));
 
     // VERIFICATION DU NOM ENVOYE
-    const regexName = /^[A-Za-zÀ-ÖØ-öø-ÿ\d\s'-]+$/;
-    if(!regexName.test(name)){
+    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\d\s'-]+$/;
+    if(!regex.test(name)){
       const errorMessage = "Le nom du cocktail ne doit contenir que des lettres et des chiffres."
       return res.status(400).render('errorPage', {errorMessage})
     }
 
     // VERIFICATION DE L'INSTRUCTION ENVOYE
-    const regexInst = /^[A-Za-zÀ-ÖØ-öø-ÿ\d\s'-]+$/;
-    if(!regexInst.test(instruction)){
+    if(!regex.test(instruction)){
       const errorMessage = "Les instructions du cocktail ne doit contenir que des lettres et des chiffres."
       return res.status(400).render('errorPage', {errorMessage})
     }
