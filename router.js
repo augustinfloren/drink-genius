@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const { mainController, cocktailsController, userController } = require('./controllers')
-const cw = require("./controllers/middlewares/controllerWrapper");
+const cw = require("./services/controllerWrapper");
 const validationService = require("./services/validationService");
-const middleware404 = require("./controllers/middlewares/middleware404");
-const auth = require("./controllers/middlewares/authMiddleware")
+const middleware404 = require("./services/middleware404");
+const auth = require("./services/authMiddleware");
 
 // Accueil
 router.get("/", cw(mainController.renderHomePage));
@@ -18,7 +18,7 @@ router.get("/cocktails", cw(cocktailsController.renderAllCocktailsPage));
 router.get("/cocktail/:id", cw(cocktailsController.renderCocktailInfoPage));
 
 // Filtre
-router.post("/cocktails",cw(cocktailsController.filterCocktailsBySpirits));
+router.post("/cocktails", cw(cocktailsController.filterCocktailsBySpirits));
 
 // User - Connexion
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect));
