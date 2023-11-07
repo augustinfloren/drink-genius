@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const { mainController, cocktailsController, userController } = require('./controllers')
-const cw = require("./controllers/middlewares/controllerWrapper");
+const cw = require("./services/controllerWrapper");
 const validationService = require("./services/validationService");
-const middleware404 = require("./controllers/middlewares/middleware404");
-const auth = require("./controllers/middlewares/authMiddleware")
+const middleware404 = require("./services/middleware404");
+const auth = require("./services/authMiddleware");
+const sanitizer = require('./services/sanitizeService');
 
 // Accueil
 router.get("/", cw(mainController.renderHomePage));
@@ -18,7 +19,7 @@ router.get("/cocktails", cw(cocktailsController.renderAllCocktailsPage));
 router.get("/cocktail/:id", cw(cocktailsController.renderCocktailInfoPage));
 
 // Filtre
-router.post("/cocktails",cw(cocktailsController.filterCocktailsBySpirits));
+router.post("/cocktails", cw(cocktailsController.filterCocktailsBySpirits));
 
 // User - Connexion
 router.post("/signin", validationService.checkSignUpData, cw(userController.signUpAndRedirect));
@@ -29,13 +30,13 @@ router.delete("/profile", auth.isAuthed, cw(userController.deleteProfile));
 
 // User - Profil
 router.get("/profile/parameters", auth.isAuthed, cw(userController.renderProfilePage));
-router.patch("/profile", auth.isAuthed, cw(userController.updateProfile));
+router.patch("/profile", auth.isAuthed, sanitizer, cw(userController.updateProfile));
 router.get("/profile/usersfavourites", auth.isAuthed, cw(userController.getFavouriteCocktails));
 router.get("/profile/favourites", auth.isAuthed, cw(userController.renderFavouritesPages));
 router.post("/profile/favourites", auth.isAuthed, cw(userController.addToFavouritesByUser));
 router.delete("/profile/favourites", auth.isAuthed, cw(userController.deleteFavourite))
 router.get("/profile/newcocktail", auth.isAuthed, cw(userController.renderNewCocktailPage));
-router.post("/profile/newcocktail", auth.isAuthed, cw(userController.addNewCocktail));
+router.post("/profile/newcocktail", auth.isAuthed, sanitizer, cw(userController.addNewCocktail));
 router.get("/ingredients", auth.isAuthed, cw(userController.displayIngredients));
 router.get("/profile/usercocktails", auth.isAuthed, cw(userController.renderUserCocktailsPage));
 

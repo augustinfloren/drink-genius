@@ -3,7 +3,6 @@
   // ECOUTE SUR LE BOUTON MODIFIER ET AFFICHE LE FORMULAIRE DE MODIFICATION
   const parametersModificationBtn = document.getElementById("parameters-modification-btn");
   const parametersForm = document.getElementById("parameters-form");
-  const parametersList = document.getElementById("parameters-list");
   const fields = parametersForm.querySelectorAll("input");
 
 
@@ -39,7 +38,7 @@
           window.location.reload();
       })
       .catch(error => {
-        console.error("Erreur", error);
+        console.error("Erreur");
       });}
 
   /**************** SUPPRIMER SON COMPTE ****************/

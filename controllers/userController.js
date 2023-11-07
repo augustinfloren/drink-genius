@@ -175,8 +175,8 @@ const userController = {
   // MISE A JOUR DES INFORMATIONS DE PROFIL
   async updateProfile(req, res) {
     const userId = req.session.user.id;
-    const parameters = req.body;
-    const userInfo = await userDataMapper.updateUser(parameters, userId);
+    const {firstname, lastname, birthdate, email, location, hobbies} = req.body;
+    const userInfo = await userDataMapper.updateUser(firstname, lastname, birthdate, email, location, hobbies, userId);
     req.session.user = userInfo;
     res.json(userInfo);
   },
