@@ -38,7 +38,7 @@
           window.location.reload();
       })
       .catch(error => {
-        console.error("Erreur");
+        console.error("Erreur", error);
       });}
 
   /**************** SUPPRIMER SON COMPTE ****************/
