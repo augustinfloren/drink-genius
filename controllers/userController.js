@@ -108,6 +108,12 @@ const userController = {
       return res.status(400).render('errorPage', {errorMessage})
     }
 
+    // VERIFICATION DE L'INSTRUCTION ENVOYE
+    if(!regex.test(instruction)){
+      const errorMessage = "Les instructions du cocktail ne doit contenir que des lettres et des chiffres."
+      return res.status(400).render('errorPage', {errorMessage})
+    }
+
     // CONVERSION DE DEUX TABLEAUX EN JSON
     function convertintoJSON(ingredients, quantities){
       const elementsJson = [];
