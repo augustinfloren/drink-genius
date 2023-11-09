@@ -4,6 +4,9 @@ const firstChild = document.getElementById('first-child');
 const deleteMessage = document.createElement('div');
 deleteMessage.textContent = 'Le compte utilisateur a bien été supprimé.'
 
+const errorMessage = document.createElement('div');
+errorMessage.textContent = 'Une erreur est survenue. Merci de réessayer plus tard.'
+
 const deleteButton = document.querySelectorAll('.delete-user');
 deleteButton.forEach(button => {
 button.addEventListener('click', function (){
@@ -29,7 +32,12 @@ button.addEventListener('click', function (){
           }, 1500);
         })
     .catch(error => {
-        console.error('Erreur', error)
+        console.error('Erreur', error);
+        manageDiv.insertBefore(errorMessage, firstChild);
+        setTimeout(() => {
+            errorMessage.remove();
+            window.location.reload();
+          }, 1500);
     })
 })
 });
@@ -61,7 +69,12 @@ adminBtn.forEach(button =>{
           }, 1500);
         })
     .catch(error => {
-        console.error('Erreur', error)
+        console.error('Erreur', error);
+        manageDiv.insertBefore(errorMessage, firstChild);
+        setTimeout(() => {
+            errorMessage.remove();
+            window.location.reload();
+          }, 1500);
         })
     })
 })
