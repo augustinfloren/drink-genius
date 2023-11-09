@@ -28,7 +28,6 @@ async function getFavouritesId(){
     setTimeout(() => {
       message.textContent = '';
     }, 2000);
-
   });
 }
 

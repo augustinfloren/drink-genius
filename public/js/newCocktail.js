@@ -2,6 +2,7 @@
 // let ingredientCounter = 1;
 let ingredients = [];
 const newIngredientButton = document.querySelector('.add-ingredient-button')
+let message = document.getElementById('newcocktail-message');
 
 // RECUPERER LES INGREDIENTS
 function fetchIngredients (){
@@ -21,7 +22,11 @@ function fetchIngredients (){
         ingredients = data;
     })
     .catch(error => {
-        console.error('Erreur', error)
+        console.error("Erreur : ", error);
+        message.textContent = "Une erreur est survenue. Merci de réessayer ultérieurement."
+        setTimeout(() => {
+          message.textContent = '';
+        }, 2000);
     })};
 
 
