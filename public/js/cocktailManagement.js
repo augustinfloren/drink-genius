@@ -8,6 +8,9 @@ validationMessage.textContent = 'Le cocktail a bien été validé.';
 const deleteMessage = document.createElement('div');
 deleteMessage.textContent = 'Le cocktail a bien été supprimé.'
 
+const errorMessage = document.createElement('div');
+errorMessage.textContent = 'Une erreur est survenue. Merci de ressayer ultérieurement.';
+
 validateButton.forEach(button => {
 button.addEventListener('click', function(){
     const cocktailId = this.getAttribute('data-info');
@@ -32,7 +35,12 @@ button.addEventListener('click', function(){
       }, 1500);
     })
     .catch(error => {
-        console.error('Erreur', error)
+        console.error('Erreur', error);
+        manageDiv.insertBefore(errorMessage, firstChild);
+        setTimeout(() => {
+            errorMessage.remove();
+            window.location.reload();
+          }, 1500);
     })
 })
 });
@@ -62,7 +70,12 @@ button.addEventListener('click', function (){
           }, 1500);
         })
     .catch(error => {
-        console.error('Erreur', error)
+        console.error('Erreur', error);
+        manageDiv.insertBefore(errorMessage, firstChild);
+        setTimeout(() => {
+            errorMessage.remove();
+            window.location.reload();
+          }, 1500);
     })
 })
 });

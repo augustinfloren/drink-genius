@@ -3,6 +3,8 @@ let favouriteButton = document.querySelectorAll('.add-favourite-btn');
 // const cocktailId = document.querySelector('.cocktail-img').getAttribute('data-info');
 let favouritesDb = [];
 
+let message = document.getElementById('cocktail-message');
+
 // RECUPERATION DES ID DES COCKTAILS FAVORIS PAR UTILISATEUR CONNECTE
 async function getFavouritesId(){
   return await fetch("/profile/usersfavourites", {
@@ -22,6 +24,11 @@ async function getFavouritesId(){
     })
     .catch(error => {
     console.error("Erreur : ", error);
+    message.textContent = "Une erreur est survenue. Merci de réessayer ultérieurement."
+    setTimeout(() => {
+      message.textContent = '';
+    }, 2000);
+
   });
 }
 
