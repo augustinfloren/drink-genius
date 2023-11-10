@@ -14,14 +14,24 @@ const mainController = {
 
   // GENERE UNE RECETTE ALEATOIRE AVEC ALCOOL
   async getRandomRecipe(req, res){
-    const randomIngredients = await ingredientDataMapper.getRandomIngredients();
+    const { result, error } = await ingredientDataMapper.getRandomIngredients();
+    const randomIngredients = result;
+    if(randomIngredients){
     res.json(randomIngredients); 
+  } else {
+    res.json(error);
+  }
   },
 
   // GENERE UNE RECETTE ALEATOIRE SANS ALCOOL
   async getRandomVirginRecipe(req, res){
-      const randomVirginIngredients = await ingredientDataMapper.getRandomVirginIngredients();
+      const { result, error } = await ingredientDataMapper.getRandomVirginIngredients();
+      const randomVirginIngredients = result;
+      if(randomVirginIngredients){
       res.json(randomVirginIngredients);
+    } else {
+      res.json(error);
+    }
   }
 };
 

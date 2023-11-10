@@ -5,7 +5,7 @@
     <div class="profile-content" id="manage-cocktails">
         <h2>Liste des cocktails en attente :</h2>
         <div class="cocktails cocktails-container" id="first-child">
-            <% if (notValidatedCocktails.length>0) { %>
+            <% if (notValidatedCocktails) { %>
 
             <% notValidatedCocktails.forEach(cocktail => { %>
                 <div id="not-validated-cocktail">

@@ -3,12 +3,19 @@ const client = require('./dbClient');
 const dataMapper = {
     // AFFICHER TOUS LES UTILISATEURS NON-ADMIN
     async getAllUsers(){
+        let result;
+        let error;
         try {
-            const result = await client.query(`SELECT * FROM "user" WHERE role_id=2`);
-            return result.rows;
+            const response = await client.query(`SELECT * FROM "user" WHERE role_id=2`);
+            result = response.rows;
+            if(!result || result.length === 0){
+                error = "Aucun utilisateur à afficher."
+            }
         } catch(error) {
-            return {error: "Erreur s'est produite avec le serveur."}
+            console.error(error);
+            error = "Une erreur s'est produite lors de la récupération des utilisateurs."
         }
+        return { error, result };
     },
 
     // CONNEXION

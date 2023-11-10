@@ -3,23 +3,31 @@ const client = require('./dbClient');
 const ingredientDataMapper = {
     // OBTENIR DES INGREDIENTS ALEATOIRES
     async getRandomIngredients(){
+        let result;
+        let error;
         try {
-            const result = await client.query(`SELECT
+            const response = await client.query(`SELECT
             name, unit,
             CEIL(random()*( (max_quantity - min_quantity) + min_quantity)) AS quantity
             FROM ingredient
             ORDER BY name(random())
             LIMIT (3 + random() * (6 - 3))`);
-            return result.rows
+            result = response.rows;
+            if(!result){
+                error = "Une erreur s'est produite avec le serveur."
+            }
         } catch(error) {
-            return {error: "Erreur s'est produite avec le serveur."}
-        }
+            console.error(error);
+        };
+        return { error, result };
     },
 
     // OBTENIR DES INGREDIENTS SANS ALCOOL ALEATOIRES
     async getRandomVirginIngredients(){
+        let result;
+        let error;
         try {
-            const result = await client.query(`SELECT name, unit,
+            const response = await client.query(`SELECT name, unit,
             CEIL(random()*( (max_quantity - min_quantity) + min_quantity)) AS quantity
             FROM ingredient
             WHERE ingredient.id NOT IN (
@@ -28,20 +36,30 @@ const ingredientDataMapper = {
             WHERE label_id = 1)
             ORDER BY name(random())
             LIMIT (3 + random() * (6 - 3))`);
-            return result.rows
+            result =  response.rows;
+            if(!result){
+                error = "Une erreur s'est produite avec le serveur."
+            }
         } catch (error) {
-            return {error: "Erreur s'est produite avec le serveur."}
-        }
+            console.error(error);
+        };
+        return {error, result};
     },
 
     // OBTENIR TOUS LES INGREDIENTS
     async getAllIngredients(){
+        let result;
+        let error;
         try {
-            const result = await client.query(`SELECT * FROM ingredient ORDER BY name`);
-            return result.rows;
+            const response = await client.query(`SELECT * FROM ingredient ORDER BY name`);
+            result =  response.rows;
+            if(!result || result.length === 0){
+                error = "Une erreur s'est produite avec le serveur."
+            }
         } catch(error){
-            return {error: "Erreur s'est produite avec le serveur."} 
-        }
+            console.error(error) ;
+        };
+        return { result, error };
     },
 
     // OBTENIR LE NOM D'UN INGREDIENT

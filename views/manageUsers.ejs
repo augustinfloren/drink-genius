@@ -5,7 +5,7 @@
     <div class="profile-content" id="manage-users">
         <h2>Liste des comptes utilisateurs</h2>
         <div class="cocktails cocktails-container" id="first-child">
-            <% if (userAccounts.length>0) { %>
+            <% if (!error) { %>
             <ul id="users-container">
             <% userAccounts.forEach(user => { %>
                 <li><%= user.firstname %> <%= user.lastname %>
@@ -15,7 +15,7 @@
             <% }) %>
             </ul>
             <% } else { %>
-                <p>Il n'y a pas de comptes à afficher.</p>
+                <p>Il n'y a pas d'utilisateurs à afficher.</p>
                 <% } %>
         </div>
     </div>

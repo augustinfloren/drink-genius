@@ -86,10 +86,15 @@ const userController = {
 
   // AFFICHE DE LA PAGE D'AJOUT D'UN NOUVEAU COCKTAIL
   async renderNewCocktailPage(req,res){
-    const ingredients = await ingredientDataMapper.getAllIngredients();
+    const {result, error} = await ingredientDataMapper.getAllIngredients();
+    const ingredients = result;
     currentRoute = "newCocktail";
     const userInfo = req.session.user;
-    res.render('newCocktail', {ingredients, currentRoute, userInfo});
+    if(error){
+      res.render('errorPage', {errorMessage : "Création de cocktail impossible pour le moment. Merci de réessayer ultérieurement."})
+    } else { 
+      res.render('newCocktail', {ingredients, currentRoute, userInfo});
+    }
   },
 
   // AJOUT D'UN COCKTAIL EN BASE DE DONNEES
@@ -130,12 +135,12 @@ const userController = {
 
     const ingredientJson = convertintoJSON(ingredientId, quantity);
 
-    const result = await cocktailDataMapper.addOneCocktailFunction(name, instruction, userId, ingredientJson);
+    const {result, error} = await cocktailDataMapper.addOneCocktailFunction(name, instruction, userId, ingredientJson);
     if(result){
       res.redirect('/profile/usercocktails');
     } else {
-      const errorMessage = "Une erreur serveur est survenue."
-      return res.status(500).render('errorPage', {errorMessage})
+      const errorMessage = error;
+      res.render('errorPage', {errorMessage})
   }
 },
 
@@ -150,8 +155,13 @@ const userController = {
 
   // RECUPERATION DE TOUS LES INGREDIENTS
   async displayIngredients(req, res){
-    const ingredients = await ingredientDataMapper.getAllIngredients();
+    const { result, error } = await ingredientDataMapper.getAllIngredients();
+    const ingredients = result;
+    if(ingredients){
     res.json(ingredients);
+    } else {
+      res.json(error);
+    }
   },
 
   // AJOUT DE COCKTAILS FAVORIS AU COMPTE DE L'UTILISATEUR
@@ -199,27 +209,35 @@ const userController = {
 
   // AFFICHAGE DES COCKTAILS NON VALIDES
   async renderCocktailsManagementPage(req, res){
-    const notValidatedCocktails = await cocktailDataMapper.getNotValidatedCocktails();
+    const { error, result } = await cocktailDataMapper.getNotValidatedCocktails();
+    const notValidatedCocktails = result;
+    console.log(result);
     const userInfo = req.session.user;
-    currentRoute = "admin/cocktails"
-    res.render('manageCocktails', {notValidatedCocktails, userInfo, currentRoute });
+    currentRoute = "admin/cocktails";
+    if(error){
+      res.render('cocktailListPage', {error, currentRoute});
+    } else {
+      res.render('manageCocktails', {notValidatedCocktails, error, userInfo, currentRoute });
+    }
   },
 
   // VALIDATION D'UN COCKTAIL
   async validateCocktail(req, res){
     const cocktailId = req.body.cocktailId;
-    const validation = await cocktailDataMapper.updateCocktailStatus(cocktailId);
+    const {result, error} = await cocktailDataMapper.updateCocktailStatus(cocktailId);
+    const validation = result;
     if(validation.rowCount>0){
       res.json("Cocktail validé");
     } else {
-      console.log(result.error)
+      res.json(error);
     }
   },
 
   // SUPPRESSION D'UN COCKTAIL
   async deleteCocktail(req, res){
     const cocktailId = req.body.cocktailId;
-    const deletion = await cocktailDataMapper.deleteCocktail(cocktailId);
+    const {error, result} = await cocktailDataMapper.deleteCocktail(cocktailId);
+    const deletion = result;
     if(deletion.rowCount>0){
       res.json("Cocktail supprimé");
     } else {
@@ -229,9 +247,14 @@ const userController = {
 
   // AFFICHAGE DE LA PAGE DE TOUS LES UTILISATEURS
   async renderUsersManagementPage(req, res){
-    const userAccounts = await userDataMapper.getAllUsers();
+    const {result, error} = await userDataMapper.getAllUsers();
+    const userAccounts = result;
     currentRoute = "admin/users";
-    res.render('manageUsers', {userAccounts, currentRoute});
+    if(error){
+      res.render('manageUsers', {error, currentRoute})
+    } else {
+    res.render('manageUsers', {userAccounts, error, currentRoute});
+    }
   },
 
   // SUPPRESSION D'UN COMPTE UTILISATEUR
