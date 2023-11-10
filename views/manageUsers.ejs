@@ -4,6 +4,7 @@
 <%- include('partials/profileNav') %>
     <div class="profile-content" id="manage-users">
         <h2>Liste des comptes utilisateurs</h2>
+        <div id="message-display-user-manage"></div>
         <div class="cocktails cocktails-container" id="first-child">
             <% if (!error) { %>
             <ul id="users-container">
@@ -15,7 +16,7 @@
             <% }) %>
             </ul>
             <% } else { %>
-                <p>Il n'y a pas d'utilisateurs à afficher.</p>
+                <p><%= error %></p>
                 <% } %>
         </div>
     </div>

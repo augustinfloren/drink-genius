@@ -8,12 +8,13 @@ const cocktailDataMapper = {
         try {
             const response = await client.query(`SELECT * FROM cocktail WHERE validation=true`);
             result = response.rows
-            if(!result){
+            if(!result || result.length === 0){
                 error = "Aucun cocktail à afficher."
             }
-        } catch(error) {
-            console.error(error);
-        }
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la récupération des cocktails."
+        };
         return {error, result}
     },
 
@@ -42,16 +43,14 @@ const cocktailDataMapper = {
         try {
             const response = await client.query('SELECT * FROM cocktail WHERE validation=false')
             result = response.rows;
-            console.log(result);
-            if(!result){
+            if(!result || result.length === 0){
                 error = "Aucun cocktail en attente de validation."
             }
-        } catch(error) {
-            console.error(error);
+        } catch(err) {
+            console.error(err);
             error = "Une erreur s'est produite lors de la récupération des cocktails."
         };
-
-        return (error, result);
+        return {error, result};
     },
 
     // CHANGER LE STATUT D'UN COCKTAIL PAR L'ADMIN
@@ -67,11 +66,12 @@ const cocktailDataMapper = {
             const response = await client.query(sqlQuery);
             result = response;
             if(!result){
-                error = "Une erreur s'est produite avec le serveur. Le cocktail n'a pas été validé."
+                error = "Cocktail introuvable. Merci de réessayer ultérieurement."
             }
-        } catch(error) {
-            console.error(error);
-        }
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la validation du cocktail."
+        };
         return { result, error };
     },
 
@@ -112,8 +112,9 @@ const cocktailDataMapper = {
             if(!result){
                 error = "Oups ! Cocktail introuvable..."
             }
-        } catch(error){
-            console.error(error);
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la récupération du cocktail."
         };
         return { result, error };
     },
@@ -132,8 +133,9 @@ const cocktailDataMapper = {
             if(!result){
                 error = "Une erreur s'est produite. Le cocktail n'a pas été ajouté."
             }
-        } catch(error){
-            console.error(error) ;
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de l'ajout du cocktail."
         };
         return { result, error };
     },
@@ -150,10 +152,11 @@ const cocktailDataMapper = {
             const response = await client.query(sqlQuery);
             result = response;
             if(!result || result.length === 0){
-                error = "Une erreur s'est produite. Le cocktail n'a pas été supprimé."
+                error = "Cocktail introuvable. Le cocktail n'a pas été supprimé."
             }
-        } catch(error){
-            console.error(error);
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la suppression du cocktail."
         };
         return { error, result };
     }

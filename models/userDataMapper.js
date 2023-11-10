@@ -11,10 +11,10 @@ const dataMapper = {
             if(!result || result.length === 0){
                 error = "Aucun utilisateur à afficher."
             }
-        } catch(error) {
-            console.error(error);
+        } catch(err) {
+            console.error(err);
             error = "Une erreur s'est produite lors de la récupération des utilisateurs."
-        }
+        };
         return { error, result };
     },
 
@@ -71,10 +71,9 @@ const dataMapper = {
                 const response = await client.query(insertQuery);
                 result = response.rows[0];
             }
-
             } catch(err){
                 return { error: "Une erreur s'est produite lors de l'ajout de l'utilisateur.", code: "DATABASE_ERROR", result: null };
-            }
+            };
 
             return {error, result};
     },
@@ -94,61 +93,88 @@ const dataMapper = {
 
     // MODIFICATION PROFIL
     async updateUser(firstname, lastname, birthdate, email, location, hobbies, id){
+        let result;
+        let error;
+        const sqlQuery = {
+            text: `UPDATE "user" SET firstname = $1, lastname = $2, birthdate = $3, email = $4, location =$5, hobbies =$6 WHERE id=$7 RETURNING id, lastname, firstname, birthdate, location, email, hobbies, role_id`,
+            values:[firstname, lastname, birthdate, email, location, hobbies, id]
+        };
         try {
-            const sqlQuery = {
-                text: `UPDATE "user" SET firstname = $1, lastname = $2, birthdate = $3, email = $4, location =$5, hobbies =$6 WHERE id=$7 RETURNING id, lastname, firstname, birthdate, location, email, hobbies, role_id`,
-                values:[firstname, lastname, birthdate, email, location, hobbies, id]
-            };
-            const result = await client.query(sqlQuery);
-            return result.rows[0];
-        } catch (error) {
-            return {error: "Une erreur s'est produite avec le serveur. Le profil n'a pas été modifié."}
-        }
+            const response = await client.query(sqlQuery);
+            result =  response.rows[0];
+            if(!result){
+                error = "Une erreur serveur est survenue. Le profil n'a pas été mis à jour."
+            }
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la mise à jour."
+        };
+        return {error, result};
     },
 
     // DESINSCRIPTION
     async deleteUser(userId){
+        let error;
+        let result;
+        const sqlQuery= {
+            text:`DELETE FROM "user" WHERE id=$1`,
+            values:[userId]
+        };
         try {
-            const sqlQuery= {
-                text:`DELETE FROM "user" WHERE id=$1`,
-                values:[userId]
-            };
-            const result = await client.query(sqlQuery);
-
-            return result.rowCount;
-        } catch (error) {
-            return {error: "Une erreur s'est produite avec le serveur. L'uilisateur est toujours inscrit."}
-        }
+            const response = await client.query(sqlQuery);
+            result = response.rowCount;
+            if(!result || result.length === 0){
+                error = "Une erreur s'est produite lors de la suppression. Le profil n'a pas été supprimé."
+            }
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la suppression."
+        };
+        return {error, result};
     },
 
     // RECUPERER LES COCKTAILS FAVORIS PAR UTILISATEUR
     async getFavourites(user_id){
+        let error;
+        let result;
+        const sqlQuery = {
+            text: `SELECT * FROM cocktail
+            JOIN user_like_cocktail AS favourites ON cocktail.id = favourites.cocktail_id
+            WHERE favourites.user_id =$1`,
+            values: [user_id]
+        };
         try {
-            const sqlQuery = {
-                text: `SELECT * FROM cocktail
-                JOIN user_like_cocktail AS favourites ON cocktail.id = favourites.cocktail_id
-                WHERE favourites.user_id =$1`,
-                values: [user_id]
-            };
-            const result = await client.query(sqlQuery);
-            return result.rows;
-        } catch (error) {
-            return {error: "Une erreur s'est produite avec le serveur."}
-        }
+            const response = await client.query(sqlQuery);
+            result = response.rows;
+            if(!result){
+                error = "Utilisateur non trouvé."
+            }
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la récupération des favoris."
+        };
+        return {error, result};
     },
 
     // RECUPERER LES COCKTAILS PAR UTILISATEUR
     async getUserCocktails(user_id){
+        let result;
+        let error;
+        const sqlQuery = {
+            text: 'SELECT * FROM cocktail WHERE user_id=$1',
+            values: [user_id]
+        };
         try {
-            const sqlQuery = {
-                text: 'SELECT * FROM cocktail WHERE user_id=$1',
-                values: [user_id]
-            };
-            const result = await client.query(sqlQuery)
-            return result.rows;
-        } catch(error){
-            return {error: "Une erreur s'est produite avec le serveur."}
-        }
+            const response = await client.query(sqlQuery)
+            result = response.rows;
+            if(!result){
+                error = "Utilisateur non trouvé."
+            }
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la récupération des cocktails."
+        };
+        return {error, result};
     },
 
     // AJOUTER UN COCKTAIL AUX FAVORIS DE L'UTILISATEUR

@@ -31,7 +31,7 @@
     })
       .then(response => {
         if (!response.ok){
-          throw new Error("la requete a échoué");
+          throw new Error("La requete a échoué");
         }
         return response.json();
       })

@@ -147,7 +147,8 @@ const userController = {
 // AFFICHAGE DES COCKTAILS CREES PAR L'UTILISATEUR
   async renderUserCocktailsPage(req, res){
     const userId = req.session.user.id;
-    const userCocktails = await userDataMapper.getUserCocktails(userId);
+    const { result, error } = await userDataMapper.getUserCocktails(userId);
+    const userCocktails = result;
     const userInfo = req.session.user;
     currentRoute = "usercocktails";
     res.render('userCocktailsPage', {userCocktails, currentRoute, userInfo});
@@ -192,15 +193,17 @@ const userController = {
   async updateProfile(req, res) {
     const userId = req.session.user.id;
     const {firstname, lastname, birthdate, email, location, hobbies} = req.body;
-    const userInfo = await userDataMapper.updateUser(firstname, lastname, birthdate, email, location, hobbies, userId);
+    const {result, error} = await userDataMapper.updateUser(firstname, lastname, birthdate, email, location, hobbies, userId);
+    const userInfo = result;
     req.session.user = userInfo;
-    res.json(userInfo);
+    res.json(userInfo, error);
   },
 
   // SUPPRESSION DU COMPTE UTILISATEUR
   async deleteProfile(req,res){
     const userId = req.session.user.id;
-    const deletedProfile = await userDataMapper.deleteUser(userId);
+    const { result, error } = await userDataMapper.deleteUser(userId);
+    const deletedProfile = result;
     if(deletedProfile>0){
     req.session.user = null;
     res.json("Compte supprimé")
@@ -209,16 +212,10 @@ const userController = {
 
   // AFFICHAGE DES COCKTAILS NON VALIDES
   async renderCocktailsManagementPage(req, res){
-    const { error, result } = await cocktailDataMapper.getNotValidatedCocktails();
+    const {result, error } = await cocktailDataMapper.getNotValidatedCocktails();
     const notValidatedCocktails = result;
-    console.log(result);
-    const userInfo = req.session.user;
     currentRoute = "admin/cocktails";
-    if(error){
-      res.render('cocktailListPage', {error, currentRoute});
-    } else {
-      res.render('manageCocktails', {notValidatedCocktails, error, userInfo, currentRoute });
-    }
+    res.render('manageCocktails', {notValidatedCocktails, error, currentRoute });
   },
 
   // VALIDATION D'UN COCKTAIL
@@ -241,7 +238,7 @@ const userController = {
     if(deletion.rowCount>0){
       res.json("Cocktail supprimé");
     } else {
-      console.log(result.error)
+      console.error(result.error)
     }
   },
 
@@ -250,17 +247,14 @@ const userController = {
     const {result, error} = await userDataMapper.getAllUsers();
     const userAccounts = result;
     currentRoute = "admin/users";
-    if(error){
-      res.render('manageUsers', {error, currentRoute})
-    } else {
-    res.render('manageUsers', {userAccounts, error, currentRoute});
-    }
+    res.render('manageUsers', {error, userAccounts, currentRoute})
   },
 
   // SUPPRESSION D'UN COMPTE UTILISATEUR
   async deleteProfileByAdmin(req,res){
     const userId = req.body.userId;
-    const deletedProfile = await userDataMapper.deleteUser(userId);
+    const {result, error} = await userDataMapper.deleteUser(userId);
+    const deletedProfile = result;
     if(deletedProfile>0){
     res.json("Compte supprimé")
     }

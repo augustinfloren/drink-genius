@@ -4,9 +4,9 @@
 <%- include('partials/profileNav') %>
     <div class="profile-content" id="manage-cocktails">
         <h2>Liste des cocktails en attente :</h2>
+        <div id="message-display-cocktail-manage"></div>
         <div class="cocktails cocktails-container" id="first-child">
-            <% if (notValidatedCocktails) { %>
-
+            <% if (!error) { %>
             <% notValidatedCocktails.forEach(cocktail => { %>
                 <div id="not-validated-cocktail">
                     <a class="cocktail cocktails-container-item" href="/cocktail/<%=cocktail.id%>">
@@ -20,7 +20,7 @@
                 </div>
             <% }) %>
             <% } else { %>
-                <p>Il n'y a pas de cocktails en attente de validation.</p>
+                <p><%= error %></p>
                 <% } %>
         </div>
     </div>

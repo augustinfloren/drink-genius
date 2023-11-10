@@ -1,15 +1,7 @@
 const manageDiv = document.getElementById('manage-cocktails');
-const firstChild = document.getElementById('first-child');
+const message = document.getElementById('message-display-cocktail-manage');
 
 const validateButton = document.querySelectorAll('.validate-cocktail');
-const validationMessage = document.createElement('div');
-validationMessage.textContent = 'Le cocktail a bien été validé.';
-
-const deleteMessage = document.createElement('div');
-deleteMessage.textContent = 'Le cocktail a bien été supprimé.'
-
-const errorMessage = document.createElement('div');
-errorMessage.textContent = 'Une erreur est survenue. Merci de ressayer ultérieurement.';
 
 validateButton.forEach(button => {
 button.addEventListener('click', function(){
@@ -28,17 +20,17 @@ button.addEventListener('click', function(){
       return response.json();
     })
     .then(data => {
-    manageDiv.insertBefore(validationMessage, firstChild);
+    message.textContent = 'Le cocktail a bien été validé.';
     setTimeout(() => {
-        validationMessage.remove();
+        message.textContent = '';
         window.location.reload();
       }, 1500);
     })
     .catch(error => {
         console.error('Erreur', error);
-        manageDiv.insertBefore(errorMessage, firstChild);
+        message.textContent = 'Une erreur est survenue. Merci de ressayer ultérieurement.';
         setTimeout(() => {
-            errorMessage.remove();
+            message.textContent = '';
             window.location.reload();
           }, 1500);
     })
@@ -63,9 +55,9 @@ button.addEventListener('click', function (){
         return response.json();
     })
     .then(data => {
-        manageDiv.insertBefore(deleteMessage, firstChild);
+        message.textContent = 'Le cocktail a bien été supprimé.'
         setTimeout(() => {
-            deleteMessage.remove();
+            message.textContent = '';
             window.location.reload();
           }, 1500);
         })

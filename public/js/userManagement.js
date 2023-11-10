@@ -1,12 +1,7 @@
 const manageDiv = document.getElementById('manage-users');
-const firstChild = document.getElementById('first-child');
+const message = document.getElementById('message-display-user-manage');
 
-const deleteMessage = document.createElement('div');
-deleteMessage.textContent = 'Le compte utilisateur a bien été supprimé.'
-
-const errorMessage = document.createElement('div');
-errorMessage.textContent = 'Une erreur est survenue. Merci de réessayer plus tard.'
-
+// SUPPRESSION D'UN UTILISATEUR
 const deleteButton = document.querySelectorAll('.delete-user');
 deleteButton.forEach(button => {
 button.addEventListener('click', function (){
@@ -25,26 +20,25 @@ button.addEventListener('click', function (){
         return response.json();
     })
     .then(data => {
-        manageDiv.insertBefore(deleteMessage, firstChild);
+        message.textContent = 'Le compte utilisateur a bien été supprimé.';
         setTimeout(() => {
-            deleteMessage.remove();
+            message.textContent ='';
             window.location.reload();
           }, 1500);
         })
     .catch(error => {
         console.error('Erreur', error);
-        manageDiv.insertBefore(errorMessage, firstChild);
+        message.textContent = 'Une erreur est survenue. Merci de réessayer.';
         setTimeout(() => {
-            errorMessage.remove();
+            message.textContent ='';
             window.location.reload();
           }, 1500);
     })
 })
 });
 
+// ATTRIBUTION DU ROLE ADMIN A UN USER
 const adminBtn = document.querySelectorAll('.admin-user');
-const adminMessage = document.createElement('div');
-adminMessage.textContent = "Le role a bien été mis à jour";
 adminBtn.forEach(button =>{
     button.addEventListener('click', function(){
         const userId = this.getAttribute('user-info');
@@ -62,19 +56,19 @@ adminBtn.forEach(button =>{
         return response.json();
     })
     .then(data => {
-        manageDiv.insertBefore(adminMessage, firstChild);
+        message.textContent = "Le role a bien été mis à jour";
         setTimeout(() => {
-            adminMessage.remove();
+            message.textContent = '';
             window.location.reload();
           }, 1500);
         })
     .catch(error => {
         console.error('Erreur', error);
-        manageDiv.insertBefore(errorMessage, firstChild);
+        message.textContent = 'Une erreur est survenue. Merci de réessayer.';
         setTimeout(() => {
-            errorMessage.remove();
+            message.textContent = '';
             window.location.reload();
           }, 1500);
         })
     })
-})
+});

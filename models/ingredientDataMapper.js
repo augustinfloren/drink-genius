@@ -16,8 +16,9 @@ const ingredientDataMapper = {
             if(!result){
                 error = "Une erreur s'est produite avec le serveur."
             }
-        } catch(error) {
-            console.error(error);
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la récupération des ingrédients."
         };
         return { error, result };
     },
@@ -40,8 +41,9 @@ const ingredientDataMapper = {
             if(!result){
                 error = "Une erreur s'est produite avec le serveur."
             }
-        } catch (error) {
-            console.error(error);
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la récupération des ingrédients."
         };
         return {error, result};
     },
@@ -54,10 +56,11 @@ const ingredientDataMapper = {
             const response = await client.query(`SELECT * FROM ingredient ORDER BY name`);
             result =  response.rows;
             if(!result || result.length === 0){
-                error = "Une erreur s'est produite avec le serveur."
+                error = "Aucun ingrédient trouvé."
             }
-        } catch(error){
-            console.error(error) ;
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la récupération des ingrédients."
         };
         return { result, error };
     },
