@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Comparaison mdp et confirmation
     if (inputValue !== passwordValue ) {
       confirmationError.style.display = "block";
-      confirmationError.innerText = "Les mots de passe doivent correspondrent.";
+      confirmationError.innerText = "Les mots de passe doivent correspondre.";
       confirmationOK = false;
     } else {
       confirmationError.style.display ="none";

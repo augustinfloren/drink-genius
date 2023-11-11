@@ -71,25 +71,35 @@ const userController = {
   // AFFICHAGE DE LA PAGE DES COCKTAILS FAVORIS
   async renderFavouritesPages(req, res){
     const userId = req.session.user.id;
-    const favourites = await userDataMapper.getFavourites(userId);
+    const {error, result} = await userDataMapper.getFavourites(userId);
+    const favourites = result;
     currentRoute = 'favourites';
-    const userInfo = req.session.user;
-    res.render('favouritesPage', {favourites, currentRoute, userInfo});
+    res.render('favouritesPage', {favourites, currentRoute, error});
   },
 
   // RECUPERATION DES COCKTAILS FAVORIS
   async getFavouriteCocktails(req,res){
     const userId = req.session.user.id;
-    const favourites = await userDataMapper.getFavourites(userId);
-    res.json(favourites);
+    const {result,error} = await userDataMapper.getFavourites(userId);
+    const favourites = result;
+    if(result){
+      res.json(favourites);
+    } else {
+      res.json(error);
+    }
   },
 
   // AFFICHE DE LA PAGE D'AJOUT D'UN NOUVEAU COCKTAIL
   async renderNewCocktailPage(req,res){
-    const ingredients = await ingredientDataMapper.getAllIngredients();
+    const {result, error} = await ingredientDataMapper.getAllIngredients();
+    const ingredients = result;
     currentRoute = "newCocktail";
     const userInfo = req.session.user;
-    res.render('newCocktail', {ingredients, currentRoute, userInfo});
+    if(error){
+      res.render('errorPage', {errorMessage : "Création de cocktail impossible pour le moment. Merci de réessayer ultérieurement."})
+    } else { 
+      res.render('newCocktail', {ingredients, currentRoute, userInfo});
+    }
   },
 
   // AJOUT D'UN COCKTAIL EN BASE DE DONNEES
@@ -130,36 +140,41 @@ const userController = {
 
     const ingredientJson = convertintoJSON(ingredientId, quantity);
 
-    const result = await cocktailDataMapper.addOneCocktailFunction(name, instruction, userId, ingredientJson);
+    const {result, error} = await cocktailDataMapper.addOneCocktailFunction(name, instruction, userId, ingredientJson);
     if(result){
       res.redirect('/profile/usercocktails');
     } else {
-      const errorMessage = "Une erreur serveur est survenue."
-      return res.status(500).render('errorPage', {errorMessage})
+      const errorMessage = error;
+      res.render('errorPage', {errorMessage})
   }
 },
 
 // AFFICHAGE DES COCKTAILS CREES PAR L'UTILISATEUR
   async renderUserCocktailsPage(req, res){
     const userId = req.session.user.id;
-    const userCocktails = await userDataMapper.getUserCocktails(userId);
-    const userInfo = req.session.user;
+    const { result, error } = await userDataMapper.getUserCocktails(userId);
+    const userCocktails = result;
     currentRoute = "usercocktails";
-    res.render('userCocktailsPage', {userCocktails, currentRoute, userInfo});
+    res.render('userCocktailsPage', {userCocktails, error, currentRoute});
   },
 
   // RECUPERATION DE TOUS LES INGREDIENTS
   async displayIngredients(req, res){
-    const ingredients = await ingredientDataMapper.getAllIngredients();
+    const { result, error } = await ingredientDataMapper.getAllIngredients();
+    const ingredients = result;
+    if(ingredients){
     res.json(ingredients);
+    } else {
+      res.json(error);
+    }
   },
 
   // AJOUT DE COCKTAILS FAVORIS AU COMPTE DE L'UTILISATEUR
   async addToFavouritesByUser(req, res) {
     const cocktailId = req.body.cocktailId;
     const userId = req.session.user.id;
-    const result = await userDataMapper.addToFavourites(userId, cocktailId);
-    if (result.error) {
+    const {result, error} = await userDataMapper.addToFavourites(userId, cocktailId);
+    if (error) {
       res.status(400).json(result.error);
     } else {
       res.status(200).json("Cocktail ajouté aux favoris avec succès!");
@@ -170,8 +185,8 @@ const userController = {
   async deleteFavourite(req, res){
     const userId = req.session.user.id;
     const cocktailId = req.body.cocktailId;
-    const result = await userDataMapper.deleteFromFavourites(userId, cocktailId);
-    if (result.error) {
+    const {result,error} = await userDataMapper.deleteFromFavourites(userId, cocktailId);
+    if (error) {
       res.status(400).json(result.error);
     } else {
       res.status(200).json("Cocktail supprimé des favoris avec succès!");
@@ -182,15 +197,17 @@ const userController = {
   async updateProfile(req, res) {
     const userId = req.session.user.id;
     const {firstname, lastname, birthdate, email, location, hobbies} = req.body;
-    const userInfo = await userDataMapper.updateUser(firstname, lastname, birthdate, email, location, hobbies, userId);
+    const {result, error} = await userDataMapper.updateUser(firstname, lastname, birthdate, email, location, hobbies, userId);
+    const userInfo = result;
     req.session.user = userInfo;
-    res.json(userInfo);
+    res.json(userInfo, error);
   },
 
   // SUPPRESSION DU COMPTE UTILISATEUR
   async deleteProfile(req,res){
     const userId = req.session.user.id;
-    const deletedProfile = await userDataMapper.deleteUser(userId);
+    const { result, error } = await userDataMapper.deleteUser(userId);
+    const deletedProfile = result;
     if(deletedProfile>0){
     req.session.user = null;
     res.json("Compte supprimé")
@@ -199,45 +216,49 @@ const userController = {
 
   // AFFICHAGE DES COCKTAILS NON VALIDES
   async renderCocktailsManagementPage(req, res){
-    const notValidatedCocktails = await cocktailDataMapper.getNotValidatedCocktails();
-    const userInfo = req.session.user;
-    currentRoute = "admin/cocktails"
-    res.render('manageCocktails', {notValidatedCocktails, userInfo, currentRoute });
+    const {result, error } = await cocktailDataMapper.getNotValidatedCocktails();
+    const notValidatedCocktails = result;
+    currentRoute = "admin/cocktails";
+    res.render('manageCocktails', {notValidatedCocktails, error, currentRoute });
   },
 
   // VALIDATION D'UN COCKTAIL
   async validateCocktail(req, res){
     const cocktailId = req.body.cocktailId;
-    const validation = await cocktailDataMapper.updateCocktailStatus(cocktailId);
+    const {result, error} = await cocktailDataMapper.updateCocktailStatus(cocktailId);
+    const validation = result;
     if(validation.rowCount>0){
       res.json("Cocktail validé");
     } else {
-      console.log(result.error)
+      res.json(error);
     }
   },
 
   // SUPPRESSION D'UN COCKTAIL
   async deleteCocktail(req, res){
     const cocktailId = req.body.cocktailId;
-    const deletion = await cocktailDataMapper.deleteCocktail(cocktailId);
+    const {error, result} = await cocktailDataMapper.deleteCocktail(cocktailId);
+    const deletion = result;
     if(deletion.rowCount>0){
       res.json("Cocktail supprimé");
     } else {
-      console.log(result.error)
+      console.error(result.error)
     }
   },
 
   // AFFICHAGE DE LA PAGE DE TOUS LES UTILISATEURS
   async renderUsersManagementPage(req, res){
-    const userAccounts = await userDataMapper.getAllUsers();
+    const {result, error} = await userDataMapper.getAllUsers();
+    const userAccounts = result;
     currentRoute = "admin/users";
-    res.render('manageUsers', {userAccounts, currentRoute});
+    res.render('manageUsers', {error, userAccounts, currentRoute})
   },
 
   // SUPPRESSION D'UN COMPTE UTILISATEUR
   async deleteProfileByAdmin(req,res){
     const userId = req.body.userId;
-    const deletedProfile = await userDataMapper.deleteUser(userId);
+    const {result, error} = await userDataMapper.deleteUser(userId);
+    const deletedProfile = result;
     if(deletedProfile>0){
     res.json("Compte supprimé")
     }
@@ -246,8 +267,12 @@ const userController = {
   // MISE A JOUR DU ROLE
   async updateUserRole(req,res){
     const userId = req.body.userId;
-    const updatedProfile = await userDataMapper.updateRoleToAdmin(userId);
-    res.json("Role mis à jour")
+    const {result, error} = await userDataMapper.updateRoleToAdmin(userId);
+    if(result){
+      res.json("Role mis à jour")
+    } else {
+      res.json(error);
+    }
   }
 };
 

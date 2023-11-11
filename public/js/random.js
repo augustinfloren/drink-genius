@@ -79,7 +79,7 @@ const random = {
             random.randomIngredients = data;
         })
         .catch(error => {
-            console.error('Erreur', error)
+         random.generatorTitle.innerText = "La machine semble être en panne. Merci de réessayer plus tard.";
     })},
 
     // Affichage des ingrédients

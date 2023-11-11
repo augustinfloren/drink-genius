@@ -5,8 +5,8 @@
 <!-- COCKTAILS CONTAINER-->
 <div class="profile-content" id="user-cocktails-content">
         <h2>Vos créations</h2>
-            <% if (userCocktails.length === 0) { %>
-                <p>Vous n'avez pas créé de cocktail.</p>
+            <% if (error) { %>
+                <p><%= error %></p>
             <% } else { %>
                 <div class="cocktails-container">
                     <% userCocktails.forEach(userCocktail => { %>

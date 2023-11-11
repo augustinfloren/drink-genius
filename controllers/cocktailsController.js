@@ -4,10 +4,15 @@ const ingredientDataMapper = require("../models/ingredientDataMapper");
 const cocktailsController = {
   // AFFICHE LA PAGE DE TOUS LES COCKTAILS
   async renderAllCocktailsPage(req, res){
-    const cocktails = await cocktailDataMapper.getValidatedCocktails();
+    const { error, result } = await cocktailDataMapper.getValidatedCocktails();
+    const cocktails = result;
     const spirits = await ingredientDataMapper.getSpiritsName();
     let currentRoute = 'cocktails';
+    if(error){
+      res.render('errorPage', {errorMessage: error});
+    } else {
     res.render('cocktailsListPage', {cocktails, spirits, currentRoute});
+    }
   },
 
   // FILTRE LES COCKTAILS SELON L'ALCOOL
@@ -20,13 +25,14 @@ const cocktailsController = {
   // AFFICHE LES INFORMATIONS D'UN COCKTAIL
   async renderCocktailInfoPage(req, res){
     const cocktailId = parseInt(req.params.id, 10);
-    const cocktailInfo = await cocktailDataMapper.getCocktailInformation(cocktailId);
+    const { error, result } = await cocktailDataMapper.getCocktailInformation(cocktailId);
+    const cocktailInfo = result;
     let currentRoute = "cocktail";
-    if(cocktailInfo){
-        res.render('cocktailPage', { cocktailInfo, currentRoute });
+    if(error){
+      res.render('errorPage', {errorMessage: error});
     } else {
-      res.status(500).json("cocktail introuvable");
-    };
+    res.render('cocktailPage', { cocktailInfo, currentRoute });
+    }
   },
 
   // AJOUTE UN COCKTAIL

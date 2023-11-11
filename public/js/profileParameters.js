@@ -4,6 +4,7 @@
   const parametersModificationBtn = document.getElementById("parameters-modification-btn");
   const parametersForm = document.getElementById("parameters-form");
   const fields = parametersForm.querySelectorAll("input");
+  let message = document.getElementById('parameters-message');
 
 
   // ACTIVATION BOUTON SUBMIT
@@ -30,15 +31,20 @@
     })
       .then(response => {
         if (!response.ok){
-          throw new Error("la requete a échoué");
+          throw new Error("La requete a échoué");
         }
         return response.json();
       })
       .then(data => {
-          window.location.reload();
+        window.location.reload();
       })
       .catch(error => {
         console.error("Erreur", error);
+        message.textContent = "Une erreur est survenue. Merci de réessayer ultérieurement."
+        setTimeout(() => {
+          message.textContent = '';
+          window.location.reload();
+        }, 2000);
       });}
 
   /**************** SUPPRIMER SON COMPTE ****************/
@@ -65,7 +71,12 @@
         window.location.href = '/'
     })
       .catch(error => {
-          console.error('Erreur', error)
+        console.error("Erreur", error);
+        message.textContent = "Une erreur est survenue. Merci de réessayer ultérieurement."
+        setTimeout(() => {
+          message.textContent = '';
+          window.location.reload();
+        }, 2000);
       })
     });
 

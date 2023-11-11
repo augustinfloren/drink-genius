@@ -3,6 +3,8 @@ let favouriteButton = document.querySelectorAll('.add-favourite-btn');
 // const cocktailId = document.querySelector('.cocktail-img').getAttribute('data-info');
 let favouritesDb = [];
 
+let message = document.getElementById('cocktail-message');
+
 // RECUPERATION DES ID DES COCKTAILS FAVORIS PAR UTILISATEUR CONNECTE
 async function getFavouritesId(){
   return await fetch("/profile/usersfavourites", {
@@ -18,10 +20,16 @@ async function getFavouritesId(){
     return response.json();
     })
     .then(data => {
+      if(data.length>0){
         favouritesDb = data;
+      }
     })
     .catch(error => {
     console.error("Erreur : ", error);
+    message.textContent = "Une erreur est survenue. Merci de réessayer ultérieurement."
+    setTimeout(() => {
+      message.textContent = '';
+    }, 2000);
   });
 }
 
@@ -95,6 +103,9 @@ favouriteButton.forEach(button => {
         button.classList.add('fa-regular');
         button.removeEventListener('click', deleteFavourite);
         button.addEventListener('click', addFavourite);
+        if(window.location.href.includes('/profile/favourites')){
+          window.location.reload();
+        }
     })
     .catch(error => {
         console.error('Erreur', error)
