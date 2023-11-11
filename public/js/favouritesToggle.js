@@ -20,7 +20,9 @@ async function getFavouritesId(){
     return response.json();
     })
     .then(data => {
+      if(data.length>0){
         favouritesDb = data;
+      }
     })
     .catch(error => {
     console.error("Erreur : ", error);
@@ -101,6 +103,9 @@ favouriteButton.forEach(button => {
         button.classList.add('fa-regular');
         button.removeEventListener('click', deleteFavourite);
         button.addEventListener('click', addFavourite);
+        if(window.location.href.includes('/profile/favourites')){
+          window.location.reload();
+        }
     })
     .catch(error => {
         console.error('Erreur', error)

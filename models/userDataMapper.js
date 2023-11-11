@@ -146,8 +146,8 @@ const dataMapper = {
         try {
             const response = await client.query(sqlQuery);
             result = response.rows;
-            if(!result){
-                error = "Utilisateur non trouvé."
+            if(!result|| result.length === 0){
+                error = "Aucun cocktail en favori."
             }
         } catch(err) {
             console.error(err);
@@ -167,8 +167,8 @@ const dataMapper = {
         try {
             const response = await client.query(sqlQuery)
             result = response.rows;
-            if(!result){
-                error = "Utilisateur non trouvé."
+            if(!result|| result.length === 0){
+                error = "Aucun cocktail créé."
             }
         } catch(err) {
             console.error(err);
@@ -179,44 +179,65 @@ const dataMapper = {
 
     // AJOUTER UN COCKTAIL AUX FAVORIS DE L'UTILISATEUR
     async addToFavourites(user_id, cocktail_id) {
+        let result;
+        let error;
+        const sqlQuery = {
+        text: "INSERT INTO user_like_cocktail(user_id, cocktail_id) VALUES ($1, $2) RETURNING *",
+        values: [user_id, cocktail_id],
+        };
         try {
-            const sqlQuery = {
-            text: "INSERT INTO user_like_cocktail(user_id, cocktail_id) VALUES ($1, $2) RETURNING *",
-            values: [user_id, cocktail_id],
-            };
-            const result = await client.query(sqlQuery);
-            return result;
-        } catch(error){
-            return {error: "Une erreur s'est produite avec le serveur. Le cocktail n'a pas été ajouté aux favoris."}
-        }
+            const response = await client.query(sqlQuery);
+            result = response;
+            if(!result){
+                error = "Cocktail ou utilisateur introuvable."
+            }
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de l'ajout du cocktail."
+        };
+        return {error, result};
     },
 
     // SUPPRIMER UN COCKTAIL DES FAVORIS
     async deleteFromFavourites(user_id, cocktail_id){
+        let result;
+        let error;
+        const sqlQuery = {
+            text: "DELETE FROM user_like_cocktail WHERE user_id=$1 AND cocktail_id=$2",
+            values: [user_id, cocktail_id]
+        };
         try {
-            const sqlQuery = {
-                text: "DELETE FROM user_like_cocktail WHERE user_id=$1 AND cocktail_id=$2",
-                values: [user_id, cocktail_id]
-            };
-            const result = await client.query(sqlQuery);
-            return result;
-        } catch(error){
-            return {error: "Une erreur s'est produite avec le serveur. Le cocktail n'a pas été retiré des favoris."}
-        }
+            const response = await client.query(sqlQuery);
+            result = response;
+            if(!result){
+                error = "Cocktail ou utilisateur introuvable."
+            }
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la suppression du cocktail."
+        };
+        return {error, result};
     },
 
     // ATTRIBUER LE ROLE ADMIN A UN USER
     async updateRoleToAdmin(user_id){
-        try {
-            const sqlQuery = {
-                text: `UPDATE "user" SET role_id=1 WHERE id=$1`,
-                values: [user_id]
-            }
-            const result = await client.query(sqlQuery);
-            return result;
-        } catch(error){
-            return {error: "Une erreur s'est produite avec le serveur. Le role n'a pas été changé."}
+        let error;
+        let result;
+        const sqlQuery = {
+            text: `UPDATE "user" SET role_id=1 WHERE id=$1`,
+            values: [user_id]
         }
+        try {
+            const response = await client.query(sqlQuery);
+            result = response;
+            if(!response){
+                error = "Utilisateur introuvable."
+            }
+        } catch(err) {
+            console.error(err);
+            error = "Une erreur s'est produite lors de la suppression du cocktail."
+        };
+        return {error, result};
     }
 };
 

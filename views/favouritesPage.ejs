@@ -7,8 +7,8 @@
 
   <!-- COCKTAILS CONTAINER-->
   <div class="cocktails-container" id="favourite-container">
-    <% if(favourites.length === 0) { %>
-        <p>Vous n'avez aucun favoris</p>
+    <% if(error) { %>
+        <p><%= error %></p>
     <% } else { %>
       <% favourites.forEach(favourite => { %>
         <div class="cocktails-container-item">

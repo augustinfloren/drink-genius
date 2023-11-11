@@ -14,7 +14,7 @@ const ingredientDataMapper = {
             LIMIT (3 + random() * (6 - 3))`);
             result = response.rows;
             if(!result){
-                error = "Une erreur s'est produite avec le serveur."
+                error = "Pas d'ingrédients disponibles."
             }
         } catch(err) {
             console.error(err);

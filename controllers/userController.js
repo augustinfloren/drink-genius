@@ -71,17 +71,22 @@ const userController = {
   // AFFICHAGE DE LA PAGE DES COCKTAILS FAVORIS
   async renderFavouritesPages(req, res){
     const userId = req.session.user.id;
-    const favourites = await userDataMapper.getFavourites(userId);
+    const {error, result} = await userDataMapper.getFavourites(userId);
+    const favourites = result;
     currentRoute = 'favourites';
-    const userInfo = req.session.user;
-    res.render('favouritesPage', {favourites, currentRoute, userInfo});
+    res.render('favouritesPage', {favourites, currentRoute, error});
   },
 
   // RECUPERATION DES COCKTAILS FAVORIS
   async getFavouriteCocktails(req,res){
     const userId = req.session.user.id;
-    const favourites = await userDataMapper.getFavourites(userId);
-    res.json(favourites);
+    const {result,error} = await userDataMapper.getFavourites(userId);
+    const favourites = result;
+    if(result){
+      res.json(favourites);
+    } else {
+      res.json(error);
+    }
   },
 
   // AFFICHE DE LA PAGE D'AJOUT D'UN NOUVEAU COCKTAIL
@@ -149,9 +154,8 @@ const userController = {
     const userId = req.session.user.id;
     const { result, error } = await userDataMapper.getUserCocktails(userId);
     const userCocktails = result;
-    const userInfo = req.session.user;
     currentRoute = "usercocktails";
-    res.render('userCocktailsPage', {userCocktails, currentRoute, userInfo});
+    res.render('userCocktailsPage', {userCocktails, error, currentRoute});
   },
 
   // RECUPERATION DE TOUS LES INGREDIENTS
@@ -169,8 +173,8 @@ const userController = {
   async addToFavouritesByUser(req, res) {
     const cocktailId = req.body.cocktailId;
     const userId = req.session.user.id;
-    const result = await userDataMapper.addToFavourites(userId, cocktailId);
-    if (result.error) {
+    const {result, error} = await userDataMapper.addToFavourites(userId, cocktailId);
+    if (error) {
       res.status(400).json(result.error);
     } else {
       res.status(200).json("Cocktail ajouté aux favoris avec succès!");
@@ -181,8 +185,8 @@ const userController = {
   async deleteFavourite(req, res){
     const userId = req.session.user.id;
     const cocktailId = req.body.cocktailId;
-    const result = await userDataMapper.deleteFromFavourites(userId, cocktailId);
-    if (result.error) {
+    const {result,error} = await userDataMapper.deleteFromFavourites(userId, cocktailId);
+    if (error) {
       res.status(400).json(result.error);
     } else {
       res.status(200).json("Cocktail supprimé des favoris avec succès!");
@@ -263,8 +267,12 @@ const userController = {
   // MISE A JOUR DU ROLE
   async updateUserRole(req,res){
     const userId = req.body.userId;
-    const updatedProfile = await userDataMapper.updateRoleToAdmin(userId);
-    res.json("Role mis à jour")
+    const {result, error} = await userDataMapper.updateRoleToAdmin(userId);
+    if(result){
+      res.json("Role mis à jour")
+    } else {
+      res.json(error);
+    }
   }
 };
 
