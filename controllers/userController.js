@@ -200,7 +200,11 @@ const userController = {
     const {result, error} = await userDataMapper.updateUser(firstname, lastname, birthdate, email, location, hobbies, userId);
     const userInfo = result;
     req.session.user = userInfo;
-    res.json(userInfo, error);
+    if(error){
+      res.json(error)
+    } else {
+    res.json(userInfo);
+    }
   },
 
   // SUPPRESSION DU COMPTE UTILISATEUR
