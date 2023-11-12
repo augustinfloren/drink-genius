@@ -126,15 +126,15 @@ const userController = {
 
     // CONVERSION DE DEUX TABLEAUX EN JSON
     function convertintoJSON(ingredients, quantities){
-      const elementsJson = [];
+      const associatedElements = [];
       for (let i = 0; i < ingredients.length; i++){
         const association = {
           ingredient_id : ingredients[i],
           quantity : quantities[i]
         };
-        elementsJson.push(association);
+        associatedElements.push(association);
       };
-      const jsonObject = JSON.stringify(elementsJson);
+      const jsonObject = JSON.stringify(associatedElements);
       return jsonObject;
     };
 
